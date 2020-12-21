@@ -1,0 +1,32 @@
+{
+    "_id": "biobb_amber",
+    "desc": "biobb_amber is a BioBB category for AMBER MD package, allowing setup and simulation of atomistic MD simulations using AMBER MD package and its associated AMBER tools.",
+    "github": "https://github.com/bioexcel/biobb_amber",
+    "readthedocs": "https://biobb-amber.readthedocs.io/en/latest/",
+    "conda": "",
+    "docker": "",
+    "singularity": "",
+    "version": "3.0.0",
+    "tools" : [
+        {
+            "block" : "BuildLinearStructure",
+            "tool" : "tLeap",
+            "desc" : "Build a linear (unfolded) 3D structure from an AA sequence",
+            "exec" : "build_linear_structure"
+        }
+    ],
+    "dep_pypi" : [
+        "install_requires=['biobb_common==3.0.0']",
+        "python_requires='==3.7.*'"
+    ],
+    "dep_conda" : [
+        "python ==3.7.*",
+        "biobb_common ==3.0.0",
+        "ambertools ==20.0"
+    ],
+    "keywords" : [
+        "AmberTools",
+        "tLeap",
+        "MD"
+    ]
+}

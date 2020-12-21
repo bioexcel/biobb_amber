@@ -1,0 +1,82 @@
+working_dir_path: /tmp/biobb/unitests
+
+leap_build_linear_structure:
+  paths:
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.pdb
+  properties:
+    sequence : "ALA PRO SER ARG LYS ASP GLU GLY GLY ALA"
+    build_library: False
+    forcefield : "protein.ff14SB"
+    remove_tmp: True
+
+leap_gen_top:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.leap.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.leap.pdb
+    output_crd_path: output.leap.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.leap.crd
+    output_top_path: output.leap.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.leap.top
+  properties:
+    forcefield : "protein.ff14SB"
+    remove_tmp: True
+
+leap_solvate:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.solv.pdb
+    output_crd_path: output.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.solv.crd
+    output_top_path: output.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.solv.top
+  properties:
+    forcefield : "protein.ff14SB"
+    water_type: "TIP3PBOX"
+    distance_to_molecule: "9.0"
+    box_type: "truncated_octahedron"
+    remove_tmp: True
+
+leap_add_ions:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.solv.pdb
+    output_crd_path: output.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.solv.crd
+    output_top_path: output.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.solv.top
+  properties:
+    forcefield : "protein.ff14SB"
+    water_type: "TIP3PBOX"
+    distance_to_molecule: "9.0"
+    box_type: "truncated_octahedron"
+    remove_tmp: True
+
+parmed_cpinutil:
+  paths:
+    input_top_path: file:test_data_dir/parmed/cln025.prmtop
+    output_cpin_path: output.pH.cpin
+    ref_output_cpin_path: file:test_reference_dir/parmed/cln025.cpin
+  properties:
+    igb : 2
+    resnames: "AS4 GL4"
+    system: "cln025"
+    remove_tmp: True
+
+sander_mdrun:
+  paths:
+    input_top_path: file:test_data_dir/sander/cln025.prmtop
+    input_crd_path: file:test_data_dir/sander/cln025.inpcrd
+    output_traj_path: file:test_data_dir/sander/sander.x
+    ref_output_traj_path: file:test_reference_dir/sander/sander.x
+    output_rst_path: file:test_data_dir/sander/sander.rst
+    ref_output_rst_path: file:test_reference_dir/sander/sander.rst
+    output_log_path: file:test_data_dir/sander/sander.log
+  properties:
+    mdin :
+      type: "minimization"
+      maxcyc: 500
+    remove_tmp: True
