@@ -1,52 +1,76 @@
-[![](https://readthedocs.org/projects/biobb-template/badge/?version=latest)](https://biobb-template.readthedocs.io/en/latest/?badge=latest)
+[![](https://readthedocs.org/projects/biobb-ml/badge/?version=latest)](https://biobb-ml.readthedocs.io/en/latest/?badge=latest)
+[![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_ml)
+[![](https://img.shields.io/badge/docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_ml)
+[![](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/4574)
+[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# biobb_template
+# biobb_ml
 
 ### Introduction
-Biobb_template is a complete code template to promote and facilitate the creation of
-new Biobbs by the community.
+Biobb_ml is the Biobb module collection to perform machine learning predictions.
 Biobb (BioExcel building blocks) packages are Python building blocks that
 create new layer of compatibility and interoperability over popular
 bioinformatics tools.
 The latest documentation of this package can be found in our readthedocs site:
-[latest API documentation](http://biobb_template.readthedocs.io/en/latest/).
+[latest API documentation](http://biobb_ml.readthedocs.io/en/latest/).
 
 ### Version
-v1.0.0 2020.1
+v3.5.0 2020.4
 
 ### Installation
+Using PIP:
 
-If you have no experience with anaconda, please first take a look to the [New with anaconda?](https://biobb-documentation.readthedocs.io/en/latest/first_steps.html#new-with-anaconda) section of the [official documentation](https://biobb-documentation.readthedocs.io/en/latest/).
+> **Important:** PIP only installs the package. All the dependencies must be installed separately. To perform a complete installation, please use ANACONDA, DOCKER or SINGULARITY.
 
-Clone repository to your computer and create new conda environment:
+* Installation:
 
-```console
-git https://github.com/bioexcel/biobb_template.git
-cd biobb_template
-conda env create -f conda_env/environment.yml
-```
 
-Edit **conda_env/biobb_template.pth** with the paths to your *biobb_template* folder. Example:
+        pip install "biobb_ml>=3.5.0"
 
-```console
-/home/user_name/projects/biobb_template/
-/home/user_name/projects/biobb_template/biobb_template/biobb_template
-```
 
-Copy the edited **conda_env/biobb_template.pth** file to the site-packages folder of your environment. This folder is in */[anaconda-path]/envs/biobb_template/lib/python3.6/site-packages*, where */[anaconda-path]* is usually */anaconda3* or */opt/conda*. Then, activate the recently created *biobb_template* conda environment.
+* Usage: [Python API documentation](https://biobb-ml.readthedocs.io/en/latest/modules.html)
 
-```console
-cp conda_env/biobb_template.pth /[anaconda-path]/envs/biobb_template/lib/python3.6/site-packages
-conda activate biobb_template
-```
+Using ANACONDA:
 
-Additionnally, it's recommendable to configure binary paths in your environment in order to easy the command line execution. More info about this subject in the [Binary path configuration](https://biobb-documentation.readthedocs.io/en/latest/execution.html#binary-path-configuration) section of the [official documentation](https://biobb-documentation.readthedocs.io/en/latest/).
+* Installation:
 
-### Documentation
 
-[Click here to find the API Documentation example](https://biobb-template.readthedocs.io/en/latest/template.html) for this template and [here for Command Line documentation](http://biobb_template.readthedocs.io/en/latest/command_line.html).
+        conda install -c bioconda "biobb_ml>=3.5.0"
 
-And here you can find [the full documentation](https://biobb-documentation.readthedocs.io/en/latest/) about how to build a new **BioExcel building block** from scratch.
+
+* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-ml.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-ml.readthedocs.io/en/latest/command_line.html)
+
+Using DOCKER:
+
+* Installation:
+
+
+        docker pull quay.io/biocontainers/biobb_ml:3.5.0--py_0
+
+
+* Usage:
+
+
+        docker run quay.io/biocontainers/biobb_ml:3.5.0--py_0 <command>
+
+
+Using SINGULARITY:
+
+**MacOS users**: it's strongly recommended to avoid Singularity and use **Docker** as containerization system.
+
+* Installation:
+
+
+        singularity pull --name biobb_ml.sif shub://bioexcel/biobb_ml
+
+
+* Usage:
+
+
+        singularity exec biobb_ml.sif <command>
+
+
+The command list and specification can be found at the [Command Line documentation](https://biobb-ml.readthedocs.io/en/latest/command_line.html).
 
 ### Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).
