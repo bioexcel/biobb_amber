@@ -1,9 +1,3 @@
-[![](https://readthedocs.org/projects/biobb-ml/badge/?version=latest)](https://biobb-ml.readthedocs.io/en/latest/?badge=latest)
-[![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_ml)
-[![](https://img.shields.io/badge/docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_ml)
-[![](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/4574)
-[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
 # biobb_ml
 
 ### Introduction
