@@ -1,0 +1,105 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/leap_build_linear_structure",
+    "name": "biobb_amber.leap.leap_build_linear_structure LeapBuildLinearStructure",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) leap tool module.",
+    "description": "Builds a linear (unfolded) 3D structure from an AA sequence using tLeap tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools tLeap",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "output_pdb_path"
+    ],
+    "properties": {
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Linear (unfolded) 3D structure PDB file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Linear (unfolded) 3D structure PDB file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "sequence": {
+                    "type": "string",
+                    "default": "ALA GLY SER PRO ARG ALA PRO GLY",
+                    "wf_prop": false,
+                    "description": "Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them."
+                },
+                "forcefield": {
+                    "type": "string",
+                    "default": "protein.ff14SB",
+                    "wf_prop": false,
+                    "description": "Forcefield to be used for the structure generation. ",
+                    "enum": [
+                        "protein.ff14SB",
+                        "protein.ff19SB",
+                        "DNA.bsc1",
+                        "DNA.OL15",
+                        "RNA.OL3"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "protein.ff14SB",
+                            "description": null
+                        },
+                        {
+                            "name": "protein.ff19SB",
+                            "description": null
+                        },
+                        {
+                            "name": "DNA.bsc1",
+                            "description": null
+                        },
+                        {
+                            "name": "DNA.OL15",
+                            "description": null
+                        },
+                        {
+                            "name": "RNA.OL3",
+                            "description": null
+                        }
+                    ]
+                },
+                "build_library": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Generate AMBER lib file for the structure."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

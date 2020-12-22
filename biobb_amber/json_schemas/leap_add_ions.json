@@ -1,0 +1,344 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/leap_add_ions",
+    "name": "biobb_amber LeapAddIons",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) leap tool module.",
+    "description": "Adds counterions to a system box for an AMBER MD system using tLeap tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools tLeap",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_pdb_path",
+        "output_pdb_path",
+        "output_top_path",
+        "output_crd_path"
+    ],
+    "properties": {
+        "input_pdb_path": {
+            "type": "string",
+            "description": "Input 3D structure PDB file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Input 3D structure PDB file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "input_lib_path": {
+            "type": "string",
+            "description": "Input ligand library parameters file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib",
+            "enum": [
+                ".*\\.lib$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.lib$",
+                    "description": "Input ligand library parameters file",
+                    "edam": "format_3889"
+                }
+            ]
+        },
+        "input_frcmod_path": {
+            "type": "string",
+            "description": "Input ligand frcmod parameters file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod",
+            "enum": [
+                ".*\\.frcmod$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.frcmod$",
+                    "description": "Input ligand frcmod parameters file",
+                    "edam": "format_3888"
+                }
+            ]
+        },
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Output 3D structure PDB file matching the topology file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Output 3D structure PDB file matching the topology file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "output_top_path": {
+            "type": "string",
+            "description": "Output topology file (AMBER ParmTop)",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.top",
+            "enum": [
+                ".*\\.top$",
+                ".*\\.parmtop$",
+                ".*\\.prmtop$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.top$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.parmtop$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.prmtop$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                }
+            ]
+        },
+        "output_crd_path": {
+            "type": "string",
+            "description": "Output coordinates file (AMBER crd)",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.crd",
+            "enum": [
+                ".*\\.crd$",
+                ".*\\.mdcrd$",
+                ".*\\.inpcrd$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.crd$",
+                    "description": "Output coordinates file (AMBER crd)",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.mdcrd$",
+                    "description": "Output coordinates file (AMBER crd)",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.inpcrd$",
+                    "description": "Output coordinates file (AMBER crd)",
+                    "edam": "format_3878"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "forcefield": {
+                    "type": "string",
+                    "default": "protein.ff14SB",
+                    "wf_prop": false,
+                    "description": "Forcefield to be used for the structure generation. ",
+                    "enum": [
+                        "protein.ff14SB",
+                        "protein.ff19SB",
+                        "DNA.bsc1",
+                        "DNA.OL15",
+                        "RNA.OL3"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "protein.ff14SB",
+                            "description": null
+                        },
+                        {
+                            "name": "protein.ff19SB",
+                            "description": null
+                        },
+                        {
+                            "name": "DNA.bsc1",
+                            "description": null
+                        },
+                        {
+                            "name": "DNA.OL15",
+                            "description": null
+                        },
+                        {
+                            "name": "RNA.OL3",
+                            "description": null
+                        }
+                    ]
+                },
+                "water_type": {
+                    "type": "string",
+                    "default": "TIP3PBOX",
+                    "wf_prop": false,
+                    "description": "Water molecule parameters to be used for the topology. ",
+                    "enum": [
+                        "POL3BOX",
+                        "QSPCFWBOX",
+                        "SPCBOX",
+                        "SPCFWBOX",
+                        "TIP3PBOX",
+                        "TIP3PFBOX",
+                        "TIP4PBOX",
+                        "TIP4PEWBOX",
+                        "OPCBOX",
+                        "OPC3BOX",
+                        "TIP5PBOX"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "POL3BOX",
+                            "description": null
+                        },
+                        {
+                            "name": "QSPCFWBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "SPCBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "SPCFWBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "TIP3PBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "TIP3PFBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "TIP4PBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "TIP4PEWBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "OPCBOX",
+                            "description": null
+                        },
+                        {
+                            "name": "OPC3BOX",
+                            "description": null
+                        },
+                        {
+                            "name": "TIP5PBOX",
+                            "description": null
+                        }
+                    ]
+                },
+                "box_type": {
+                    "type": "string",
+                    "default": "truncated_octahedron",
+                    "wf_prop": false,
+                    "description": "Type for the MD system box. ",
+                    "enum": [
+                        "cubic",
+                        "truncated_octahedron"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "cubic",
+                            "description": null
+                        },
+                        {
+                            "name": "truncated_octahedron",
+                            "description": null
+                        }
+                    ]
+                },
+                "neutralise": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": false,
+                    "description": "Energetically neutralise the system adding the necessary counterions."
+                },
+                "ionic_concentration": {
+                    "type": "number",
+                    "default": 0.05,
+                    "wf_prop": false,
+                    "description": "Additional ionic concentration to include in the system box. Units in Mol/L."
+                },
+                "positive_ions_number": {
+                    "type": "integer",
+                    "default": 0,
+                    "wf_prop": false,
+                    "description": "Number of additional positive ions to include in the system box."
+                },
+                "negative_ions_number": {
+                    "type": "integer",
+                    "default": 0,
+                    "wf_prop": false,
+                    "description": "Number of additional negative ions to include in the system box."
+                },
+                "positive_ions_type": {
+                    "type": "string",
+                    "default": "Na+",
+                    "wf_prop": false,
+                    "description": "Type of additional positive ions to include in the system box. ",
+                    "enum": [
+                        "Na+",
+                        "K+"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "Na+",
+                            "description": null
+                        },
+                        {
+                            "name": "K+",
+                            "description": null
+                        }
+                    ]
+                },
+                "negative_ions_type": {
+                    "type": "string",
+                    "default": "Cl-",
+                    "wf_prop": false,
+                    "description": "Type of additional negative ions to include in the system box. ",
+                    "enum": [
+                        "Cl-"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "Cl-",
+                            "description": null
+                        }
+                    ]
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

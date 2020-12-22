@@ -1,0 +1,190 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/process_minout",
+    "name": "biobb_amber.process.process_minout ProcessMinOut",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) process_minout tool module.",
+    "description": "Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools process_minout",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_log_path",
+        "output_dat_path"
+    ],
+    "properties": {
+        "input_log_path": {
+            "type": "string",
+            "description": "AMBER (sander) Minimization output (log) file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/min.log",
+            "enum": [
+                ".*\\.log$",
+                ".*\\.out$",
+                ".*\\.txt$",
+                ".*\\.o$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.log$",
+                    "description": "AMBER (sander) Minimization output (log) file",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.out$",
+                    "description": "AMBER (sander) Minimization output (log) file",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "AMBER (sander) Minimization output (log) file",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.o$",
+                    "description": "AMBER (sander) Minimization output (log) file",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "output_dat_path": {
+            "type": "string",
+            "description": "Dat output file containing data from the specified terms along the minimization process",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/min.process.dat",
+            "enum": [
+                ".*\\.dat$",
+                ".*\\.txt$",
+                ".*\\.csv$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.dat$",
+                    "description": "Dat output file containing data from the specified terms along the minimization process",
+                    "edam": "format_1637"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Dat output file containing data from the specified terms along the minimization process",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.csv$",
+                    "description": "Dat output file containing data from the specified terms along the minimization process",
+                    "edam": "format_3752"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "terms": {
+                    "type": "array",
+                    "default": "[ENERGY]",
+                    "wf_prop": false,
+                    "description": "Statistics descriptors. ",
+                    "enum": [
+                        "ANGLE",
+                        "BOND",
+                        "DIHEDRAL",
+                        "EEL",
+                        "EEL14",
+                        "ENERGY",
+                        "GMAX",
+                        "HBOND",
+                        "NAME",
+                        "NSTEP",
+                        "NUMBER",
+                        "RESTRAINT",
+                        "RMS",
+                        "VDW14",
+                        "VDWAALS"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "ANGLE",
+                            "description": null
+                        },
+                        {
+                            "name": "BOND",
+                            "description": null
+                        },
+                        {
+                            "name": "DIHEDRAL",
+                            "description": null
+                        },
+                        {
+                            "name": "EEL",
+                            "description": null
+                        },
+                        {
+                            "name": "EEL14",
+                            "description": null
+                        },
+                        {
+                            "name": "ENERGY",
+                            "description": null
+                        },
+                        {
+                            "name": "GMAX",
+                            "description": null
+                        },
+                        {
+                            "name": "HBOND",
+                            "description": null
+                        },
+                        {
+                            "name": "NAME",
+                            "description": null
+                        },
+                        {
+                            "name": "NSTEP",
+                            "description": null
+                        },
+                        {
+                            "name": "NUMBER",
+                            "description": null
+                        },
+                        {
+                            "name": "RESTRAINT",
+                            "description": null
+                        },
+                        {
+                            "name": "RMS",
+                            "description": null
+                        },
+                        {
+                            "name": "VDW14",
+                            "description": null
+                        },
+                        {
+                            "name": "VDWAALS",
+                            "description": null
+                        }
+                    ]
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

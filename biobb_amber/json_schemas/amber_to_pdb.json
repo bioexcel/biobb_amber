@@ -1,0 +1,116 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/amber_to_pdb",
+    "name": "biobb_amber AmberToPDB",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) ambpdb tool module.",
+    "description": "Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools ambpdb",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_top_path",
+        "input_crd_path",
+        "output_pdb_path"
+    ],
+    "properties": {
+        "input_top_path": {
+            "type": "string",
+            "description": "AMBER topology file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.top",
+            "enum": [
+                ".*\\.top$",
+                ".*\\.parmtop$",
+                ".*\\.prmtop$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.top$",
+                    "description": "AMBER topology file",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.parmtop$",
+                    "description": "AMBER topology file",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.prmtop$",
+                    "description": "AMBER topology file",
+                    "edam": "format_3881"
+                }
+            ]
+        },
+        "input_crd_path": {
+            "type": "string",
+            "description": "AMBER coordinates file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.crd",
+            "enum": [
+                ".*\\.crd$",
+                ".*\\.mdcrd$",
+                ".*\\.inpcrd$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.crd$",
+                    "description": "AMBER coordinates file",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.mdcrd$",
+                    "description": "AMBER coordinates file",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.inpcrd$",
+                    "description": "AMBER coordinates file",
+                    "edam": "format_3878"
+                }
+            ]
+        },
+        "output_pdb_path": {
+            "type": "string",
+            "description": "Structure PDB file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "Structure PDB file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

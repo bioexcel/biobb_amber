@@ -1,0 +1,196 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/parmed_cpinutil",
+    "name": "biobb_amber ParmedCpinUtil",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) parmed tool module.",
+    "description": "Creates a cpin file for constant pH simulations from an AMBER topology file using parmed tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools parmed",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_top_path",
+        "output_cpin_path"
+    ],
+    "properties": {
+        "input_top_path": {
+            "type": "string",
+            "description": "Input AMBER topology file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.solv.top",
+            "enum": [
+                ".*\\.top$",
+                ".*\\.parmtop$",
+                ".*\\.prmtop$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.top$",
+                    "description": "Input AMBER topology file",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.parmtop$",
+                    "description": "Input AMBER topology file",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.prmtop$",
+                    "description": "Input AMBER topology file",
+                    "edam": "format_3881"
+                }
+            ]
+        },
+        "output_cpin_path": {
+            "type": "string",
+            "description": "Output AMBER constant pH input (CPin) file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.cpin",
+            "enum": [
+                ".*\\.cpin$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.cpin$",
+                    "description": "Output AMBER constant pH input (CPin) file",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "output_top_path": {
+            "type": "string",
+            "description": "Output topology file (AMBER ParmTop)",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.cpin.top",
+            "enum": [
+                ".*\\.top$",
+                ".*\\.parmtop$",
+                ".*\\.prmtop$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.top$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.parmtop$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.prmtop$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "resnames": {
+                    "type": "string",
+                    "default": "None",
+                    "wf_prop": false,
+                    "description": "Residue names to include in CPIN file. ",
+                    "enum": [
+                        "AS4",
+                        "GL4",
+                        "HIP",
+                        "CYS",
+                        "LYS",
+                        "TYR"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "AS4",
+                            "description": null
+                        },
+                        {
+                            "name": "GL4",
+                            "description": null
+                        },
+                        {
+                            "name": "HIP",
+                            "description": null
+                        },
+                        {
+                            "name": "CYS",
+                            "description": null
+                        },
+                        {
+                            "name": "LYS",
+                            "description": null
+                        },
+                        {
+                            "name": "TYR",
+                            "description": null
+                        }
+                    ]
+                },
+                "igb": {
+                    "type": "integer",
+                    "default": 2,
+                    "wf_prop": false,
+                    "description": "Generalized Born model which you intend to use to evaluate dynamics or protonation state swaps. ",
+                    "enum": [
+                        1,
+                        2,
+                        5,
+                        7,
+                        8
+                    ],
+                    "property_formats": [
+                        {
+                            "name": 1,
+                            "description": null
+                        },
+                        {
+                            "name": 2,
+                            "description": null
+                        },
+                        {
+                            "name": 5,
+                            "description": null
+                        },
+                        {
+                            "name": 7,
+                            "description": null
+                        },
+                        {
+                            "name": 8,
+                            "description": null
+                        }
+                    ]
+                },
+                "system": {
+                    "type": "string",
+                    "default": "Unknown",
+                    "wf_prop": false,
+                    "description": "Name of system to titrate."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

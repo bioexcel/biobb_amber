@@ -1,0 +1,146 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/nab_build_dna_structure",
+    "name": "biobb_amber.nab.nab_build_dna_structure NabBuildDNAStructure",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) nab tool module.",
+    "description": "Builds a 3D structure from a DNA sequence using nab (Nucleic Acid Builder) tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools nab",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "output_pdb_path"
+    ],
+    "properties": {
+        "output_pdb_path": {
+            "type": "string",
+            "description": "DNA 3D structure PDB file",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/nab/structure.pdb",
+            "enum": [
+                ".*\\.pdb$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.pdb$",
+                    "description": "DNA 3D structure PDB file",
+                    "edam": "format_1476"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "sequence": {
+                    "type": "string",
+                    "default": "GCGCGGCTGATAAACGAAAGC",
+                    "wf_prop": false,
+                    "description": "Nucleotide sequence to convert to a 3D structure. Nucleotides should be written in 1-letter code, with no spaces between them."
+                },
+                "helix_type": {
+                    "type": "string",
+                    "default": "lbdna",
+                    "wf_prop": false,
+                    "description": "DNA/RNA helix type. ",
+                    "enum": [
+                        "arna",
+                        "Arnott",
+                        "aprna",
+                        "Arnott",
+                        "lbdna",
+                        "Langridge",
+                        "abdna",
+                        "Arnott",
+                        "sbdna",
+                        "Sasisekharan",
+                        "adna",
+                        "Arnott"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "arna",
+                            "description": null
+                        },
+                        {
+                            "name": "Arnott",
+                            "description": null
+                        },
+                        {
+                            "name": "aprna",
+                            "description": null
+                        },
+                        {
+                            "name": "Arnott",
+                            "description": null
+                        },
+                        {
+                            "name": "lbdna",
+                            "description": null
+                        },
+                        {
+                            "name": "Langridge",
+                            "description": null
+                        },
+                        {
+                            "name": "abdna",
+                            "description": null
+                        },
+                        {
+                            "name": "Arnott",
+                            "description": null
+                        },
+                        {
+                            "name": "sbdna",
+                            "description": null
+                        },
+                        {
+                            "name": "Sasisekharan",
+                            "description": null
+                        },
+                        {
+                            "name": "adna",
+                            "description": null
+                        },
+                        {
+                            "name": "Arnott",
+                            "description": null
+                        }
+                    ]
+                },
+                "compiler": {
+                    "type": "string",
+                    "default": "gcc",
+                    "wf_prop": false,
+                    "description": "Alternative C compiler for nab."
+                },
+                "linker": {
+                    "type": "string",
+                    "default": "gfortran",
+                    "wf_prop": false,
+                    "description": "Alternative Fortran linker for nab."
+                },
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}
