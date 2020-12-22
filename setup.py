@@ -18,10 +18,7 @@ setuptools.setup(
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
-    install_requires=['biobb_common==3.5.1'],
-    extras_require={ 
-     "sphinx": ["sphinx<2"], 
-    },
+    install_requires=['biobb_common==3.5.1', 'sphinx==1.8.5'],
     python_requires='==3.7.*',
     classifiers=(
         "Development Status :: 3 - Alpha",
