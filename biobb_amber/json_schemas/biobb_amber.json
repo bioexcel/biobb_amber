@@ -6,7 +6,7 @@
     "conda": "",
     "docker": "",
     "singularity": "",
-    "version": "3.0.0",
+    "version": "3.5.0",
     "tools" : [
         {
             "block" : "BuildLinearStructure",
@@ -16,12 +16,12 @@
         }
     ],
     "dep_pypi" : [
-        "install_requires=['biobb_common==3.0.0']",
+        "install_requires=['biobb_common==3.5.1']",
         "python_requires='==3.7.*'"
     ],
     "dep_conda" : [
         "python ==3.7.*",
-        "biobb_common ==3.0.0",
+        "biobb_common ==3.5.1",
         "ambertools ==20.0"
     ],
     "keywords" : [

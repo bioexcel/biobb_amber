@@ -1,7 +1,0 @@
-properties:
-  boolean_property: false
-  remove_tmp: true
-  executable_binary_property: /opt/conda/bin/zip
-  container_path: singularity
-  container_image: zip.sif
-  container_volume_path: /tmp

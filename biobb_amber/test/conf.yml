@@ -1,5 +1,31 @@
 working_dir_path: /tmp/biobb/unitests
 
+# ambpdb
+
+amber_to_pdb:
+  paths:
+    input_top_path: file:test_data_dir/ambpdb/amber_to_pdb.top
+    input_crd_path: file:test_data_dir/ambpdb/amber_to_pdb.crd
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/ambpdb/ref_amber_to_pdb.pdb
+  properties:
+    remove_tmp: True
+
+# cpptraj
+
+cpptraj_randomize_ions:
+  paths:
+    input_top_path: file:test_data_dir/cpptraj/cpptraj_randomize_ions.top
+    input_crd_path: file:test_data_dir/cpptraj/cpptraj_randomize_ions.crd
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/cpptraj/ref_cpptraj_randomize_ions.pdb
+    output_crd_path: output.crd
+    ref_output_crd_path: file:test_reference_dir/cpptraj/ref_cpptraj_randomize_ions.crd
+  properties:
+    remove_tmp: True
+
+# leap
+
 leap_build_linear_structure:
   paths:
     output_pdb_path: output.pdb
@@ -55,6 +81,17 @@ leap_add_ions:
     box_type: "truncated_octahedron"
     remove_tmp: True
 
+# nab
+
+nab_build_dna_structure:
+  paths:
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/nab/ref_nab_build_dna_structure.pdb
+  properties:
+    remove_tmp: True
+
+# parmed
+
 parmed_cpinutil:
   paths:
     input_top_path: file:test_data_dir/parmed/cln025.prmtop
@@ -65,6 +102,36 @@ parmed_cpinutil:
     resnames: "AS4 GL4"
     system: "cln025"
     remove_tmp: True
+
+# pdb4amber
+
+pdb4amber:
+  paths:
+    input_pdb_path: file:test_data_dir/pdb4amber/pdb4amber.pdb
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/pdb4amber/ref_pdb4amber.pdb
+  properties:
+    remove_tmp: True
+
+# process
+
+process_minout:
+  paths:
+    input_log_path: file:test_data_dir/process/process_minout.log
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/process/ref_process_minout.dat
+  properties:
+    remove_tmp: True
+
+process_mdout:
+  paths:
+    input_log_path: file:test_data_dir/process/process_mdout.log
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/process/ref_process_mdout.dat
+  properties:
+    remove_tmp: True
+
+# sander
 
 sander_mdrun:
   paths:

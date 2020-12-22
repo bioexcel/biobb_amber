@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "mdin": {
+      "type": "minimization",
+      "maxcyc": 500
+    },
+    "remove_tmp": true
+  }
+}

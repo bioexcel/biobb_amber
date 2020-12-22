@@ -20,7 +20,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     install_requires=['biobb_common==3.5.1'],
     extras_require={ 
-     "sphinx": ["sphinx==1.8.5"], 
+     "sphinx": ["sphinx=1.8.5"], 
     },
     python_requires='==3.7.*',
     classifiers=(

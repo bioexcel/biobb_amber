@@ -1,0 +1,5 @@
+properties:
+  mdin:
+    maxcyc: 500
+    type: minimization
+  remove_tmp: true

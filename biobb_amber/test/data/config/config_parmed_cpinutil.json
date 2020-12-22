@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "igb": 2,
+    "resnames": "AS4 GL4",
+    "system": "cln025",
+    "remove_tmp": true
+  }
+}
