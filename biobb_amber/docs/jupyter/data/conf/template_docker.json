@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "boolean_property": false,
+    "remove_tmp": true,
+    "container_path": "docker",
+    "container_image": "mmbirb/zip:latest",
+    "container_volume_path": "/tmp"
+  }
+}

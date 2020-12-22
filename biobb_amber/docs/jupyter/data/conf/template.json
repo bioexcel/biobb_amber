@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "boolean_property": false,
+    "remove_tmp": true
+  }
+}
