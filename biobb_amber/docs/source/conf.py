@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path('../../').resolve()))
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '1.8.5'
+#needs_sphinx = '1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -130,6 +130,7 @@ todo_include_todos = False
 
 # -- Options for HTML output ----------------------------------------------
 def setup(app):
+    #app.add_stylesheet('theme_overrides.css')
     app.add_css_file('theme_overrides.css')
     app.add_js_file('theme_overrides.js')
 
