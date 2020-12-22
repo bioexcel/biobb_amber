@@ -24,3 +24,31 @@ a:visited { color:#9e8830; }
 .ethical-rtd.ethical-dark-theme { display: none; }
 
 .icon:before { display:none; }
+
+.rst-content blockquote { margin-left: 0; background: #b5e0dd; padding: 15px; }
+.rst-content blockquote code.literal { color: #29b3b6; }
+
+dl.docutils dt {
+    background: transparent!important;
+    border-left: none!important;
+    font-size: 100%!important;
+    color: #404340!important;
+}
+
+.line-block .line:first-child {
+	display: none;
+}
+
+p.rubric:after {
+    content: ":";
+}
+
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) {
+
+    dl.first.docutils { 
+
+        margin-top:-27px; 
+
+    }
+}}
