@@ -154,7 +154,7 @@ class CpptrajRandomizeIons():
 
 def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
         output_pdb_path: str, output_crd_path: str,
-        properties: dict = None) -> int:
+        properties: dict = None, **kwargs) -> int:
     """Create :class:`CpptrajRandomizeIons <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons>`cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons class and
 execute :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.launch>` method"""
 

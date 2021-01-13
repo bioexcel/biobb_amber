@@ -390,7 +390,7 @@ def leap_add_ions(input_pdb_path: str, output_pdb_path: str,
            output_top_path: str, output_crd_path: str,
            input_lib_path: str = None, input_frcmod_path: str = None,
            input_params_path: str = None, input_source_path: str = None,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapAddIons <leap.leap_add_ions.LeapAddIons>`leap.leap_add_ions.LeapAddIons class and
     execute :meth:`launch() <leap.leap_add_ions.LeapAddIons.launch>` method"""
 

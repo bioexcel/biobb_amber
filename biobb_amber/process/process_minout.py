@@ -137,7 +137,7 @@ class ProcessMinOut():
         return returncode
 
 def process_minout(input_log_path: str, output_dat_path: str,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`ProcessMinOut <process.process_mdout.ProcessMinOut>`process.process_mdout.ProcessMinOut class and
     execute :meth:`launch() <process.process_mdout.ProcessMinOut.launch>` method"""
 

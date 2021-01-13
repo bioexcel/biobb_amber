@@ -132,7 +132,7 @@ class Pdb4amber():
         return returncode
 
 def pdb4amber(input_pdb_path: str, output_pdb_path: str,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`Pdb4amber <pdb4amber.pdb4amber.Pdb4amber>`pdb4amber.pdb4amber.Pdb4amber class and
     execute :meth:`launch() <pdb4amber.pdb4amber.Pdb4amber.launch>` method"""
 

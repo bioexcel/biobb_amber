@@ -112,7 +112,7 @@ class NabBuildDNAStructure():
 
         acid_type = 'dna'
         if ("rna" in self.helix_type):
-            acid_type = 'rna' 
+            acid_type = 'rna'
 
         instructions_file = str(PurePath(self.tmp_folder).joinpath("nuc.nab"))
         with open(instructions_file, 'w') as nabin:
@@ -143,7 +143,7 @@ class NabBuildDNAStructure():
         return returncode
 
 def nab_build_dna_structure(output_pdb_path: str,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`NabBuildDNAStructure <nab.nab_build_dna_structure.NabBuildDNAStructure>`nab.nab_build_dna_structure.NabBuildDNAStructure class and
     execute :meth:`launch() <nab.nab_build_dna_structure.NabBuildDNAStructure.launch>` method"""
 

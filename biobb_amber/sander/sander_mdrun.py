@@ -271,7 +271,7 @@ def sander_mdrun(input_top_path: str, input_crd_path: str,
             input_mdin_path: str = None, input_cpin_path: str = None,
             output_cpout_path: str = None, output_cprst_path: str = None,
             output_mdinfo_path: str = None, input_ref_path: str=None,
-            properties: dict = None) -> int:
+            properties: dict = None, **kwargs) -> int:
     """Create :class:`SanderMDRun <sander.sander_mdrun.SanderMDRun>`sander.sander_mdrun.SanderMDRun class and
     execute :meth:`launch() <sander.sander_mdrun.SanderMDRun.launch>` method"""
 

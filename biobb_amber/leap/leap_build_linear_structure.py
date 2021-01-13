@@ -137,7 +137,7 @@ class LeapBuildLinearStructure():
         return returncode
 
 def leap_build_linear_structure(output_pdb_path: str,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>`leap.leap_build_linear_structure.LeapBuildLinearStructure class and
     execute :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method"""
 

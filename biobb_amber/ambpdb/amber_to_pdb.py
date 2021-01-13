@@ -117,7 +117,7 @@ class AmberToPDB():
         return returncode
 
 def amber_to_pdb(input_top_path: str, input_crd_path: str, output_pdb_path: str,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>`amber.amber_to_pdb.AmberToPDB class and
     execute :meth:`launch() <amber.amber_to_pdb.AmberToPDB.launch>` method"""
 

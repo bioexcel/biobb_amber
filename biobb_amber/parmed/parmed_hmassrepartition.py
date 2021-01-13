@@ -124,7 +124,7 @@ class ParmedHMassRepartition():
 
 def parmed_hmassrepartition(input_top_path: str,
            output_top_path: str = None,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`ParmedHMassRepartition <parmed.parmed_hmassrepartition.ParmedHMassRepartition>`parmed.parmed_hmassrepartition.ParmedHMassRepartition class and
     execute :meth:`launch() <parmed.parmed_hmassrepartition.ParmedHMassRepartition.launch>` method"""
 

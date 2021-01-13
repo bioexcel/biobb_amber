@@ -137,7 +137,7 @@ class ProcessMDOut():
         return returncode
 
 def process_mdout(input_log_path: str, output_dat_path: str,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`ProcessMDOut <process.process_mdout.ProcessMDOut>`process.process_mdout.ProcessMDOut class and
     execute :meth:`launch() <process.process_mdout.ProcessMDOut.launch>` method"""
 

@@ -151,11 +151,11 @@ class ParmedCpinUtil():
 
 def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
            output_top_path: str = None,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`ParmedCpinUtil <parmed.parmed_cpinutil.ParmedCpinUtil>`parmed.parmed_cpinutil.ParmedCpinUtil class and
     execute :meth:`launch() <parmed.parmed_cpinutil.ParmedCpinUtil.launch>` method"""
 
-    return ParmedCpinUtil( input_top_path=input_pdb_path,
+    return ParmedCpinUtil( input_top_path=input_top_path,
                         output_cpin_path=output_cpin_path,
                         output_top_path=output_top_path,
                         properties=properties).launch()

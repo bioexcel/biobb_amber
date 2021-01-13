@@ -273,7 +273,7 @@ def pmemd_mdrun(input_top_path: str, input_crd_path: str,
             input_mdin_path: str = None, input_cpin_path: str = None,
             output_cpout_path: str = None, output_cprst_path: str = None,
             output_mdinfo_path: str = None, input_ref_path: str=None,
-            properties: dict = None) -> int:
+            properties: dict = None, **kwargs) -> int:
     """Create :class:`PmemdMDRun <pmemd.pmemd_mdrun.PmemdMDRun>`pmemd.pmemd_mdrun.PmemdMDRun class and
     execute :meth:`launch() <pmemd.pmemd_mdrun.PmemdMDRun.launch>` method"""
 

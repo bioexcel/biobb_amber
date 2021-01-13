@@ -286,7 +286,7 @@ def leap_solvate(input_pdb_path: str, output_pdb_path: str,
            output_top_path: str, output_crd_path: str,
            input_lib_path: str = None, input_frcmod_path: str = None,
            input_params_path: str = None, input_source_path: str = None,
-           properties: dict = None) -> int:
+           properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapSolvate <leap.leap_solvate.LeapSolvate>`leap.leap_solvate.LeapSolvate class and
     execute :meth:`launch() <leap.leap_solvate.LeapSolvate.launch>` method"""
 
