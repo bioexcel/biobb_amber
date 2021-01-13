@@ -20,7 +20,7 @@ class ProcessMDOut():
         input_log_path (str): AMBER (sander) MD output (log) file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/md.log>`_. Accepted formats: log (edam:format_2330), out (edam:format_2330), txt (edam:format_2330), o (edam:format_2330).
         output_dat_path (str): Dat output file containing data from the specified terms along the minimization process. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/md.process.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330), csv (edam:format_3752).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **terms** (*list*) - (["ENERGY"]) Statistics descriptors. Values: VOLUME, TSOLVENT, TSOLUTE, TEMP, PRES, ETOT, ESCF, EPTOT, EKTOT, EKCMT, DENSITY.
+            * **terms** (*list*) - (["ETOT"]) Statistics descriptors. Values: VOLUME, TSOLVENT, TSOLUTE, TEMP, PRES, ETOT, ESCF, EPTOT, EKTOT, EKCMT, DENSITY.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -57,7 +57,7 @@ class ProcessMDOut():
 
         # Properties specific for BB
         self.properties = properties
-        self.terms = properties.get('terms', ["ENERGY"])
+        self.terms = properties.get('terms', ["ETOT"])
 
         # Properties common in all BB
         self.can_write_console_log = properties.get('can_write_console_log', True)

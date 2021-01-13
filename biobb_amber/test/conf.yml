@@ -4,10 +4,10 @@ working_dir_path: /tmp/biobb/unitests
 
 amber_to_pdb:
   paths:
-    input_top_path: file:test_data_dir/ambpdb/amber_to_pdb.top
-    input_crd_path: file:test_data_dir/ambpdb/amber_to_pdb.crd
+    input_top_path: file:test_data_dir/ambpdb/structure.leap.top
+    input_crd_path: file:test_data_dir/ambpdb/structure.leap.crd
     output_pdb_path: output.pdb
-    ref_output_pdb_path: file:test_reference_dir/ambpdb/ref_amber_to_pdb.pdb
+    ref_output_pdb_path: file:test_reference_dir/ambpdb/structure.ambpdb.pdb
   properties:
     remove_tmp: True
 
@@ -15,12 +15,12 @@ amber_to_pdb:
 
 cpptraj_randomize_ions:
   paths:
-    input_top_path: file:test_data_dir/cpptraj/cpptraj_randomize_ions.top
-    input_crd_path: file:test_data_dir/cpptraj/cpptraj_randomize_ions.crd
+    input_top_path: file:test_data_dir/cpptraj/structure.ions.parmtop
+    input_crd_path: file:test_data_dir/cpptraj/structure.ions.crd
     output_pdb_path: output.pdb
-    ref_output_pdb_path: file:test_reference_dir/cpptraj/ref_cpptraj_randomize_ions.pdb
+    ref_output_pdb_path: file:test_reference_dir/cpptraj/structure.randIons.pdb
     output_crd_path: output.crd
-    ref_output_crd_path: file:test_reference_dir/cpptraj/ref_cpptraj_randomize_ions.crd
+    ref_output_crd_path: file:test_reference_dir/cpptraj/structure.randIons.crd
   properties:
     remove_tmp: True
 
@@ -46,7 +46,7 @@ leap_gen_top:
     output_top_path: output.leap.top
     ref_output_top_path: file:test_reference_dir/leap/structure.leap.top
   properties:
-    forcefield : "protein.ff14SB"
+    forcefield : ["protein.ff14SB"]
     remove_tmp: True
 
 leap_solvate:
@@ -59,7 +59,7 @@ leap_solvate:
     output_top_path: output.solv.top
     ref_output_top_path: file:test_reference_dir/leap/structure.solv.top
   properties:
-    forcefield : "protein.ff14SB"
+    forcefield : ["protein.ff14SB"]
     water_type: "TIP3PBOX"
     distance_to_molecule: "9.0"
     box_type: "truncated_octahedron"
@@ -67,18 +67,21 @@ leap_solvate:
 
 leap_add_ions:
   paths:
-    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    input_pdb_path: file:test_data_dir/leap/structure.ions.input.pdb
     output_pdb_path: output.solv.pdb
-    ref_output_pdb_path: file:test_reference_dir/leap/structure.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.ions.pdb
     output_crd_path: output.solv.crd
-    ref_output_crd_path: file:test_reference_dir/leap/structure.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.ions.crd
     output_top_path: output.solv.top
-    ref_output_top_path: file:test_reference_dir/leap/structure.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.ions.top
   properties:
-    forcefield : "protein.ff14SB"
+    forcefield : ["protein.ff14SB","DNA.bsc1"]
     water_type: "TIP3PBOX"
-    distance_to_molecule: "9.0"
     box_type: "truncated_octahedron"
+    neutralise : True
+    positive_ions_type: "K+"
+    negative_ions_type: "Cl-"
+    ionic_concentration : 150
     remove_tmp: True
 
 # nab
@@ -88,6 +91,7 @@ nab_build_dna_structure:
     output_pdb_path: output.pdb
     ref_output_pdb_path: file:test_reference_dir/nab/ref_nab_build_dna_structure.pdb
   properties:
+    sequence: "GCGCGGCTGATAAACGAAAGC"
     remove_tmp: True
 
 # parmed
@@ -103,13 +107,21 @@ parmed_cpinutil:
     system: "cln025"
     remove_tmp: True
 
+parmed_hmassrepartition:
+  paths:
+    input_top_path: file:test_data_dir/parmed/input.hmass.prmtop
+    output_top_path: output.prmtop
+    ref_output_top_path: file:test_reference_dir/parmed/output.hmass.prmtop
+  properties:
+    remove_tmp: True
+
 # pdb4amber
 
 pdb4amber:
   paths:
-    input_pdb_path: file:test_data_dir/pdb4amber/pdb4amber.pdb
+    input_pdb_path: file:test_data_dir/pdb4amber/1aki_fixed.pdb
     output_pdb_path: output.pdb
-    ref_output_pdb_path: file:test_reference_dir/pdb4amber/ref_pdb4amber.pdb
+    ref_output_pdb_path: file:test_reference_dir/pdb4amber/structure.pdb4amber.pdb
   properties:
     remove_tmp: True
 
@@ -117,18 +129,19 @@ pdb4amber:
 
 process_minout:
   paths:
-    input_log_path: file:test_data_dir/process/process_minout.log
+    input_log_path: file:test_data_dir/process/sander.min.log
     output_dat_path: output.dat
-    ref_output_dat_path: file:test_reference_dir/process/ref_process_minout.dat
+    ref_output_dat_path: file:test_reference_dir/process/sander.min.energy.dat
   properties:
     remove_tmp: True
 
 process_mdout:
   paths:
-    input_log_path: file:test_data_dir/process/process_mdout.log
+    input_log_path: file:test_data_dir/process/sander.heat.log
     output_dat_path: output.dat
-    ref_output_dat_path: file:test_reference_dir/process/ref_process_mdout.dat
+    ref_output_dat_path: file:test_reference_dir/process/sander.md.temp.dat
   properties:
+    terms : ['TEMP']
     remove_tmp: True
 
 # sander
@@ -143,7 +156,9 @@ sander_mdrun:
     ref_output_rst_path: file:test_reference_dir/sander/sander.rst
     output_log_path: file:test_data_dir/sander/sander.log
   properties:
+    simulation_type: "minimization"
     mdin :
-      type: "minimization"
       maxcyc: 500
-    remove_tmp: True
+      ntwx: 100
+      ioutfm: 0
+    remove_tmp: False

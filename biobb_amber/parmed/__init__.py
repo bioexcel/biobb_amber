@@ -1,2 +1,2 @@
 name = "parmed"
-__all__ = ["parmed_cpinutil"]
+__all__ = ["parmed_cpinutil", "parmed_hmassrepartition"]
