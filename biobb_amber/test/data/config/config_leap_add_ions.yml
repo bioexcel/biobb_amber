@@ -1,6 +1,11 @@
 properties:
   box_type: truncated_octahedron
-  distance_to_molecule: '9.0'
-  forcefield: protein.ff14SB
+  forcefield:
+  - protein.ff14SB
+  - DNA.bsc1
+  ionic_concentration: 150
+  negative_ions_type: Cl-
+  neutralise: true
+  positive_ions_type: K+
   remove_tmp: true
   water_type: TIP3PBOX

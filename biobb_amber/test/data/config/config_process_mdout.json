@@ -1,5 +1,8 @@
 {
   "properties": {
+    "terms": [
+      "TEMP"
+    ],
     "remove_tmp": true
   }
 }

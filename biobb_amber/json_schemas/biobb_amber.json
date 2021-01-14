@@ -9,10 +9,102 @@
     "version": "3.5.0",
     "tools" : [
         {
-            "block" : "BuildLinearStructure",
+            "block" : "CpptrajRandomizeIons",
+            "tool" : "cpptraj",
+            "desc" : "Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package",
+            "exec" : "cpptraj_randomize_ions",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/cpptraj.html#module-cpptraj.cpptraj_randomize_ions"
+        },
+        {
+            "block" : "AmberToPDB",
+            "tool" : "ambpdb",
+            "desc" : "Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package",
+            "exec" : "amber_to_pdb",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/ambpdb.html#module-ambpdb.amber_to_pdb"
+        },
+        {
+            "block" : "LeapAddIons",
             "tool" : "tLeap",
-            "desc" : "Build a linear (unfolded) 3D structure from an AA sequence",
-            "exec" : "build_linear_structure"
+            "desc" : "Adds counterions to a system box for an AMBER MD system using tLeap tool from the AmberTools MD package",
+            "exec" : "leap_add_ions",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/leap.html#module-leap.leap_add_ions"
+        },
+        {
+            "block" : "LeapGenTop",
+            "tool" : "tLeap",
+            "desc" : "Generates a MD topology from a molecule structure using tLeap tool from the AmberTools MD package",
+            "exec" : "leap_gen_top",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/leap.html#module-leap.leap_gen_top"
+        },
+        {
+            "block" : "LeapSolvate",
+            "tool" : "tLeap",
+            "desc" : "Creates and solvates a system box for an AMBER MD system using tLeap tool from the AmberTools MD package",
+            "exec" : "leap_solvate",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/leap.html#module-leap.leap_solvate"
+        },
+        {
+            "block" : "LeapBuildLinearStructure",
+            "tool" : "tLeap",
+            "desc" : "Builds a linear (unfolded) 3D structure from an AA sequence using tLeap tool from the AmberTools MD package",
+            "exec" : "leap_build_linear_structure",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/leap.html#module-leap.leap_build_linear_structure"
+        },
+        {
+            "block" : "NabBuildDNAStructure",
+            "tool" : "nab",
+            "desc" : "Builds a 3D structure from a DNA sequence using nab (Nucleic Acid Builder) tool from the AmberTools MD package",
+            "exec" : "nab_build_dna_structure",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/nab.html#module-nab.nab_build_dna_structure"
+        },
+        {
+            "block" : "ParmedCpinUtil",
+            "tool" : "parmed",
+            "desc" : "Creates a cpin file for constant pH simulations from an AMBER topology file using parmed tool from the AmberTools MD package",
+            "exec" : "parmed_cpinutil",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/parmed.html#module-parmed.parmed_cpinutil"
+        },
+        {
+            "block" : "ParmedHMassRepartition",
+            "tool" : "parmed",
+            "desc" : "Performs a Hydrogen Mass Repartition from an AMBER topology file using parmed tool from the AmberTools MD package",
+            "exec" : "parmed_hmassrepartition",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/parmed.html#module-parmed.parmed_hmassrepartition"
+        },
+        {
+            "block" : "Pdb4amber",
+            "tool" : "pdb4amber",
+            "desc" : "Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package",
+            "exec" : "pdb4amber",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/pdb4amber.html#module-pdb4amber.pdb4amber"
+        },
+        {
+            "block" : "PmemdMDRun",
+            "tool" : "pmemd",
+            "desc" : "Runs molecular dynamics using pmemd tool from the AMBER MD package",
+            "exec" : "pmemd_mdrun",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/pmemd.html#module-pmemd.pmemd_mdrun"
+        },
+        {
+            "block" : "ProcessMinOut",
+            "tool" : "process",
+            "desc" : "Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package",
+            "exec" : "process_minout",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/process.html#module-process.process_minout"
+        },
+        {
+            "block" : "ProcessMDOut",
+            "tool" : "process",
+            "desc" : "Parses the AMBER (sander) md output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package",
+            "exec" : "process_mdout",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/process.html#module-process.process_mdout"
+        },
+        {
+            "block" : "SanderMDRun",
+            "tool" : "sander",
+            "desc" : "Runs energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package",
+            "exec" : "sander_mdrun",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/sander.html#module-sander.sander_mdrun"
         }
     ],
     "dep_pypi" : [
@@ -25,8 +117,12 @@
         "ambertools ==20.0"
     ],
     "keywords" : [
+        "Amber",
         "AmberTools",
-        "tLeap",
+        "cpptraj",
+        "parmed",
+        "leap",
+        "nab",
         "MD"
     ]
 }

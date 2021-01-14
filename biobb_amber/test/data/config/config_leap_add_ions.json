@@ -1,9 +1,15 @@
 {
   "properties": {
-    "forcefield": "protein.ff14SB",
+    "forcefield": [
+      "protein.ff14SB",
+      "DNA.bsc1"
+    ],
     "water_type": "TIP3PBOX",
-    "distance_to_molecule": "9.0",
     "box_type": "truncated_octahedron",
+    "neutralise": true,
+    "positive_ions_type": "K+",
+    "negative_ions_type": "Cl-",
+    "ionic_concentration": 150,
     "remove_tmp": true
   }
 }

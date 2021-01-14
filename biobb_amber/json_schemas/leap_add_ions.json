@@ -45,13 +45,19 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib",
             "enum": [
-                ".*\\.lib$"
+                ".*\\.lib$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.lib$",
                     "description": "Input ligand library parameters file",
                     "edam": "format_3889"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Input ligand library parameters file",
+                    "edam": "format_3987"
                 }
             ]
         },
@@ -61,13 +67,87 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod",
             "enum": [
-                ".*\\.frcmod$"
+                ".*\\.frcmod$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.frcmod$",
                     "description": "Input ligand frcmod parameters file",
                     "edam": "format_3888"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Input ligand frcmod parameters file",
+                    "edam": "format_3987"
+                }
+            ]
+        },
+        "input_params_path": {
+            "type": "string",
+            "description": "Additional leap parameter files to load with loadAmberParams Leap command",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapParams.in",
+            "enum": [
+                ".*\\.in$",
+                ".*\\.leapin$",
+                ".*\\.txt$",
+                ".*\\.zip$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Additional leap parameter files to load with loadAmberParams Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.leapin$",
+                    "description": "Additional leap parameter files to load with loadAmberParams Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Additional leap parameter files to load with loadAmberParams Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Additional leap parameter files to load with loadAmberParams Leap command",
+                    "edam": "format_3987"
+                }
+            ]
+        },
+        "input_source_path": {
+            "type": "string",
+            "description": "Additional leap command files to load with source Leap command",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapSource.in",
+            "enum": [
+                ".*\\.in$",
+                ".*\\.leapin$",
+                ".*\\.txt$",
+                ".*\\.zip$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Additional leap command files to load with source Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.leapin$",
+                    "description": "Additional leap command files to load with source Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Additional leap command files to load with source Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Additional leap command files to load with source Leap command",
+                    "edam": "format_3987"
                 }
             ]
         },
@@ -147,8 +227,8 @@
             "type": "object",
             "properties": {
                 "forcefield": {
-                    "type": "string",
-                    "default": "protein.ff14SB",
+                    "type": "array",
+                    "default": "[protein.ff14SB,DNA.bsc1,gaff]",
                     "wf_prop": false,
                     "description": "Forcefield to be used for the structure generation. ",
                     "enum": [
@@ -156,7 +236,8 @@
                         "protein.ff19SB",
                         "DNA.bsc1",
                         "DNA.OL15",
-                        "RNA.OL3"
+                        "RNA.OL3",
+                        "gaff"
                     ],
                     "property_formats": [
                         {
@@ -177,6 +258,10 @@
                         },
                         {
                             "name": "RNA.OL3",
+                            "description": null
+                        },
+                        {
+                            "name": "gaff",
                             "description": null
                         }
                     ]
@@ -262,6 +347,46 @@
                         },
                         {
                             "name": "truncated_octahedron",
+                            "description": null
+                        }
+                    ]
+                },
+                "ions_type": {
+                    "type": "string",
+                    "default": "ionsjc_tip3p",
+                    "wf_prop": false,
+                    "description": "Ions type. ",
+                    "enum": [
+                        "ionsjc_tip3p",
+                        "ionsjc_spce",
+                        "ionsff99_tip3p",
+                        "ions_charmm22",
+                        "ionsjc_tip4pew",
+                        "None"
+                    ],
+                    "property_formats": [
+                        {
+                            "name": "ionsjc_tip3p",
+                            "description": null
+                        },
+                        {
+                            "name": "ionsjc_spce",
+                            "description": null
+                        },
+                        {
+                            "name": "ionsff99_tip3p",
+                            "description": null
+                        },
+                        {
+                            "name": "ions_charmm22",
+                            "description": null
+                        },
+                        {
+                            "name": "ionsjc_tip4pew",
+                            "description": null
+                        },
+                        {
+                            "name": "None",
                             "description": null
                         }
                     ]

@@ -1,4 +1,2 @@
 properties:
   remove_tmp: true
-  terms:
-  - TEMP

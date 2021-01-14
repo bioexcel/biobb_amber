@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/parmed_hmassrepartition",
+    "name": "biobb_amber ParmedHMassRepartition",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) parmed tool module.",
+    "description": "Performs a Hydrogen Mass Repartition from an AMBER topology file using parmed tool from the AmberTools MD package.",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "AmberTools parmed",
+            "version": ">20.9",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_top_path",
+        "output_top_path"
+    ],
+    "properties": {
+        "input_top_path": {
+            "type": "string",
+            "description": "Input AMBER topology file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.solv.top",
+            "enum": [
+                ".*\\.top$",
+                ".*\\.parmtop$",
+                ".*\\.prmtop$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.top$",
+                    "description": "Input AMBER topology file",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.parmtop$",
+                    "description": "Input AMBER topology file",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.prmtop$",
+                    "description": "Input AMBER topology file",
+                    "edam": "format_3881"
+                }
+            ]
+        },
+        "output_top_path": {
+            "type": "string",
+            "description": "Output topology file (AMBER ParmTop)",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.4fs.top",
+            "enum": [
+                ".*\\.top$",
+                ".*\\.parmtop$",
+                ".*\\.prmtop$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.top$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.parmtop$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                },
+                {
+                    "extension": ".*\\.prmtop$",
+                    "description": "Output topology file (AMBER ParmTop)",
+                    "edam": "format_3881"
+                }
+            ]
+        },
+        "properties": {
+            "type": "object",
+            "properties": {
+                "remove_tmp": {
+                    "type": "boolean",
+                    "default": true,
+                    "wf_prop": true,
+                    "description": "Remove temporal files."
+                },
+                "restart": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": true,
+                    "description": "Do not execute if output files exist."
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}

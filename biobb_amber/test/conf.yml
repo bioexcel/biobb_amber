@@ -161,7 +161,7 @@ sander_mdrun:
       maxcyc: 500
       ntwx: 100
       ioutfm: 0
-    remove_tmp: False
+    remove_tmp: True
 
 # pmemd
 
@@ -180,4 +180,4 @@ pmemd_mdrun:
       maxcyc: 500
       ntwx: 100
       ioutfm: 0
-    remove_tmp: False
+    remove_tmp: True

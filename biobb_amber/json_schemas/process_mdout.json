@@ -88,7 +88,7 @@
             "properties": {
                 "terms": {
                     "type": "array",
-                    "default": "[ENERGY]",
+                    "default": "[ETOT]",
                     "wf_prop": false,
                     "description": "Statistics descriptors. ",
                     "enum": [

@@ -1,3 +1,4 @@
 properties:
-  forcefield: protein.ff14SB
+  forcefield:
+  - protein.ff14SB
   remove_tmp: true

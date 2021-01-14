@@ -1,15 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/sander_mdrun",
-    "name": "biobb_amber SanderMDRun",
-    "title": "Wrapper of the AmberTools (AMBER MD Package) sander tool module.",
-    "description": "Runs energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.",
+    "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/pmemd_mdrun",
+    "name": "biobb_amber PmemdMDRun",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) pmemd tool module.",
+    "description": "Runs molecular dynamics using pmemd tool from the AMBER MD package.",
     "type": "object",
     "info": {
         "wrapped_software": {
-            "name": "AmberTools Sander",
-            "version": ">20.9",
-            "license": "LGPL 2.1"
+            "name": "AMBER pmemd",
+            "version": ">20",
+            "license": "other"
         },
         "ontology": {
             "name": "EDAM",
@@ -28,7 +28,7 @@
             "type": "string",
             "description": "Input topology file (AMBER ParmTop)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/structure.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/structure.top",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -56,7 +56,7 @@
             "type": "string",
             "description": "Input coordinates file (AMBER crd)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/structure.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/structure.crd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
@@ -84,7 +84,7 @@
             "type": "string",
             "description": "Input configuration file (MD run options) (AMBER mdin)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.mdin",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.mdin",
             "enum": [
                 ".*\\.mdin$",
                 ".*\\.in$",
@@ -112,7 +112,7 @@
             "type": "string",
             "description": "Input constant pH file (AMBER cpin)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cpin",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.cpin",
             "enum": [
                 ".*\\.cpin$"
             ],
@@ -128,7 +128,7 @@
             "type": "string",
             "description": "Input reference coordinates for position restraints",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.refc",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.refc",
             "enum": [
                 ".*\\.rst$",
                 ".*\\.rst7$"
@@ -150,7 +150,7 @@
             "type": "string",
             "description": "Output log file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.out",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/md.out",
             "enum": [
                 ".*\\.log$",
                 ".*\\.out$",
@@ -184,7 +184,7 @@
             "type": "string",
             "description": "Output trajectory file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.x",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/md.x",
             "enum": [
                 ".*\\.trj$",
                 ".*\\.crd$",
@@ -230,7 +230,7 @@
             "type": "string",
             "description": "Output restart file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.rst",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/md.rst",
             "enum": [
                 ".*\\.rst$",
                 ".*\\.rst7$"
@@ -252,7 +252,7 @@
             "type": "string",
             "description": "Output constant pH file (AMBER cpout)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cpout",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.cpout",
             "enum": [
                 ".*\\.cpout$"
             ],
@@ -268,7 +268,7 @@
             "type": "string",
             "description": "Output constant pH restart file (AMBER rstout)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cprst",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.cprst",
             "enum": [
                 ".*\\.cprst$",
                 ".*\\.rst$",
@@ -296,7 +296,7 @@
             "type": "string",
             "description": "Output MD info",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.mdinfo",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.mdinfo",
             "enum": [
                 ".*\\.mdinfo$"
             ],
@@ -315,7 +315,13 @@
                     "type": "object",
                     "default": {},
                     "wf_prop": false,
-                    "description": "Sander MD run options specification. (Used if *input_mdin_path* is None)"
+                    "description": "pmemd MD run options specification. (Used if *input_mdin_path* is None)"
+                },
+                "pmemd_path": {
+                    "type": "string",
+                    "default": "pmemd",
+                    "wf_prop": false,
+                    "description": "pmemd binary path to be used."
                 },
                 "simulation_type": {
                     "type": "string",
@@ -351,12 +357,6 @@
                             "description": "Runs a MD simulation"
                         }
                     ]
-                },
-                "sander_path": {
-                    "type": "string",
-                    "default": "sander",
-                    "wf_prop": false,
-                    "description": "sander binary path to be used."
                 },
                 "remove_tmp": {
                     "type": "boolean",
