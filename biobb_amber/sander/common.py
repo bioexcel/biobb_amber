@@ -11,7 +11,8 @@ def check_input_path(path, argument, optional, out_log, classname):
 	if optional and not path:
 		return None
 	if not Path(path).exists():
-		fu.log(classname + ': Unexisting %s file, exiting' % argument, out_log)
+		fu.log("Path: " + path)
+		fu.log("Path " + path + " --- " + classname + ': Unexisting %s file, exiting' % argument, out_log)
 		raise SystemExit(classname + ': Unexisting %s file' % argument)
 	file_extension = PurePath(path).suffix
 	if not is_valid_file(file_extension[1:], argument):

@@ -319,7 +319,7 @@ class LeapAddIons():
         returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
 
         if self.box_type != "cubic":
-            fu.log('Fixing truncated octahedron Box in the topology and restart files', out_log, self.global_log)
+            fu.log('Fixing truncated octahedron Box in the topology and coordinates files', out_log, self.global_log)
 
             # Taking box info from input PDB file, CRYST1 tag (first line)
             with open(self.io_dict['in']['input_pdb_path']) as file:

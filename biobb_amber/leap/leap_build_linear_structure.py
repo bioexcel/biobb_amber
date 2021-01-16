@@ -20,7 +20,7 @@ class LeapBuildLinearStructure():
         output_pdb_path (str): Linear (unfolded) 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **sequence** (*str*) - ("ALA GLY SER PRO ARG ALA PRO GLY") Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them.
-            * **forcefield** (*str*) - ("protein.ff14SB") Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3.
+            * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
             * **build_library** (*bool*) - (False) Generate AMBER lib file for the structure.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -32,7 +32,7 @@ class LeapBuildLinearStructure():
             prop = {
                 'sequence' : 'ALA PRO SER ARG LYS ASP GLU GLY GLY ALA',
                 'build_library': False,
-                'forcefield' : 'protein.ff14SB'
+                'forcefield': ['protein.ff14SB']
             }
             leap_build_linear_structure(output_pdb_path='/path/to/newStructure.pdb',
                           properties=prop)
@@ -60,7 +60,7 @@ class LeapBuildLinearStructure():
         # Properties specific for BB
         self.properties = properties
         self.sequence = properties.get('sequence', "ALA GLY SER PRO ARG ALA PRO GLY")
-        self.forcefield = properties.get('forcefield', "protein.ff14SB")
+        self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
         self.build_library = properties.get('build_library', False)
 
         # Properties common in all BB
@@ -113,13 +113,17 @@ class LeapBuildLinearStructure():
 
         instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
         with open(instructions_file, 'w') as leapin:
+
+                # Forcefields loaded from input forcefield property
+                for t in self.forcefield:
+                    leapin.write("source leaprc.{}\n".format(t))
+
                 leapin.write("struct = sequence {" + self.sequence + " } \n")
                 leapin.write("savepdb struct " + self.io_dict['out']['output_pdb_path'] + "\n")
                 leapin.write("quit \n");
 
         # Command line
         cmd = ['tleap ',
-               '-f', "leaprc."+self.forcefield,
                '-f', instructions_file
                ]
         fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)

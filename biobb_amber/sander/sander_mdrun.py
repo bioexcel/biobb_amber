@@ -255,6 +255,10 @@ class SanderMDRun():
             cmd.append('-ref ')
             cmd.append(self.io_dict['in']['input_ref_path'])
 
+        if self.io_dict['in']['input_cpin_path']:
+            cmd.append('-cpin ')
+            cmd.append(self.io_dict['in']['input_cpin_path'])
+
         fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
         # Launch execution
