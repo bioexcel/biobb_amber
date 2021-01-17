@@ -263,6 +263,10 @@ class PmemdMDRun():
             cmd.append('-ref ')
             cmd.append(self.io_dict['in']['input_ref_path'])
 
+        if self.io_dict['in']['input_cpin_path']:
+            cmd.append('-cpin ')
+            cmd.append(self.io_dict['in']['input_cpin_path'])
+
         # general mpi properties
         if self.mpi_bin:
             mpi_cmd = [self.mpi_bin]
