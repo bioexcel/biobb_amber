@@ -32,6 +32,9 @@ class SanderMDRun():
             * **mdin** (*dict*) - ({}) Sander MD run options specification. (Used if *input_mdin_path* is None)
             * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/minimization.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/NVT.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/NPT.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/free.mdin>`_ (Runs a MD simulation).
             * **sander_path** (*str*) - ("sander") sander binary path to be used.
+            * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
+            * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
+            * **mpi_hostlist** (*str*) - (None) Path to the MPI hostlist file.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -87,6 +90,11 @@ class SanderMDRun():
         self.simulation_type = properties.get('simulation_type', "minimization")
         self.sander_path = properties.get('sander_path', "sander")
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
+
+        # Properties for MPI
+        self.mpi_bin = properties.get('mpi_bin')
+        self.mpi_np = properties.get('mpi_np')
+        self.mpi_hostlist = properties.get('mpi_hostlist')
 
         # Properties common in all BB
         self.can_write_console_log = properties.get('can_write_console_log', True)
@@ -258,6 +266,17 @@ class SanderMDRun():
         if self.io_dict['in']['input_cpin_path']:
             cmd.append('-cpin ')
             cmd.append(self.io_dict['in']['input_cpin_path'])
+
+        # general mpi properties
+        if self.mpi_bin:
+            mpi_cmd = [self.mpi_bin]
+            if self.mpi_np:
+                mpi_cmd.append('-n')
+                mpi_cmd.append(str(self.mpi_np))
+            if self.mpi_hostlist:
+                mpi_cmd.append('-hostfile')
+                mpi_cmd.append(self.mpi_hostlist)
+            cmd = mpi_cmd + cmd
 
         fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
