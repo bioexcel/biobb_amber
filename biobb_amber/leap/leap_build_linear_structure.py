@@ -17,7 +17,7 @@ class LeapBuildLinearStructure():
     | Builds a linear (unfolded) 3D structure from an AA sequence using tLeap tool from the AmberTools MD package.
 
     Args:
-        output_pdb_path (str): Linear (unfolded) 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_pdb_path (str): Linear (unfolded) 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **sequence** (*str*) - ("ALA GLY SER PRO ARG ALA PRO GLY") Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them.
             * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
@@ -75,10 +75,8 @@ class LeapBuildLinearStructure():
     def check_data_params(self, out_log):
         """ Checks input/output paths correctness """
 
-        # Check input(s) -- No input paths required in this bb
-
-        # Check output(s) -- Not really sure is needed...
-        #self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        # Check output(s)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):

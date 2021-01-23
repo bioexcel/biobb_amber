@@ -19,14 +19,14 @@ class LeapAddIons():
     | Adds counterions to a system box for an AMBER MD system using tLeap tool from the AmberTools MD package.
 
     Args:
-        input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.pdb>`_. Accepted formats: pdb (edam:format_1476).
         input_lib_path (str) (Optional): Input ligand library parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib>`_. Accepted formats: lib (edam:format_3889), zip (edam:format_3987).
         input_frcmod_path (str) (Optional): Input ligand frcmod parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod>`_. Accepted formats: frcmod (edam:format_3888), zip (edam:format_3987).
-        input_params_path (str) (Optional): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapParams.in>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
-        input_source_path (str) (Optional): Additional leap command files to load with source Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapSource.in>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
-        output_pdb_path (str): Output 3D structure PDB file matching the topology file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_top_path (str): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.top>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
-        output_crd_path (str): Output coordinates file (AMBER crd). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.crd>`_. Accepted formats: crd  (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
+        input_params_path (str) (Optional): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
+        input_source_path (str) (Optional): Additional leap command files to load with source Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
+        output_pdb_path (str): Output 3D structure PDB file matching the topology file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.ions.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_top_path (str): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.ions.top>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
+        output_crd_path (str): Output coordinates file (AMBER crd). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.ions.crd>`_. Accepted formats: crd  (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
             * **water_type** (*str*) - ("TIP3PBOX") Water molecule parameters to be used for the topology. Values: POL3BOX, QSPCFWBOX, SPCBOX, SPCFWBOX, TIP3PBOX, TIP3PFBOX, TIP4PBOX, TIP4PEWBOX, OPCBOX, OPC3BOX, TIP5PBOX.
@@ -123,12 +123,16 @@ class LeapAddIons():
         """ Checks input/output paths correctness """
 
         # Check input(s)
-        self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_lib_path"] = check_input_path(self.io_dict["in"]["input_lib_path"], "input_lib_path", True, out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_frcmod_path"] = check_input_path(self.io_dict["in"]["input_frcmod_path"], "input_frcmod_path", True, out_log, self.__class__.__name__)
+        #self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
+        #self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
 
-        # Check output(s) -- Not really sure is needed...
-        #self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
-        #self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", False, out_log, self.__class__.__name__)
-        #self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"],"output_crd_path", False, out_log, self.__class__.__name__)
+        # Check output(s)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"],"output_crd_path", False, out_log, self.__class__.__name__)
 
     def find_out_number_of_ions(self):
         """ Computes the number of positive and negative ions from the input ionic
@@ -152,21 +156,6 @@ class LeapAddIons():
         # n(NaCl) = #waters / 55 Mol * X M
         # where X M = X mM / 1000
         self.nio = (cnt / 55) * (self.ionic_concentration / 1000)
-
-    def tail(self, file, n_lines):
-        """ Wrapper of the tail command line to extract the last
-        n lines from a file."""
-        proc = subprocess.Popen(['tail', '-n', n_lines, file], stdout=subprocess.PIPE)
-        lines = proc.stdout.readlines()
-        return lines
-
-    def sed(self, file, out_file):
-        """ Wrapper of the sed command line to remove the last
-        line from a file."""
-        proc = subprocess.Popen(['sed', '\'$d\'', file, ' > ', out_file], shell=True, stdout=subprocess.PIPE)
-        lines = proc.stdout.readlines()
-
-        return lines
 
     @launchlogger
     def launch(self):
@@ -326,11 +315,13 @@ class LeapAddIons():
                 lines = file.readlines()
                 pdb_line = lines[0]
 
-            if 'CRYST1' not in pdb_line:
-                fu.log('WARNING: box info not found in input PDB file (CRYST1). Needed to correctly assign the octahedron box. Assuming cubic box.',out_log, self.global_log)
+            if 'OCTBOX' not in pdb_line:
+                fu.log('WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.',out_log, self.global_log)
             else:
                 # PDB info: CRYST1   86.316   86.316   86.316 109.47 109.47 109.47 P 1
-                regex_box = 'CRYST1\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*P 1'
+                # PDB info: OCTBOX   86.1942924  86.1942924  86.1942924 109.4712190 109.4712190 109.4712190
+                #regex_box = 'CRYST1\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*P 1'
+                regex_box = 'OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)'
                 box = re.findall(regex_box, pdb_line)[0]
                 box_line = ""
                 for coord in box:
@@ -358,6 +349,7 @@ class LeapAddIons():
 
                 # Now fixing IFBOX param in prmtop.
                 box_flag = False
+                ifbox_flag = 0
                 #%FLAG BOX_DIMENSIONS
                 #%FORMAT(5E16.8)
                 #1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
@@ -374,6 +366,13 @@ class LeapAddIons():
                             elif box_flag and 'FORMAT' not in line:
                                 new_top.write(top_box_line + "\n")
                                 box_flag = False
+                            elif 'FLAG POINTERS' in line or ifbox_flag==1 or ifbox_flag==2 or ifbox_flag==3:
+                                ifbox_flag+=1
+                                new_top.write(line)
+                            elif ifbox_flag == 4:
+                                #new_top.write(top_box_line + "\n")
+                                new_top.write(line[:56] + '       2' + line[64:])
+                                ifbox_flag+=1
                             else:
                                 new_top.write(line)
 

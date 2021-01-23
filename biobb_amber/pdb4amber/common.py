@@ -3,9 +3,7 @@ from pathlib import Path, PurePath
 import re
 from biobb_common.tools import file_utils as fu
 
-
-# CHECK PARAMETERS
-
+# CHECK INPUT PARAMETERS
 def check_input_path(path, argument, optional, out_log, classname):
 	""" Checks input file """
 	if optional and not path:
@@ -19,6 +17,7 @@ def check_input_path(path, argument, optional, out_log, classname):
 		raise SystemExit(classname + ': Format %s in %s file is not compatible' % (file_extension[1:], argument))
 	return path
 
+# CHECK OUTPUT PARAMETERS
 def check_output_path(path, argument, optional, out_log, classname):
 	""" Checks output file """
 	if optional and not path:

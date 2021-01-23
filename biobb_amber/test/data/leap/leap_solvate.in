@@ -1,0 +1,8 @@
+source leaprc.protein.ff14SB
+loadamberparams frcmod.ionsjc_tip3p
+source leaprc.water.tip3p 
+mol = loadpdb structure.leap.pdb 
+solvateOct mol TIP3PBOX 9.0
+savepdb mol structure.solv.pdb 
+saveAmberParm mol structure.solv.parmtop structure.solv.crd
+quit 

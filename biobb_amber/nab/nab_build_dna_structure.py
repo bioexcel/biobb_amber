@@ -17,7 +17,7 @@ class NabBuildDNAStructure():
     | Builds a 3D structure from a DNA sequence using nab (Nucleic Acid Builder) tool from the AmberTools MD package.
 
     Args:
-        output_pdb_path (str): DNA 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/nab/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_pdb_path (str): DNA 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/nab/ref_nab_build_dna_structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **sequence** (*str*) - ("GCGCGGCTGATAAACGAAAGC") Nucleotide sequence to convert to a 3D structure. Nucleotides should be written in 1-letter code, with no spaces between them.
             * **helix_type** (*str*) - ("lbdna") DNA/RNA helix type. Values: arna (Right Handed A-RNA, Arnott), aprna (Right Handed A’-RNA, Arnott), lbdna (Right Handed B-DNA, Langridge), abdna (Right Handed B-DNA, Arnott), sbdna (Left Handed B-DNA, Sasisekharan), adna (Right Handed A-DNA, Arnott).
@@ -74,10 +74,8 @@ class NabBuildDNAStructure():
     def check_data_params(self, out_log):
         """ Checks input/output paths correctness """
 
-        # Check input(s) -- No input paths required in this bb
-
-        # Check output(s) -- Not really sure is needed...
-        #self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        # Check output(s)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):

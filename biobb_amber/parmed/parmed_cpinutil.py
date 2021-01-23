@@ -18,8 +18,8 @@ class ParmedCpinUtil():
 
     Args:
         input_top_path (str): Input AMBER topology file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.solv.top>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
-        output_cpin_path (str): Output AMBER constant pH input (CPin) file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.cpin>`_. Accepted formats: cpin (edam:format_2330).
-        output_top_path (str) (Optional): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.cpin.top>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
+        output_cpin_path (str): Output AMBER constant pH input (CPin) file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/parmed/cln025.cpin>`_. Accepted formats: cpin (edam:format_2330).
+        output_top_path (str) (Optional): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/parmed/cln025.cpH.prmtop>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **resnames** (*str*) - ("None") Residue names to include in CPIN file. Values: AS4, GL4, HIP, CYS, LYS, TYR.
             * **igb** (*int*) - (2) Generalized Born model which you intend to use to evaluate dynamics or protonation state swaps. Values: 1, 2, 5, 7, 8.
@@ -82,11 +82,11 @@ class ParmedCpinUtil():
         """ Checks input/output paths correctness """
 
         # Check input(s)
-        self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", False, out_log, self.__class__.__name__)
 
-        # Check output(s) -- Not really sure is needed...
-        #self.io_dict["out"]["output_cpin_path"] = check_output_path(self.io_dict["out"]["output_cpin_path"],"output_cpin_path", False, out_log, self.__class__.__name__)
-        #self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", True, out_log, self.__class__.__name__)        #self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"],"output_crd_path", False, out_log, self.__class__.__name__)
+        # Check output(s)
+        self.io_dict["out"]["output_cpin_path"] = check_output_path(self.io_dict["out"]["output_cpin_path"],"output_cpin_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", True, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):

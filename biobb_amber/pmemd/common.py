@@ -3,9 +3,7 @@ from pathlib import Path, PurePath
 import re
 from biobb_common.tools import file_utils as fu
 
-
-# CHECK PARAMETERS
-
+# CHECK INPUT PARAMETERS
 def check_input_path(path, argument, optional, out_log, classname):
 	""" Checks input file """
 	if optional and not path:
@@ -19,6 +17,7 @@ def check_input_path(path, argument, optional, out_log, classname):
 		raise SystemExit(classname + ': Format %s in %s file is not compatible' % (file_extension[1:], argument))
 	return path
 
+# CHECK OUTPUT PARAMETERS
 def check_output_path(path, argument, optional, out_log, classname):
 	""" Checks output file """
 	if optional and not path:
@@ -39,11 +38,12 @@ def is_valid_file(ext, argument):
 		'input_crd_path': ['crd','inpcrd','mdcrd','rst','rst7'],
 		'input_mdin_path': ['mdin','txt','in'],
 		'input_cpin_path': ['cpin','txt','in'],
+		'input_ref_path': ['crd','inpcrd','mdcrd','rst','rst7'],
 		'output_log_path': ['log','out','txt','o'],
-		'output_traj_path': ['trj', 'crd', 'mdcrd', 'x'],
+		'output_traj_path': ['trj', 'crd', 'mdcrd', 'x', 'netcdf', 'nc'],
 		'output_rst_path': ['rst', 'rst7'],
 		'output_cpout_path': ['cpout'],
-		'output_cprst_path': ['cprst'],
+		'output_cprst_path': ['cprst', 'rst', 'rst7'],
 		'output_mdinfo_path': ['mdinfo']
 	}
 	return ext in formats[argument]

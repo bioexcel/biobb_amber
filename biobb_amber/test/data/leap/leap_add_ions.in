@@ -1,0 +1,10 @@
+source leaprc.protein.ff14SB
+loadamberparams frcmod.ionsjc_tip3p
+source leaprc.water.tip3p 
+mol = loadpdb structure.solv.pdb 
+addionsRand mol Cl- 5 
+addionsRand mol Na+ 5 
+setBox mol vdw 
+savepdb mol structure.ions.pdb 
+saveAmberParm mol structure.ions.parmtop structure.ions.crd
+quit 

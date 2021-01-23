@@ -3,11 +3,11 @@ from pathlib import Path, PurePath
 import re
 from biobb_common.tools import file_utils as fu
 
-
-# CHECK PARAMETERS
-
-def check_input_path(path, argument, out_log, classname):
+# CHECK INPUT PARAMETERS
+def check_input_path(path, argument, optional, out_log, classname):
 	""" Checks input file """
+	if optional and not path:
+		return None
 	if not Path(path).exists():
 		fu.log(classname + ': Unexisting %s file, exiting' % argument, out_log)
 		raise SystemExit(classname + ': Unexisting %s file' % argument)
@@ -17,6 +17,7 @@ def check_input_path(path, argument, out_log, classname):
 		raise SystemExit(classname + ': Format %s in %s file is not compatible' % (file_extension[1:], argument))
 	return path
 
+# CHECK OUTPUT PARAMETERS
 def check_output_path(path, argument, optional, out_log, classname):
 	""" Checks output file """
 	if optional and not path:
@@ -34,8 +35,12 @@ def is_valid_file(ext, argument):
 	""" Checks if file format is compatible """
 	formats = {
 		'input_pdb_path': ['pdb'],
+		'input_lib_path': ['lib','zip'],
+		'input_frcmod_path': ['frcmod','zip'],
+		'input_params_path': ['in', 'leapin', 'txt', 'zip'],
+		'input_source_path': ['in', 'leapin', 'txt', 'zip'],
         'output_pdb_path': ['pdb'],
 		'output_top_path': ['top','prmtop','parmtop'],
-		'output_crd_path': ['crd']
+		'output_crd_path': ['crd','mdcrd','inpcrd','rst','rst7']
 	}
 	return ext in formats[argument]

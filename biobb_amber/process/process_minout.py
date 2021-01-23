@@ -17,8 +17,8 @@ class ProcessMinOut():
     | Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package.
 
     Args:
-        input_log_path (str): AMBER (sander) Minimization output (log) file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/min.log>`_. Accepted formats: log (edam:format_2330), out (edam:format_2330), txt (edam:format_2330), o (edam:format_2330).
-        output_dat_path (str): Dat output file containing data from the specified terms along the minimization process. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/min.process.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330), csv (edam:format_3752).
+        input_log_path (str): AMBER (sander) Minimization output (log) file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/sander.min.log>`_. Accepted formats: log (edam:format_2330), out (edam:format_2330), txt (edam:format_2330), o (edam:format_2330).
+        output_dat_path (str): Dat output file containing data from the specified terms along the minimization process. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/sander.min.energy.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330), csv (edam:format_3752).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **terms** (*list*) - (["ENERGY"]) Statistics descriptors. Values: ANGLE, BOND, DIHEDRAL, EEL, EEL14, ENERGY, GMAX, HBOND, NAME, NSTEP, NUMBER, RESTRAINT, RMS, VDW14, VDWAALS.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -71,10 +71,11 @@ class ProcessMinOut():
     def check_data_params(self, out_log):
         """ Checks input/output paths correctness """
 
-        # Check input(s) -- No input paths required in this bb
+        # Check input(s)
+        self.io_dict["in"]["input_log_path"] = check_input_path(self.io_dict["in"]["input_log_path"], "input_log_path", False, out_log, self.__class__.__name__)
 
-        # Check output(s) -- Not really sure is needed...
-        #self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        # Check output(s)
+        self.io_dict["out"]["output_dat_path"] = check_output_path(self.io_dict["out"]["output_dat_path"],"output_dat_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):

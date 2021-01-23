@@ -17,20 +17,20 @@ class SanderMDRun():
     | Runs energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.
 
     Args:
-        input_top_path (str): Input topology file (AMBER ParmTop). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/structure.top>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
-        input_crd_path (str): Input coordinates file (AMBER crd). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/structure.crd>`_. Accepted formats: crd (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
-        input_mdin_path (str) (Optional): Input configuration file (MD run options) (AMBER mdin). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.mdin>`_. Accepted formats: mdin (edam:format_2330), in (edam:format_2330), txt (edam:format_2330).
-        input_cpin_path (str) (Optional): Input constant pH file (AMBER cpin). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cpin>`_. Accepted formats: cpin (edam:format_2330).
-        input_ref_path (str) (Optional): Input reference coordinates for position restraints. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.refc>`_. Accepted formats: rst (edam:format_3886), rst7 (edam:format_3886).
-        output_log_path (str): Output log file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.out>`_. Accepted formats: log (edam:format_2330), out (edam:format_2330), txt (edam:format_2330), o (edam:format_2330).
-        output_traj_path (str): Output trajectory file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.x>`_. Accepted formats: trj (edam:format_3878), crd (edam:format_3878), mdcrd (edam:format_3878), x (edam:format_3878), netcdf (edam:format_3650), nc (edam:format_3650).
-        output_rst_path (str): Output restart file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.rst>`_. Accepted formats: rst (edam:format_3886), rst7 (edam:format_3886).
-        output_cpout_path (str) (Optional): Output constant pH file (AMBER cpout). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cpout>`_. Accepted formats: cpout (edam:format_2330).
-        output_cprst_path (str) (Optional): Output constant pH restart file (AMBER rstout). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cprst>`_. Accepted formats: cprst (edam:format_3886), rst (edam:format_3886), rst7 (edam:format_3886).
-        output_mdinfo_path (str) (Optional): Output MD info. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.mdinfo>`_. Accepted formats: mdinfo (edam:format_2330).
+        input_top_path (str): Input topology file (AMBER ParmTop). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.prmtop>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
+        input_crd_path (str): Input coordinates file (AMBER crd). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.inpcrd>`_. Accepted formats: crd (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
+        input_mdin_path (str) (Optional): Input configuration file (MD run options) (AMBER mdin). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/npt.mdin>`_. Accepted formats: mdin (edam:format_2330), in (edam:format_2330), txt (edam:format_2330).
+        input_cpin_path (str) (Optional): Input constant pH file (AMBER cpin). File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.cpin>`_. Accepted formats: cpin (edam:format_2330).
+        input_ref_path (str) (Optional): Input reference coordinates for position restraints. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.rst>`_. Accepted formats: rst (edam:format_3886), rst7 (edam:format_3886).
+        output_log_path (str): Output log file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.log>`_. Accepted formats: log (edam:format_2330), out (edam:format_2330), txt (edam:format_2330), o (edam:format_2330).
+        output_traj_path (str): Output trajectory file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.x>`_. Accepted formats: trj (edam:format_3878), crd (edam:format_3878), mdcrd (edam:format_3878), x (edam:format_3878), netcdf (edam:format_3650), nc (edam:format_3650).
+        output_rst_path (str): Output restart file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.rst>`_. Accepted formats: rst (edam:format_3886), rst7 (edam:format_3886).
+        output_cpout_path (str) (Optional): Output constant pH file (AMBER cpout). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.cpout>`_. Accepted formats: cpout (edam:format_2330).
+        output_cprst_path (str) (Optional): Output constant pH restart file (AMBER rstout). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.cprst>`_. Accepted formats: cprst (edam:format_3886), rst (edam:format_3886), rst7 (edam:format_3886).
+        output_mdinfo_path (str) (Optional): Output MD info. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.mdinfo>`_. Accepted formats: mdinfo (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **mdin** (*dict*) - ({}) Sander MD run options specification. (Used if *input_mdin_path* is None)
-            * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/minimization.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/NVT.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/NPT.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/free.mdin>`_ (Runs a MD simulation).
+            * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/nvt.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/npt.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/free.mdin>`_ (Runs a MD simulation), `heat <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/heat.mdin>`_ (Heats the MD system).
             * **sander_path** (*str*) - ("sander") sander binary path to be used.
             * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
             * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
@@ -112,11 +112,16 @@ class SanderMDRun():
         self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", False, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_crd_path"] = check_input_path(self.io_dict["in"]["input_crd_path"], "input_crd_path", False, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_mdin_path"] = check_input_path(self.io_dict["in"]["input_mdin_path"], "input_mdin_path", True, out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_cpin_path"] = check_input_path(self.io_dict["in"]["input_cpin_path"], "input_cpin_path", True, out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_ref_path"] = check_input_path(self.io_dict["in"]["input_ref_path"], "input_ref_path", True, out_log, self.__class__.__name__)
 
-        # Check output(s) -- Not really sure is needed...
-        #self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"],"output_log_path", False, out_log, self.__class__.__name__)
-        #self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"],"output_traj_path", False, out_log, self.__class__.__name__)
-        #self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"],"output_rst_path", False, out_log, self.__class__.__name__)
+        # Check output(s)
+        self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"],"output_log_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"],"output_traj_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"],"output_rst_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cpout_path"] = check_output_path(self.io_dict["out"]["output_cpout_path"],"output_cpout_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"],"output_cprst_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"],"output_mdinfo_path", True, out_log, self.__class__.__name__)
 
     def create_mdin(self, path: str = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""
@@ -145,7 +150,7 @@ class SanderMDRun():
             nvt = (sim_type == 'nvt')
             npt = (sim_type == 'npt')
             free = (sim_type == 'free')
-            md = (nvt or npt or free)
+            md = (nvt or npt or free or heat)
 
             mdin_list.append("Type of mdin: " + sim_type)
             mdin_list.append("&cntrl")
@@ -153,47 +158,42 @@ class SanderMDRun():
             # Pre-configured simulation type parameters
             if minimization:
                 mdin_list.append("  imin = 1")
-            if md:
-                mdin_list.append("  imin = 0")
             if min_vacuo:
                 mdin_list.append("  imin = 1")
                 mdin_list.append("  ncyc = 250")
                 mdin_list.append("  ntb = 0")
                 mdin_list.append("  igb = 0")
                 mdin_list.append("  cut = 12")
+            if md:
+                mdin_list.append("  imin = 0")
+                mdin_list.append("  cut = 10.0")
+                mdin_list.append("  ntr = 0")
+                mdin_list.append("  ntc = 2")
+                mdin_list.append("  ntf = 2")
+                mdin_list.append("  ntt = 3")
+                mdin_list.append("  ig = -1")
+                mdin_list.append("  ioutfm = 1")
+                mdin_list.append("  iwrap = 1")
+                mdin_list.append("  nstlim = 5000")
+                mdin_list.append("  dt = 0.002")
+            if npt:
+                mdin_list.append("  irest = 1")
+                mdin_list.append("  gamma_ln = 5.0")
+                mdin_list.append("  pres0 = 1.0")
+                mdin_list.append("  ntp = 1")
+                mdin_list.append("  taup = 2.0")
+                mdin_list.append("  ntx = 5")
+            if nvt:
+                mdin_list.append("  irest = 1")
+                mdin_list.append("  gamma_ln = 5.0")
+                mdin_list.append("  ntb = 1")
+                mdin_list.append("  ntx = 5")
             if heat:
                 mdin_list.append("  tempi = 0.0")
                 mdin_list.append("  temp0 = 300.0")
                 mdin_list.append("  irest = 0")
                 mdin_list.append("  ntb = 1") #periodic boundaries
-                mdin_list.append("  cut = 10.0")
-                mdin_list.append("  ntr = 0")
-                mdin_list.append("  ntc = 2")
-                mdin_list.append("  ntf = 2")
-                mdin_list.append("  ntt = 3")
-                mdin_list.append("  ig = -1")
-                mdin_list.append("  ioutfm = 1")
-                mdin_list.append("  iwrap = 1")
                 mdin_list.append("  gamma_ln = 1.0")
-                mdin_list.append("  nstlim = 5000")
-                mdin_list.append("  dt = 0.002")
-            if npt:
-                mdin_list.append("  irest = 1")
-                mdin_list.append("  ntx = 5")
-                mdin_list.append("  pres0 = 1.0")
-                mdin_list.append("  ntp = 1")
-                mdin_list.append("  taup = 2.0")
-                mdin_list.append("  cut = 10.0")
-                mdin_list.append("  ntr = 0")
-                mdin_list.append("  ntc = 2")
-                mdin_list.append("  ntf = 2")
-                mdin_list.append("  ntt = 3")
-                mdin_list.append("  gamma_ln = 5.0")
-                mdin_list.append("  ig = -1")
-                mdin_list.append("  ioutfm = 1")
-                mdin_list.append("  iwrap = 1")
-                mdin_list.append("  nstlim = 5000")
-                mdin_list.append("  dt = 0.002")
 
         # Adding the rest of parameters in the config file to the mdin file
         # if the parameter has already been added replace the value
