@@ -17,6 +17,7 @@ Contents
 
    Introduction & installation <readme>
    API Documentation <modules>
+   Changelog <change_log>
 
 Indices and tables
 ==================
