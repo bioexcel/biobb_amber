@@ -1,4 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "restructuredtext.confPath": "${workspaceFolder}/biobb_amber/docs/source"
 }
