@@ -16,8 +16,8 @@ Contents
 .. toctree::
    :maxdepth: 1
 
-   Introduction & installation <readme>
-  
+
+   Changelog <change_log>
 
 Indices and tables
 ==================
