@@ -81,7 +81,7 @@ class AmberToPDB():
 
     @launchlogger
     def launch(self):
-        """Execute the :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>` amber.amber_to_pdb.AmberToPDB object."""
+        """Execute the :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>`_ amber.amber_to_pdb.AmberToPDB object."""
 
         # Get local loggers from launchlogger decorator
         out_log = getattr(self, 'out_log', None)
