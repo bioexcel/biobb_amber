@@ -1,32 +1,32 @@
 /* override table width restrictions as found on https://github.com/getpelican/pelican/issues/1311 */
-a { color:#dcbc3c; }
-a:hover { color:#29b3b6; }
-a:visited { color:#9e8830; }
+a { color:#dcbc3c!important; }
+a:hover { color:#29b3b6!important; }
+a:visited { color:#9e8830!important; }
 
-.highlight { background: #fffae4; }
+.highlight { background: #fffae4!important; }
 
-.rst-content dl:not(.docutils) dt { background: #d5f0f1; color: #29b3b5; border-top: solid 3px #29b3b5; }
-.rst-content .viewcode-link, .rst-content .viewcode-back { color: #dcbc3c; }
-.rst-versions .rst-current-version { color: #29b3b5; }
+.rst-content dl:not(.docutils) dt { background: #d5f0f1; color: #29b3b5!important; border-top: solid 3px #29b3b5!important; }
+.rst-content .viewcode-link, .rst-content .viewcode-back { color: #dcbc3c!important; }
+.rst-versions .rst-current-version { color: #29b3b5!important; }
 
 .wy-table-responsive table td, .wy-table-responsive table th { white-space: normal !important; }
 .wy-table-responsive { overflow: visible !important; }
 
-.wy-menu-vertical a:active { background-color: #29b3b6; }
+.wy-menu-vertical a:active { background-color: #29b3b6!important; }
 
-.wy-nav-content { max-width: 1200px; margin: unset; }
+.wy-nav-content { max-width: 1200px!important; margin: unset!important; }
 
-.wy-side-nav-search { background-color: #29b3b6; }
-.wy-side-nav-search>a:hover { background:none; }
-.wy-side-nav-search>div.version { color:rgba(255, 255, 255, 1); }
+.wy-side-nav-search { background-color: #29b3b6!important; }
+.wy-side-nav-search>a:hover { background:none!important; }
+.wy-side-nav-search>div.version { color:rgba(255, 255, 255, 1)!important; }
 
 /* !!! */
-.ethical-rtd.ethical-dark-theme { display: none; }
+.ethical-rtd.ethical-dark-theme { display: none!important; }
 
-.icon:before { display:none; }
+.icon:before { display:none!important; }
 
-.rst-content blockquote { margin-left: 0; background: #b5e0dd; padding: 15px; }
-.rst-content blockquote code.literal { color: #29b3b6; }
+.rst-content blockquote { margin-left: 0!important; background: #b5e0dd!important; padding: 15px!important; }
+.rst-content blockquote code.literal { color: #29b3b6!important; }
 
 dl.docutils dt {
     background: transparent!important;
@@ -36,7 +36,7 @@ dl.docutils dt {
 }
 
 .line-block .line:first-child {
-	display: none;
+	display: none!important;
 }
 
 p.rubric:after {

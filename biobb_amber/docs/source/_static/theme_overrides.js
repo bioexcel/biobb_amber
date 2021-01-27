@@ -1,3 +1,8 @@
-$(document).ready(function(){
-	$('.wy-side-nav-search a.icon.icon-home').html('<img src="_static/logo.png" class="logo" alt="Logo">');
+$(document).ready(function() {
+	var path = '';
+	
+	if($('.icon.icon-home').attr('href') == '../index.html') path = '../';
+	else if($('.icon.icon-home').attr('href') == '../../index.html') path = '../../';
+		
+	$('.icon.icon-home').html('<img src="' + path + '_static/logo.png" class="logo" alt="Logo">');
 });
