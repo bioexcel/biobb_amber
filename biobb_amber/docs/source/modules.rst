@@ -10,5 +10,4 @@ biobb_amber
    nab
    parmed
    pdb4amber
-   process
    sander
