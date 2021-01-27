@@ -5,7 +5,12 @@ a:visited { color:#9e8830; }
 
 .highlight { background: #fffae4; }
 
-.rst-content dl:not(.docutils) dt { background: #d5f0f1; color: #29b3b5; border-top: solid 3px #29b3b5; }
+/*.rst-content dl:not(.docutils) dt { background: #d5f0f1; color: #29b3b5; border-top: solid 3px #29b3b5; }*/
+html.writer-html4 .rst-content dl:not(.docutils)>dt, 
+html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.simple)>dt { 
+    background: #d5f0f1; color: #29b3b5; border-top: solid 3px #29b3b5;
+}
+dl.simple dt { border: none!important; background: transparent!important; }
 .rst-content .viewcode-link, .rst-content .viewcode-back { color: #dcbc3c; }
 .rst-versions .rst-current-version { color: #29b3b5; }
 
