@@ -114,3 +114,5 @@ traj_comp.xtc
 biobb_amber/notebooks/
 
 *.bk
+
+.vscode
