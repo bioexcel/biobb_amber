@@ -15,6 +15,7 @@ Contents
 .. toctree::
    :maxdepth: 1
 
+   Introduction & installation <readme>
    API Documentation <modules>
 
 Indices and tables
