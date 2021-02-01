@@ -12,3 +12,4 @@ biobb_amber
    pdb4amber
    process
    sander
+   pmemd
