@@ -24,7 +24,7 @@
             "type": "string",
             "description": "Linear (unfolded) 3D structure PDB file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -46,8 +46,8 @@
                     "description": "Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them."
                 },
                 "forcefield": {
-                    "type": "string",
-                    "default": "protein.ff14SB",
+                    "type": "array",
+                    "default": "[protein.ff14SB,DNA.bsc1,gaff]",
                     "wf_prop": false,
                     "description": "Forcefield to be used for the structure generation. ",
                     "enum": [
@@ -55,7 +55,8 @@
                         "protein.ff19SB",
                         "DNA.bsc1",
                         "DNA.OL15",
-                        "RNA.OL3"
+                        "RNA.OL3",
+                        "gaff"
                     ],
                     "property_formats": [
                         {
@@ -76,6 +77,10 @@
                         },
                         {
                             "name": "RNA.OL3",
+                            "description": null
+                        },
+                        {
+                            "name": "gaff",
                             "description": null
                         }
                     ]

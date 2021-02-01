@@ -155,7 +155,7 @@ class LeapAddIons():
         # To get to X mM ions we need
         # n(NaCl) = #waters / 55 Mol * X M
         # where X M = X mM / 1000
-        self.nio = (cnt / 55) * (self.ionic_concentration / 1000)
+        self.nio = int((cnt / 55) * (self.ionic_concentration / 1000))
 
     @launchlogger
     def launch(self):
@@ -267,6 +267,9 @@ class LeapAddIons():
                 for leap_commands in leap_source_list:
                     leapin.write("source " + leap_commands + "\n")
 
+                # Water Model loaded from input water_model property
+                leapin.write(source_wat_command + " \n")
+
                 # Ions Type
                 if self.ions_type != "None":
                     leapin.write("loadamberparams frcmod." + self.ions_type + "\n")
@@ -274,9 +277,6 @@ class LeapAddIons():
                 # Additional Amber parameters
                 for amber_params in amber_params_list:
                     leapin.write("loadamberparams " + amber_params + "\n")
-
-                # Water Model loaded from input water_model property
-                leapin.write(source_wat_command + " \n")
 
                 # Ligand(s) libraries (if any)
                 for amber_lib in ligands_lib_list:

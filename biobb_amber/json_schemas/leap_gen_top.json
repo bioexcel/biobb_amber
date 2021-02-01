@@ -75,7 +75,7 @@
             "type": "string",
             "description": "Additional leap parameter files to load with loadAmberParams Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapParams.in",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce",
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
@@ -109,7 +109,7 @@
             "type": "string",
             "description": "Additional leap command files to load with source Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapSource.in",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce",
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
@@ -143,7 +143,7 @@
             "type": "string",
             "description": "Output 3D structure PDB file matching the topology file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leap.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -159,7 +159,7 @@
             "type": "string",
             "description": "Output topology file (AMBER ParmTop)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leap.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.top",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -187,7 +187,7 @@
             "type": "string",
             "description": "Output coordinates file (AMBER crd)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leap.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.crd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",

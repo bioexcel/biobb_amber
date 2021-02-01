@@ -2,7 +2,9 @@
   "properties": {
     "sequence": "ALA PRO SER ARG LYS ASP GLU GLY GLY ALA",
     "build_library": false,
-    "forcefield": "protein.ff14SB",
+    "forcefield": [
+      "protein.ff14SB"
+    ],
     "remove_tmp": true
   }
 }

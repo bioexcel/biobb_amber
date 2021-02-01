@@ -27,7 +27,7 @@
             "type": "string",
             "description": "Input topology file (AMBER ParmTop)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.cpptraj.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.ions.parmtop",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -55,7 +55,7 @@
             "type": "string",
             "description": "Input coordinates file (AMBER crd)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.cpptraj.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.ions.crd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
@@ -83,7 +83,7 @@
             "type": "string",
             "description": "Structure PDB file with randomized ions",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.randIons.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cpptraj/structure.randIons.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -99,7 +99,7 @@
             "type": "string",
             "description": "Structure CRD file with coordinates including randomized ions",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.randIons.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cpptraj/structure.randIons.crd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",

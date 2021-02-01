@@ -28,7 +28,7 @@
             "type": "string",
             "description": "Input topology file (AMBER ParmTop)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/structure.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.prmtop",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -56,7 +56,7 @@
             "type": "string",
             "description": "Input coordinates file (AMBER crd)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/structure.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.inpcrd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
@@ -84,7 +84,7 @@
             "type": "string",
             "description": "Input configuration file (MD run options) (AMBER mdin)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.mdin",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/npt.mdin",
             "enum": [
                 ".*\\.mdin$",
                 ".*\\.in$",
@@ -112,7 +112,7 @@
             "type": "string",
             "description": "Input constant pH file (AMBER cpin)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cpin",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.cpin",
             "enum": [
                 ".*\\.cpin$"
             ],
@@ -128,7 +128,7 @@
             "type": "string",
             "description": "Input reference coordinates for position restraints",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.refc",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.rst",
             "enum": [
                 ".*\\.rst$",
                 ".*\\.rst7$"
@@ -150,7 +150,7 @@
             "type": "string",
             "description": "Output log file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.out",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.log",
             "enum": [
                 ".*\\.log$",
                 ".*\\.out$",
@@ -184,7 +184,7 @@
             "type": "string",
             "description": "Output trajectory file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.x",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.x",
             "enum": [
                 ".*\\.trj$",
                 ".*\\.crd$",
@@ -230,7 +230,7 @@
             "type": "string",
             "description": "Output restart file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/md.rst",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.rst",
             "enum": [
                 ".*\\.rst$",
                 ".*\\.rst7$"
@@ -252,7 +252,7 @@
             "type": "string",
             "description": "Output constant pH file (AMBER cpout)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cpout",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.cpout",
             "enum": [
                 ".*\\.cpout$"
             ],
@@ -268,7 +268,7 @@
             "type": "string",
             "description": "Output constant pH restart file (AMBER rstout)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.cprst",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.cprst",
             "enum": [
                 ".*\\.cprst$",
                 ".*\\.rst$",
@@ -296,7 +296,7 @@
             "type": "string",
             "description": "Output MD info",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.mdinfo",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.mdinfo",
             "enum": [
                 ".*\\.mdinfo$"
             ],
@@ -327,7 +327,8 @@
                         "min_vacuo",
                         "NVT",
                         "npt",
-                        "free"
+                        "free",
+                        "heat"
                     ],
                     "property_formats": [
                         {
@@ -349,6 +350,10 @@
                         {
                             "name": "free",
                             "description": "Runs a MD simulation"
+                        },
+                        {
+                            "name": "heat",
+                            "description": "Heats the MD system"
                         }
                     ]
                 },
@@ -357,6 +362,27 @@
                     "default": "sander",
                     "wf_prop": false,
                     "description": "sander binary path to be used."
+                },
+                "mpi_bin": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the MPI runner. Usually \"mpirun\" or \"srun\"."
+                },
+                "mpi_np": {
+                    "type": "integer",
+                    "default": 0,
+                    "wf_prop": false,
+                    "description": "Number of MPI processes. Usually an integer bigger than 1.",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 1
+                },
+                "mpi_hostlist": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the MPI hostlist file."
                 },
                 "remove_tmp": {
                     "type": "boolean",

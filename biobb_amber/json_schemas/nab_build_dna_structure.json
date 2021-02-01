@@ -24,7 +24,7 @@
             "type": "string",
             "description": "DNA 3D structure PDB file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/nab/structure.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/nab/ref_nab_build_dna_structure.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],

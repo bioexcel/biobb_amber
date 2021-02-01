@@ -25,7 +25,7 @@
             "type": "string",
             "description": "AMBER (sander) MD output (log) file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/md.log",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/sander.heat.log",
             "enum": [
                 ".*\\.log$",
                 ".*\\.out$",
@@ -59,7 +59,7 @@
             "type": "string",
             "description": "Dat output file containing data from the specified terms along the minimization process",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/md.process.dat",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/process/sander.md.temp.dat",
             "enum": [
                 ".*\\.dat$",
                 ".*\\.txt$",

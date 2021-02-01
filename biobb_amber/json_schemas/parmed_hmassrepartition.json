@@ -25,7 +25,7 @@
             "type": "string",
             "description": "Input AMBER topology file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.solv.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/input.hmass.prmtop",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -53,7 +53,7 @@
             "type": "string",
             "description": "Output topology file (AMBER ParmTop)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/structure.4fs.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/parmed/output.hmass.prmtop",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",

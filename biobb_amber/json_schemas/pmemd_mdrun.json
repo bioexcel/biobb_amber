@@ -28,7 +28,7 @@
             "type": "string",
             "description": "Input topology file (AMBER ParmTop)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/structure.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.prmtop",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -56,11 +56,13 @@
             "type": "string",
             "description": "Input coordinates file (AMBER crd)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/structure.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.inpcrd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
-                ".*\\.inpcrd$"
+                ".*\\.inpcrd$",
+                ".*\\.rst$",
+                ".*\\.rst7$"
             ],
             "file_formats": [
                 {
@@ -77,6 +79,16 @@
                     "extension": ".*\\.inpcrd$",
                     "description": "Input coordinates file (AMBER crd)",
                     "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.rst$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.rst7$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3886"
                 }
             ]
         },
@@ -84,7 +96,7 @@
             "type": "string",
             "description": "Input configuration file (MD run options) (AMBER mdin)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.mdin",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/npt.mdin",
             "enum": [
                 ".*\\.mdin$",
                 ".*\\.in$",
@@ -112,7 +124,7 @@
             "type": "string",
             "description": "Input constant pH file (AMBER cpin)",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.cpin",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.cpin",
             "enum": [
                 ".*\\.cpin$"
             ],
@@ -128,12 +140,30 @@
             "type": "string",
             "description": "Input reference coordinates for position restraints",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.refc",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/sander.rst",
             "enum": [
+                ".*\\.crd$",
+                ".*\\.mdcrd$",
+                ".*\\.inpcrd$",
                 ".*\\.rst$",
                 ".*\\.rst7$"
             ],
             "file_formats": [
+                {
+                    "extension": ".*\\.crd$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.mdcrd$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.inpcrd$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3878"
+                },
                 {
                     "extension": ".*\\.rst$",
                     "description": "Input reference coordinates for position restraints",
@@ -150,7 +180,7 @@
             "type": "string",
             "description": "Output log file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/md.out",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.log",
             "enum": [
                 ".*\\.log$",
                 ".*\\.out$",
@@ -184,7 +214,7 @@
             "type": "string",
             "description": "Output trajectory file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/md.x",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.x",
             "enum": [
                 ".*\\.trj$",
                 ".*\\.crd$",
@@ -230,7 +260,7 @@
             "type": "string",
             "description": "Output restart file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/md.rst",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.rst",
             "enum": [
                 ".*\\.rst$",
                 ".*\\.rst7$"
@@ -252,7 +282,7 @@
             "type": "string",
             "description": "Output constant pH file (AMBER cpout)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.cpout",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.cpout",
             "enum": [
                 ".*\\.cpout$"
             ],
@@ -268,7 +298,7 @@
             "type": "string",
             "description": "Output constant pH restart file (AMBER rstout)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.cprst",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.cprst",
             "enum": [
                 ".*\\.cprst$",
                 ".*\\.rst$",
@@ -296,7 +326,7 @@
             "type": "string",
             "description": "Output MD info",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/pmemd.mdinfo",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.mdinfo",
             "enum": [
                 ".*\\.mdinfo$"
             ],
@@ -357,6 +387,27 @@
                             "description": "Runs a MD simulation"
                         }
                     ]
+                },
+                "mpi_bin": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the MPI runner. Usually \"mpirun\" or \"srun\"."
+                },
+                "mpi_np": {
+                    "type": "integer",
+                    "default": 0,
+                    "wf_prop": false,
+                    "description": "Number of MPI processes. Usually an integer bigger than 1.",
+                    "min": 0,
+                    "max": 1000,
+                    "step": 1
+                },
+                "mpi_hostlist": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Path to the MPI hostlist file."
                 },
                 "remove_tmp": {
                     "type": "boolean",

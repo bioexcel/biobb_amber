@@ -26,7 +26,7 @@
             "type": "string",
             "description": "AMBER topology file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.top",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -54,7 +54,7 @@
             "type": "string",
             "description": "AMBER coordinates file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
@@ -82,7 +82,7 @@
             "type": "string",
             "description": "Structure PDB file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/ambpdb/structure.ambpdb.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],

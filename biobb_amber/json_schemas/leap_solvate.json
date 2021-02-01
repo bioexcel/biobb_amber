@@ -27,7 +27,7 @@
             "type": "string",
             "description": "Input 3D structure PDB file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leap.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -87,7 +87,7 @@
             "type": "string",
             "description": "Additional leap parameter files to load with loadAmberParams Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapParams.in",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce",
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
@@ -121,7 +121,7 @@
             "type": "string",
             "description": "Additional leap command files to load with source Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leapSource.in",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce",
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
@@ -155,7 +155,7 @@
             "type": "string",
             "description": "Output 3D structure PDB file matching the topology file",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -171,7 +171,7 @@
             "type": "string",
             "description": "Output topology file (AMBER ParmTop)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.top",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.top",
             "enum": [
                 ".*\\.top$",
                 ".*\\.parmtop$",
@@ -199,7 +199,7 @@
             "type": "string",
             "description": "Output coordinates file (AMBER crd)",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.crd",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.crd",
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
@@ -396,6 +396,12 @@
                     "default": false,
                     "wf_prop": false,
                     "description": "Energetically neutralise the system adding the necessary counterions."
+                },
+                "iso": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Make the box isometric."
                 },
                 "positive_ions_number": {
                     "type": "integer",

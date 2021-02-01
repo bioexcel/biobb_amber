@@ -25,7 +25,7 @@
             "type": "string",
             "description": "Input 3D structure PDB file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/structure.in.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
@@ -41,7 +41,7 @@
             "type": "string",
             "description": "Output 3D structure PDB file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/structure.out.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],
