@@ -273,6 +273,18 @@ class PmemdMDRun():
             cmd.append('-cpin ')
             cmd.append(self.io_dict['in']['input_cpin_path'])
 
+        if self.io_dict['out']['output_mdinfo_path']:
+            cmd.append('-inf ')
+            cmd.append(self.io_dict['out']['output_mdinfo_path'])
+
+        if self.io_dict['out']['output_cpout_path']:
+            cmd.append('-cpout ')
+            cmd.append(self.io_dict['out']['output_cpout_path'])
+
+        if self.io_dict['out']['output_cprst_path']:
+            cmd.append('-cprestrt ')
+            cmd.append(self.io_dict['out']['output_cprst_path'])
+
         # general mpi properties
         if self.mpi_bin:
             mpi_cmd = [self.mpi_bin]
