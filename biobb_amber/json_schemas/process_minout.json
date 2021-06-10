@@ -59,7 +59,7 @@
             "type": "string",
             "description": "Dat output file containing data from the specified terms along the minimization process",
             "filetype": "output",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/process/sander.min.energy.dat",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/process/sander.min.energy.dat",
             "enum": [
                 ".*\\.dat$",
                 ".*\\.txt$",
