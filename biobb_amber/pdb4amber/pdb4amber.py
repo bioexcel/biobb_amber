@@ -20,8 +20,9 @@ class Pdb4amber():
         input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb>`_. Accepted formats: pdb (edam:format_1476).
         output_pdb_path (str): Output 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
-            * **remove_hydrogens** (*bool*) - (True) Remove hydrogen atoms from the PDB file.
-            * **remove_waters** (*bool*) - (True) Remove water molecules from the PDB file.
+            * **remove_hydrogens** (*bool*) - (False) Remove hydrogen atoms from the PDB file.
+            * **remove_waters** (*bool*) - (False) Remove water molecules from the PDB file.
+            * **constant_pH** (*bool*) - (False) Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -60,6 +61,7 @@ class Pdb4amber():
         self.properties = properties
         self.remove_hydrogens = properties.get('remove_hydrogens', False)
         self.remove_waters = properties.get('remove_waters', False)
+        self.constant_pH = properties.get('constant_pH', False)
 
         # Properties common in all BB
         self.can_write_console_log = properties.get('can_write_console_log', True)
@@ -116,6 +118,8 @@ class Pdb4amber():
             cmd.append("-y ")
         if self.remove_waters:
             cmd.append("-d ")
+        if self.constant_pH:
+            cmd.append("--constantph ")
 
         fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
