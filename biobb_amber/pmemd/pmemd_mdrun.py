@@ -223,7 +223,7 @@ class PmemdMDRun():
 
     @launchlogger
     def launch(self):
-        """Launches the execution of the BuildLinearStructure module."""
+        """Launches the execution of the PmemdMDRun module."""
 
         # Get local loggers from launchlogger decorator
         out_log = getattr(self, 'out_log', None)
