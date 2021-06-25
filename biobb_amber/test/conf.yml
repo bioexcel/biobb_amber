@@ -117,7 +117,7 @@ parmed_hmassrepartition:
 
 # pdb4amber
 
-pdb4amber:
+pdb4amber_run:
   paths:
     input_pdb_path: file:test_data_dir/pdb4amber/1aki_fixed.pdb
     output_pdb_path: output.pdb
@@ -150,11 +150,11 @@ sander_mdrun:
   paths:
     input_top_path: file:test_data_dir/sander/cln025.prmtop
     input_crd_path: file:test_data_dir/sander/cln025.inpcrd
-    output_traj_path: file:test_data_dir/sander/sander.x
+    output_traj_path: sander.x
     ref_output_traj_path: file:test_reference_dir/sander/sander.x
-    output_rst_path: file:test_data_dir/sander/sander.rst
+    output_rst_path: sander.rst
     ref_output_rst_path: file:test_reference_dir/sander/sander.rst
-    output_log_path: file:test_data_dir/sander/sander.log
+    output_log_path: sander.log
   properties:
     simulation_type: "minimization"
     mdin :
@@ -169,15 +169,35 @@ pmemd_mdrun:
   paths:
     input_top_path: file:test_data_dir/sander/cln025.prmtop
     input_crd_path: file:test_data_dir/sander/cln025.inpcrd
-    output_traj_path: file:test_data_dir/sander/sander.x
+    output_traj_path: pmemd.x
     ref_output_traj_path: file:test_reference_dir/sander/sander.x
-    output_rst_path: file:test_data_dir/sander/sander.rst
+    output_rst_path: pmemd.rst
     ref_output_rst_path: file:test_reference_dir/sander/sander.rst
-    output_log_path: file:test_data_dir/sander/sander.log
+    output_log_path: pmemd.log
   properties:
     simulation_type: "minimization"
     mdin :
       maxcyc: 500
       ntwx: 100
       ioutfm: 0
+    remove_tmp: True
+
+# cphstats
+
+cphstats_run:
+  paths:
+    input_cpin_path: file:test_data_dir/cphstats/structure.cpin
+    input_cpout_path: file:test_data_dir/cphstats/sander.pH.cpout
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/cphstats/cphstats.pH.dat
+  properties:
+    remove_tmp: True
+
+cestats_run:
+  paths:
+    input_cein_path: file:test_data_dir/cphstats/structure.cein
+    input_ceout_path: file:test_data_dir/cphstats/sander.ceout.gz
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/cphstats/cestats.dat
+  properties:
     remove_tmp: True

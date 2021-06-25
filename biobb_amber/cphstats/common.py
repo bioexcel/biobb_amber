@@ -35,7 +35,9 @@ def is_valid_file(ext, argument):
 	""" Checks if file format is compatible """
 	formats = {
 		'input_cpin_path': ['cpin','txt','in'],
-		'input_cpout_path': ['cpout'],
+		'input_cpout_path': ['cpout','zip','gzip','gz'],
+		'input_cein_path': ['cein','txt','in'],
+		'input_ceout_path': ['ceout','zip','gzip','gz'],
 		'output_dat_path': ['dat','out','txt','o'],
 		'output_population_path': ['dat','out','txt','o'],
 		'output_chunk_path': ['dat','out','txt','o'],

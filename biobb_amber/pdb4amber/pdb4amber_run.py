@@ -10,9 +10,9 @@ from biobb_common.tools.file_utils import launchlogger
 from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.pdb4amber.common import *
 
-class Pdb4amber():
+class Pdb4amberRun():
     """
-    | biobb_amber.pdb4amber.pdb4amber Pdb4amber
+    | biobb_amber.pdb4amber.pdb4amber_run Pdb4amberRun
     | Wrapper of the `AmberTools (AMBER MD Package) pdb4amber tool <https://ambermd.org/AmberTools.php>`_ module.
     | Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.
 
@@ -29,11 +29,11 @@ class Pdb4amber():
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_amber.pdb4amber.pdb4amber import pdb4amber
+            from biobb_amber.pdb4amber.pdb4amber_run import pdb4amber_run
             prop = {
                 'remove_tmp': True
             }
-            pdb4amber(input_pdb_path='/path/to/structure.pdb',
+            pdb4amber_run(input_pdb_path='/path/to/structure.pdb',
                           output_pdb_path='/path/to/newStructure.pdb',
                           properties=prop)
 
@@ -83,7 +83,7 @@ class Pdb4amber():
 
     @launchlogger
     def launch(self):
-        """Launches the execution of the BuildLinearStructure module."""
+        """Launches the execution of the Pdb4amberRun module."""
 
         # Get local loggers from launchlogger decorator
         out_log = getattr(self, 'out_log', None)
@@ -133,12 +133,12 @@ class Pdb4amber():
 
         return returncode
 
-def pdb4amber(input_pdb_path: str, output_pdb_path: str,
+def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
            properties: dict = None, **kwargs) -> int:
-    """Create :class:`Pdb4amber <pdb4amber.pdb4amber.Pdb4amber>`pdb4amber.pdb4amber.Pdb4amber class and
-    execute :meth:`launch() <pdb4amber.pdb4amber.Pdb4amber.launch>` method"""
+    """Create :class:`Pdb4amberRun <pdb4amber.pdb4amber_run.Pdb4amberRun>`pdb4amber.pdb4amber_run.Pdb4amberRun class and
+    execute :meth:`launch() <pdb4amber.pdb4amber_run.Pdb4amberRun.launch>` method"""
 
-    return Pdb4amber( input_pdb_path=input_pdb_path,
+    return Pdb4amberRun( input_pdb_path=input_pdb_path,
                         output_pdb_path=output_pdb_path,
                         properties=properties).launch()
 
@@ -156,7 +156,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    Pdb4amber(    input_pdb_path=args.input_pdb_path,
+    Pdb4amberRun(    input_pdb_path=args.input_pdb_path,
                     output_pdb_path=args.output_pdb_path,
                     properties=properties).launch()
 

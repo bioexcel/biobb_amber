@@ -1,15 +1,15 @@
 from biobb_common.tools import test_fixtures as fx
-from biobb_amber.pdb4amber.pdb4amber import pdb4amber
+from biobb_amber.pdb4amber.pdb4amber_run import pdb4amber_run
 
-class TestPdb4amber():
+class TestPdb4amberRun():
     def setUp(self):
-        fx.test_setup(self, 'pdb4amber')
+        fx.test_setup(self, 'pdb4amber_run')
 
     def tearDown(self):
         fx.test_teardown(self)
         pass
 
-    def test_pdb4amber(self):
-        pdb4amber(properties=self.properties, **self.paths)
+    def test_pdb4amber_run(self):
+        pdb4amber_run(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_pdb_path'])
         assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
