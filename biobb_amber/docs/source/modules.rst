@@ -13,3 +13,4 @@ biobb_amber
    process
    sander
    pmemd
+   cphstats

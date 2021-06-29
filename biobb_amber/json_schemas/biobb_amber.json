@@ -105,6 +105,20 @@
             "desc" : "Runs energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package",
             "exec" : "sander_mdrun",
             "docs": "https://biobb-amber.readthedocs.io/en/latest/sander.html#module-sander.sander_mdrun"
+        },
+        {
+            "block" : "CestatsRun",
+            "tool" : "cestats",
+            "desc" : "Analyzing the results of constant Redox potential MD simulations using cestats tool from the AMBER MD package",
+            "exec" : "cestats_mdrun",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/cphstats.html#module-cphstats.cestats_mdrun"
+        },
+        {
+            "block" : "CphstatsRun",
+            "tool" : "cphstats",
+            "desc" : "Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package",
+            "exec" : "cphstats_mdrun",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/cphstats.html#module-cphstats.cphstats_mdrun"
         }
     ],
     "dep_pypi" : [
