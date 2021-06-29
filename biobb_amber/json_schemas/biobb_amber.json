@@ -72,11 +72,11 @@
             "docs": "https://biobb-amber.readthedocs.io/en/latest/parmed.html#module-parmed.parmed_hmassrepartition"
         },
         {
-            "block" : "Pdb4amber",
+            "block" : "Pdb4amberRun",
             "tool" : "pdb4amber",
             "desc" : "Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package",
-            "exec" : "pdb4amber",
-            "docs": "https://biobb-amber.readthedocs.io/en/latest/pdb4amber.html#module-pdb4amber.pdb4amber"
+            "exec" : "pdb4amber_run",
+            "docs": "https://biobb-amber.readthedocs.io/en/latest/pdb4amber.html#module-pdb4amber.pdb4amber_run"
         },
         {
             "block" : "PmemdMDRun",
