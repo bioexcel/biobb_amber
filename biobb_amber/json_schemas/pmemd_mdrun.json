@@ -9,7 +9,8 @@
         "wrapped_software": {
             "name": "AMBER pmemd",
             "version": ">20",
-            "license": "other"
+            "license": "other",
+            "multinode": "mpi"
         },
         "ontology": {
             "name": "EDAM",
@@ -62,7 +63,10 @@
                 ".*\\.mdcrd$",
                 ".*\\.inpcrd$",
                 ".*\\.rst$",
-                ".*\\.rst7$"
+                ".*\\.rst7$",
+                ".*\\.netcdf$",
+                ".*\\.nc$",
+                ".*\\.ncrst$"
             ],
             "file_formats": [
                 {
@@ -89,6 +93,21 @@
                     "extension": ".*\\.rst7$",
                     "description": "Input coordinates file (AMBER crd)",
                     "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.netcdf$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.nc$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.ncrst$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3650"
                 }
             ]
         },
@@ -146,7 +165,10 @@
                 ".*\\.mdcrd$",
                 ".*\\.inpcrd$",
                 ".*\\.rst$",
-                ".*\\.rst7$"
+                ".*\\.rst7$",
+                ".*\\.netcdf$",
+                ".*\\.nc$",
+                ".*\\.ncrst$"
             ],
             "file_formats": [
                 {
@@ -173,6 +195,21 @@
                     "extension": ".*\\.rst7$",
                     "description": "Input reference coordinates for position restraints",
                     "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.netcdf$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.nc$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.ncrst$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3650"
                 }
             ]
         },
@@ -263,7 +300,10 @@
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.rst",
             "enum": [
                 ".*\\.rst$",
-                ".*\\.rst7$"
+                ".*\\.rst7$",
+                ".*\\.netcdf$",
+                ".*\\.nc$",
+                ".*\\.ncrst$"
             ],
             "file_formats": [
                 {
@@ -275,6 +315,21 @@
                     "extension": ".*\\.rst7$",
                     "description": "Output restart file",
                     "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.netcdf$",
+                    "description": "Output restart file",
+                    "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.nc$",
+                    "description": "Output restart file",
+                    "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.ncrst$",
+                    "description": "Output restart file",
+                    "edam": "format_3650"
                 }
             ]
         },
@@ -403,7 +458,7 @@
                     "max": 1000,
                     "step": 1
                 },
-                "mpi_hostlist": {
+                "mpi_flags": {
                     "type": "string",
                     "default": null,
                     "wf_prop": false,

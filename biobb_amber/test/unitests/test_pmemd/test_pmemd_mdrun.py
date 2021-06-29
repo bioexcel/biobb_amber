@@ -1,5 +1,5 @@
 from biobb_common.tools import test_fixtures as fx
-from biobb_amber.pmemd.pmemd_mdrun import PmemdMDRun
+from biobb_amber.pmemd.pmemd_mdrun import pmemd_mdrun
 
 class TestPmemdMDRun():
     def setUp(self):

@@ -52,66 +52,36 @@
                     "description": "DNA/RNA helix type. ",
                     "enum": [
                         "arna",
-                        "Arnott",
                         "aprna",
-                        "Arnott",
                         "lbdna",
-                        "Langridge",
                         "abdna",
-                        "Arnott",
                         "sbdna",
-                        "Sasisekharan",
-                        "adna",
-                        "Arnott"
+                        "adna"
                     ],
                     "property_formats": [
                         {
                             "name": "arna",
-                            "description": null
-                        },
-                        {
-                            "name": "Arnott",
-                            "description": null
+                            "description": "Right Handed A-RNA - Arnott"
                         },
                         {
                             "name": "aprna",
-                            "description": null
-                        },
-                        {
-                            "name": "Arnott",
-                            "description": null
+                            "description": "Right Handed A\u2019-RNA - Arnott"
                         },
                         {
                             "name": "lbdna",
-                            "description": null
-                        },
-                        {
-                            "name": "Langridge",
-                            "description": null
+                            "description": "Right Handed B-DNA - Langridge"
                         },
                         {
                             "name": "abdna",
-                            "description": null
-                        },
-                        {
-                            "name": "Arnott",
-                            "description": null
+                            "description": "Right Handed B-DNA - Arnott"
                         },
                         {
                             "name": "sbdna",
-                            "description": null
-                        },
-                        {
-                            "name": "Sasisekharan",
-                            "description": null
+                            "description": "Left Handed B-DNA - Sasisekharan"
                         },
                         {
                             "name": "adna",
-                            "description": null
-                        },
-                        {
-                            "name": "Arnott",
-                            "description": null
+                            "description": "Right Handed A-DNA - Arnott"
                         }
                     ]
                 },

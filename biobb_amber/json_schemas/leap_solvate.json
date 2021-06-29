@@ -454,7 +454,13 @@
                     "type": "number",
                     "default": 8.0,
                     "wf_prop": false,
-                    "description": "Size for the MD system box, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter."
+                    "description": "Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter."
+                },
+                "closeness": {
+                    "type": "number",
+                    "default": 1.0,
+                    "wf_prop": false,
+                    "description": "How close, in \u00c5, solvent ATOMs may come to solute ATOMs."
                 },
                 "remove_tmp": {
                     "type": "boolean",

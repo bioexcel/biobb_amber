@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_amber",
-    version="3.5.0",
+    version="3.6.0",
     author="Biobb developers",
     author_email="adam.hospital@irbbarcelona.org",
     description="Biobb_amber is a BioBB category for AMBER MD package.",
@@ -18,7 +18,7 @@ setuptools.setup(
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
-    install_requires=['biobb_common==3.5.1'],
+    install_requires=['biobb_common==3.6.0'],
     python_requires='==3.7.*',
     classifiers=(
         "Development Status :: 3 - Alpha",

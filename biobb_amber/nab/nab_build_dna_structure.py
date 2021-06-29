@@ -20,7 +20,7 @@ class NabBuildDNAStructure():
         output_pdb_path (str): DNA 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/nab/ref_nab_build_dna_structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **sequence** (*str*) - ("GCGCGGCTGATAAACGAAAGC") Nucleotide sequence to convert to a 3D structure. Nucleotides should be written in 1-letter code, with no spaces between them.
-            * **helix_type** (*str*) - ("lbdna") DNA/RNA helix type. Values: arna (Right Handed A-RNA, Arnott), aprna (Right Handed A’-RNA, Arnott), lbdna (Right Handed B-DNA, Langridge), abdna (Right Handed B-DNA, Arnott), sbdna (Left Handed B-DNA, Sasisekharan), adna (Right Handed A-DNA, Arnott).
+            * **helix_type** (*str*) - ("lbdna") DNA/RNA helix type. Values: arna (Right Handed A-RNA - Arnott), aprna (Right Handed A’-RNA - Arnott), lbdna (Right Handed B-DNA - Langridge), abdna (Right Handed B-DNA - Arnott), sbdna (Left Handed B-DNA - Sasisekharan), adna (Right Handed A-DNA - Arnott).
             * **compiler** (*str*) - ("gcc") Alternative C compiler for nab.
             * **linker** (*str*) - ("gfortran") Alternative Fortran linker for nab.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
