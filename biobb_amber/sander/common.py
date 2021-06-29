@@ -38,7 +38,7 @@ def is_valid_file(ext, argument):
 		'input_crd_path': ['crd','inpcrd','mdcrd','rst','rst7','netcdf','nc','ncrst'],
 		'input_mdin_path': ['mdin','txt','in'],
 		'input_cpin_path': ['cpin','txt','in'],
-		'input_ref_path': ['crd','inpcrd','mdcrd','rst','rst7'],
+		'input_ref_path': ['crd','inpcrd','mdcrd','rst','rst7','netcdf','nc','ncrst'],
 		'output_log_path': ['log','out','txt','o'],
 		'output_traj_path': ['trj', 'crd', 'mdcrd', 'x', 'netcdf', 'nc'],
 		'output_rst_path': ['rst','rst7','netcdf','nc','ncrst'],
