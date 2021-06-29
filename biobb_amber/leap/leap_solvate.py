@@ -37,6 +37,7 @@ class LeapSolvate():
             * **positive_ions_type** (*str*) - ("Na+") Type of additional positive ions to include in the system box. Values: Na+,K+.
             * **negative_ions_type** (*str*) - ("Cl-") Type of additional negative ions to include in the system box. Values: Cl-.
             * **distance_to_molecule** (*float*) - ("8.0") Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter.
+            * **closeness** (*float*) - ("1.0") How close, in Å, solvent ATOMs may come to solute ATOMs.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -108,6 +109,7 @@ class LeapSolvate():
         self.negative_ions_number = properties.get('negative_ions_number', 0)
         self.negative_ions_type = properties.get('negative_ions_type', "Cl-")
         self.distance_to_molecule = properties.get('distance_to_molecule', 8.0)
+        self.closeness = properties.get('closeness', 1.0)
 
         # Properties common in all BB
         self.can_write_console_log = properties.get('can_write_console_log', True)
@@ -260,7 +262,7 @@ class LeapSolvate():
                 leapin.write("mol = loadpdb " + self.io_dict['in']['input_pdb_path'] + " \n")
 
                 # Generating box + adding water molecules
-                leapin.write(box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule))
+                leapin.write(box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule) + " " + str(self.closeness))
                 leapin.write(" iso \n") if self.iso else leapin.write("\n")
 
                 # Adding counterions

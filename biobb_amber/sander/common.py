@@ -35,13 +35,13 @@ def is_valid_file(ext, argument):
 	""" Checks if file format is compatible """
 	formats = {
 		'input_top_path': ['top','prmtop','parmtop'],
-		'input_crd_path': ['crd','inpcrd','mdcrd','rst','rst7'],
+		'input_crd_path': ['crd','inpcrd','mdcrd','rst','rst7','netcdf','nc','ncrst'],
 		'input_mdin_path': ['mdin','txt','in'],
 		'input_cpin_path': ['cpin','txt','in'],
 		'input_ref_path': ['crd','inpcrd','mdcrd','rst','rst7'],
 		'output_log_path': ['log','out','txt','o'],
 		'output_traj_path': ['trj', 'crd', 'mdcrd', 'x', 'netcdf', 'nc'],
-		'output_rst_path': ['rst', 'rst7'],
+		'output_rst_path': ['rst','rst7','netcdf','nc','ncrst'],
 		'output_cpout_path': ['cpout'],
 		'output_cprst_path': ['cprst', 'rst', 'rst7'],
 		'output_mdinfo_path': ['mdinfo']
