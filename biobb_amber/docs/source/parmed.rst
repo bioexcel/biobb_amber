@@ -11,3 +11,11 @@ parmed.parmed_cpinutil module
     :members:
     :undoc-members:
     :show-inheritance:
+
+parmed.parmed_hmassrepartition module
+----------------------------------------
+
+.. automodule:: parmed.parmed_hmassrepartition
+    :members:
+    :undoc-members:
+    :show-inheritance:

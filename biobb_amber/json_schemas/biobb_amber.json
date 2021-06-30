@@ -4,7 +4,7 @@
     "github": "https://github.com/bioexcel/biobb_amber",
     "readthedocs": "https://biobb-amber.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_amber",
-    "docker": "https://quay.io/biocontainers/biobb_amber:3.6.0--py_0",
+    "docker": "https://quay.io/biocontainers/biobb_amber:3.6.0--pyhdfd78af_1",
     "singularity": "",
     "version": "3.6.0",
     "tools" : [
@@ -128,8 +128,7 @@
     "dep_conda" : [
         "python ==3.7.*",
         "biobb_common ==3.6.0",
-        "ambertools ==20.0",
-        "gfortran_linux-64 ==9.3.0"
+        "ambertools ==20.0"
     ],
     "keywords" : [
         "Amber",
