@@ -52,7 +52,7 @@ Using DOCKER:
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_amber:3.6.0--pyhdfd78af_1 <command>
+        docker run quay.io/biocontainers/biobb_amber:3.6.0--pyhdfd78af_1
 
 
 Using SINGULARITY:
@@ -68,7 +68,7 @@ Using SINGULARITY:
 * Usage:
 
 
-        singularity exec biobb_amber.sif <command>
+        singularity exec biobb_amber.sif
 
 
 The command list and specification can be found at the [Command Line documentation](https://biobb-amber.readthedocs.io/en/latest/command_line.html).
