@@ -116,7 +116,9 @@ class ProcessMDOut():
                 with open("summary."+term) as fp:
                    for line in fp:
                        x = line.split()
-                       ene_dict.setdefault(str(x[0]), {})[term] = x[1]
+                       if x:
+                           if (len(x) > 1):
+                               ene_dict.setdefault(float(x[0]), {})[term] = x[1]
 
             with open(self.io_dict['out']['output_dat_path'],'w') as fp_out:
                 fp_out.write("# TIME ")

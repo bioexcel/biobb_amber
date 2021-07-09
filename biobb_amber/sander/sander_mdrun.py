@@ -127,18 +127,45 @@ class SanderMDRun():
     def create_mdin(self, path: str = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""
         mdin_list = []
+        mdin_firstPart = []
+        mdin_middlePart = []
+        mdin_lastPart = []
 
         self.output_mdin_path = path
 
         if self.io_dict['in']['input_mdin_path']:
             # MDIN parameters read from an input mdin file
-            mdin_list.append("Mdin read from input file: " + self.io_dict['in']['input_mdin_path'])
-            mdin_list.append("and modified by the biobb_amber module from the BioBB library ")
-            mdin_list.append("&cntrl")
+            mdin_firstPart.append("Mdin read from input file: " + self.io_dict['in']['input_mdin_path'])
+            mdin_firstPart.append("and modified by the biobb_amber module from the BioBB library ")
             with open(self.io_dict['in']['input_mdin_path']) as input_params:
+                firstPart = True
+                secondPart = False
                 for line in input_params:
-                    if '=' in line:
-                        mdin_list.append(line.rstrip())
+                    if '=' in line and not secondPart:
+                        firstPart = False
+                        mdin_middlePart.append(line.rstrip())
+                    else:
+                        if (firstPart):
+                            mdin_firstPart.append(line.rstrip())
+                        elif(secondPart):
+                            mdin_lastPart.append(line.rstrip())
+                        else:
+                            secondPart = True
+                            mdin_lastPart.append(line.rstrip())
+
+            for line in mdin_middlePart:
+                if ('!' in line or '#' in line) and not ('!@' in line or '!:' in line):
+                    params = re.split('!|#',line)
+                    for param in params[0].split(','):
+                        if param.strip():
+                            mdin_list.append("  " + param.strip() + " ! " + params[1])
+                else:
+                    for param in line.split(','):
+                        if param.strip():
+                            if not param.strip().startswith('!'):
+                                mdin_list.append("  " + param.strip())
+                                print("PARAM: " + param.strip())
+
         else:
             # MDIN parameters added by the biobb_amber module
             mdin_list.append("This mdin file has been created by the biobb_amber module from the BioBB library ")
@@ -158,43 +185,56 @@ class SanderMDRun():
 
             # Pre-configured simulation type parameters
             if minimization:
-                mdin_list.append("  imin = 1")
+                mdin_list.append("  imin = 1 ! BioBB simulation_type minimization")
             if min_vacuo:
-                mdin_list.append("  imin = 1")
-                mdin_list.append("  ncyc = 250")
-                mdin_list.append("  ntb = 0")
-                mdin_list.append("  igb = 0")
-                mdin_list.append("  cut = 12")
+                mdin_list.append("  imin = 1 ! BioBB simulation_type min_vacuo")
+                mdin_list.append("  ncyc = 250 ! BioBB simulation_type min_vacuo")
+                mdin_list.append("  ntb = 0 ! BioBB simulation_type min_vacuo")
+                mdin_list.append("  igb = 0 ! BioBB simulation_type min_vacuo")
+                mdin_list.append("  cut = 12 ! BioBB simulation_type min_vacuo")
             if md:
-                mdin_list.append("  imin = 0")
-                mdin_list.append("  cut = 10.0")
-                mdin_list.append("  ntr = 0")
-                mdin_list.append("  ntc = 2")
-                mdin_list.append("  ntf = 2")
-                mdin_list.append("  ntt = 3")
-                mdin_list.append("  ig = -1")
-                mdin_list.append("  ioutfm = 1")
-                mdin_list.append("  iwrap = 1")
-                mdin_list.append("  nstlim = 5000")
-                mdin_list.append("  dt = 0.002")
+                mdin_list.append("  imin = 0 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  cut = 10.0 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  ntr = 0 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  ntc = 2 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  ntf = 2 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  ntt = 3 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  ig = -1 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  ioutfm = 1 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  iwrap = 1 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  nstlim = 5000 ! BioBB simulation_type nvt|npt|free|heat")
+                mdin_list.append("  dt = 0.002 ! BioBB simulation_type nvt|npt|free|heat")
             if npt:
-                mdin_list.append("  irest = 1")
-                mdin_list.append("  gamma_ln = 5.0")
-                mdin_list.append("  pres0 = 1.0")
-                mdin_list.append("  ntp = 1")
-                mdin_list.append("  taup = 2.0")
-                mdin_list.append("  ntx = 5")
+                mdin_list.append("  irest = 1 ! BioBB simulation_type npt")
+                mdin_list.append("  gamma_ln = 5.0 ! BioBB simulation_type npt")
+                mdin_list.append("  pres0 = 1.0 ! BioBB simulation_type npt")
+                mdin_list.append("  ntp = 1 ! BioBB simulation_type npt")
+                mdin_list.append("  taup = 2.0 ! BioBB simulation_type npt")
+                mdin_list.append("  ntx = 5 ! BioBB simulation_type npt")
             if nvt:
-                mdin_list.append("  irest = 1")
-                mdin_list.append("  gamma_ln = 5.0")
-                mdin_list.append("  ntb = 1")
-                mdin_list.append("  ntx = 5")
+                mdin_list.append("  irest = 1 ! BioBB simulation_type nvt")
+                mdin_list.append("  gamma_ln = 5.0 ! BioBB simulation_type nvt")
+                mdin_list.append("  ntb = 1 ! BioBB simulation_type nvt")
+                mdin_list.append("  ntx = 5 ! BioBB simulation_type nvt")
             if heat:
-                mdin_list.append("  tempi = 0.0")
-                mdin_list.append("  temp0 = 300.0")
-                mdin_list.append("  irest = 0")
-                mdin_list.append("  ntb = 1") #periodic boundaries
-                mdin_list.append("  gamma_ln = 1.0")
+                mdin_list.append("  tempi = 0.0 ! BioBB simulation_type heat")
+                mdin_list.append("  temp0 = 300.0 ! BioBB simulation_type heat")
+                mdin_list.append("  irest = 0 ! BioBB simulation_type heat")
+                mdin_list.append("  ntb = 1 ! BioBB simulation_type heat") #periodic boundaries
+                mdin_list.append("  gamma_ln = 1.0 ! BioBB simulation_type heat")
+                #mdin_list.append("  nmropt = 1 ! BioBB simulation_type heat")
+
+                #mdin_lastPart.append("/")
+                #mdin_lastPart.append("&wt")
+                #mdin_lastPart.append(" TYPE = 'TEMP0' ! BioBB simulation_type heat")
+                #mdin_lastPart.append(" ISTEP1 = 1 ! BioBB simulation_type heat")
+                #mdin_lastPart.append(" ISTEP2 = 4000 ! BioBB simulation_type heat")
+                #mdin_lastPart.append(" VALUE1 = 10.0 ! BioBB simulation_type heat")
+                #mdin_lastPart.append(" VALUE2 = 300.0 ! BioBB simulation_type heat")
+                #mdin_lastPart.append("/")
+                #mdin_lastPart.append("&wt")
+                #mdin_lastPart.append(" TYPE = 'END' ! BioBB simulation_type heat")
+                #mdin_lastPart.append("/")
 
         # Adding the rest of parameters in the config file to the mdin file
         # if the parameter has already been added replace the value
@@ -202,17 +242,27 @@ class SanderMDRun():
         for k, v in self.mdin.items():
             config_parameter_key = str(k).strip()
             if config_parameter_key in parameter_keys:
-                mdin_list[parameter_keys.index(config_parameter_key)] = '  ' + config_parameter_key + ' = '+str(v)
+                mdin_list[parameter_keys.index(config_parameter_key)] = '  ' + config_parameter_key + ' = ' + str(v) + ' ! BioBB property'
             else:
-                mdin_list.append('  ' + config_parameter_key + ' = '+str(v))
-
-        # End of file keyword
-        mdin_list.append("&end")
+                mdin_list.append('  ' + config_parameter_key + ' = '+str(v) + ' ! BioBB property')
 
         # Writing MD configuration file (mdin)
         with open(self.output_mdin_path, 'w') as mdin:
+            # Start of file keyword(s)
+            if mdin_firstPart:
+                for line in mdin_firstPart:
+                    mdin.write(line + '\n')
+
+            # MD config parameters
             for line in mdin_list:
                 mdin.write(line + '\n')
+
+            # End of file keyword(s)
+            if mdin_lastPart:
+                for line in mdin_lastPart:
+                    mdin.write(line + '\n')
+            else:
+                mdin.write("&end\n")
 
         return self.output_mdin_path
 
