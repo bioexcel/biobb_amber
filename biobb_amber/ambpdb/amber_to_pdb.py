@@ -144,10 +144,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    AmberToPDB(input_top_path=args.input_top_path,
+    amber_to_pdb(input_top_path=args.input_top_path,
                 input_crd_path=args.input_crd_path,
                 output_pdb_path=args.output_pdb_path,
-                properties=properties).launch()
+                properties=properties)
 
 if __name__ == '__main__':
     main()

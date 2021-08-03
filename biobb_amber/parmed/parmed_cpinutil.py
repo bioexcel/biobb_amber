@@ -175,10 +175,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    ParmedCpinUtil(   input_top_path=args.input_top_path,
+    parmed_cpinutil(   input_top_path=args.input_top_path,
                             output_cpin_path=args.output_cpin_path,
                             output_top_path=args.output_top_path,
-                            properties=properties).launch()
+                            properties=properties)
 
 if __name__ == '__main__':
     main()

@@ -255,7 +255,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    CestatsRun(    input_cein_path=args.input_cein_path,
+    cestats_run(    input_cein_path=args.input_cein_path,
                     input_ceout_path=args.input_ceout_path,
                     output_dat_path=args.output_dat_path,
                     output_population_path=args.output_population_path,
@@ -263,7 +263,7 @@ def main():
                     output_cumulative_path=args.output_cumulative_path,
                     output_conditional_path=args.output_conditional_path,
                     output_chunk_conditional_path=args.output_chunk_conditional_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

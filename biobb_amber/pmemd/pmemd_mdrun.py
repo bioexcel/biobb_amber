@@ -398,7 +398,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    PmemdMDRun(    input_top_path=args.input_top_path,
+    pmemd_mdrun(    input_top_path=args.input_top_path,
                     input_crd_path=args.input_crd_path,
                     input_mdin_path=args.input_mdin_path,
                     input_cpin_path=args.input_cpin_path,
@@ -409,7 +409,7 @@ def main():
                     output_cpout_path=args.output_cpout_path,
                     output_cprst_path=args.output_cprst_path,
                     output_mdinfo_path=args.output_mdinfo_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

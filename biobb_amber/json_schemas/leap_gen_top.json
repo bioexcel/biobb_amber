@@ -27,7 +27,7 @@
             "type": "string",
             "description": "Input 3D structure PDB file",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leapin.pdb",
             "enum": [
                 ".*\\.pdb$"
             ],

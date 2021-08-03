@@ -17,7 +17,7 @@ class LeapGenTop():
     | Generates a MD topology from a molecule structure using tLeap tool from the AmberTools MD package.
 
     Args:
-        input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leapin.pdb>`_. Accepted formats: pdb (edam:format_1476).
         input_lib_path (str) (Optional): Input ligand library parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib>`_. Accepted formats: lib (edam:format_3889).
         input_frcmod_path (str) (Optional): Input ligand frcmod parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod>`_. Accepted formats: frcmod (edam:format_3888).
         input_params_path (str) (Optional): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
@@ -260,7 +260,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    LeapGenTop(     input_pdb_path=args.input_pdb_path,
+    leap_gen_top(     input_pdb_path=args.input_pdb_path,
                     input_lib_path=args.input_lib_path,
                     input_frcmod_path=args.input_frcmod_path,
                     input_params_path=args.input_params_path,
@@ -268,7 +268,7 @@ def main():
                     output_pdb_path=args.output_pdb_path,
                     output_top_path=args.output_top_path,
                     output_crd_path=args.output_crd_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

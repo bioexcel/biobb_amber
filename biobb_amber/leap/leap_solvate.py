@@ -343,7 +343,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    LeapSolvate(    input_pdb_path=args.input_pdb_path,
+    leap_solvate(    input_pdb_path=args.input_pdb_path,
                     input_lib_path=args.input_lib_path,
                     input_frcmod_path=args.input_frcmod_path,
                     input_params_path=args.input_params_path,
@@ -351,7 +351,7 @@ def main():
                     output_pdb_path=args.output_pdb_path,
                     output_top_path=args.output_top_path,
                     output_crd_path=args.output_crd_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

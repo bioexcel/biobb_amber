@@ -173,15 +173,21 @@ def main():
 
     # Specific args
     required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--output_pdb_path', required=True, help='Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.')
+    required_args.add_argument('--input_top_path', required=True, help='Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.')
+    required_args.add_argument('--input_crd_path', required=True, help='Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.')
+    required_args.add_argument('--output_pdb_path', required=True, help='Structure PDB file with randomized ions. Accepted formats: pdb.')
+    required_args.add_argument('--output_crd_path', required=True, help='Structure CRD file with coordinates including randomized ions. Accepted formats: crd, mdcrd, inpcrd.')
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    CpptrajRandomizeIons(output_pdb_path=args.output_pdb_path,
-             properties=properties).launch()
+    cpptraj_randomize_ions(input_top_path=args.input_top_path,
+                        input_crd_path=args.input_crd_path,
+                        output_pdb_path=args.output_pdb_path,
+                        output_crd_path=args.output_crd_path,
+                        properties=properties)
 
 if __name__ == '__main__':
     main()

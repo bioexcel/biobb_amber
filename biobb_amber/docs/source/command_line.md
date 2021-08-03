@@ -177,7 +177,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb). Accepted formats: PDB
-* **output_pdb_path** (*string*): Output 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb). Accepted formats: PDB
+* **output_pdb_path** (*string*): Output 3D structure PDB file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb). Accepted formats: PDB
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -283,30 +283,30 @@ sander_mdrun -h
     optional arguments:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
-    
-    required arguments:
-      --input_top_path INPUT_TOP_PATH
-                            Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.
-      --input_crd_path INPUT_CRD_PATH
-                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.
       --input_mdin_path INPUT_MDIN_PATH
                             Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.
       --input_cpin_path INPUT_CPIN_PATH
                             Input constant pH file (AMBER cpin). Accepted formats: cpin.
       --input_ref_path INPUT_REF_PATH
                             Input reference coordinates for position restraints. Accepted formats: rst, rst7.
-      --output_log_path OUTPUT_LOG_PATH
-                            Output log file. Accepted formats: log, out, txt.
-      --output_traj_path OUTPUT_TRAJ_PATH
-                            Output trajectory file. Accepted formats: trj, crd, mdcrd, x.
-      --output_rst_path OUTPUT_RST_PATH
-                            Output restart file. Accepted formats: rst, rst7.
       --output_cpout_path OUTPUT_CPOUT_PATH
                             Output constant pH file (AMBER cpout). Accepted formats: cpout.
       --output_cprst_path OUTPUT_CPRST_PATH
                             Output constant pH restart file (AMBER rstout). Accepted formats: cprst.
       --output_mdinfo_path OUTPUT_MDINFO_PATH
                             Output MD info. Accepted formats: mdinfo.
+    
+    required arguments:
+      --input_top_path INPUT_TOP_PATH
+                            Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.
+      --input_crd_path INPUT_CRD_PATH
+                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.
+      --output_log_path OUTPUT_LOG_PATH
+                            Output log file. Accepted formats: log, out, txt.
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output trajectory file. Accepted formats: trj, crd, mdcrd, x.
+      --output_rst_path OUTPUT_RST_PATH
+                            Output restart file. Accepted formats: rst, rst7.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -406,7 +406,7 @@ leap_gen_top -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.pdb). Accepted formats: PDB
+* **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leapin.pdb). Accepted formats: PDB
 * **input_lib_path** (*string*): Input ligand library parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib). Accepted formats: LIB
 * **input_frcmod_path** (*string*): Input ligand frcmod parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod). Accepted formats: FRCMOD
 * **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce). Accepted formats: IN, LEAPIN, TXT, ZIP
@@ -432,7 +432,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
+leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top.json)
@@ -448,7 +448,7 @@ leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.pdb --i
 ```
 #### Command line
 ```python
-leap_gen_top --config config_leap_gen_top.json --input_pdb_path structure.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
+leap_gen_top --config config_leap_gen_top.json --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
 ```
 
 ## Cestats_run
@@ -1163,7 +1163,7 @@ Command:
 ```python
 cpptraj_randomize_ions -h
 ```
-    usage: cpptraj_randomize_ions [-h] [--config CONFIG] --output_pdb_path OUTPUT_PDB_PATH
+    usage: cpptraj_randomize_ions [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH --output_pdb_path OUTPUT_PDB_PATH --output_crd_path OUTPUT_CRD_PATH
     
     Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.
     
@@ -1172,8 +1172,14 @@ cpptraj_randomize_ions -h
       --config CONFIG       Configuration file
     
     required arguments:
+      --input_top_path INPUT_TOP_PATH
+                            Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
+      --input_crd_path INPUT_CRD_PATH
+                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.
       --output_pdb_path OUTPUT_PDB_PATH
-                            Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.
+                            Structure PDB file with randomized ions. Accepted formats: pdb.
+      --output_crd_path OUTPUT_CRD_PATH
+                            Structure CRD file with coordinates including randomized ions. Accepted formats: crd, mdcrd, inpcrd.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
