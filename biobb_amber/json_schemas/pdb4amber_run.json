@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/pdb4amber_run",
     "name": "biobb_amber.pdb4amber.pdb4amber_run Pdb4amberRun",
-    "title": "Wrapper of the AmberTools (AMBER MD Package) pdb4amber tool module.",
+    "title": "Wrapper of the AmberTools (AMBER MD Package) pdb4amber tool module",
     "description": "Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.",
     "type": "object",
     "info": {
