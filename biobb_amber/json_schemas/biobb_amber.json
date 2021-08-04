@@ -4,7 +4,7 @@
     "github": "https://github.com/bioexcel/biobb_amber",
     "readthedocs": "https://biobb-amber.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_amber",
-    "docker": "https://quay.io/biocontainers/biobb_amber:3.6.1--pyhdfd78af_1",
+    "docker": "https://quay.io/biocontainers/biobb_amber:3.6.1--pyhdfd78af_0",
     "singularity": "",
     "version": "3.6.1",
     "tools" : [
