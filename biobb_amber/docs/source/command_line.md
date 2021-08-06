@@ -409,8 +409,8 @@ Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leapin.pdb). Accepted formats: PDB
 * **input_lib_path** (*string*): Input ligand library parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib). Accepted formats: LIB
 * **input_frcmod_path** (*string*): Input ligand frcmod parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod). Accepted formats: FRCMOD
-* **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce). Accepted formats: IN, LEAPIN, TXT, ZIP
-* **input_source_path** (*string*): Additional leap command files to load with source Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce). Accepted formats: IN, LEAPIN, TXT, ZIP
+* **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
+* **input_source_path** (*string*): Additional leap command files to load with source Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
 * **output_pdb_path** (*string*): Output 3D structure PDB file matching the topology file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.pdb). Accepted formats: PDB
 * **output_top_path** (*string*): Output topology file (AMBER ParmTop). File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.top). Accepted formats: TOP, PARMTOP, PRMTOP
 * **output_crd_path** (*string*): Output coordinates file (AMBER crd). File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.crd). Accepted formats: CRD, MDCRD, INPCRD
@@ -432,7 +432,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
+leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top.json)
@@ -448,7 +448,7 @@ leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.
 ```
 #### Command line
 ```python
-leap_gen_top --config config_leap_gen_top.json --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
+leap_gen_top --config config_leap_gen_top.json --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
 ```
 
 ## Cestats_run
@@ -867,8 +867,8 @@ Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.pdb). Accepted formats: PDB
 * **input_lib_path** (*string*): Input ligand library parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib). Accepted formats: LIB, ZIP
 * **input_frcmod_path** (*string*): Input ligand frcmod parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod). Accepted formats: FRCMOD, ZIP
-* **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce). Accepted formats: IN, LEAPIN, TXT, ZIP
-* **input_source_path** (*string*): Additional leap command files to load with source Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce). Accepted formats: IN, LEAPIN, TXT, ZIP
+* **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
+* **input_source_path** (*string*): Additional leap command files to load with source Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
 * **output_pdb_path** (*string*): Output 3D structure PDB file matching the topology file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.ions.pdb). Accepted formats: PDB
 * **output_top_path** (*string*): Output topology file (AMBER ParmTop). File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.ions.top). Accepted formats: TOP, PARMTOP, PRMTOP
 * **output_crd_path** (*string*): Output coordinates file (AMBER crd). File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.ions.crd). Accepted formats: CRD, MDCRD, INPCRD
@@ -906,7 +906,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.solv.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
+leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.solv.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_add_ions.json)
@@ -929,7 +929,7 @@ leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.solv.
 ```
 #### Command line
 ```python
-leap_add_ions --config config_leap_add_ions.json --input_pdb_path structure.solv.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
+leap_add_ions --config config_leap_add_ions.json --input_pdb_path structure.solv.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
 ```
 
 ## Leap_build_linear_structure
@@ -1037,8 +1037,8 @@ Config input / output arguments for this building block:
 * **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leap.pdb). Accepted formats: PDB
 * **input_lib_path** (*string*): Input ligand library parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib). Accepted formats: LIB, ZIP
 * **input_frcmod_path** (*string*): Input ligand frcmod parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod). Accepted formats: FRCMOD, ZIP
-* **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce). Accepted formats: IN, LEAPIN, TXT, ZIP
-* **input_source_path** (*string*): Additional leap command files to load with source Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce). Accepted formats: IN, LEAPIN, TXT, ZIP
+* **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
+* **input_source_path** (*string*): Additional leap command files to load with source Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
 * **output_pdb_path** (*string*): Output 3D structure PDB file matching the topology file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.pdb). Accepted formats: PDB
 * **output_top_path** (*string*): Output topology file (AMBER ParmTop). File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.top). Accepted formats: TOP, PARMTOP, PRMTOP
 * **output_crd_path** (*string*): Output coordinates file (AMBER crd). File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.crd). Accepted formats: CRD, MDCRD, INPCRD
@@ -1074,7 +1074,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
+leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_solvate.json)
@@ -1093,7 +1093,7 @@ leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pd
 ```
 #### Command line
 ```python
-leap_solvate --config config_leap_solvate.json --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce --input_source_path leaprc.water.spce --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
+leap_solvate --config config_leap_solvate.json --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
 ```
 
 ## Amber_to_pdb

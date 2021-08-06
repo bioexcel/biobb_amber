@@ -75,7 +75,7 @@
             "type": "string",
             "description": "Additional leap parameter files to load with loadAmberParams Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce.txt",
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
@@ -109,7 +109,7 @@
             "type": "string",
             "description": "Additional leap command files to load with source Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce.txt",
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
