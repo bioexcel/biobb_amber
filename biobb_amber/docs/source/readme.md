@@ -1,7 +1,6 @@
 [![](https://readthedocs.org/projects/biobb-amber/badge/?version=latest)](https://biobb-amber.readthedocs.io/en/latest/?badge=latest)
 [![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_amber)
 [![](https://img.shields.io/badge/docker-Quay.io-blue)]()
-[![](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)]()
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # biobb_amber
@@ -21,7 +20,7 @@ v3.6.1 2021.2
 ### Installation
 Using PIP:
 
-> **Important:** PIP only installs the package. All the dependencies must be installed separately. To perform a complete installation, please use ANACONDA, DOCKER or SINGULARITY.
+> **Important:** PIP only installs the package. All the dependencies must be installed separately. To perform a complete installation, please use ANACONDA or DOCKER.
 
 * Installation:
 
@@ -55,20 +54,20 @@ Using DOCKER:
         docker run quay.io/biocontainers/biobb_amber:3.6.1--pyhdfd78af_0
 
 
-Using SINGULARITY:
+[//]: # (Using SINGULARITY:)
 
-**MacOS users**: it's strongly recommended to avoid Singularity and use **Docker** as containerization system.
+[//]: # (**MacOS users**: it's strongly recommended to avoid Singularity and use **Docker** as containerization system.)
 
-* Installation:
-
-
-        singularity pull --name biobb_amber.sif shub://bioexcel/biobb_amber
+[//]: # (* Installation:)
 
 
-* Usage:
+[//]: # (singularity pull --name biobb_amber.sif shub://bioexcel/biobb_amber)
 
 
-        singularity exec biobb_amber.sif
+[//]: # (* Usage:)
+
+
+[//]: # (singularity exec biobb_amber.sif)
 
 
 The command list and specification can be found at the [Command Line documentation](https://biobb-amber.readthedocs.io/en/latest/command_line.html).
