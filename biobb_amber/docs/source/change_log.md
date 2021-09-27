@@ -1,14 +1,21 @@
 # Biobb Amber changelog
 
+## What's new in version [3.6.2](https://github.com/bioexcel/biobb_amber/releases/tag/v3.6.2)?
+In version 3.6.2 some bugs have been fixed.
+
+### New features
+
+* Sander/Pmemd mdin parser upgraded
+
 ## What's new in version [3.6.1](https://github.com/bioexcel/biobb_amber/releases/tag/v3.6.1)?
-In version 3.6.1 some bugs have been fixed. 
+In version 3.6.1 some bugs have been fixed.
 
 ### Other changes
 
 * Bug fixes
 
 ## What's new in version [3.6.0](https://github.com/bioexcel/biobb_amber/releases/tag/v3.6.0)?
-In version 3.6.0 the dependency biobb_common has been updated to 3.6.0 version. 
+In version 3.6.0 the dependency biobb_common has been updated to 3.6.0 version.
 
 ### New features
 
@@ -25,4 +32,4 @@ New package wrapping AMBER MD tool. In version 3.5.0 the dependency biobb_common
 
 ### Other changes
 
-* New docstrings 
+* New docstrings
