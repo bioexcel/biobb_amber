@@ -92,6 +92,9 @@ class SanderMDRun():
         self.sander_path = properties.get('sander_path', "sander")
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
 
+        if self.mdin['restraintmask'] and self.mdin['restraintmask'][0] != '"' and self.mdin['restraintmask'][-1] != '"':
+            self.mdin['restraintmask'] = "\"" + self.mdin['restraintmask'] + "\""
+            
         # Properties for MPI
         self.mpi_bin = properties.get('mpi_bin')
         self.mpi_np = properties.get('mpi_np')

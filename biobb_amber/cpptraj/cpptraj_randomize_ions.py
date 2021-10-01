@@ -70,7 +70,7 @@ class CpptrajRandomizeIons():
 
         # Properties specific for BB
         self.properties = properties
-        self.ion_mask = properties.get('ion_types', ":K+,Cl-,Na+")
+        self.ion_mask = properties.get('ion_mask', ":K+,Cl-,Na+")
         self.solute_mask = properties.get('solute_mask', ":DA,DC,DG,DT,D?3,D?5")
         self.distance = properties.get('distance', 5.0)
         self.overlap = properties.get('overlap', 3.5)
