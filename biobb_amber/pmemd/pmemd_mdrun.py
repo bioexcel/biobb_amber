@@ -155,16 +155,22 @@ class PmemdMDRun():
 
             for line in mdin_middlePart:
                 if ('!' in line or '#' in line) and not ('!@' in line or '!:' in line):
+                    # Parsing lines with comments (#,!), e.g. :
+                    # ntc=2, ntf=2, ! SHAKE, constrain lenghts of the bonds having H
                     params = re.split('!|#',line)
                     for param in params[0].split(','):
                         if param.strip():
                             mdin_list.append("  " + param.strip() + " ! " + params[1])
+                elif ('@' in line or ':' in line):
+                    # Parsing masks, e.g. :
+                    # restraintmask = ":1-40@P,O5',C5',C4',C3',O3'", restraint_wt = 0.5
+                    mylist = re.findall(r'(?:[^,"]|"(?:\\.|[^"])*")+', line)
+                    [mdin_list.append("  " + i.lstrip()) for i in mylist]
                 else:
                     for param in line.split(','):
                         if param.strip():
                             if not param.strip().startswith('!'):
                                 mdin_list.append("  " + param.strip())
-                                print("PARAM: " + param.strip())
 
         else:
             # MDIN parameters added by the biobb_amber module
@@ -398,7 +404,7 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    PmemdMDRun(    input_top_path=args.input_top_path,
+    pmemd_mdrun(    input_top_path=args.input_top_path,
                     input_crd_path=args.input_crd_path,
                     input_mdin_path=args.input_mdin_path,
                     input_cpin_path=args.input_cpin_path,
@@ -409,7 +415,7 @@ def main():
                     output_cpout_path=args.output_cpout_path,
                     output_cprst_path=args.output_cprst_path,
                     output_mdinfo_path=args.output_mdinfo_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

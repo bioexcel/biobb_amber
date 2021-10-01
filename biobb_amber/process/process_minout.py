@@ -162,10 +162,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    ProcessMinOut(
-             input_log_path=args.input_log_path,
-             output_pdb_path=args.output_pdb_path,
-             properties=properties).launch()
+    process_minout(input_log_path=args.input_log_path,
+                    output_dat_path=args.output_dat_path,
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

@@ -92,6 +92,9 @@ class SanderMDRun():
         self.sander_path = properties.get('sander_path', "sander")
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
 
+        if self.mdin['restraintmask'] and self.mdin['restraintmask'][0] != '"' and self.mdin['restraintmask'][-1] != '"':
+            self.mdin['restraintmask'] = "\"" + self.mdin['restraintmask'] + "\""
+            
         # Properties for MPI
         self.mpi_bin = properties.get('mpi_bin')
         self.mpi_np = properties.get('mpi_np')
@@ -155,16 +158,22 @@ class SanderMDRun():
 
             for line in mdin_middlePart:
                 if ('!' in line or '#' in line) and not ('!@' in line or '!:' in line):
+                    # Parsing lines with comments (#,!), e.g. :
+                    # ntc=2, ntf=2, ! SHAKE, constrain lenghts of the bonds having H
                     params = re.split('!|#',line)
                     for param in params[0].split(','):
                         if param.strip():
                             mdin_list.append("  " + param.strip() + " ! " + params[1])
+                elif ('@' in line or ':' in line):
+                    # Parsing masks, e.g. :
+                    # restraintmask = ":1-40@P,O5',C5',C4',C3',O3'", restraint_wt = 0.5
+                    mylist = re.findall(r'(?:[^,"]|"(?:\\.|[^"])*")+', line)
+                    [mdin_list.append("  " + i.lstrip()) for i in mylist]
                 else:
                     for param in line.split(','):
                         if param.strip():
                             if not param.strip().startswith('!'):
                                 mdin_list.append("  " + param.strip())
-                                print("PARAM: " + param.strip())
 
         else:
             # MDIN parameters added by the biobb_amber module
@@ -383,22 +392,30 @@ def main():
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('--input_top_path', required=True, help='Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.')
     required_args.add_argument('--input_crd_path', required=True, help='Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.')
-    required_args.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
-    required_args.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
-    required_args.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
+    #required_args.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
+    parser.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
+    #required_args.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
+    parser.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
+    #required_args.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
+    parser.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
     required_args.add_argument('--output_log_path', required=True, help='Output log file. Accepted formats: log, out, txt.')
     required_args.add_argument('--output_traj_path', required=True, help='Output trajectory file. Accepted formats: trj, crd, mdcrd, x.')
     required_args.add_argument('--output_rst_path', required=True, help='Output restart file. Accepted formats: rst, rst7.')
-    required_args.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
-    required_args.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
-    required_args.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
+    #required_args.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
+    parser.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
+    #required_args.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
+    parser.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
+    #required_args.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
+    parser.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
 
     args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
+    #config = args.config if args.config else None
+    args.config = args.config or "{}"
+    #properties = settings.ConfReader(config=config).get_prop_dic()
+    properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    SanderMDRun(    input_top_path=args.input_top_path,
+    sander_mdrun(    input_top_path=args.input_top_path,
                     input_crd_path=args.input_crd_path,
                     input_mdin_path=args.input_mdin_path,
                     input_cpin_path=args.input_cpin_path,
@@ -409,7 +426,7 @@ def main():
                     output_cpout_path=args.output_cpout_path,
                     output_cprst_path=args.output_cprst_path,
                     output_mdinfo_path=args.output_mdinfo_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

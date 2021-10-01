@@ -161,8 +161,8 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    NabBuildDNAStructure(output_pdb_path=args.output_pdb_path,
-             properties=properties).launch()
+    nab_build_dna_structure(output_pdb_path=args.output_pdb_path,
+             properties=properties)
 
 if __name__ == '__main__':
     main()

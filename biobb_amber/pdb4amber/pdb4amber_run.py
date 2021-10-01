@@ -18,7 +18,7 @@ class Pdb4amberRun():
 
     Args:
         input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb>`_. Accepted formats: pdb (edam:format_1476).
-        output_pdb_path (str): Output 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb>`_. Accepted formats: pdb (edam:format_1476).
+        output_pdb_path (str): Output 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **remove_hydrogens** (*bool*) - (False) Remove hydrogen atoms from the PDB file.
             * **remove_waters** (*bool*) - (False) Remove water molecules from the PDB file.
@@ -156,9 +156,9 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    Pdb4amberRun(    input_pdb_path=args.input_pdb_path,
+    pdb4amber_run(    input_pdb_path=args.input_pdb_path,
                     output_pdb_path=args.output_pdb_path,
-                    properties=properties).launch()
+                    properties=properties)
 
 if __name__ == '__main__':
     main()

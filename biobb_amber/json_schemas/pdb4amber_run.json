@@ -40,7 +40,7 @@
         "output_pdb_path": {
             "type": "string",
             "description": "Output 3D structure PDB file",
-            "filetype": "input",
+            "filetype": "output",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb",
             "enum": [
                 ".*\\.pdb$"
