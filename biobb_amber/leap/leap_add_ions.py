@@ -3,16 +3,18 @@
 """Module containing the LeapAddIons class and the command line interface."""
 import argparse
 import shutil, re
-import subprocess
+#import subprocess
 from decimal import Decimal
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
+#from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.leap.common import *
 
-class LeapAddIons():
+
+class LeapAddIons(BiobbObject):
     """
     | biobb_amber LeapAddIons
     | Wrapper of the `AmberTools (AMBER MD Package) leap tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -75,6 +77,9 @@ class LeapAddIons():
 
         properties = properties or {}
 
+        # Call parent class constructor
+        super().__init__(properties)
+
         # Input/Output files
         self.io_dict = {
             'in': { 'input_pdb_path': input_pdb_path,
@@ -110,16 +115,10 @@ class LeapAddIons():
         self.negative_ions_number = properties.get('negative_ions_number', 0)
         self.negative_ions_type = properties.get('negative_ions_type', "Cl-")
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -162,7 +161,7 @@ class LeapAddIons():
         """Launches the execution of the LeapAddIons module."""
 
         # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
+        '''out_log = getattr(self, 'out_log', None)
         err_log = getattr(self, 'err_log', None)
 
         # check input/output paths and parameters
@@ -178,11 +177,18 @@ class LeapAddIons():
                                 self.io_dict['out']['output_crd_path']]
             if fu.check_complete_files(output_file_list):
                 fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+                return 0'''
+
+        # check input/output paths and parameters
+        self.check_data_params(self.out_log, self.err_log)
+
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Creating temporary folder
         self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, out_log)
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # Water Type
         # leaprc.water.tip4pew, tip4pd, tip3p, spceb, spce, opc, fb4, fb3
@@ -224,28 +230,28 @@ class LeapAddIons():
         ligands_lib_list = []
         if self.io_dict['in']['input_lib_path'] is not None:
             if self.io_dict['in']['input_lib_path'].endswith('.zip'):
-                ligands_lib_list = fu.unzip_list(self.io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                ligands_lib_list = fu.unzip_list(self.io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 ligands_lib_list.append(self.io_dict['in']['input_lib_path'])
 
         ligands_frcmod_list = []
         if self.io_dict['in']['input_frcmod_path'] is not None:
             if self.io_dict['in']['input_frcmod_path'].endswith('.zip'):
-                ligands_frcmod_list = fu.unzip_list(self.io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                ligands_frcmod_list = fu.unzip_list(self.io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 ligands_frcmod_list.append(self.io_dict['in']['input_frcmod_path'])
 
         amber_params_list = []
         if self.io_dict['in']['input_params_path'] is not None:
             if self.io_dict['in']['input_params_path'].endswith('.zip'):
-                amber_params_list = fu.unzip_list(self.io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                amber_params_list = fu.unzip_list(self.io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 amber_params_list.append(self.io_dict['in']['input_params_path'])
 
         leap_source_list = []
         if self.io_dict['in']['input_source_path'] is not None:
             if self.io_dict['in']['input_source_path'].endswith('.zip'):
-                leap_source_list = fu.unzip_list(self.io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                leap_source_list = fu.unzip_list(self.io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 leap_source_list.append(self.io_dict['in']['input_source_path'])
 
@@ -299,16 +305,22 @@ class LeapAddIons():
                 leapin.write("quit \n");
 
         # Command line
-        cmd = ['tleap ',
+        self.cmd = ['tleap ',
                '-f', instructions_file
                ]
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
+        '''fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
         # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()'''
+
+        # Run Biobb block
+        self.run_biobb()
+
+        # Copy files to host
+        self.copy_to_host()
 
         if self.box_type != "cubic":
-            fu.log('Fixing truncated octahedron Box in the topology and coordinates files', out_log, self.global_log)
+            fu.log('Fixing truncated octahedron Box in the topology and coordinates files', self.out_log, self.global_log)
 
             # Taking box info from input PDB file, CRYST1 tag (first line)
             with open(self.io_dict['in']['input_pdb_path']) as file:
@@ -316,7 +328,7 @@ class LeapAddIons():
                 pdb_line = lines[0]
 
             if 'OCTBOX' not in pdb_line:
-                fu.log('WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.',out_log, self.global_log)
+                fu.log('WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.',self.out_log, self.global_log)
             else:
                 # PDB info: CRYST1   86.316   86.316   86.316 109.47 109.47 109.47 P 1
                 # PDB info: OCTBOX   86.1942924  86.1942924  86.1942924 109.4712190 109.4712190 109.4712190
@@ -377,13 +389,21 @@ class LeapAddIons():
                                 new_top.write(line)
 
         # Remove temporary file(s)
-        if self.remove_tmp:
+        '''if self.remove_tmp:
             fu.rm(self.tmp_folder)
             fu.rm("leap.log")
             fu.log('Removed: %s' % str(self.tmp_folder), out_log)
             fu.log('Removed: leap.log', out_log)
 
-        return returncode
+        return returncode'''
+
+        # remove temporary folder(s)
+        if self.remove_tmp:
+            self.tmp_files.append(self.tmp_folder)
+            self.tmp_files.append("leap.log")
+            self.remove_tmp_files()
+
+        return self.return_code
 
 def leap_add_ions(input_pdb_path: str, output_pdb_path: str,
            output_top_path: str, output_crd_path: str,

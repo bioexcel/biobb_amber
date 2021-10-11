@@ -2,15 +2,17 @@
 
 """Module containing the AmberToPDB class and the command line interface."""
 import argparse
-import shutil
-from pathlib import Path, PurePath
+#import shutil
+#from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
+#from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.ambpdb.common import *
 
-class AmberToPDB():
+
+class AmberToPDB(BiobbObject):
     """
     | biobb_amber AmberToPDB
     | Wrapper of the `AmberTools (AMBER MD Package) ambpdb tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -50,6 +52,9 @@ class AmberToPDB():
     def __init__(self, input_top_path, input_crd_path, output_pdb_path, properties: dict = None, **kwargs):
         properties = properties or {}
 
+        # Call parent class constructor
+        super().__init__(properties)
+
         # Input/Output files
         self.io_dict = {
             'in': { 'input_top_path': input_top_path,
@@ -60,16 +65,10 @@ class AmberToPDB():
         # Properties specific for BB
         self.properties = properties
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -83,7 +82,7 @@ class AmberToPDB():
     def launch(self):
         """Execute the :class:`AmberToPDB` object."""
 
-        # Get local loggers from launchlogger decorator
+        '''# Get local loggers from launchlogger decorator
         out_log = getattr(self, 'out_log', None)
         err_log = getattr(self, 'err_log', None)
 
@@ -99,24 +98,37 @@ class AmberToPDB():
             output_file_list = [self.io_dict['out']['output_pdb_path']]
             if fu.check_complete_files(output_file_list):
                 fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+                return 0'''
+
+        # check input/output paths and parameters
+        self.check_data_params(self.out_log, self.err_log)
+
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Command line
-        cmd = ['ambpdb ',
+        self.cmd = ['ambpdb ',
                '-p', self.io_dict['in']['input_top_path'],
                '-c', self.io_dict['in']['input_crd_path'],
                '> ', self.io_dict['out']['output_pdb_path']
                ]
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
+        '''fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
         # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()'''
+
+         # Run Biobb block
+        self.run_biobb()
+
+        # Copy files to host
+        self.copy_to_host()
 
         # Remove temporary file(s)
         #if self.remove_tmp:
         # Nothing to remove
 
-        return returncode
+        return self.return_code
 
 def amber_to_pdb(input_top_path: str, input_crd_path: str, output_pdb_path: str,
            properties: dict = None, **kwargs) -> int:
