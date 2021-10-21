@@ -1,5 +1,8 @@
 # Biobb Amber changelog
 
+## What's new in version [3.7.1](https://github.com/bioexcel/biobb_amber/releases/tag/v3.7.1)?
+In version 3.7.1 entry points have been added to setup.py.
+
 ## What's new in version [3.7.0](https://github.com/bioexcel/biobb_amber/releases/tag/v3.7.0)?
 In version 3.7.0 the dependency biobb_common has been updated to 3.7.0 version.
 
