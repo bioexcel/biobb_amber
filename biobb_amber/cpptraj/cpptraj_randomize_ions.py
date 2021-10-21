@@ -4,13 +4,13 @@
 import argparse
 import shutil
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.cpptraj.common import *
 
-class CpptrajRandomizeIons():
+class CpptrajRandomizeIons(BiobbObject):
     """
     | biobb_amber.cpptraj.cpptraj_randomize_ions CpptrajRandomizeIons
     | Wrapper of the `AmberTools (AMBER MD Package) cpptraj tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -54,7 +54,11 @@ class CpptrajRandomizeIons():
     """
 
     def __init__(self, input_top_path: str, input_crd_path: str, output_pdb_path: str, output_crd_path: str, properties, **kwargs) -> None:
+
         properties = properties or {}
+
+        # Call parent class constructor
+        super().__init__(properties)
 
         # Input/Output files
         self.io_dict = {
@@ -75,16 +79,10 @@ class CpptrajRandomizeIons():
         self.distance = properties.get('distance', 5.0)
         self.overlap = properties.get('overlap', 3.5)
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -99,27 +97,16 @@ class CpptrajRandomizeIons():
     def launch(self):
         """Launches the execution of the CpptrajRandomizeIons module."""
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
         # check input/output paths and parameters
-        self.check_data_params(out_log)
+        self.check_data_params(self.out_log, self.err_log)
 
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            output_file_list = [self.io_dict['out']['output_pdb_path'],
-                                self.io_dict['out']['output_crd_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Creating temporary folder
         self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, out_log)
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # create cpptraj.in file
         # trajin randomizeIons.crd
@@ -137,23 +124,24 @@ class CpptrajRandomizeIons():
                 cpptrajin.write("go\n");
 
         # Command line
-        cmd = ['cpptraj ',
+        self.cmd = ['cpptraj ',
                self.io_dict['in']['input_top_path'],
                '-i', instructions_file
                ]
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Run Biobb block
+        self.run_biobb()
 
-        # Remove temporary file(s)
+        # Copy files to host
+        self.copy_to_host()
+
+        # remove temporary folder(s)
         if self.remove_tmp:
-            fu.rm(self.tmp_folder)
-            fu.rm("cpptraj.log")
-            fu.log('Removed: %s' % str(self.tmp_folder), out_log)
-            fu.log('Removed: cpptraj.log', out_log)
+            self.tmp_files.append(self.tmp_folder)
+            self.tmp_files.append("cpptraj.log")
+            self.remove_tmp_files()
 
-        return returncode
+        return self.return_code
 
 def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
         output_pdb_path: str, output_crd_path: str,

@@ -4,13 +4,13 @@
 import argparse
 import shutil, re
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.parmed.common import *
 
-class ParmedCpinUtil():
+class ParmedCpinUtil(BiobbObject):
     """
     | biobb_amber ParmedCpinUtil
     | Wrapper of the `AmberTools (AMBER MD Package) parmed tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -54,7 +54,11 @@ class ParmedCpinUtil():
     """
 
     def __init__(self, input_top_path, output_cpin_path, output_top_path=None, properties=None, **kwargs) -> None:
+
         properties = properties or {}
+
+        # Call parent class constructor
+        super().__init__(properties)
 
         # Input/Output files
         self.io_dict = {
@@ -69,16 +73,10 @@ class ParmedCpinUtil():
         self.igb = properties.get('igb', 2)
         self.system = properties.get('system', "Unknown")
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -92,62 +90,55 @@ class ParmedCpinUtil():
     def launch(self):
         """Launches the execution of the ParmedCpinUtil module."""
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
         # check input/output paths and parameters
-        self.check_data_params(out_log)
+        self.check_data_params(self.out_log, self.err_log)
 
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            output_file_list = [self.io_dict['out']['output_cpin_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Creating temporary folder
         self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, out_log)
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # cpinutil.py -igb 2 -resname AS4 GL4 -p $1.prmtop -op $1.cpH.prmtop
         # cpinutil.py -p cln025.cpH.prmtop -igb 2 -system "CLN" -o cpin
 
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
+        fu.log('Creating command line with instructions and required arguments', self.out_log, self.global_log)
 
-        cmd = ['cpinutil.py',
+        self.cmd = ['cpinutil.py',
                '-p', self.io_dict['in']['input_top_path'],
                '-o', self.io_dict['out']['output_cpin_path']
                ]
 
         if self.igb:
-            cmd.append('-igb')
-            cmd.append(str(self.igb))
+            self.cmd.append('-igb')
+            self.cmd.append(str(self.igb))
 
         if self.system:
-            cmd.append('-system')
-            cmd.append(self.system)
+            self.cmd.append('-system')
+            self.cmd.append(self.system)
 
         if self.resnames:
-            cmd.append('-resnames')
-            cmd.append(self.resnames)
+            self.cmd.append('-resnames')
+            self.cmd.append(self.resnames)
 
         if self.io_dict["out"]["output_top_path"]:
-            cmd.append('-op')
-            cmd.append(self.io_dict["out"]["output_top_path"])
+            self.cmd.append('-op')
+            self.cmd.append(self.io_dict["out"]["output_top_path"])
 
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Run Biobb block
+        self.run_biobb()
 
-        # Remove temporary file(s)
+        # Copy files to host
+        self.copy_to_host()
+
+        # remove temporary folder(s)
         if self.remove_tmp:
-            fu.rm(self.tmp_folder)
-            fu.log('Removed: %s' % str(self.tmp_folder), out_log)
+            self.tmp_files.append(self.tmp_folder)
+            self.remove_tmp_files()
 
-        return returncode
+        return self.return_code
 
 def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
            output_top_path: str = None,

@@ -4,13 +4,13 @@
 import argparse
 import shutil, re
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.cphstats.common import *
 
-class CestatsRun():
+class CestatsRun(BiobbObject):
     """
     | biobb_amber CestatsRun
     | Wrapper of the `AmberTools (AMBER MD Package) cestats tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -65,7 +65,11 @@ class CestatsRun():
     def __init__(self, input_cein_path: str, input_ceout_path: str, output_dat_path: str, output_population_path: str = None,
                  output_chunk_path: str = None, output_cumulative_path: str = None, output_conditional_path: str = None, output_chunk_conditional_path: str = None,
                  properties: dict = None, **kwargs) -> None:
+
         properties = properties or {}
+
+        # Call parent class constructor
+        super().__init__(properties)
 
         # Input/Output files
         self.io_dict = {
@@ -93,16 +97,10 @@ class CestatsRun():
         self.fix_remd = properties.get('fix_remd', "")
         self.conditional = properties.get('conditional', "")
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -121,26 +119,16 @@ class CestatsRun():
     def launch(self):
         """Launches the execution of the CestatsRun module."""
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
         # check input/output paths and parameters
-        self.check_data_params(out_log)
+        self.check_data_params(self.out_log, self.err_log)
 
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            output_file_list = [self.io_dict['out']['output_dat_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Command line
         # cphstats -i 4LYT.equil.cpin 0/4LYT.md1.cpout -o pH0_calcpka.dat --population pH0_populations.dat
-        cmd = ['cestats',
+        self.cmd = ['cestats',
                '-O',
                '-i', self.io_dict['in']['input_cein_path'],
                '-o', self.io_dict['out']['output_dat_path'],
@@ -148,73 +136,70 @@ class CestatsRun():
                ]
 
         if self.io_dict['out']['output_population_path']:
-            cmd.append('--population ')
-            cmd.append(self.io_dict['out']['output_population_path'])
+            self.cmd.append('--population ')
+            self.cmd.append(self.io_dict['out']['output_population_path'])
 
         if self.io_dict['out']['output_chunk_path']:
-            cmd.append('--chunk-out ')
-            cmd.append(self.io_dict['out']['output_chunk_path'])
+            self.cmd.append('--chunk-out ')
+            self.cmd.append(self.io_dict['out']['output_chunk_path'])
             if self.chunk_window:
-                cmd.append('--chunk')
-                cmd.append(str(self.chunk_window))
+                self.cmd.append('--chunk')
+                self.cmd.append(str(self.chunk_window))
 
         if self.io_dict['out']['output_cumulative_path']:
-            cmd.append('--cumulative-out ')
-            cmd.append(self.io_dict['out']['output_cumulative_path'])
+            self.cmd.append('--cumulative-out ')
+            self.cmd.append(self.io_dict['out']['output_cumulative_path'])
 
         if self.io_dict['out']['output_conditional_path']:
-            cmd.append('--conditional-output ')
-            cmd.append(self.io_dict['out']['output_conditional_path'])
+            self.cmd.append('--conditional-output ')
+            self.cmd.append(self.io_dict['out']['output_conditional_path'])
 
         if self.io_dict['out']['output_chunk_conditional_path']:
-            cmd.append('--chunk-conditional ')
-            cmd.append(self.io_dict['out']['output_chunk_conditional_path'])
+            self.cmd.append('--chunk-conditional ')
+            self.cmd.append(self.io_dict['out']['output_chunk_conditional_path'])
 
         if self.verbose:
-            cmd.append('-v 1')
+            self.cmd.append('-v 1')
 
         if self.interval:
-            cmd.append('-n')
-            cmd.append(str(self.interval))
+            self.cmd.append('-n')
+            self.cmd.append(str(self.interval))
 
         if self.reduced:
-            cmd.append('-p')
+            self.cmd.append('-p')
         else:
-            cmd.append('-d')
+            self.cmd.append('-d')
 
         if self.eos:
-            cmd.append('-a')
+            self.cmd.append('-a')
 
         if self.calceo:
-            cmd.append('--calceo')
+            self.cmd.append('--calceo')
         else:
-            cmd.append('--no-calceo')
+            self.cmd.append('--no-calceo')
 
         if self.running_avg_window:
-            cmd.append('-r')
-            cmd.append(str(self.running_avg_window))
+            self.cmd.append('-r')
+            self.cmd.append(str(self.running_avg_window))
 
         if self.cumulative:
-            cmd.append('--cumulative')
+            self.cmd.append('--cumulative')
 
         if self.fix_remd:
-            cmd.append('--fix-remd')
-            cmd.append(str(self.fix_remd))
+            self.cmd.append('--fix-remd')
+            self.cmd.append(str(self.fix_remd))
 
         if self.conditional:
-            cmd.append('-c')
-            cmd.append(str(self.conditional))
+            self.cmd.append('-c')
+            self.cmd.append(str(self.conditional))
 
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
+        # Run Biobb block
+        self.run_biobb()
 
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Copy files to host
+        self.copy_to_host()
 
-        # Remove temporary file(s)
-        if self.remove_tmp:
-            fu.log('Nothing to remove', out_log)
-
-        return returncode
+        return self.return_code
 
 def cestats_run(input_cein_path: str, input_ceout_path: str,
             output_dat_path: str,

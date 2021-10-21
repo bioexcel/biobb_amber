@@ -4,13 +4,13 @@
 import argparse
 import shutil
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.leap.common import *
 
-class LeapGenTop():
+class LeapGenTop(BiobbObject):
     """
     | biobb_amber.leap.leap_gen_top LeapGenTop
     | Wrapper of the `AmberTools (AMBER MD Package) leap tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -59,7 +59,11 @@ class LeapGenTop():
     input_lib_path: str = None, input_frcmod_path: str = None,
     input_params_path: str = None, input_source_path: str = None,
     properties: dict = None, **kwargs):
+
         properties = properties or {}
+
+        # Call parent class constructor
+        super().__init__(properties)
 
         # Input/Output files
         self.io_dict = {
@@ -87,16 +91,10 @@ class LeapGenTop():
         self.properties = properties
         self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -115,28 +113,16 @@ class LeapGenTop():
     def launch(self):
         """Launches the execution of the LeapGenTop module."""
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
         # check input/output paths and parameters
-        self.check_data_params(out_log)
+        self.check_data_params(self.out_log, self.err_log)
 
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            output_file_list = [self.io_dict['out']['output_pdb_path'],
-                                self.io_dict['out']['output_top_path'],
-                                self.io_dict['out']['output_crd_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Creating temporary folder
         self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, out_log)
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # Leap configuration (instructions) file
         instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
@@ -144,28 +130,28 @@ class LeapGenTop():
         ligands_lib_list = []
         if self.io_dict['in']['input_lib_path'] is not None:
             if self.io_dict['in']['input_lib_path'].endswith('.zip'):
-                ligands_lib_list = fu.unzip_list(self.io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                ligands_lib_list = fu.unzip_list(self.io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 ligands_lib_list.append(self.io_dict['in']['input_lib_path'])
 
         ligands_frcmod_list = []
         if self.io_dict['in']['input_frcmod_path'] is not None:
             if self.io_dict['in']['input_frcmod_path'].endswith('.zip'):
-                ligands_frcmod_list = fu.unzip_list(self.io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                ligands_frcmod_list = fu.unzip_list(self.io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 ligands_frcmod_list.append(self.io_dict['in']['input_frcmod_path'])
 
         amber_params_list = []
         if self.io_dict['in']['input_params_path'] is not None:
             if self.io_dict['in']['input_params_path'].endswith('.zip'):
-                amber_params_list = fu.unzip_list(self.io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                amber_params_list = fu.unzip_list(self.io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 amber_params_list.append(self.io_dict['in']['input_params_path'])
 
         leap_source_list = []
         if self.io_dict['in']['input_source_path'] is not None:
             if self.io_dict['in']['input_source_path'].endswith('.zip'):
-                leap_source_list = fu.unzip_list(self.io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=out_log)
+                leap_source_list = fu.unzip_list(self.io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 leap_source_list.append(self.io_dict['in']['input_source_path'])
 
@@ -205,22 +191,23 @@ class LeapGenTop():
                 leapin.write("quit \n");
 
         # Command line
-        cmd = ['tleap ',
+        self.cmd = ['tleap ',
                '-f', instructions_file
                ]
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Run Biobb block
+        self.run_biobb()
 
-        # Remove temporary file(s)
+        # Copy files to host
+        self.copy_to_host()
+
+        # remove temporary folder(s)
         if self.remove_tmp:
-            fu.rm(self.tmp_folder)
-            fu.rm("leap.log")
-            fu.log('Removed: %s' % str(self.tmp_folder), out_log)
-            fu.log('Removed: leap.log', out_log)
+            self.tmp_files.append(self.tmp_folder)
+            self.tmp_files.append("leap.log")
+            self.remove_tmp_files()
 
-        return returncode
+        return self.return_code
 
 def leap_gen_top(input_pdb_path: str, output_pdb_path: str,
            output_top_path: str, output_crd_path: str,

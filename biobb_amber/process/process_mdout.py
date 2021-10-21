@@ -4,13 +4,13 @@
 import argparse
 import shutil
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.process.common import *
 
-class ProcessMDOut():
+class ProcessMDOut(BiobbObject):
     """
     | biobb_amber.process.process_mdout ProcessMDOut
     | Wrapper of the `AmberTools (AMBER MD Package) process_mdout tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -47,7 +47,11 @@ class ProcessMDOut():
     """
 
     def __init__(self, input_log_path: str, output_dat_path: str, properties, **kwargs):
+
         properties = properties or {}
+
+        # Call parent class constructor
+        super().__init__(properties)
 
         # Input/Output files
         self.io_dict = {
@@ -59,16 +63,10 @@ class ProcessMDOut():
         self.properties = properties
         self.terms = properties.get('terms', ["ETOT"])
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -81,32 +79,23 @@ class ProcessMDOut():
     def launch(self):
         """Launches the execution of the ProcessMDOut module."""
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
         # check input/output paths and parameters
-        self.check_data_params(out_log)
+        self.check_data_params(self.out_log, self.err_log)
 
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            # 4. Include here all output file paths
-            output_file_list = [self.io_dict['out']['output_dat_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Command line
-        cmd = ['process_mdout.perl ',
+        self.cmd = ['process_mdout.perl ',
                self.io_dict['in']['input_log_path']
                ]
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
 
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Run Biobb block
+        self.run_biobb()
+
+        # Copy files to host
+        self.copy_to_host()
 
         if len(self.terms) == 1:
            shutil.copy('summary.'+self.terms[0], self.io_dict['out']['output_dat_path'])
@@ -131,13 +120,13 @@ class ProcessMDOut():
                         fp_out.write(ene_dict[key][term] + " ")
                     fp_out.write("\n")
 
-        # Remove temporary file(s)
+        # remove temporary folder(s)
         if self.remove_tmp:
-            files_to_rm = list(Path().glob('summary*'))
-            fu.rm_file_list(files_to_rm)
-            fu.log('Removed: {}'.format(files_to_rm), out_log)
+            self.tmp_files.extend(list(Path().glob('summary*')))
+            self.remove_tmp_files()
 
-        return returncode
+        return self.return_code
+
 
 def process_mdout(input_log_path: str, output_dat_path: str,
            properties: dict = None, **kwargs) -> int:

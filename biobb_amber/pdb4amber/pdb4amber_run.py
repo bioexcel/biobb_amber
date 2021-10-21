@@ -4,13 +4,13 @@
 import argparse
 import shutil, re
 from pathlib import Path, PurePath
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.pdb4amber.common import *
 
-class Pdb4amberRun():
+class Pdb4amberRun(BiobbObject):
     """
     | biobb_amber.pdb4amber.pdb4amber_run Pdb4amberRun
     | Wrapper of the `AmberTools (AMBER MD Package) pdb4amber tool <https://ambermd.org/AmberTools.php>`_ module.
@@ -49,7 +49,11 @@ class Pdb4amberRun():
     """
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
                  properties: dict, **kwargs):
+
         properties = properties or {}
+
+        # Call parent class constructor
+        super().__init__(properties)
 
         # Input/Output files
         self.io_dict = {
@@ -63,16 +67,10 @@ class Pdb4amberRun():
         self.remove_waters = properties.get('remove_waters', False)
         self.constant_pH = properties.get('constant_pH', False)
 
-        # Properties common in all BB
-        self.can_write_console_log = properties.get('can_write_console_log', True)
-        self.global_log = properties.get('global_log', None)
-        self.prefix = properties.get('prefix', None)
-        self.step = properties.get('step', None)
-        self.path = properties.get('path', '')
-        self.remove_tmp = properties.get('remove_tmp', True)
-        self.restart = properties.get('restart', False)
+        # Check the properties
+        self.check_properties(properties)
 
-    def check_data_params(self, out_log):
+    def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
 
         # Check input(s)
@@ -85,53 +83,43 @@ class Pdb4amberRun():
     def launch(self):
         """Launches the execution of the Pdb4amberRun module."""
 
-        # Get local loggers from launchlogger decorator
-        out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
         # check input/output paths and parameters
-        self.check_data_params(out_log)
+        self.check_data_params(self.out_log, self.err_log)
 
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            output_file_list = [self.io_dict['out']['output_traj_path'],
-                                self.io_dict['out']['output_rst_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0
+        # Setup Biobb
+        if self.check_restart(): return 0
+        self.stage_files()
 
         # Creating temporary folder
         self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, out_log)
+        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
-        cmd = ['pdb4amber ',
+        self.cmd = ['pdb4amber ',
                '-i', self.io_dict['in']['input_pdb_path'],
                '-o', self.io_dict['out']['output_pdb_path']
                ]
 
         if self.remove_hydrogens:
-            cmd.append("-y ")
+            self.cmd.append("-y ")
         if self.remove_waters:
-            cmd.append("-d ")
+            self.cmd.append("-d ")
         if self.constant_pH:
-            cmd.append("--constantph ")
+            self.cmd.append("--constantph ")
 
-        fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
+        # Run Biobb block
+        self.run_biobb()
 
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()
+        # Copy files to host
+        self.copy_to_host()
 
-        # Remove temporary file(s)
+        # remove temporary folder(s)
         if self.remove_tmp:
-            fu.rm(self.tmp_folder)
-            fu.log('Removed: %s' % str(self.tmp_folder), out_log)
+            self.tmp_files.append(self.tmp_folder)
+            self.remove_tmp_files()
 
-        return returncode
+        return self.return_code
 
 def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
            properties: dict = None, **kwargs) -> int:

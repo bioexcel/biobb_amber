@@ -3,16 +3,13 @@
 """Module containing the LeapAddIons class and the command line interface."""
 import argparse
 import shutil, re
-#import subprocess
 from decimal import Decimal
 from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-#from biobb_common.command_wrapper import cmd_wrapper
 from biobb_amber.leap.common import *
-
 
 class LeapAddIons(BiobbObject):
     """
@@ -160,25 +157,6 @@ class LeapAddIons(BiobbObject):
     def launch(self):
         """Launches the execution of the LeapAddIons module."""
 
-        # Get local loggers from launchlogger decorator
-        '''out_log = getattr(self, 'out_log', None)
-        err_log = getattr(self, 'err_log', None)
-
-        # check input/output paths and parameters
-        self.check_data_params(out_log)
-
-        # Check the properties
-        fu.check_properties(self, self.properties)
-
-        # Restart
-        if self.restart:
-            output_file_list = [self.io_dict['out']['output_pdb_path'],
-                                self.io_dict['out']['output_top_path'],
-                                self.io_dict['out']['output_crd_path']]
-            if fu.check_complete_files(output_file_list):
-                fu.log('Restart is enabled, this step: %s will the skipped' % self.step, out_log, self.global_log)
-                return 0'''
-
         # check input/output paths and parameters
         self.check_data_params(self.out_log, self.err_log)
 
@@ -308,10 +286,6 @@ class LeapAddIons(BiobbObject):
         self.cmd = ['tleap ',
                '-f', instructions_file
                ]
-        '''fu.log('Creating command line with instructions and required arguments', out_log, self.global_log)
-
-        # Launch execution
-        returncode = cmd_wrapper.CmdWrapper(cmd, out_log, err_log, self.global_log).launch()'''
 
         # Run Biobb block
         self.run_biobb()
@@ -387,15 +361,6 @@ class LeapAddIons(BiobbObject):
                                 ifbox_flag+=1
                             else:
                                 new_top.write(line)
-
-        # Remove temporary file(s)
-        '''if self.remove_tmp:
-            fu.rm(self.tmp_folder)
-            fu.rm("leap.log")
-            fu.log('Removed: %s' % str(self.tmp_folder), out_log)
-            fu.log('Removed: leap.log', out_log)
-
-        return returncode'''
 
         # remove temporary folder(s)
         if self.remove_tmp:
