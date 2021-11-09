@@ -52,7 +52,8 @@
             "enum": [
                 ".*\\.ceout$",
                 ".*\\.zip$",
-                ".*\\.gzip$"
+                ".*\\.gzip$",
+                ".*\\.gz$"
             ],
             "file_formats": [
                 {
