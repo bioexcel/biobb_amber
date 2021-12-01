@@ -95,7 +95,7 @@
                 {
                     "extension": ".*\\.ncrst$",
                     "description": "Input coordinates file (AMBER crd)",
-                    "edam": "format_3650"
+                    "edam": "format_3886"
                 }
             ]
         },
@@ -180,7 +180,7 @@
                 {
                     "extension": ".*\\.ncrst$",
                     "description": "Input reference coordinates for position restraints",
-                    "edam": "format_3650"
+                    "edam": "format_3886"
                 },
                 {
                     "extension": ".*\\.crd$",
@@ -305,7 +305,7 @@
                 {
                     "extension": ".*\\.ncrst$",
                     "description": "Output restart file",
-                    "edam": "format_3650"
+                    "edam": "format_3886"
                 }
             ]
         },
