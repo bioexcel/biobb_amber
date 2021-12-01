@@ -153,7 +153,8 @@
                 ".*\\.rst7$",
                 ".*\\.netcdf$",
                 ".*\\.nc$",
-                ".*\\.ncrst$"
+                ".*\\.ncrst$",
+                ".*\\.crd$"
             ],
             "file_formats": [
                 {
@@ -180,6 +181,11 @@
                     "extension": ".*\\.ncrst$",
                     "description": "Input reference coordinates for position restraints",
                     "edam": "format_3650"
+                },
+                {
+                    "extension": ".*\\.crd$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3878"
                 }
             ]
         },
