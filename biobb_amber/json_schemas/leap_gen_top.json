@@ -45,13 +45,19 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib",
             "enum": [
-                ".*\\.lib$"
+                ".*\\.lib$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.lib$",
                     "description": "Input ligand library parameters file",
                     "edam": "format_3889"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Input ligand library parameters file",
+                    "edam": "format_3987"
                 }
             ]
         },
@@ -61,13 +67,19 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod",
             "enum": [
-                ".*\\.frcmod$"
+                ".*\\.frcmod$",
+                ".*\\.zip$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.frcmod$",
                     "description": "Input ligand frcmod parameters file",
                     "edam": "format_3888"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Input ligand frcmod parameters file",
+                    "edam": "format_3987"
                 }
             ]
         },
