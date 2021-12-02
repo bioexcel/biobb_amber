@@ -1123,7 +1123,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_top_path** (*string*): AMBER topology file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.top). Accepted formats: TOP, PARMTOP, PRMTOP
-* **input_crd_path** (*string*): AMBER coordinates file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd). Accepted formats: CRD, MDCRD, INPCRD
+* **input_crd_path** (*string*): AMBER coordinates file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd). Accepted formats: CRD, MDCRD, INPCRD, RST
 * **output_pdb_path** (*string*): Structure PDB file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/ambpdb/structure.ambpdb.pdb). Accepted formats: PDB
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition

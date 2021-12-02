@@ -58,7 +58,8 @@
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
-                ".*\\.inpcrd$"
+                ".*\\.inpcrd$",
+                ".*\\.rst$"
             ],
             "file_formats": [
                 {
@@ -75,6 +76,11 @@
                     "extension": ".*\\.inpcrd$",
                     "description": "AMBER coordinates file",
                     "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.rst$",
+                    "description": "AMBER coordinates file",
+                    "edam": "format_3886"
                 }
             ]
         },
