@@ -176,6 +176,9 @@ class LeapGenTop(BiobbObject):
                 for amber_params in amber_params_list:
                     leapin.write("loadamberparams " + amber_params + "\n")
 
+                # Ions libraries
+                leapin.write("loadOff atomic_ions.lib \n")
+                
                 # Ligand(s) libraries (if any)
                 for amber_lib in ligands_lib_list:
                     leapin.write("loadOff " + amber_lib + "\n")
