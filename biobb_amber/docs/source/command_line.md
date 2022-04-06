@@ -164,7 +164,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_cein_path** (*string*): Input cein or cpein file (from pmemd or sander) with titrating residue information. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cein). Accepted formats: CEIN, CPEIN
-* **input_ceout_path** (*string*): Output ceout file (AMBER ceout). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/sander.ceout.gz). Accepted formats: CEOUT, ZIP, GZIP
+* **input_ceout_path** (*string*): Output ceout file (AMBER ceout). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/sander.ceout.gz). Accepted formats: CEOUT, ZIP, GZIP, GZ
 * **output_dat_path** (*string*): Output file to which the standard calceo-type statistics are written. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
 * **output_population_path** (*string*): Output file where protonation state populations are printed for every state of every residue. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
 * **output_chunk_path** (*string*): Output file where the time series data calculated over chunks of the simulation are printed. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O

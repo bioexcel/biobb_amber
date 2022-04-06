@@ -70,6 +70,11 @@
                     "extension": ".*\\.gzip$",
                     "description": "Output ceout file (AMBER ceout)",
                     "edam": "format_3987"
+                },
+                {
+                    "extension": ".*\\.gz$",
+                    "description": "Output ceout file (AMBER ceout)",
+                    "edam": "format_3987"
                 }
             ]
         },
