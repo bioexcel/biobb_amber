@@ -4,9 +4,9 @@
     "github": "https://github.com/bioexcel/biobb_amber",
     "readthedocs": "https://biobb-amber.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_amber",
-    "docker": "https://quay.io/biocontainers/biobb_amber:3.7.1--pyhdfd78af_0",
+    "docker": "https://quay.io/biocontainers/biobb_amber:3.8.0--pyhdfd78af_0",
     "singularity": "",
-    "version": "3.7.1",
+    "version": "3.8.0",
     "rest": true,
     "tools" : [
         {
@@ -139,12 +139,12 @@
         }
     ],
     "dep_pypi" : [
-        "install_requires=['biobb_common==3.7.0']",
-        "python_requires='==3.7.*'"
+        "install_requires=['biobb_common==3.8.1']",
+        "python_requires='>=3.7'"
     ],
     "dep_conda" : [
-        "python ==3.7.*",
-        "biobb_common ==3.7.0",
+        "python >=3.7",
+        "biobb_common ==3.8.1",
         "ambertools ==20.0"
     ],
     "keywords" : [
