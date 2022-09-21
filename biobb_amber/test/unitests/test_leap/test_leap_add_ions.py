@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_add_ions import leap_add_ions
 
 class TestLeapAddIons():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'leap_add_ions')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

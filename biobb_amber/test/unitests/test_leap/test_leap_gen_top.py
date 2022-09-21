@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_gen_top import leap_gen_top
 
 class TestLeapGenTop():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'leap_gen_top')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

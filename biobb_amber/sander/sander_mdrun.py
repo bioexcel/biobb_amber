@@ -31,7 +31,7 @@ class SanderMDRun(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **mdin** (*dict*) - ({}) Sander MD run options specification. (Used if *input_mdin_path* is None)
             * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/nvt.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/npt.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/free.mdin>`_ (Runs a MD simulation), `heat <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/heat.mdin>`_ (Heats the MD system).
-            * **sander_path** (*str*) - ("sander") sander binary path to be used.
+            * **binary_path** (*str*) - ("sander") sander binary path to be used.
             * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
             * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
             * **mpi_flags** (*str*) - (None) Path to the MPI hostlist file.
@@ -93,7 +93,7 @@ class SanderMDRun(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.simulation_type = properties.get('simulation_type', "minimization")
-        self.sander_path = properties.get('sander_path', "sander")
+        self.binary_path = properties.get('binary_path', "sander")
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
 
         if 'restraintmask' in self.mdin and self.mdin['restraintmask'][0] != '"' and self.mdin['restraintmask'][-1] != '"':
@@ -296,7 +296,7 @@ class SanderMDRun(BiobbObject):
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
-        self.cmd = [self.sander_path,
+        self.cmd = [self.binary_path,
                '-O',
                '-i', self.output_mdin_path,
                '-p', self.io_dict['in']['input_top_path'],

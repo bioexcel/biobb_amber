@@ -30,7 +30,7 @@ class PmemdMDRun(BiobbObject):
         output_mdinfo_path (str) (Optional): Output MD info. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.mdinfo>`_. Accepted formats: mdinfo (edam:format_2330).
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **mdin** (*dict*) - ({}) pmemd MD run options specification. (Used if *input_mdin_path* is None)
-            * **pmemd_path** (*str*) - ("pmemd") pmemd binary path to be used.
+            * **binary_path** (*str*) - ("pmemd") pmemd binary path to be used.
             * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/minimization.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/NVT.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/NPT.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdin/free.mdin>`_ (Runs a MD simulation).
             * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
             * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
@@ -93,7 +93,7 @@ class PmemdMDRun(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.simulation_type = properties.get('simulation_type', "minimization")
-        self.pmemd_path = properties.get('pmemd_path', "pmemd")
+        self.binary_path = properties.get('binary_path', "pmemd")
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
 
         # Properties for MPI
@@ -293,7 +293,7 @@ class PmemdMDRun(BiobbObject):
 
         # Command line
         # pmemd -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
-        self.cmd = [self.pmemd_path,
+        self.cmd = [self.binary_path,
                '-O',
                '-i', self.output_mdin_path,
                '-p', self.io_dict['in']['input_top_path'],

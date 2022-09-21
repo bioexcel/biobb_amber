@@ -402,7 +402,7 @@
                     "wf_prop": false,
                     "description": "pmemd MD run options specification. (Used if *input_mdin_path* is None)"
                 },
-                "pmemd_path": {
+                "binary_path": {
                     "type": "string",
                     "default": "pmemd",
                     "wf_prop": false,

@@ -418,7 +418,7 @@
                         }
                     ]
                 },
-                "sander_path": {
+                "binary_path": {
                     "type": "string",
                     "default": "sander",
                     "wf_prop": false,
