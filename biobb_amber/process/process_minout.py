@@ -21,6 +21,7 @@ class ProcessMinOut(BiobbObject):
         output_dat_path (str): Dat output file containing data from the specified terms along the minimization process. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/process/sander.min.energy.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330), csv (edam:format_3752).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **terms** (*list*) - (["ENERGY"]) Statistics descriptors. Values: ANGLE, BOND, DIHEDRAL, EEL, EEL14, ENERGY, GMAX, HBOND, NAME, NSTEP, NUMBER, RESTRAINT, RMS, VDW14, VDWAALS.
+            * **binary_path** (*str*) - ("process_minout.perl") Path to the process_minout.perl executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -62,6 +63,7 @@ class ProcessMinOut(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.terms = properties.get('terms', ["ENERGY"])
+        self.binary_path = properties.get('binary_path', 'process_minout.perl')
 
         # Check the properties
         self.check_properties(properties)
@@ -87,7 +89,7 @@ class ProcessMinOut(BiobbObject):
         self.stage_files()
 
         # Command line
-        self.cmd = ['process_minout.perl ',
+        self.cmd = [self.binary_path,
                self.io_dict['in']['input_log_path']
                ]
 

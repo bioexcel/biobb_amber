@@ -22,6 +22,7 @@ class LeapBuildLinearStructure(BiobbObject):
             * **sequence** (*str*) - ("ALA GLY SER PRO ARG ALA PRO GLY") Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them.
             * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
             * **build_library** (*bool*) - (False) Generate AMBER lib file for the structure.
+            * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -65,6 +66,7 @@ class LeapBuildLinearStructure(BiobbObject):
         self.sequence = properties.get('sequence', "ALA GLY SER PRO ARG ALA PRO GLY")
         self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
         self.build_library = properties.get('build_library', False)
+        self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
         self.check_properties(properties)
@@ -107,7 +109,7 @@ class LeapBuildLinearStructure(BiobbObject):
                 leapin.write("quit \n");
 
         # Command line
-        self.cmd = ['tleap ',
+        self.cmd = [self.binary_path,
                '-f', instructions_file
                ]
 

@@ -23,6 +23,7 @@ class NabBuildDNAStructure(BiobbObject):
             * **helix_type** (*str*) - ("lbdna") DNA/RNA helix type. Values: arna (Right Handed A-RNA - Arnott), aprna (Right Handed A’-RNA - Arnott), lbdna (Right Handed B-DNA - Langridge), abdna (Right Handed B-DNA - Arnott), sbdna (Left Handed B-DNA - Sasisekharan), adna (Right Handed A-DNA - Arnott).
             * **compiler** (*str*) - ("gcc") Alternative C compiler for nab.
             * **linker** (*str*) - ("gfortran") Alternative Fortran linker for nab.
+            * **binary_path** (*str*) - ("nab") Path to the nab executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -65,6 +66,7 @@ class NabBuildDNAStructure(BiobbObject):
         self.helix_type = properties.get('helix_type', "lbdna")
         self.compiler = properties.get('compiler', "gcc")
         self.linker = properties.get('linker', "gfortran")
+        self.binary_path = properties.get('binary_path', 'nab')
 
         # Check the properties
         self.check_properties(properties)
@@ -106,7 +108,7 @@ class NabBuildDNAStructure(BiobbObject):
                 nabin.write("putpdb( \"" + self.io_dict['out']['output_pdb_path'] + "\" , m, \"-wwpdb\");\n")
 
         # Command line
-        self.cmd = ['nab ',
+        self.cmd = [self.binary_path,
                '--compiler', self.compiler,
                '--linker', self.linker,
                instructions_file,

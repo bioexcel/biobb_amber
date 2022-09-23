@@ -23,6 +23,7 @@ class Pdb4amberRun(BiobbObject):
             * **remove_hydrogens** (*bool*) - (False) Remove hydrogen atoms from the PDB file.
             * **remove_waters** (*bool*) - (False) Remove water molecules from the PDB file.
             * **constant_pH** (*bool*) - (False) Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation.
+            * **binary_path** (*str*) - ("pdb4amber") Path to the pdb4amber executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -66,6 +67,7 @@ class Pdb4amberRun(BiobbObject):
         self.remove_hydrogens = properties.get('remove_hydrogens', False)
         self.remove_waters = properties.get('remove_waters', False)
         self.constant_pH = properties.get('constant_pH', False)
+        self.binary_path = properties.get('binary_path', 'pdb4amber')
 
         # Check the properties
         self.check_properties(properties)
@@ -96,7 +98,7 @@ class Pdb4amberRun(BiobbObject):
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
-        self.cmd = ['pdb4amber ',
+        self.cmd = [self.binary_path,
                '-i', self.io_dict['in']['input_pdb_path'],
                '-o', self.io_dict['out']['output_pdb_path']
                ]

@@ -19,6 +19,7 @@ class AmberToPDB(BiobbObject):
         input_crd_path (str): AMBER coordinates file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd>`_. Accepted formats: crd (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878), rst (edam:format_3886).
         output_pdb_path (str): Structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/ambpdb/structure.ambpdb.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
+            * **binary_path** (*str*) - ("ambpdb") Path to the ambpdb executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -60,6 +61,7 @@ class AmberToPDB(BiobbObject):
 
         # Properties specific for BB
         self.properties = properties
+        self.binary_path = properties.get('binary_path', 'ambpdb')
 
         # Check the properties
         self.check_properties(properties)
@@ -85,7 +87,7 @@ class AmberToPDB(BiobbObject):
         self.stage_files()
 
         # Command line
-        self.cmd = ['ambpdb ',
+        self.cmd = [self.binary_path,
                '-p', self.io_dict['in']['input_top_path'],
                '-c', self.io_dict['in']['input_crd_path'],
                '> ', self.io_dict['out']['output_pdb_path']

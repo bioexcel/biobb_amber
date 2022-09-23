@@ -26,6 +26,7 @@ class CpptrajRandomizeIons(BiobbObject):
             * **solute_mask** (*str*) - (":DA,DC,DG,DT,D?3,D?5") Solute (or set of atoms) around which the ions can get no closer than the distance specified. Cpptraj mask syntax can be found at the official `Cpptraj manual <https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml>`_.
             * **distance** (*float*) - (5.0) Minimum distance cutoff for the ions around the defined solute.
             * **overlap** (*float*) - (3.5) Minimum distance between ions.
+            * **binary_path** (*str*) - ("cpptraj") Path to the cpptraj executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -78,6 +79,7 @@ class CpptrajRandomizeIons(BiobbObject):
         self.solute_mask = properties.get('solute_mask', ":DA,DC,DG,DT,D?3,D?5")
         self.distance = properties.get('distance', 5.0)
         self.overlap = properties.get('overlap', 3.5)
+        self.binary_path = properties.get('binary_path', 'cpptraj')
 
         # Check the properties
         self.check_properties(properties)
@@ -124,7 +126,7 @@ class CpptrajRandomizeIons(BiobbObject):
                 cpptrajin.write("go\n");
 
         # Command line
-        self.cmd = ['cpptraj ',
+        self.cmd = [self.binary_path,
                self.io_dict['in']['input_top_path'],
                '-i', instructions_file
                ]

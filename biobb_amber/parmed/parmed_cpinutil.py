@@ -24,6 +24,7 @@ class ParmedCpinUtil(BiobbObject):
             * **resnames** (*str*) - ("None") Residue names to include in CPIN file. Values: AS4, GL4, HIP, CYS, LYS, TYR.
             * **igb** (*int*) - (2) Generalized Born model which you intend to use to evaluate dynamics or protonation state swaps. Values: 1, 2, 5, 7, 8.
             * **system** (*str*) - ("Unknown") Name of system to titrate.
+            * **binary_path** (*str*) - ("cpinutil.py") Path to the cpinutil.py executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -72,6 +73,7 @@ class ParmedCpinUtil(BiobbObject):
         self.resnames = properties.get('resnames')
         self.igb = properties.get('igb', 2)
         self.system = properties.get('system', "Unknown")
+        self.binary_path = properties.get('binary_path', 'cpinutil.py')
 
         # Check the properties
         self.check_properties(properties)
@@ -106,7 +108,7 @@ class ParmedCpinUtil(BiobbObject):
 
         fu.log('Creating command line with instructions and required arguments', self.out_log, self.global_log)
 
-        self.cmd = ['cpinutil.py',
+        self.cmd = [self.binary_path,
                '-p', self.io_dict['in']['input_top_path'],
                '-o', self.io_dict['out']['output_cpin_path']
                ]

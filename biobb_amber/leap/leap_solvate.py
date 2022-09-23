@@ -38,6 +38,7 @@ class LeapSolvate(BiobbObject):
             * **negative_ions_type** (*str*) - ("Cl-") Type of additional negative ions to include in the system box. Values: Cl-.
             * **distance_to_molecule** (*float*) - ("8.0") Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter.
             * **closeness** (*float*) - ("1.0") How close, in Å, solvent ATOMs may come to solute ATOMs.
+            * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -114,6 +115,7 @@ class LeapSolvate(BiobbObject):
         self.negative_ions_type = properties.get('negative_ions_type', "Cl-")
         self.distance_to_molecule = properties.get('distance_to_molecule', 8.0)
         self.closeness = properties.get('closeness', 1.0)
+        self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
         self.check_properties(properties)
@@ -260,7 +262,7 @@ class LeapSolvate(BiobbObject):
                 leapin.write("quit \n");
 
         # Command line
-        self.cmd = ['tleap ',
+        self.cmd = [self.binary_path,
                '-f', instructions_file
                ]
 

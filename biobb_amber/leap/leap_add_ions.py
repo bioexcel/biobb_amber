@@ -37,6 +37,7 @@ class LeapAddIons(BiobbObject):
             * **negative_ions_number** (*int*) - (0) Number of additional negative ions to include in the system box.
             * **positive_ions_type** (*str*) - ("Na+") Type of additional positive ions to include in the system box. Values: Na+,K+.
             * **negative_ions_type** (*str*) - ("Cl-") Type of additional negative ions to include in the system box. Values: Cl-.
+            * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -111,6 +112,7 @@ class LeapAddIons(BiobbObject):
         self.positive_ions_type = properties.get('positive_ions_type', "Na+")
         self.negative_ions_number = properties.get('negative_ions_number', 0)
         self.negative_ions_type = properties.get('negative_ions_type', "Cl-")
+        self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
         self.check_properties(properties)
@@ -283,7 +285,7 @@ class LeapAddIons(BiobbObject):
                 leapin.write("quit \n");
 
         # Command line
-        self.cmd = ['tleap ',
+        self.cmd = [self.binary_path,
                '-f', instructions_file
                ]
 
@@ -307,7 +309,7 @@ class LeapAddIons(BiobbObject):
                 # PDB info: CRYST1   86.316   86.316   86.316 109.47 109.47 109.47 P 1
                 # PDB info: OCTBOX   86.1942924  86.1942924  86.1942924 109.4712190 109.4712190 109.4712190
                 #regex_box = 'CRYST1\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*P 1'
-                regex_box = 'OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)'
+                regex_box = r'OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)'
                 box = re.findall(regex_box, pdb_line)[0]
                 box_line = ""
                 for coord in box:

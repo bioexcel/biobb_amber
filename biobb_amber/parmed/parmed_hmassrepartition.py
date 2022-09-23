@@ -20,6 +20,7 @@ class ParmedHMassRepartition(BiobbObject):
         input_top_path (str): Input AMBER topology file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/parmed/input.hmass.prmtop>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
         output_top_path (str): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/parmed/output.hmass.prmtop>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
+            * **binary_path** (*str*) - ("parmed") Path to the parmed executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -56,6 +57,7 @@ class ParmedHMassRepartition(BiobbObject):
 
         # Properties specific for BB
         self.properties = properties
+        self.binary_path = properties.get('binary_path', 'parmed')
 
         # Check the properties
         self.check_properties(properties)
@@ -91,7 +93,7 @@ class ParmedHMassRepartition(BiobbObject):
             parmedin.write("hmassrepartition\n")
             parmedin.write("outparm " + self.io_dict['out']['output_top_path'] + "\n")
 
-        self.cmd = ['parmed',
+        self.cmd = [self.binary_path,
                '-p', self.io_dict['in']['input_top_path'],
                '-i', instructions_file,
                '-O' # Overwrite output files

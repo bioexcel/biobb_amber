@@ -27,6 +27,7 @@ class LeapGenTop(BiobbObject):
         output_crd_path (str): Output coordinates file (AMBER crd). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.crd>`_. Accepted formats: crd  (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
+            * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -90,6 +91,7 @@ class LeapGenTop(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
+        self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
         self.check_properties(properties)
@@ -194,7 +196,7 @@ class LeapGenTop(BiobbObject):
                 leapin.write("quit \n");
 
         # Command line
-        self.cmd = ['tleap ',
+        self.cmd = [self.binary_path,
                '-f', instructions_file
                ]
 

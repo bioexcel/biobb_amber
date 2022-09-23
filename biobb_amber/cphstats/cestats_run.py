@@ -37,6 +37,7 @@ class CestatsRun(BiobbObject):
             * **cumulative** (*bool*) - (False) Computes the cumulative average time series data over the course of the trajectory.
             * **fix_remd** (*str*) - ("") This option will trigger cestats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done.
             * **conditional** (*str*) - ("") Evaluates conditional probabilities. CONDITIONAL should be a string of the format: <resid>:<state>,<resid>:<state>,... or <resid>:PROT,<resid>:DEPROT,... or <resid>:<state1>;<state2>,<resid>:PROT,... where <resid> is the residue number in the prmtop and <state> is either the state number or -p-rotonated or -d-eprotonated, case-insensitive.
+            * **binary_path** (*str*) - ("cestats") Path to the cestats executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
 
@@ -96,6 +97,7 @@ class CestatsRun(BiobbObject):
         self.cumulative = properties.get('cumulative', False)
         self.fix_remd = properties.get('fix_remd', "")
         self.conditional = properties.get('conditional', "")
+        self.binary_path = properties.get('binary_path', 'cestats')
 
         # Check the properties
         self.check_properties(properties)
@@ -128,7 +130,7 @@ class CestatsRun(BiobbObject):
 
         # Command line
         # cphstats -i 4LYT.equil.cpin 0/4LYT.md1.cpout -o pH0_calcpka.dat --population pH0_populations.dat
-        self.cmd = ['cestats',
+        self.cmd = [self.binary_path,
                '-O',
                '-i', self.io_dict['in']['input_cein_path'],
                '-o', self.io_dict['out']['output_dat_path'],
