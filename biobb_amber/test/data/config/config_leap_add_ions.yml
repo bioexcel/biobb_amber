@@ -1,11 +1,8 @@
 properties:
   box_type: truncated_octahedron
   forcefield:
-  - protein.ff14SB
   - DNA.bsc1
-  ionic_concentration: 150
-  negative_ions_type: Cl-
-  neutralise: true
+  ionic_concentration: 100
+  ions_type: ionsjc_tip4pew
   positive_ions_type: K+
-  remove_tmp: true
-  water_type: TIP3PBOX
+  water_type: OPCBOX

@@ -40,6 +40,12 @@ class CestatsRun(BiobbObject):
             * **binary_path** (*str*) - ("cestats") Path to the cestats executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -132,33 +138,33 @@ class CestatsRun(BiobbObject):
         # cphstats -i 4LYT.equil.cpin 0/4LYT.md1.cpout -o pH0_calcpka.dat --population pH0_populations.dat
         self.cmd = [self.binary_path,
                '-O',
-               '-i', self.io_dict['in']['input_cein_path'],
-               '-o', self.io_dict['out']['output_dat_path'],
-               self.io_dict['in']['input_ceout_path']
+               '-i', self.stage_io_dict['in']['input_cein_path'],
+               '-o', self.stage_io_dict['out']['output_dat_path'],
+               self.stage_io_dict['in']['input_ceout_path']
                ]
 
         if self.io_dict['out']['output_population_path']:
             self.cmd.append('--population ')
-            self.cmd.append(self.io_dict['out']['output_population_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_population_path'])
 
         if self.io_dict['out']['output_chunk_path']:
             self.cmd.append('--chunk-out ')
-            self.cmd.append(self.io_dict['out']['output_chunk_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_chunk_path'])
             if self.chunk_window:
                 self.cmd.append('--chunk')
                 self.cmd.append(str(self.chunk_window))
 
         if self.io_dict['out']['output_cumulative_path']:
             self.cmd.append('--cumulative-out ')
-            self.cmd.append(self.io_dict['out']['output_cumulative_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_cumulative_path'])
 
         if self.io_dict['out']['output_conditional_path']:
             self.cmd.append('--conditional-output ')
-            self.cmd.append(self.io_dict['out']['output_conditional_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_conditional_path'])
 
         if self.io_dict['out']['output_chunk_conditional_path']:
             self.cmd.append('--chunk-conditional ')
-            self.cmd.append(self.io_dict['out']['output_chunk_conditional_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_chunk_conditional_path'])
 
         if self.verbose:
             self.cmd.append('-v 1')

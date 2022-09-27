@@ -27,6 +27,12 @@ class ParmedCpinUtil(BiobbObject):
             * **binary_path** (*str*) - ("cpinutil.py") Path to the cpinutil.py executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -109,8 +115,8 @@ class ParmedCpinUtil(BiobbObject):
         fu.log('Creating command line with instructions and required arguments', self.out_log, self.global_log)
 
         self.cmd = [self.binary_path,
-               '-p', self.io_dict['in']['input_top_path'],
-               '-o', self.io_dict['out']['output_cpin_path']
+               '-p', self.stage_io_dict['in']['input_top_path'],
+               '-o', self.stage_io_dict['out']['output_cpin_path']
                ]
 
         if self.igb:
@@ -127,7 +133,7 @@ class ParmedCpinUtil(BiobbObject):
 
         if self.io_dict["out"]["output_top_path"]:
             self.cmd.append('-op')
-            self.cmd.append(self.io_dict["out"]["output_top_path"])
+            self.cmd.append(self.stage_io_dict["out"]["output_top_path"])
 
         # Run Biobb block
         self.run_biobb()

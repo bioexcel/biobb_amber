@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "forcefield": [
+      "protein.ff14SB"
+    ],
+    "container_path": "docker",
+    "container_image": "afandiadib/ambertools:serial",
+    "container_volume_path": "/tmp"
+  }
+}

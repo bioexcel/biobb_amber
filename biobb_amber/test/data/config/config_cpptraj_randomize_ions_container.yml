@@ -1,0 +1,4 @@
+properties:
+  container_image: afandiadib/ambertools:serial
+  container_path: docker
+  container_volume_path: /tmp

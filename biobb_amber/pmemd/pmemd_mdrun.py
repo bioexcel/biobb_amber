@@ -331,7 +331,7 @@ class PmemdMDRun(BiobbObject):
                 mpi_cmd.append(str(self.mpi_np))
             if self.mpi_flags:
                 mpi_cmd.extend(self.mpi_flags)
-            self.cmd = mpi_cmd + cmd
+            self.cmd = mpi_cmd + self.cmd
 
         # Run Biobb block
         self.run_biobb()

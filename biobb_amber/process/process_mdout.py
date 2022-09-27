@@ -24,6 +24,12 @@ class ProcessMDOut(BiobbObject):
             * **binary_path** (*str*) - ("process_mdout.perl") Path to the process_mdout.perl executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -90,7 +96,7 @@ class ProcessMDOut(BiobbObject):
 
         # Command line
         self.cmd = [self.binary_path,
-               self.io_dict['in']['input_log_path']
+               self.stage_io_dict['in']['input_log_path']
                ]
 
         # Run Biobb block
@@ -100,8 +106,12 @@ class ProcessMDOut(BiobbObject):
         self.copy_to_host()
 
         if len(self.terms) == 1:
-           shutil.copy('summary.'+self.terms[0], self.io_dict['out']['output_dat_path'])
+            if self.container_path:
+                shutil.copy(PurePath(self.stage_io_dict['unique_dir']).joinpath('summary.'+self.terms[0]), self.io_dict['out']['output_dat_path'])
+            else:
+                shutil.copy('summary.'+self.terms[0], self.io_dict['out']['output_dat_path'])
         else:
+            # TODO: NOT WORKING FOR MORE THAN ONE self.terms!
             ene_dict = {}
             for term in self.terms:
                 with open("summary."+term) as fp:
@@ -125,6 +135,8 @@ class ProcessMDOut(BiobbObject):
         # remove temporary folder(s)
         if self.remove_tmp:
             self.tmp_files.extend(list(Path().glob('summary*')))
+            # this line shouldn't be needed
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
             self.remove_tmp_files()
 
         return self.return_code

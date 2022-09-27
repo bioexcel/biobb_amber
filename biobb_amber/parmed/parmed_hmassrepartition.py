@@ -23,6 +23,12 @@ class ParmedHMassRepartition(BiobbObject):
             * **binary_path** (*str*) - ("parmed") Path to the parmed executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -82,20 +88,23 @@ class ParmedHMassRepartition(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
-
-        # Parmed configuration (instructions) file
-        instructions_file = str(PurePath(self.tmp_folder).joinpath("parmed.in"))
+        # Creating temporary folder & Parmed configuration (instructions) file
+        if self.container_path:
+            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("parmed.in"))
+            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("parmed.in"))
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(self.tmp_folder).joinpath("parmed.in"))
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            instructions_file_path = instructions_file
 
         with open(instructions_file, 'w') as parmedin:
             parmedin.write("hmassrepartition\n")
-            parmedin.write("outparm " + self.io_dict['out']['output_top_path'] + "\n")
+            parmedin.write("outparm " + self.stage_io_dict['out']['output_top_path'] + "\n")
 
         self.cmd = [self.binary_path,
-               '-p', self.io_dict['in']['input_top_path'],
-               '-i', instructions_file,
+               '-p', self.stage_io_dict['in']['input_top_path'],
+               '-i', instructions_file_path,
                '-O' # Overwrite output files
                ]
 
@@ -106,8 +115,9 @@ class ParmedHMassRepartition(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
+        if self.remove_tmp:           
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
+            else: self.tmp_files.append(self.tmp_folder)
             self.remove_tmp_files()
 
         return self.return_code

@@ -1,0 +1,11 @@
+properties:
+  box_type: truncated_octahedron
+  container_image: afandiadib/ambertools:serial
+  container_path: docker
+  container_volume_path: /tmp
+  forcefield:
+  - DNA.bsc1
+  ionic_concentration: 100
+  ions_type: ionsjc_tip4pew
+  positive_ions_type: K+
+  water_type: OPCBOX

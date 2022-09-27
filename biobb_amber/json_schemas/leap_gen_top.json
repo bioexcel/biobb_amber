@@ -266,6 +266,12 @@
                         }
                     ]
                 },
+                "binary_path": {
+                    "type": "string",
+                    "default": "tleap",
+                    "wf_prop": false,
+                    "description": "Path to the tleap executable binary."
+                },
                 "remove_tmp": {
                     "type": "boolean",
                     "default": true,
@@ -277,6 +283,42 @@
                     "default": false,
                     "wf_prop": true,
                     "description": "Do not execute if output files exist."
+                },
+                "container_path": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Container path definition."
+                },
+                "container_image": {
+                    "type": "string",
+                    "default": "afandiadib/ambertools:serial",
+                    "wf_prop": false,
+                    "description": "Container image definition."
+                },
+                "container_volume_path": {
+                    "type": "string",
+                    "default": "/tmp",
+                    "wf_prop": false,
+                    "description": "Container volume path definition."
+                },
+                "container_working_dir": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Container working directory definition."
+                },
+                "container_user_id": {
+                    "type": "string",
+                    "default": null,
+                    "wf_prop": false,
+                    "description": "Container user_id definition."
+                },
+                "container_shell_path": {
+                    "type": "string",
+                    "default": "/bin/bash",
+                    "wf_prop": false,
+                    "description": "Path to default shell inside the container."
                 }
             }
         }
