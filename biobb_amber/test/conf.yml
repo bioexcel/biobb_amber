@@ -272,7 +272,7 @@ process_mdout:
     output_dat_path: output.dat
     ref_output_dat_path: file:test_reference_dir/process/sander.md.temp.dat
   properties:
-    terms : ['TEMP']
+    terms : [TEMP, VOLUME, EKTOT]
     remove_tmp: True
 
 process_mdout_docker:
@@ -281,7 +281,7 @@ process_mdout_docker:
     output_dat_path: output.dat
     ref_output_dat_path: file:test_reference_dir/process/sander.md.temp.dat
   properties:
-    terms : ['TEMP']
+    terms : [TEMP, VOLUME, EKTOT]
     container_path: docker
     container_image: afandiadib/ambertools:serial
     container_volume_path: /tmp
