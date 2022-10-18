@@ -45,29 +45,29 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_amber:3.8.0--pyhdfd78af_0
+        docker pull quay.io/biocontainers/biobb_amber:3.8.0--pyhdfd78af_1
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_amber:3.8.0--pyhdfd78af_0
+        docker run quay.io/biocontainers/biobb_amber:3.8.0--pyhdfd78af_1
 
 
-[//]: # (Using SINGULARITY:)
+Using SINGULARITY:
 
-[//]: # (**MacOS users**: it's strongly recommended to avoid Singularity and use **Docker** as containerization system.)
+**MacOS users**: it's strongly recommended to avoid Singularity and use **Docker** as containerization system.
 
-[//]: # (* Installation:)
-
-
-[//]: # (singularity pull --name biobb_amber.sif shub://bioexcel/biobb_amber)
+* Installation:
 
 
-[//]: # (* Usage:)
+        singularity pull --name biobb_amber.sif https://depot.galaxyproject.org/singularity/biobb_amber:3.8.0--pyhdfd78af_1
 
 
-[//]: # (singularity exec biobb_amber.sif)
+* Usage:
+
+
+        singularity exec biobb_amber.sif <command>
 
 
 The command list and specification can be found at the [Command Line documentation](https://biobb-amber.readthedocs.io/en/latest/command_line.html).

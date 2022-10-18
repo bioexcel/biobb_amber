@@ -2,7 +2,7 @@
 
 """Module containing the ProcessMDOut class and the command line interface."""
 import argparse
-import shutil, os
+import shutil
 from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import  settings
