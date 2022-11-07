@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "simulation_type": "minimization",
+    "mdin": {
+      "maxcyc": 500,
+      "ntwx": 100,
+      "ioutfm": 0
+    },
+    "container_path": "docker",
+    "container_image": "afandiadib/ambertools:serial",
+    "container_volume_path": "/tmp"
+  }
+}

@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.process.process_minout import process_minout
 
 class TestProcessMinOut():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'process_minout')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

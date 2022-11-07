@@ -26,8 +26,15 @@ class CpptrajRandomizeIons(BiobbObject):
             * **solute_mask** (*str*) - (":DA,DC,DG,DT,D?3,D?5") Solute (or set of atoms) around which the ions can get no closer than the distance specified. Cpptraj mask syntax can be found at the official `Cpptraj manual <https://amber-md.github.io/cpptraj/CPPTRAJ.xhtml>`_.
             * **distance** (*float*) - (5.0) Minimum distance cutoff for the ions around the defined solute.
             * **overlap** (*float*) - (3.5) Minimum distance between ions.
+            * **binary_path** (*str*) - ("cpptraj") Path to the cpptraj executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -78,6 +85,7 @@ class CpptrajRandomizeIons(BiobbObject):
         self.solute_mask = properties.get('solute_mask', ":DA,DC,DG,DT,D?3,D?5")
         self.distance = properties.get('distance', 5.0)
         self.overlap = properties.get('overlap', 3.5)
+        self.binary_path = properties.get('binary_path', 'cpptraj')
 
         # Check the properties
         self.check_properties(properties)
@@ -104,9 +112,15 @@ class CpptrajRandomizeIons(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        if self.container_path:
+            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("cpptraj.in"))
+            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("cpptraj.in"))
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(self.tmp_folder).joinpath("cpptraj.in"))
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            instructions_file_path = instructions_file
+
 
         # create cpptraj.in file
         # trajin randomizeIons.crd
@@ -114,19 +128,18 @@ class CpptrajRandomizeIons(BiobbObject):
         # trajout solv_randion.crd restart
         # trajout solv_randion.pdb pdb
         # go
-
-        instructions_file = str(PurePath(self.tmp_folder).joinpath("cpptraj.in"))
+        
         with open(instructions_file, 'w') as cpptrajin:
-                cpptrajin.write("trajin " + self.io_dict['in']['input_crd_path'] + " \n")
+                cpptrajin.write("trajin " + self.stage_io_dict['in']['input_crd_path'] + " \n")
                 cpptrajin.write("randomizeions " + self.ion_mask + " around " + self.solute_mask + " by " + str(self.distance) + " overlap " + str(self.overlap) + " \n")
-                cpptrajin.write("trajout " + self.io_dict['out']['output_crd_path'] + " restart \n")
-                cpptrajin.write("trajout " + self.io_dict['out']['output_pdb_path'] + " pdb \n")
+                cpptrajin.write("trajout " + self.stage_io_dict['out']['output_crd_path'] + " restart \n")
+                cpptrajin.write("trajout " + self.stage_io_dict['out']['output_pdb_path'] + " pdb \n")
                 cpptrajin.write("go\n");
 
         # Command line
-        self.cmd = ['cpptraj ',
-               self.io_dict['in']['input_top_path'],
-               '-i', instructions_file
+        self.cmd = [self.binary_path,
+               self.stage_io_dict['in']['input_top_path'],
+               '-i', instructions_file_path
                ]
 
         # Run Biobb block
@@ -137,8 +150,10 @@ class CpptrajRandomizeIons(BiobbObject):
 
         # remove temporary folder(s)
         if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
-            self.tmp_files.append("cpptraj.log")
+            if not self.container_path:
+                self.tmp_files.append(self.tmp_folder)
+                self.tmp_files.append("cpptraj.log")
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
             self.remove_tmp_files()
 
         return self.return_code

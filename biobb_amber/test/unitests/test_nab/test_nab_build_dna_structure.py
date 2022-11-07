@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.nab.nab_build_dna_structure import nab_build_dna_structure
 
 class TestNabBuildDNAStructure():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'nab_build_dna_structure')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

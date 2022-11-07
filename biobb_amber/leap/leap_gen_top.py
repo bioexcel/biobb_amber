@@ -27,8 +27,15 @@ class LeapGenTop(BiobbObject):
         output_crd_path (str): Output coordinates file (AMBER crd). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.crd>`_. Accepted formats: crd  (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
+            * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -90,6 +97,7 @@ class LeapGenTop(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
+        self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
         self.check_properties(properties)
@@ -120,40 +128,43 @@ class LeapGenTop(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
-
-        # Leap configuration (instructions) file
-        instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-
         ligands_lib_list = []
         if self.io_dict['in']['input_lib_path'] is not None:
             if self.io_dict['in']['input_lib_path'].endswith('.zip'):
-                ligands_lib_list = fu.unzip_list(self.io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                ligands_lib_list = fu.unzip_list(self.stage_io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                ligands_lib_list.append(self.io_dict['in']['input_lib_path'])
+                ligands_lib_list.append(self.stage_io_dict['in']['input_lib_path'])
 
         ligands_frcmod_list = []
         if self.io_dict['in']['input_frcmod_path'] is not None:
             if self.io_dict['in']['input_frcmod_path'].endswith('.zip'):
-                ligands_frcmod_list = fu.unzip_list(self.io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                ligands_frcmod_list = fu.unzip_list(self.stage_io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                ligands_frcmod_list.append(self.io_dict['in']['input_frcmod_path'])
+                ligands_frcmod_list.append(self.stage_io_dict['in']['input_frcmod_path'])
 
         amber_params_list = []
         if self.io_dict['in']['input_params_path'] is not None:
             if self.io_dict['in']['input_params_path'].endswith('.zip'):
-                amber_params_list = fu.unzip_list(self.io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                amber_params_list = fu.unzip_list(self.stage_io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                amber_params_list.append(self.io_dict['in']['input_params_path'])
+                amber_params_list.append(self.stage_io_dict['in']['input_params_path'])
 
         leap_source_list = []
         if self.io_dict['in']['input_source_path'] is not None:
             if self.io_dict['in']['input_source_path'].endswith('.zip'):
-                leap_source_list = fu.unzip_list(self.io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                leap_source_list = fu.unzip_list(self.stage_io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                leap_source_list.append(self.io_dict['in']['input_source_path'])
+                leap_source_list.append(self.stage_io_dict['in']['input_source_path'])
+
+        # Creating temporary folder & Leap configuration (instructions) file
+        if self.container_path:
+            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
+            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            instructions_file_path = instructions_file
 
         with open(instructions_file, 'w') as leapin:
                 # Forcefields loaded by default:
@@ -186,16 +197,16 @@ class LeapGenTop(BiobbObject):
                     leapin.write("loadamberparams " + amber_frcmod + "\n")
 
                 # Loading PDB file
-                leapin.write("mol = loadpdb " + self.io_dict['in']['input_pdb_path'] + " \n")
+                leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
 
                 # Saving output PDB file, coordinates and topology
-                leapin.write("savepdb mol " + self.io_dict['out']['output_pdb_path'] + " \n")
-                leapin.write("saveAmberParm mol " + self.io_dict['out']['output_top_path'] + " " + self.io_dict['out']['output_crd_path'] + "\n")
+                leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
+                leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
                 leapin.write("quit \n");
 
         # Command line
-        self.cmd = ['tleap ',
-               '-f', instructions_file
+        self.cmd = [self.binary_path,
+               '-f', instructions_file_path
                ]
 
         # Run Biobb block
@@ -206,8 +217,10 @@ class LeapGenTop(BiobbObject):
 
         # remove temporary folder(s)
         if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
-            self.tmp_files.append("leap.log")
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
+            else: 
+                self.tmp_files.append(self.tmp_folder)
+                self.tmp_files.append("leap.log")
             self.remove_tmp_files()
 
         return self.return_code

@@ -23,8 +23,15 @@ class NabBuildDNAStructure(BiobbObject):
             * **helix_type** (*str*) - ("lbdna") DNA/RNA helix type. Values: arna (Right Handed A-RNA - Arnott), aprna (Right Handed A’-RNA - Arnott), lbdna (Right Handed B-DNA - Langridge), abdna (Right Handed B-DNA - Arnott), sbdna (Left Handed B-DNA - Sasisekharan), adna (Right Handed A-DNA - Arnott).
             * **compiler** (*str*) - ("gcc") Alternative C compiler for nab.
             * **linker** (*str*) - ("gfortran") Alternative Fortran linker for nab.
+            * **binary_path** (*str*) - ("nab") Path to the nab executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -56,6 +63,7 @@ class NabBuildDNAStructure(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
+            'in': {},
             'out': { 'output_pdb_path': output_pdb_path }
         }
 
@@ -65,6 +73,7 @@ class NabBuildDNAStructure(BiobbObject):
         self.helix_type = properties.get('helix_type', "lbdna")
         self.compiler = properties.get('compiler', "gcc")
         self.linker = properties.get('linker', "gfortran")
+        self.binary_path = properties.get('binary_path', 'nab')
 
         # Check the properties
         self.check_properties(properties)
@@ -87,8 +96,8 @@ class NabBuildDNAStructure(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        #self.tmp_folder = fu.create_unique_dir()
+        #fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # create .nab file
         # molecule m;
@@ -99,19 +108,39 @@ class NabBuildDNAStructure(BiobbObject):
         if ("rna" in self.helix_type):
             acid_type = 'rna'
 
-        instructions_file = str(PurePath(self.tmp_folder).joinpath("nuc.nab"))
+        # Creating temporary folder & Leap configuration (instructions) file
+        if self.container_path:
+            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("nuc.nab"))
+            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("nuc.nab"))
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(self.tmp_folder).joinpath("nuc.nab"))
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            instructions_file_path = instructions_file
+
+        #instructions_file = str(PurePath(self.tmp_folder).joinpath("nuc.nab"))
         with open(instructions_file, 'w') as nabin:
                 nabin.write("molecule m; \n")
                 nabin.write("m = fd_helix( \"" + self.helix_type + "\", \"" + self.sequence + "\", \"" + acid_type + "\" ); \n")
-                nabin.write("putpdb( \"" + self.io_dict['out']['output_pdb_path'] + "\" , m, \"-wwpdb\");\n")
+                nabin.write("putpdb( \"" + self.stage_io_dict['out']['output_pdb_path'] + "\" , m, \"-wwpdb\");\n")
 
         # Command line
-        self.cmd = ['nab ',
-               '--compiler', self.compiler,
-               '--linker', self.linker,
-               instructions_file,
-               ' ; ./' + self.tmp_folder +'/nuc'
-               ]
+        if self.container_path: 
+            nuc_path = self.container_volume_path
+            self.cmd = [self.binary_path,
+                '--compile', self.compiler,
+                '-Xlinker', self.linker,
+                instructions_file_path,
+                ' ; ' + nuc_path +'/nuc'
+                ]
+        else: 
+            nuc_path = './' + self.tmp_folder
+            self.cmd = [self.binary_path,
+                '--compiler', self.compiler,
+                '--linker', self.linker,
+                instructions_file_path,
+                ' ; ' + nuc_path +'/nuc'
+                ]
 
         # Run Biobb block
         self.run_biobb()
@@ -121,9 +150,11 @@ class NabBuildDNAStructure(BiobbObject):
 
         # remove temporary folder(s)
         if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
-            self.tmp_files.append("nab.log")
-            self.tmp_files.append("tleap.out")
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
+            else: 
+                self.tmp_files.append(self.tmp_folder)
+                self.tmp_files.append("nab.log")
+                self.tmp_files.append("tleap.out")
             self.remove_tmp_files()
 
         return self.return_code

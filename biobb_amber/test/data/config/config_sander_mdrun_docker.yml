@@ -1,0 +1,9 @@
+properties:
+  container_image: afandiadib/ambertools:serial
+  container_path: docker
+  container_volume_path: /tmp
+  mdin:
+    ioutfm: 0
+    maxcyc: 500
+    ntwx: 100
+  simulation_type: minimization

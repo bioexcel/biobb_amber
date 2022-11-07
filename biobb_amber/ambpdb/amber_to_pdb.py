@@ -19,8 +19,15 @@ class AmberToPDB(BiobbObject):
         input_crd_path (str): AMBER coordinates file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd>`_. Accepted formats: crd (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878), rst (edam:format_3886).
         output_pdb_path (str): Structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/ambpdb/structure.ambpdb.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
+            * **binary_path** (*str*) - ("ambpdb") Path to the ambpdb executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -60,6 +67,7 @@ class AmberToPDB(BiobbObject):
 
         # Properties specific for BB
         self.properties = properties
+        self.binary_path = properties.get('binary_path', 'ambpdb')
 
         # Check the properties
         self.check_properties(properties)
@@ -85,10 +93,10 @@ class AmberToPDB(BiobbObject):
         self.stage_files()
 
         # Command line
-        self.cmd = ['ambpdb ',
-               '-p', self.io_dict['in']['input_top_path'],
-               '-c', self.io_dict['in']['input_crd_path'],
-               '> ', self.io_dict['out']['output_pdb_path']
+        self.cmd = [self.binary_path,
+               '-p', self.stage_io_dict['in']['input_top_path'],
+               '-c', self.stage_io_dict['in']['input_crd_path'],
+               '> ', self.stage_io_dict['out']['output_pdb_path']
                ]
                
          # Run Biobb block

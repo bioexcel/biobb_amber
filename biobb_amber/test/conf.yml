@@ -11,6 +11,17 @@ amber_to_pdb:
   properties:
     remove_tmp: True
 
+amber_to_pdb_docker:
+  paths:
+    input_top_path: file:test_data_dir/ambpdb/structure.leap.top
+    input_crd_path: file:test_data_dir/ambpdb/structure.leap.crd
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/ambpdb/structure.ambpdb.pdb
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+
 # cpptraj
 
 cpptraj_randomize_ions:
@@ -24,6 +35,19 @@ cpptraj_randomize_ions:
   properties:
     remove_tmp: True
 
+cpptraj_randomize_ions_container:
+  paths:
+    input_top_path: file:test_data_dir/cpptraj/structure.ions.parmtop
+    input_crd_path: file:test_data_dir/cpptraj/structure.ions.crd
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/cpptraj/structure.randIons.pdb
+    output_crd_path: output.crd
+    ref_output_crd_path: file:test_reference_dir/cpptraj/structure.randIons.crd
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+
 # leap
 
 leap_build_linear_structure:
@@ -35,6 +59,18 @@ leap_build_linear_structure:
     build_library: False
     forcefield : ["protein.ff14SB"]
     remove_tmp: True
+
+leap_build_linear_structure_docker:
+  paths:
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.pdb
+  properties:
+    sequence : "ALA PRO SER ARG LYS ASP GLU GLY GLY ALA"
+    build_library: False
+    forcefield : ["protein.ff14SB"]
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
 
 leap_gen_top:
   paths:
@@ -48,6 +84,21 @@ leap_gen_top:
   properties:
     forcefield : ["protein.ff14SB"]
     remove_tmp: True
+
+leap_gen_top_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.leap.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.leap.pdb
+    output_crd_path: output.leap.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.leap.crd
+    output_top_path: output.leap.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.leap.top
+  properties:
+    forcefield : ["protein.ff14SB"]
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
 
 leap_solvate:
   paths:
@@ -65,6 +116,24 @@ leap_solvate:
     box_type: "truncated_octahedron"
     remove_tmp: True
 
+leap_solvate_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.solv.pdb
+    output_crd_path: output.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.solv.crd
+    output_top_path: output.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.solv.top
+  properties:
+    forcefield : ["protein.ff14SB"]
+    water_type: "TIP3PBOX"
+    distance_to_molecule: "9.0"
+    box_type: "truncated_octahedron"
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+
 leap_add_ions:
   paths:
     input_pdb_path: file:test_data_dir/leap/structure.ions.input.pdb
@@ -75,14 +144,32 @@ leap_add_ions:
     output_top_path: output.solv.top
     ref_output_top_path: file:test_reference_dir/leap/structure.ions.top
   properties:
-    forcefield : ["protein.ff14SB","DNA.bsc1"]
-    water_type: "TIP3PBOX"
-    box_type: "truncated_octahedron"
-    neutralise : True
-    positive_ions_type: "K+"
-    negative_ions_type: "Cl-"
-    ionic_concentration : 150
-    remove_tmp: True
+    forcefield: ["DNA.bsc1"]
+    water_type: OPCBOX
+    ions_type : ionsjc_tip4pew
+    box_type: truncated_octahedron
+    ionic_concentration : 100
+    positive_ions_type : K+
+
+leap_add_ions_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.ions.input.pdb
+    output_pdb_path: output.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.ions.pdb
+    output_crd_path: output.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.ions.crd
+    output_top_path: output.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.ions.top
+  properties:
+    forcefield: ["DNA.bsc1"]
+    water_type: OPCBOX
+    ions_type : ionsjc_tip4pew
+    box_type: truncated_octahedron
+    ionic_concentration : 100
+    positive_ions_type : K+
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
 
 # nab
 
@@ -107,6 +194,19 @@ parmed_cpinutil:
     system: "cln025"
     remove_tmp: True
 
+parmed_cpinutil_docker:
+  paths:
+    input_top_path: file:test_data_dir/parmed/cln025.prmtop
+    output_cpin_path: output.pH.cpin
+    ref_output_cpin_path: file:test_reference_dir/parmed/cln025.docker.cpin
+  properties:
+    igb : 2
+    resnames: "AS4 GL4"
+    system: "cln025"
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+
 parmed_hmassrepartition:
   paths:
     input_top_path: file:test_data_dir/parmed/input.hmass.prmtop
@@ -114,6 +214,16 @@ parmed_hmassrepartition:
     ref_output_top_path: file:test_reference_dir/parmed/output.hmass.prmtop
   properties:
     remove_tmp: True
+
+parmed_hmassrepartition_docker:
+  paths:
+    input_top_path: file:test_data_dir/parmed/input.hmass.prmtop
+    output_top_path: output.prmtop
+    ref_output_top_path: file:test_reference_dir/parmed/output.hmass.prmtop
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
 
 # pdb4amber
 
@@ -125,6 +235,16 @@ pdb4amber_run:
   properties:
     remove_tmp: True
 
+pdb4amber_run_docker:
+  paths:
+    input_pdb_path: file:test_data_dir/pdb4amber/1aki_fixed.pdb
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/pdb4amber/structure.pdb4amber.pdb
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+
 # process
 
 process_minout:
@@ -135,14 +255,37 @@ process_minout:
   properties:
     remove_tmp: True
 
+process_minout_docker:
+  paths:
+    input_log_path: file:test_data_dir/process/sander.min.log
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/process/sander.min.energy.dat
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
 process_mdout:
   paths:
     input_log_path: file:test_data_dir/process/sander.heat.log
     output_dat_path: output.dat
     ref_output_dat_path: file:test_reference_dir/process/sander.md.temp.dat
   properties:
-    terms : ['TEMP']
+    terms : [TEMP, VOLUME, EKTOT]
     remove_tmp: True
+
+process_mdout_docker:
+  paths:
+    input_log_path: file:test_data_dir/process/sander.heat.log
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/process/sander.md.temp.dat
+  properties:
+    terms : [TEMP, VOLUME, EKTOT]
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+    container_working_dir: /tmp
 
 # sander
 
@@ -162,6 +305,25 @@ sander_mdrun:
       ntwx: 100
       ioutfm: 0
     remove_tmp: True
+
+sander_mdrun_docker:
+  paths:
+    input_top_path: file:test_data_dir/sander/cln025.prmtop
+    input_crd_path: file:test_data_dir/sander/cln025.inpcrd
+    output_traj_path: sander.x
+    ref_output_traj_path: file:test_reference_dir/sander/sander.x
+    output_rst_path: sander.rst
+    ref_output_rst_path: file:test_reference_dir/sander/sander.rst
+    output_log_path: sander.log
+  properties:
+    simulation_type: "minimization"
+    mdin :
+      maxcyc: 500
+      ntwx: 100
+      ioutfm: 0
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
 
 # pmemd
 
@@ -193,6 +355,17 @@ cphstats_run:
   properties:
     remove_tmp: True
 
+cphstats_run_docker:
+  paths:
+    input_cpin_path: file:test_data_dir/cphstats/structure.cpin
+    input_cpout_path: file:test_data_dir/cphstats/sander.pH.cpout
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/cphstats/cphstats.pH.dat
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp
+
 cestats_run:
   paths:
     input_cein_path: file:test_data_dir/cphstats/structure.cein
@@ -201,3 +374,14 @@ cestats_run:
     ref_output_dat_path: file:test_reference_dir/cphstats/cestats.dat
   properties:
     remove_tmp: True
+
+cestats_run_docker:
+  paths:
+    input_cein_path: file:test_data_dir/cphstats/structure.cein
+    input_ceout_path: file:test_data_dir/cphstats/sander.ceout.gz
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/cphstats/cestats.dat
+  properties:
+    container_path: docker
+    container_image: afandiadib/ambertools:serial
+    container_volume_path: /tmp

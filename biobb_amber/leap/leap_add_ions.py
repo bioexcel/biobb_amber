@@ -37,8 +37,15 @@ class LeapAddIons(BiobbObject):
             * **negative_ions_number** (*int*) - (0) Number of additional negative ions to include in the system box.
             * **positive_ions_type** (*str*) - ("Na+") Type of additional positive ions to include in the system box. Values: Na+,K+.
             * **negative_ions_type** (*str*) - ("Cl-") Type of additional negative ions to include in the system box. Values: Cl-.
+            * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -111,6 +118,7 @@ class LeapAddIons(BiobbObject):
         self.positive_ions_type = properties.get('positive_ions_type', "Na+")
         self.negative_ions_number = properties.get('negative_ions_number', 0)
         self.negative_ions_type = properties.get('negative_ions_type', "Cl-")
+        self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
         self.check_properties(properties)
@@ -164,10 +172,6 @@ class LeapAddIons(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
-
         # Water Type
         # leaprc.water.tip4pew, tip4pd, tip3p, spceb, spce, opc, fb4, fb3
         # Values: POL3BOX, QSPCFWBOX, SPCBOX, SPCFWBOX, TIP3PBOX, TIP3PFBOX, TIP4PBOX, TIP4PEWBOX, OPCBOX, OPC3BOX, TIP5PBOX.
@@ -208,32 +212,42 @@ class LeapAddIons(BiobbObject):
         ligands_lib_list = []
         if self.io_dict['in']['input_lib_path'] is not None:
             if self.io_dict['in']['input_lib_path'].endswith('.zip'):
-                ligands_lib_list = fu.unzip_list(self.io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                ligands_lib_list = fu.unzip_list(self.stage_io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                ligands_lib_list.append(self.io_dict['in']['input_lib_path'])
+                ligands_lib_list.append(self.stage_io_dict['in']['input_lib_path'])
 
         ligands_frcmod_list = []
         if self.io_dict['in']['input_frcmod_path'] is not None:
             if self.io_dict['in']['input_frcmod_path'].endswith('.zip'):
-                ligands_frcmod_list = fu.unzip_list(self.io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                ligands_frcmod_list = fu.unzip_list(self.stage_io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                ligands_frcmod_list.append(self.io_dict['in']['input_frcmod_path'])
+                ligands_frcmod_list.append(self.stage_io_dict['in']['input_frcmod_path'])
 
         amber_params_list = []
         if self.io_dict['in']['input_params_path'] is not None:
             if self.io_dict['in']['input_params_path'].endswith('.zip'):
-                amber_params_list = fu.unzip_list(self.io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                amber_params_list = fu.unzip_list(self.stage_io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                amber_params_list.append(self.io_dict['in']['input_params_path'])
+                amber_params_list.append(self.stage_io_dict['in']['input_params_path'])
 
         leap_source_list = []
         if self.io_dict['in']['input_source_path'] is not None:
             if self.io_dict['in']['input_source_path'].endswith('.zip'):
-                leap_source_list = fu.unzip_list(self.io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+                leap_source_list = fu.unzip_list(self.stage_io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
-                leap_source_list.append(self.io_dict['in']['input_source_path'])
+                leap_source_list.append(self.stage_io_dict['in']['input_source_path'])
 
-        instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+        # Creating temporary folder & Leap configuration (instructions) file
+        if self.container_path:
+            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
+            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            instructions_file_path = instructions_file
+
+        #instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
         with open(instructions_file, 'w') as leapin:
                 # Forcefields loaded by default:
                 # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
@@ -269,7 +283,7 @@ class LeapAddIons(BiobbObject):
                     leapin.write("loadamberparams " + amber_frcmod + "\n")
 
                 # Loading PDB file
-                leapin.write("mol = loadpdb " + self.io_dict['in']['input_pdb_path'] + " \n")
+                leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
 
                 # Adding ions
                 leapin.write(ions_command)
@@ -278,13 +292,13 @@ class LeapAddIons(BiobbObject):
                 leapin.write("setBox mol vdw \n")
 
                 # Saving output PDB file, coordinates and topology
-                leapin.write("savepdb mol " + self.io_dict['out']['output_pdb_path'] + " \n")
-                leapin.write("saveAmberParm mol " + self.io_dict['out']['output_top_path'] + " " + self.io_dict['out']['output_crd_path'] + "\n")
+                leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
+                leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
                 leapin.write("quit \n");
 
         # Command line
-        self.cmd = ['tleap ',
-               '-f', instructions_file
+        self.cmd = [self.binary_path,
+               '-f', instructions_file_path
                ]
 
         # Run Biobb block
@@ -307,7 +321,7 @@ class LeapAddIons(BiobbObject):
                 # PDB info: CRYST1   86.316   86.316   86.316 109.47 109.47 109.47 P 1
                 # PDB info: OCTBOX   86.1942924  86.1942924  86.1942924 109.4712190 109.4712190 109.4712190
                 #regex_box = 'CRYST1\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*P 1'
-                regex_box = 'OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)'
+                regex_box = r'OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)'
                 box = re.findall(regex_box, pdb_line)[0]
                 box_line = ""
                 for coord in box:
@@ -364,8 +378,10 @@ class LeapAddIons(BiobbObject):
 
         # remove temporary folder(s)
         if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
-            self.tmp_files.append("leap.log")
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
+            else: 
+                self.tmp_files.append(self.tmp_folder)
+                self.tmp_files.append("leap.log")
             self.remove_tmp_files()
 
         return self.return_code

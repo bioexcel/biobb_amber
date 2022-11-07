@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.ambpdb.amber_to_pdb import amber_to_pdb
 
 class TestAmberToPDB():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'amber_to_pdb')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

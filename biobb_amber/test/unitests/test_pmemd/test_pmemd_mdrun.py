@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.pmemd.pmemd_mdrun import pmemd_mdrun
 
 class TestPmemdMDRun():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'pmemd_mdrun')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

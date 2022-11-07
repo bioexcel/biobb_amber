@@ -23,8 +23,15 @@ class Pdb4amberRun(BiobbObject):
             * **remove_hydrogens** (*bool*) - (False) Remove hydrogen atoms from the PDB file.
             * **remove_waters** (*bool*) - (False) Remove water molecules from the PDB file.
             * **constant_pH** (*bool*) - (False) Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation.
+            * **binary_path** (*str*) - ("pdb4amber") Path to the pdb4amber executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -66,6 +73,7 @@ class Pdb4amberRun(BiobbObject):
         self.remove_hydrogens = properties.get('remove_hydrogens', False)
         self.remove_waters = properties.get('remove_waters', False)
         self.constant_pH = properties.get('constant_pH', False)
+        self.binary_path = properties.get('binary_path', 'pdb4amber')
 
         # Check the properties
         self.check_properties(properties)
@@ -96,9 +104,9 @@ class Pdb4amberRun(BiobbObject):
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
-        self.cmd = ['pdb4amber ',
-               '-i', self.io_dict['in']['input_pdb_path'],
-               '-o', self.io_dict['out']['output_pdb_path']
+        self.cmd = [self.binary_path,
+               '-i', self.stage_io_dict['in']['input_pdb_path'],
+               '-o', self.stage_io_dict['out']['output_pdb_path']
                ]
 
         if self.remove_hydrogens:

@@ -21,8 +21,15 @@ class ProcessMDOut(BiobbObject):
         output_dat_path (str): Dat output file containing data from the specified terms along the minimization process. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/process/sander.md.temp.dat>`_. Accepted formats: dat (edam:format_1637), txt (edam:format_2330), csv (edam:format_3752).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **terms** (*list*) - (["ETOT"]) Statistics descriptors. Values: VOLUME, TSOLVENT, TSOLUTE, TEMP, PRES, ETOT, ESCF, EPTOT, EKTOT, EKCMT, DENSITY.
+            * **binary_path** (*str*) - ("process_mdout.perl") Path to the process_mdout.perl executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
     Examples:
         This is a use example of how to use the building block from Python::
@@ -62,6 +69,7 @@ class ProcessMDOut(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.terms = properties.get('terms', ["ETOT"])
+        self.binary_path = properties.get('binary_path', 'process_mdout.perl')
 
         # Check the properties
         self.check_properties(properties)
@@ -86,10 +94,17 @@ class ProcessMDOut(BiobbObject):
         if self.check_restart(): return 0
         self.stage_files()
 
-        # Command line
-        self.cmd = ['process_mdout.perl ',
-               self.io_dict['in']['input_log_path']
-               ]
+        if not self.container_path:
+            self.tmp_folder = fu.create_unique_dir()
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            self.cmd = ['cd', self.tmp_folder, ';',
+                self.binary_path,
+                str(Path(self.stage_io_dict['in']['input_log_path']).resolve())
+            ]
+        else:
+            self.cmd = [self.binary_path,
+               self.stage_io_dict['in']['input_log_path']
+            ]
 
         # Run Biobb block
         self.run_biobb()
@@ -98,17 +113,28 @@ class ProcessMDOut(BiobbObject):
         self.copy_to_host()
 
         if len(self.terms) == 1:
-           shutil.copy('summary.'+self.terms[0], self.io_dict['out']['output_dat_path'])
+            if self.container_path:
+                shutil.copy(PurePath(self.stage_io_dict['unique_dir']).joinpath('summary.'+self.terms[0]), self.io_dict['out']['output_dat_path'])
+            else:
+                shutil.copy(PurePath(self.tmp_folder).joinpath('summary.'+self.terms[0]), self.io_dict['out']['output_dat_path'])
         else:
+
+            if self.container_path:
+                tmp = self.stage_io_dict['unique_dir']
+            else:
+                tmp = self.tmp_folder
+
             ene_dict = {}
             for term in self.terms:
-                with open("summary."+term) as fp:
-                   for line in fp:
-                       x = line.split()
-                       if x:
-                           if (len(x) > 1):
-                               ene_dict.setdefault(float(x[0]), {})[term] = x[1]
-
+                with open(tmp + "/summary."+term) as fp:
+                    for line in fp:
+                        x = line.split()
+                        if x:
+                            if (len(x) > 1):
+                                ene_dict.setdefault(float(x[0]), {})[term] = x[1]
+                            else:
+                                ene_dict.setdefault(float(x[0]), {})[term] = '-'
+                            
             with open(self.io_dict['out']['output_dat_path'],'w') as fp_out:
                 fp_out.write("# TIME ")
                 for term in self.terms:
@@ -123,6 +149,9 @@ class ProcessMDOut(BiobbObject):
         # remove temporary folder(s)
         if self.remove_tmp:
             self.tmp_files.extend(list(Path().glob('summary*')))
+            # this line shouldn't be needed
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
+            else: self.tmp_files.append(self.tmp_folder)
             self.remove_tmp_files()
 
         return self.return_code

@@ -1,26 +1,27 @@
 
           -------------------------------------------------------
-          Amber 20 SANDER                              2020
+          Amber 18 SANDER                              2018
           -------------------------------------------------------
 
-| Run on 08/03/2021 at 15:59:27
+| Run on 09/27/2022 at 13:59:36
 
 |   Executable path: sander
-| Working directory: /home/gbayarri_local/projects/BioBB
-|          Hostname: Unknown
+| Working directory: /
+|          Hostname: 577e7a08d495
+
   [-O]verwriting output
 
 File Assignments:
-|  MDIN: 213606d4-94e5-4417-868a-b49ae3c81f03/sander.mdin                      
-| MDOUT: biobb_amber/biobb_amber/test/reference/sander/sander.log              
-|INPCRD: biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd                
-|  PARM: biobb_amber/biobb_amber/test/data/sander/cln025.prmtop                
-|RESTRT: biobb_amber/biobb_amber/test/reference/sander/sander.rst              
+|  MDIN: /tmp/sander.mdin                                                      
+| MDOUT: /tmp/sander.log                                                       
+|INPCRD: /tmp/cln025.inpcrd                                                    
+|  PARM: /tmp/cln025.prmtop                                                    
+|RESTRT: /tmp/sander.rst                                                       
 |  REFC: refc                                                                  
 | MDVEL: mdvel                                                                 
 | MDFRC: mdfrc                                                                 
 |  MDEN: mden                                                                  
-| MDCRD: biobb_amber/biobb_amber/test/reference/sander/sander.x                
+| MDCRD: /tmp/sander.x                                                         
 |MDINFO: mdinfo                                                                
 |  MTMD: mtmd                                                                  
 |INPDIP: inpdip                                                                
@@ -61,13 +62,13 @@ Type of mdin: minimization
 
 
 |     Memory Use     Allocated
-|     Real             2016244
+|     Real             1316944
 |     Hollerith          52471
 |     Integer           411938
 |     Max Pairs        5251666
 |     nblistReal        189060
-|     nblist Int        663519
-|       Total            42149 kbytes
+|     nblist Int        660369
+|       Total            36673 kbytes
 
 | Note: 1-4 EEL scale factors are being read from the topology file.
 
@@ -249,39 +250,38 @@ ACE
    5.  TIMINGS
 --------------------------------------------------------------------------------
 
-|    Read coords time           0.02 ( 0.01% of Total)
-|                Build the list             4.39 (93.93% of List )
-|                Other                      0.28 ( 6.07% of List )
-|             List time                  4.67 ( 2.46% of Nonbo)
-|                   Short_ene time           143.30 (98.21% of Direc)
-|                   Other                      2.61 ( 1.79% of Direc)
-|                Direct Ewald time        145.90 (78.95% of Ewald)
-|                Adjust Ewald time          0.43 ( 0.23% of Ewald)
-|                   Fill Bspline coeffs        1.01 ( 2.64% of Recip)
-|                   Fill charge grid           3.40 ( 8.86% of Recip)
-|                   Scalar sum                12.95 (33.71% of Recip)
-|                   Grad sum                   8.92 (23.23% of Recip)
-|                   FFT time                  12.11 (31.54% of Recip)
-|                   Other                      0.01 ( 0.01% of Recip)
-|                Recip Ewald time          38.40 (20.78% of Ewald)
-|                Virial junk                0.05 ( 0.03% of Ewald)
-|                Other                      0.01 ( 0.01% of Ewald)
-|             Ewald time               184.80 (97.54% of Nonbo)
-|          Nonbond force            189.47 (99.82% of Force)
-|          Bond/Angle/Dihedral        0.31 ( 0.17% of Force)
-|          Other                      0.02 ( 0.01% of Force)
-|       Force time               189.80 (100.0% of Runmd)
-|    Runmd Time               189.80 (98.70% of Total)
-|    Other                      2.48 ( 1.29% of Total)
-| Total time               192.31 (100.0% of ALL  )
+|    Read coords time           0.08 ( 0.01% of Total)
+|                Build the list            13.20 (93.71% of List )
+|                Other                      0.89 ( 6.29% of List )
+|             List time                 14.08 ( 1.92% of Nonbo)
+|                   Short_ene time           457.38 (99.07% of Direc)
+|                   Other                      4.31 ( 0.93% of Direc)
+|                Direct Ewald time        461.69 (64.25% of Ewald)
+|                Adjust Ewald time          3.58 ( 0.50% of Ewald)
+|                   Fill Bspline coeffs        8.84 ( 3.51% of Recip)
+|                   Fill charge grid          15.34 ( 6.09% of Recip)
+|                   Scalar sum               110.04 (43.68% of Recip)
+|                   Grad sum                  44.51 (17.67% of Recip)
+|                   FFT time                  73.16 (29.04% of Recip)
+|                Recip Ewald time         251.89 (35.05% of Ewald)
+|                Virial junk                1.34 ( 0.19% of Ewald)
+|                Other                      0.11 ( 0.02% of Ewald)
+|             Ewald time               718.61 (98.08% of Nonbo)
+|          Nonbond force            732.70 (99.47% of Force)
+|          Bond/Angle/Dihedral        3.68 ( 0.50% of Force)
+|          Other                      0.20 ( 0.03% of Force)
+|       Force time               736.58 (100.0% of Runmd)
+|    Runmd Time               736.58 (87.46% of Total)
+|    Other                    105.52 (12.53% of Total)
+| Total time               842.19 (100.0% of ALL  )
 
 | Number of list builds   :          9
 
 | Highest rstack allocated:     995903
 | Highest istack allocated:      15755
-|           Job began  at 15:59:27.683  on 08/03/2021
-|           Setup done at 15:59:27.962  on 08/03/2021
-|           Run   done at 16:02:39.991  on 08/03/2021
+|           Job began  at 13:59:36.054  on 09/27/2022
+|           Setup done at 13:59:36.713  on 09/27/2022
+|           Run   done at 14:13:38.243  on 09/27/2022
 |     wallclock() was called   19066 times
 
 |3D-RISM memory allocation summary

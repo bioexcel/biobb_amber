@@ -31,13 +31,19 @@ class SanderMDRun(BiobbObject):
         properties (dict - Python dictionary object containing the tool parameters, not input/output files):
             * **mdin** (*dict*) - ({}) Sander MD run options specification. (Used if *input_mdin_path* is None)
             * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/nvt.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/npt.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/free.mdin>`_ (Runs a MD simulation), `heat <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/heat.mdin>`_ (Heats the MD system).
-            * **sander_path** (*str*) - ("sander") sander binary path to be used.
+            * **binary_path** (*str*) - ("sander") sander binary path to be used.
             * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
             * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
             * **mpi_flags** (*str*) - (None) Path to the MPI hostlist file.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
-
+            * **container_path** (*str*) - (None) Container path definition.
+            * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
+            * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
+            * **container_working_dir** (*str*) - (None) Container working directory definition.
+            * **container_user_id** (*str*) - (None) Container user_id definition.
+            * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
+            
     Examples:
         This is a use example of how to use the building block from Python::
 
@@ -93,7 +99,7 @@ class SanderMDRun(BiobbObject):
         # Properties specific for BB
         self.properties = properties
         self.simulation_type = properties.get('simulation_type', "minimization")
-        self.sander_path = properties.get('sander_path', "sander")
+        self.binary_path = properties.get('binary_path', "sander")
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
 
         if 'restraintmask' in self.mdin and self.mdin['restraintmask'][0] != '"' and self.mdin['restraintmask'][-1] != '"':
@@ -136,9 +142,9 @@ class SanderMDRun(BiobbObject):
 
         if self.io_dict['in']['input_mdin_path']:
             # MDIN parameters read from an input mdin file
-            mdin_firstPart.append("Mdin read from input file: " + self.io_dict['in']['input_mdin_path'])
+            mdin_firstPart.append("Mdin read from input file: " + self.stage_io_dict['in']['input_mdin_path'])
             mdin_firstPart.append("and modified by the biobb_amber module from the BioBB library ")
-            with open(self.io_dict['in']['input_mdin_path']) as input_params:
+            with open(self.stage_io_dict['in']['input_mdin_path']) as input_params:
                 firstPart = True
                 secondPart = False
                 for line in input_params:
@@ -285,46 +291,58 @@ class SanderMDRun(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        #self.tmp_folder = fu.create_unique_dir()
+        #fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         #if self.io_dict['in']['input_mdin_path']:
         #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
         #else:
         #    self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
-        self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+        
+        #self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+
+        # Creating temporary folder & Sander configuration (instructions) file
+        if self.container_path:
+            #instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
+            #instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+            instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("sander.mdin")))
+            self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
-        self.cmd = [self.sander_path,
+        self.cmd = [self.binary_path,
                '-O',
                '-i', self.output_mdin_path,
-               '-p', self.io_dict['in']['input_top_path'],
-               '-c', self.io_dict['in']['input_crd_path'],
-               '-r', self.io_dict['out']['output_rst_path'],
-               '-o', self.io_dict['out']['output_log_path'],
-               '-x', self.io_dict['out']['output_traj_path']
+               '-p', self.stage_io_dict['in']['input_top_path'],
+               '-c', self.stage_io_dict['in']['input_crd_path'],
+               '-r', self.stage_io_dict['out']['output_rst_path'],
+               '-o', self.stage_io_dict['out']['output_log_path'],
+               '-x', self.stage_io_dict['out']['output_traj_path']
                ]
 
         if self.io_dict['in']['input_ref_path']:
             self.cmd.append('-ref')
-            self.cmd.append(self.io_dict['in']['input_ref_path'])
+            self.cmd.append(self.stage_io_dict['in']['input_ref_path'])
 
         if self.io_dict['in']['input_cpin_path']:
             self.cmd.append('-cpin')
-            self.cmd.append(self.io_dict['in']['input_cpin_path'])
+            self.cmd.append(self.stage_io_dict['in']['input_cpin_path'])
 
         if self.io_dict['out']['output_mdinfo_path']:
             self.cmd.append('-inf')
-            self.cmd.append(self.io_dict['out']['output_mdinfo_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_mdinfo_path'])
 
         if self.io_dict['out']['output_cpout_path']:
             self.cmd.append('-cpout')
-            self.cmd.append(self.io_dict['out']['output_cpout_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_cpout_path'])
 
         if self.io_dict['out']['output_cprst_path']:
             self.cmd.append('-cprestrt')
-            self.cmd.append(self.io_dict['out']['output_cprst_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_cprst_path'])
 
         # general mpi properties
         if self.mpi_bin:
@@ -334,7 +352,7 @@ class SanderMDRun(BiobbObject):
                 mpi_cmd.append(str(self.mpi_np))
             if self.mpi_flags:
                 mpi_cmd.extend(self.mpi_flags)
-            self.cmd = mpi_cmd + cmd
+            self.cmd = mpi_cmd + self.cmd
 
         # Run Biobb block
         self.run_biobb()
@@ -344,8 +362,10 @@ class SanderMDRun(BiobbObject):
 
         # remove temporary folder(s)
         if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
-            self.tmp_files.append("mdinfo")
+            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
+            else: 
+                self.tmp_files.append(self.tmp_folder)
+                self.tmp_files.append("mdinfo")
             self.remove_tmp_files()
 
         return self.return_code

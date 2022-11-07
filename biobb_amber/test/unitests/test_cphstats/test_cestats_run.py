@@ -2,10 +2,10 @@ from biobb_common.tools import test_fixtures as fx
 from biobb_amber.cphstats.cestats_run import cestats_run
 
 class TestCestatsRun():
-    def setUp(self):
+    def setup_class(self):
         fx.test_setup(self, 'cestats_run')
 
-    def tearDown(self):
+    def teardown_class(self):
         fx.test_teardown(self)
         pass
 

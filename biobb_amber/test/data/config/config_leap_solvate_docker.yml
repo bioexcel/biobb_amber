@@ -1,0 +1,9 @@
+properties:
+  box_type: truncated_octahedron
+  container_image: afandiadib/ambertools:serial
+  container_path: docker
+  container_volume_path: /tmp
+  distance_to_molecule: '9.0'
+  forcefield:
+  - protein.ff14SB
+  water_type: TIP3PBOX

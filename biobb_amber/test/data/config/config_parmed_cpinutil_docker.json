@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "igb": 2,
+    "resnames": "AS4 GL4",
+    "system": "cln025",
+    "container_path": "docker",
+    "container_image": "afandiadib/ambertools:serial",
+    "container_volume_path": "/tmp"
+  }
+}
