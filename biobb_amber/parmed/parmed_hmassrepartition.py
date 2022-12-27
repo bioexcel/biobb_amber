@@ -54,6 +54,7 @@ class ParmedHMassRepartition(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -67,6 +68,7 @@ class ParmedHMassRepartition(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
@@ -92,6 +94,7 @@ class ParmedHMassRepartition(BiobbObject):
         if self.container_path:
             instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("parmed.in"))
             instructions_file_path = str(PurePath(self.container_volume_path).joinpath("parmed.in"))
+            self.tmp_folder = None
         else:
             self.tmp_folder = fu.create_unique_dir()
             instructions_file = str(PurePath(self.tmp_folder).joinpath("parmed.in"))
@@ -115,10 +118,13 @@ class ParmedHMassRepartition(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        if self.remove_tmp:           
-            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
-            else: self.tmp_files.append(self.tmp_folder)
-            self.remove_tmp_files()
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir"),
+            self.tmp_folder
+        ])
+        self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 

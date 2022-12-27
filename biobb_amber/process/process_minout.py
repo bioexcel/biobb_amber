@@ -59,6 +59,7 @@ class ProcessMinOut(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -73,6 +74,7 @@ class ProcessMinOut(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     def check_data_params(self, out_log, out_err):
         """ Checks input/output paths correctness """
@@ -102,6 +104,7 @@ class ProcessMinOut(BiobbObject):
                 str(Path(self.stage_io_dict['in']['input_log_path']).resolve())
             ]
         else:
+            self.tmp_folder = None
             self.cmd = [self.binary_path,
                self.stage_io_dict['in']['input_log_path']
             ]
@@ -147,12 +150,14 @@ class ProcessMinOut(BiobbObject):
                     fp_out.write("\n")
 
         # remove temporary folder(s)
-        if self.remove_tmp:
-            self.tmp_files.extend(list(Path().glob('summary.*')))
-            # this line shouldn't be needed
-            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
-            else: self.tmp_files.append(self.tmp_folder)
-            self.remove_tmp_files()
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir"),
+            list(Path().glob('summary*')),
+            self.tmp_folder
+        ])
+        self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 

@@ -35,7 +35,7 @@ cpptraj_randomize_ions:
   properties:
     remove_tmp: True
 
-cpptraj_randomize_ions_container:
+cpptraj_randomize_ions_docker:
   paths:
     input_top_path: file:test_data_dir/cpptraj/structure.ions.parmtop
     input_crd_path: file:test_data_dir/cpptraj/structure.ions.crd

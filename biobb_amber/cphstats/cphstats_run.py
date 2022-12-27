@@ -77,6 +77,7 @@ class CphstatsRun(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -107,6 +108,7 @@ class CphstatsRun(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
@@ -206,6 +208,14 @@ class CphstatsRun(BiobbObject):
 
         # Copy files to host
         self.copy_to_host()
+
+        # Remove temporary file(s)
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir")
+        ])
+        self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 

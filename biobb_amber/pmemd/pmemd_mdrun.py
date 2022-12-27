@@ -74,6 +74,7 @@ class PmemdMDRun(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -103,6 +104,7 @@ class PmemdMDRun(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     def check_data_params(self, out_log, err_log):
         """ Checks input/output paths correctness """
@@ -340,10 +342,14 @@ class PmemdMDRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        if self.remove_tmp:
-            self.tmp_files.append(self.tmp_folder)
-            self.tmp_files.append("mdinfo")
-            self.remove_tmp_files()
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir"),
+            self.tmp_folder,
+            "mdinfo"
+        ])
+        self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 

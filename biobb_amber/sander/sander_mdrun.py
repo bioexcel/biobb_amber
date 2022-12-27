@@ -80,6 +80,7 @@ class SanderMDRun(BiobbObject):
 
         # Call parent class constructor
         super().__init__(properties)
+        self.locals_var_dict = locals().copy()
 
         # Input/Output files
         self.io_dict = {
@@ -112,6 +113,7 @@ class SanderMDRun(BiobbObject):
 
         # Check the properties
         self.check_properties(properties)
+        self.check_arguments()
 
     def check_data_params(self, out_log, out_err):
         """ Checks input/output paths correctness """
@@ -307,6 +309,7 @@ class SanderMDRun(BiobbObject):
             #instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
             instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("sander.mdin")))
             self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
+            self.tmp_folder = None
         else:
             self.tmp_folder = fu.create_unique_dir()
             fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
@@ -361,12 +364,21 @@ class SanderMDRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        if self.remove_tmp:
+        '''if self.remove_tmp:
             if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
             else: 
                 self.tmp_files.append(self.tmp_folder)
                 self.tmp_files.append("mdinfo")
-            self.remove_tmp_files()
+            self.remove_tmp_files()'''
+
+        self.tmp_files.extend([
+            self.stage_io_dict.get("unique_dir"),
+            "mdinfo",
+            self.tmp_folder
+        ])
+        self.remove_tmp_files()
+
+        self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
 
