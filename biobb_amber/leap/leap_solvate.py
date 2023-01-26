@@ -262,8 +262,8 @@ class LeapSolvate(BiobbObject):
                 leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
 
                 # Generating box + adding water molecules
-                leapin.write(box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule) + " " + str(self.closeness))
-                leapin.write(" iso \n") if self.iso else leapin.write("\n")
+                leapin.write(box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule))
+                leapin.write(" iso " + str(self.closeness) + "\n") if self.iso else leapin.write(" " + str(self.closeness) + "\n")
 
                 # Adding counterions
                 leapin.write(ions_command)
