@@ -512,18 +512,8 @@ pdb4amber_run -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-
-* **input_cein_path** (*string*): Input cein or cpein file (from pmemd or sander) with titrating residue information. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cein). Accepted formats: CEIN, CPEIN
-* **input_ceout_path** (*string*): Output ceout file (AMBER ceout). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/sander.ceout.gz). Accepted formats: CEOUT, ZIP, GZIP, GZ
-* **output_dat_path** (*string*): Output file to which the standard calceo-type statistics are written. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
-* **output_population_path** (*string*): Output file where protonation state populations are printed for every state of every residue. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
-* **output_chunk_path** (*string*): Output file where the time series data calculated over chunks of the simulation are printed. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
-* **output_cumulative_path** (*string*): Output file where the cumulative time series data is printed. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
-* **output_conditional_path** (*string*): Output file with requested conditional probabilities. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
-* **output_chunk_conditional_path** (*string*): Output file with a time series of the conditional probabilities over a trajectory split up into chunks. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
 * **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb). Accepted formats: PDB
 * **output_pdb_path** (*string*): Output 3D structure PDB file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pdb4amber/structure.pdb4amber.pdb). Accepted formats: PDB
-
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -630,6 +620,8 @@ properties:
   remove_tmp: true
   terms:
   - TEMP
+  - VOLUME
+  - EKTOT
 
 ```
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_mdout_docker.yml)
@@ -641,6 +633,8 @@ properties:
   container_working_dir: /tmp
   terms:
   - TEMP
+  - VOLUME
+  - EKTOT
 
 ```
 #### Command line
@@ -653,7 +647,9 @@ process_mdout --config config_process_mdout.yml --input_log_path sander.heat.log
 {
   "properties": {
     "terms": [
-      "TEMP"
+      "TEMP",
+      "VOLUME",
+      "EKTOT"
     ],
     "remove_tmp": true
   }
@@ -664,7 +660,9 @@ process_mdout --config config_process_mdout.yml --input_log_path sander.heat.log
 {
   "properties": {
     "terms": [
-      "TEMP"
+      "TEMP",
+      "VOLUME",
+      "EKTOT"
     ],
     "container_path": "docker",
     "container_image": "afandiadib/ambertools:serial",
@@ -1317,6 +1315,14 @@ properties:
   remove_tmp: true
 
 ```
+#### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cpptraj_randomize_ions_docker.yml)
+```python
+properties:
+  container_image: afandiadib/ambertools:serial
+  container_path: docker
+  container_volume_path: /tmp
+
+```
 #### Command line
 ```python
 cpptraj_randomize_ions --config config_cpptraj_randomize_ions.yml --input_top_path structure.ions.parmtop --input_crd_path structure.ions.crd --output_pdb_path structure.randIons.pdb --output_crd_path structure.randIons.crd
@@ -1327,6 +1333,16 @@ cpptraj_randomize_ions --config config_cpptraj_randomize_ions.yml --input_top_pa
 {
   "properties": {
     "remove_tmp": true
+  }
+}
+```
+#### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cpptraj_randomize_ions_docker.json)
+```python
+{
+  "properties": {
+    "container_path": "docker",
+    "container_image": "afandiadib/ambertools:serial",
+    "container_volume_path": "/tmp"
   }
 }
 ```

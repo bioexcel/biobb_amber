@@ -1,7 +1,9 @@
 {
   "properties": {
     "terms": [
-      "TEMP"
+      "TEMP",
+      "VOLUME",
+      "EKTOT"
     ],
     "container_path": "docker",
     "container_image": "afandiadib/ambertools:serial",

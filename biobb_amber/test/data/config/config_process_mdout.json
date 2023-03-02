@@ -1,7 +1,9 @@
 {
   "properties": {
     "terms": [
-      "TEMP"
+      "TEMP",
+      "VOLUME",
+      "EKTOT"
     ],
     "remove_tmp": true
   }

@@ -5,3 +5,5 @@ properties:
   container_working_dir: /tmp
   terms:
   - TEMP
+  - VOLUME
+  - EKTOT
