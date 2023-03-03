@@ -60,7 +60,7 @@ jobs:
           # Ignoring docker and singularity tests
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
           # Production one
-          pytest biobb_amber/test/unitests/ --cov=./ --cov-report=xml --ignore-glob=*container.py  --ignore-glob=*pmemd*
+          pytest biobb_amber/test/unitests/ --cov=./ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd*
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
