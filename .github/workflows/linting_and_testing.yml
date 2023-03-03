@@ -1,0 +1,73 @@
+name: tests
+
+on: 
+  # workflow_dispatch
+  push:
+   branches: [ master ]
+
+jobs:
+  # Name of the Job
+  lint_and_test:
+    runs-on: self-hosted
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - run: echo "Repository -> ${{ github.repository }}"
+      - run: echo "Branch -> ${{ github.ref }}"
+      - run: echo "Trigger event -> ${{ github.event_name }}"
+      - run: echo "Runner OS -> ${{ runner.os }}"
+
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: provision-with-micromamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: .github/env.yaml
+          extra-specs: |
+            pytest
+            pytest-cov
+            flake8
+      
+      - name: List installed package versions
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: micromamba list
+
+      - name: Lint with flake8
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: |
+          # F Codes: https://flake8.pycqa.org/en/latest/user/error-codes.html
+          # E Code: https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
+
+          # Workflow fails: Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+          # Exit-zero treats all errors as warnings, workflow will not fail:
+          flake8 . --exclude=docs --ignore=C901,E226 --count --exit-zero --max-complexity=10 --max-line-length=999 --statistics
+
+      - name: Checkout biobb_common
+        uses: actions/checkout@v3
+        with:
+          repository: bioexcel/biobb_common
+          path: './biobb_common'
+
+      - name: Run tests
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: |
+          # Ignoring docker and singularity tests
+          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
+          # Production one
+          pytest biobb_amber/test/unitests/ --cov=./ --cov-report=xml --ignore-glob=*container.py  --ignore-glob=*pmemd*
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      
+      - name: Restore .bash_profile
+        run: cp ~/.bash_profile_orig ~/.bash_profile
+
+
