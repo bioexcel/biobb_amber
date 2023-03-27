@@ -3,11 +3,23 @@ name: tests
 on: 
   # workflow_dispatch
   push:
-   branches: [ master ]
+    branches: [ master ]
+    paths-ignore:
+      - '.gitignore'
+      - '.readthedocs.yaml'
+      - 'LICENSE'
+      - 'setup.py'
+      - 'README.md'
+      - '**/docs/**'
+      - '**/json_schemas/**'
 
 jobs:
   # Name of the Job
   lint_and_test:
+    strategy:
+      matrix:
+        os: [self-hosted]
+        python-version: ["3.7", "3.8", "3.9"]
     runs-on: self-hosted
     steps:
       - name: Check out repository code
@@ -28,6 +40,7 @@ jobs:
         with:
           environment-file: .github/env.yaml
           extra-specs: |
+            python=${{ matrix.python-version }}
             pytest
             pytest-cov
             flake8
