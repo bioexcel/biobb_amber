@@ -2,13 +2,12 @@
 
 """Module containing the ParmedCpinUtil class and the command line interface."""
 import argparse
-import shutil, re
-from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.parmed.common import *
+from biobb_amber.parmed.common import check_input_path, check_output_path
+
 
 class ParmedCpinUtil(BiobbObject):
     """
@@ -70,9 +69,9 @@ class ParmedCpinUtil(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_top_path': input_top_path },
-            'out': {    'output_cpin_path': output_cpin_path,
-                        'output_top_path': output_top_path }
+            'in': {'input_top_path': input_top_path},
+            'out': {'output_cpin_path': output_cpin_path,
+                    'output_top_path': output_top_path}
         }
 
         # Properties specific for BB
@@ -93,8 +92,8 @@ class ParmedCpinUtil(BiobbObject):
         self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", False, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_cpin_path"] = check_output_path(self.io_dict["out"]["output_cpin_path"],"output_cpin_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cpin_path"] = check_output_path(self.io_dict["out"]["output_cpin_path"], "output_cpin_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"], "output_top_path", True, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -104,7 +103,8 @@ class ParmedCpinUtil(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Creating temporary folder
@@ -117,9 +117,9 @@ class ParmedCpinUtil(BiobbObject):
         fu.log('Creating command line with instructions and required arguments', self.out_log, self.global_log)
 
         self.cmd = [self.binary_path,
-               '-p', self.stage_io_dict['in']['input_top_path'],
-               '-o', self.stage_io_dict['out']['output_cpin_path']
-               ]
+                    '-p', self.stage_io_dict['in']['input_top_path'],
+                    '-o', self.stage_io_dict['out']['output_cpin_path']
+                    ]
 
         if self.igb:
             self.cmd.append('-igb')
@@ -154,16 +154,18 @@ class ParmedCpinUtil(BiobbObject):
 
         return self.return_code
 
+
 def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
-           output_top_path: str = None,
-           properties: dict = None, **kwargs) -> int:
+                    output_top_path: str = None,
+                    properties: dict = None, **kwargs) -> int:
     """Create :class:`ParmedCpinUtil <parmed.parmed_cpinutil.ParmedCpinUtil>`parmed.parmed_cpinutil.ParmedCpinUtil class and
     execute :meth:`launch() <parmed.parmed_cpinutil.ParmedCpinUtil.launch>` method"""
 
-    return ParmedCpinUtil( input_top_path=input_top_path,
-                        output_cpin_path=output_cpin_path,
-                        output_top_path=output_top_path,
-                        properties=properties).launch()
+    return ParmedCpinUtil(input_top_path=input_top_path,
+                          output_cpin_path=output_cpin_path,
+                          output_top_path=output_top_path,
+                          properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -180,10 +182,11 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    parmed_cpinutil(   input_top_path=args.input_top_path,
-                            output_cpin_path=args.output_cpin_path,
-                            output_top_path=args.output_top_path,
-                            properties=properties)
+    parmed_cpinutil(input_top_path=args.input_top_path,
+                    output_cpin_path=args.output_cpin_path,
+                    output_top_path=args.output_top_path,
+                    properties=properties)
+
 
 if __name__ == '__main__':
     main()

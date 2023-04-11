@@ -1,0 +1,9 @@
+Type of mdin: minimization
+&cntrl
+  imin = 1
+  ntwx = 10
+&end
+/
+&wt
+ TYPE = 'END'
+/

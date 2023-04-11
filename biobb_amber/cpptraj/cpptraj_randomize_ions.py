@@ -2,13 +2,13 @@
 
 """Module containing the CpptrajRandomizeIons class and the command line interface."""
 import argparse
-import shutil
-from pathlib import Path, PurePath
+from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.cpptraj.common import *
+from biobb_amber.cpptraj.common import check_input_path, check_output_path
+
 
 class CpptrajRandomizeIons(BiobbObject):
     """
@@ -100,8 +100,8 @@ class CpptrajRandomizeIons(BiobbObject):
         self.io_dict["in"]["input_crd_path"] = check_input_path(self.io_dict["in"]["input_crd_path"], "input_crd_path", False, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"],"output_crd_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"], "output_crd_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -132,17 +132,17 @@ class CpptrajRandomizeIons(BiobbObject):
         # go
         
         with open(instructions_file, 'w') as cpptrajin:
-                cpptrajin.write("trajin " + self.stage_io_dict['in']['input_crd_path'] + " \n")
-                cpptrajin.write("randomizeions " + self.ion_mask + " around " + self.solute_mask + " by " + str(self.distance) + " overlap " + str(self.overlap) + " \n")
-                cpptrajin.write("trajout " + self.stage_io_dict['out']['output_crd_path'] + " restart \n")
-                cpptrajin.write("trajout " + self.stage_io_dict['out']['output_pdb_path'] + " pdb \n")
-                cpptrajin.write("go\n");
+            cpptrajin.write("trajin " + self.stage_io_dict['in']['input_crd_path'] + " \n")
+            cpptrajin.write("randomizeions " + self.ion_mask + " around " + self.solute_mask + " by " + str(self.distance) + " overlap " + str(self.overlap) + " \n")
+            cpptrajin.write("trajout " + self.stage_io_dict['out']['output_crd_path'] + " restart \n")
+            cpptrajin.write("trajout " + self.stage_io_dict['out']['output_pdb_path'] + " pdb \n")
+            cpptrajin.write("go\n")
 
         # Command line
         self.cmd = [self.binary_path,
-               self.stage_io_dict['in']['input_top_path'],
-               '-i', instructions_file_path
-               ]
+                    self.stage_io_dict['in']['input_top_path'],
+                    '-i', instructions_file_path
+                    ]
 
         # Run Biobb block
         self.run_biobb()
@@ -162,17 +162,19 @@ class CpptrajRandomizeIons(BiobbObject):
 
         return self.return_code
 
+
 def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
-        output_pdb_path: str, output_crd_path: str,
-        properties: dict = None, **kwargs) -> int:
+                           output_pdb_path: str, output_crd_path: str,
+                           properties: dict = None, **kwargs) -> int:
     """Create :class:`CpptrajRandomizeIons <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons>`cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons class and
 execute :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.launch>` method"""
 
-    return CpptrajRandomizeIons( input_top_path=input_top_path,
-                        input_crd_path=input_crd_path,
-                        output_pdb_path=output_pdb_path,
-                        output_crd_path=output_crd_path,
-                        properties=properties).launch()
+    return CpptrajRandomizeIons(input_top_path=input_top_path,
+                                input_crd_path=input_crd_path,
+                                output_pdb_path=output_pdb_path,
+                                output_crd_path=output_crd_path,
+                                properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -191,10 +193,11 @@ def main():
 
     # Specific call
     cpptraj_randomize_ions(input_top_path=args.input_top_path,
-                        input_crd_path=args.input_crd_path,
-                        output_pdb_path=args.output_pdb_path,
-                        output_crd_path=args.output_crd_path,
-                        properties=properties)
+                           input_crd_path=args.input_crd_path,
+                           output_pdb_path=args.output_pdb_path,
+                           output_crd_path=args.output_crd_path,
+                           properties=properties)
+
 
 if __name__ == '__main__':
     main()

@@ -8,7 +8,8 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.process.common import *
+from biobb_amber.process.common import check_input_path, check_output_path
+
 
 class ProcessMinOut(BiobbObject):
     """
@@ -63,8 +64,8 @@ class ProcessMinOut(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_log_path': input_log_path },
-            'out': { 'output_dat_path': output_dat_path }
+            'in': {'input_log_path': input_log_path},
+            'out': {'output_dat_path': output_dat_path}
         }
 
         # Properties specific for BB
@@ -83,7 +84,7 @@ class ProcessMinOut(BiobbObject):
         self.io_dict["in"]["input_log_path"] = check_input_path(self.io_dict["in"]["input_log_path"], "input_log_path", False, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_dat_path"] = check_output_path(self.io_dict["out"]["output_dat_path"],"output_dat_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_dat_path"] = check_output_path(self.io_dict["out"]["output_dat_path"], "output_dat_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -93,21 +94,22 @@ class ProcessMinOut(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         if not self.container_path:
             self.tmp_folder = fu.create_unique_dir()
             fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
             self.cmd = ['cd', self.tmp_folder, ';',
-                self.binary_path,
-                str(Path(self.stage_io_dict['in']['input_log_path']).resolve())
-            ]
+                        self.binary_path,
+                        str(Path(self.stage_io_dict['in']['input_log_path']).resolve())
+                        ]
         else:
             self.tmp_folder = None
             self.cmd = [self.binary_path,
-               self.stage_io_dict['in']['input_log_path']
-            ]
+                        self.stage_io_dict['in']['input_log_path']
+                        ]
 
         # Run Biobb block
         self.run_biobb()
@@ -133,12 +135,12 @@ class ProcessMinOut(BiobbObject):
                     for line in fp:
                         x = line.split()
                         if (x):
-                            if(len(x) > 1):
+                            if (len(x) > 1):
                                 ene_dict.setdefault(float(x[0]), {})[term] = x[1]
                             else:
                                 ene_dict.setdefault(float(x[0]), {})[term] = '-'
 
-            with open(self.io_dict['out']['output_dat_path'],'w') as fp_out:
+            with open(self.io_dict['out']['output_dat_path'], 'w') as fp_out:
                 fp_out.write("# TIME ")
                 for term in self.terms:
                     fp_out.write(term + " ")
@@ -161,14 +163,16 @@ class ProcessMinOut(BiobbObject):
 
         return self.return_code
 
+
 def process_minout(input_log_path: str, output_dat_path: str,
-           properties: dict = None, **kwargs) -> int:
+                   properties: dict = None, **kwargs) -> int:
     """Create :class:`ProcessMinOut <process.process_mdout.ProcessMinOut>`process.process_mdout.ProcessMinOut class and
     execute :meth:`launch() <process.process_mdout.ProcessMinOut.launch>` method"""
 
-    return ProcessMinOut( input_log_path=input_log_path,
-                        output_dat_path=output_dat_path,
-                        properties=properties).launch()
+    return ProcessMinOut(input_log_path=input_log_path,
+                         output_dat_path=output_dat_path,
+                         properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -185,8 +189,9 @@ def main():
 
     # Specific call
     process_minout(input_log_path=args.input_log_path,
-                    output_dat_path=args.output_dat_path,
-                    properties=properties)
+                   output_dat_path=args.output_dat_path,
+                   properties=properties)
+
 
 if __name__ == '__main__':
     main()

@@ -2,13 +2,11 @@
 
 """Module containing the Cphstats class and the command line interface."""
 import argparse
-import shutil, re
-from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
-from biobb_common.tools import file_utils as fu
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.cphstats.common import *
+from biobb_amber.cphstats.common import check_input_path, check_output_path
+
 
 class CphstatsRun(BiobbObject):
     """
@@ -81,14 +79,14 @@ class CphstatsRun(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_cpin_path': input_cpin_path,
-                    'input_cpout_path': input_cpout_path },
-            'out': {    'output_dat_path': output_dat_path,
-                        'output_population_path': output_population_path,
-                        'output_chunk_path': output_chunk_path,
-                        'output_cumulative_path': output_cumulative_path,
-                        'output_conditional_path': output_conditional_path,
-                        'output_chunk_conditional_path': output_chunk_conditional_path }
+            'in': {'input_cpin_path': input_cpin_path,
+                   'input_cpout_path': input_cpout_path},
+            'out': {'output_dat_path': output_dat_path,
+                    'output_population_path': output_population_path,
+                    'output_chunk_path': output_chunk_path,
+                    'output_cumulative_path': output_cumulative_path,
+                    'output_conditional_path': output_conditional_path,
+                    'output_chunk_conditional_path': output_chunk_conditional_path}
         }
 
         # Properties specific for BB
@@ -118,12 +116,12 @@ class CphstatsRun(BiobbObject):
         self.io_dict["in"]["input_cpout_path"] = check_input_path(self.io_dict["in"]["input_cpout_path"], "input_cpout_path", False, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_dat_path"] = check_output_path(self.io_dict["out"]["output_dat_path"],"output_dat_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_population_path"] = check_output_path(self.io_dict["out"]["output_population_path"],"output_population_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_chunk_path"] = check_output_path(self.io_dict["out"]["output_chunk_path"],"output_chunk_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cumulative_path"] = check_output_path(self.io_dict["out"]["output_cumulative_path"],"output_cumulative_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_chunk_conditional_path"] = check_output_path(self.io_dict["out"]["output_chunk_conditional_path"],"output_chunk_conditional_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_conditional_path"] = check_output_path(self.io_dict["out"]["output_conditional_path"],"output_conditional_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_dat_path"] = check_output_path(self.io_dict["out"]["output_dat_path"], "output_dat_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_population_path"] = check_output_path(self.io_dict["out"]["output_population_path"], "output_population_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_chunk_path"] = check_output_path(self.io_dict["out"]["output_chunk_path"], "output_chunk_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cumulative_path"] = check_output_path(self.io_dict["out"]["output_cumulative_path"], "output_cumulative_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_chunk_conditional_path"] = check_output_path(self.io_dict["out"]["output_chunk_conditional_path"], "output_chunk_conditional_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_conditional_path"] = check_output_path(self.io_dict["out"]["output_conditional_path"], "output_conditional_path", True, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -133,17 +131,18 @@ class CphstatsRun(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Command line
         # cphstats -i 4LYT.equil.cpin 0/4LYT.md1.cpout -o pH0_calcpka.dat --population pH0_populations.dat
         self.cmd = [self.binary_path,
-               '-O',
-               '-i', self.stage_io_dict['in']['input_cpin_path'],
-               '-o', self.stage_io_dict['out']['output_dat_path'],
-               self.stage_io_dict['in']['input_cpout_path']
-               ]
+                    '-O',
+                    '-i', self.stage_io_dict['in']['input_cpin_path'],
+                    '-o', self.stage_io_dict['out']['output_dat_path'],
+                    self.stage_io_dict['in']['input_cpout_path']
+                    ]
 
         if self.io_dict['out']['output_population_path']:
             self.cmd.append('--population ')
@@ -219,24 +218,26 @@ class CphstatsRun(BiobbObject):
 
         return self.return_code
 
+
 def cphstats_run(input_cpin_path: str, input_cpout_path: str,
-            output_dat_path: str,
-            output_population_path: str = None, output_chunk_path: str = None,
-            output_conditional_path: str = None, output_chunk_conditional_path: str=None,
-            output_cumulative_path: str = None,
-            properties: dict = None, **kwargs) -> int:
+                 output_dat_path: str,
+                 output_population_path: str = None, output_chunk_path: str = None,
+                 output_conditional_path: str = None, output_chunk_conditional_path: str = None,
+                 output_cumulative_path: str = None,
+                 properties: dict = None, **kwargs) -> int:
     """Create :class:`CphstatsRun <cphstats.chpstats_run.CphstatsRun>`cphstats.chpstats_run.CphstatsRun class and
     execute :meth:`launch() <cphstats.chpstats_run.CphstatsRun.launch>` method"""
 
-    return CphstatsRun( input_cpin_path=input_cpin_path,
-                    input_cpout_path=input_cpout_path,
-                    output_dat_path=output_dat_path,
-                    output_population_path=output_population_path,
-                    output_chunk_path=output_chunk_path,
-                    output_chunk_conditional_path=output_chunk_conditional_path,
-                    output_conditional_path=output_conditional_path,
-                    output_cumulative_path=output_cumulative_path,
-                    properties=properties).launch()
+    return CphstatsRun(input_cpin_path=input_cpin_path,
+                       input_cpout_path=input_cpout_path,
+                       output_dat_path=output_dat_path,
+                       output_population_path=output_population_path,
+                       output_chunk_path=output_chunk_path,
+                       output_chunk_conditional_path=output_chunk_conditional_path,
+                       output_conditional_path=output_conditional_path,
+                       output_cumulative_path=output_cumulative_path,
+                       properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -258,15 +259,16 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    cphstats_run(    input_cpin_path=args.input_cpin_path,
-                    input_cpout_path=args.input_cpout_path,
-                    output_dat_path=args.output_dat_path,
-                    output_population_path=args.output_population_path,
-                    output_chunk_path=args.output_chunk_path,
-                    output_cumulative_path=args.output_cumulative_path,
-                    output_conditional_path=args.output_conditional_path,
-                    output_chunk_conditional_path=args.output_chunk_conditional_path,
-                    properties=properties)
+    cphstats_run(input_cpin_path=args.input_cpin_path,
+                 input_cpout_path=args.input_cpout_path,
+                 output_dat_path=args.output_dat_path,
+                 output_population_path=args.output_population_path,
+                 output_chunk_path=args.output_chunk_path,
+                 output_cumulative_path=args.output_cumulative_path,
+                 output_conditional_path=args.output_conditional_path,
+                 output_chunk_conditional_path=args.output_chunk_conditional_path,
+                 properties=properties)
+
 
 if __name__ == '__main__':
     main()

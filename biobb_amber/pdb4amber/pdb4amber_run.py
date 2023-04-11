@@ -2,13 +2,12 @@
 
 """Module containing the Pdb4amber class and the command line interface."""
 import argparse
-import shutil, re
-from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.pdb4amber.common import *
+from biobb_amber.pdb4amber.common import check_input_path, check_output_path
+
 
 class Pdb4amberRun(BiobbObject):
     """
@@ -65,8 +64,8 @@ class Pdb4amberRun(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path },
-            'out': { 'output_pdb_path': output_pdb_path }
+            'in': {'input_pdb_path': input_pdb_path},
+            'out': {'output_pdb_path': output_pdb_path}
         }
 
         # Properties specific for BB
@@ -87,7 +86,7 @@ class Pdb4amberRun(BiobbObject):
         self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", False, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -97,7 +96,8 @@ class Pdb4amberRun(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Creating temporary folder
@@ -107,9 +107,9 @@ class Pdb4amberRun(BiobbObject):
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
         self.cmd = [self.binary_path,
-               '-i', self.stage_io_dict['in']['input_pdb_path'],
-               '-o', self.stage_io_dict['out']['output_pdb_path']
-               ]
+                    '-i', self.stage_io_dict['in']['input_pdb_path'],
+                    '-o', self.stage_io_dict['out']['output_pdb_path']
+                    ]
 
         if self.remove_hydrogens:
             self.cmd.append("-y ")
@@ -135,14 +135,16 @@ class Pdb4amberRun(BiobbObject):
 
         return self.return_code
 
+
 def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
-           properties: dict = None, **kwargs) -> int:
+                  properties: dict = None, **kwargs) -> int:
     """Create :class:`Pdb4amberRun <pdb4amber.pdb4amber_run.Pdb4amberRun>`pdb4amber.pdb4amber_run.Pdb4amberRun class and
     execute :meth:`launch() <pdb4amber.pdb4amber_run.Pdb4amberRun.launch>` method"""
 
-    return Pdb4amberRun( input_pdb_path=input_pdb_path,
+    return Pdb4amberRun(input_pdb_path=input_pdb_path,
                         output_pdb_path=output_pdb_path,
                         properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -158,9 +160,10 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    pdb4amber_run(    input_pdb_path=args.input_pdb_path,
-                    output_pdb_path=args.output_pdb_path,
-                    properties=properties)
+    pdb4amber_run(input_pdb_path=args.input_pdb_path,
+                  output_pdb_path=args.output_pdb_path,
+                  properties=properties)
+
 
 if __name__ == '__main__':
     main()

@@ -2,13 +2,13 @@
 
 """Module containing the NabBuildDNAStructure class and the command line interface."""
 import argparse
-import shutil
-from pathlib import Path, PurePath
+from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.nab.common import *
+from biobb_amber.nab.common import check_output_path
+
 
 class NabBuildDNAStructure(BiobbObject):
     """
@@ -65,7 +65,7 @@ class NabBuildDNAStructure(BiobbObject):
         # Input/Output files
         self.io_dict = {
             'in': {},
-            'out': { 'output_pdb_path': output_pdb_path }
+            'out': {'output_pdb_path': output_pdb_path}
         }
 
         # Properties specific for BB
@@ -84,7 +84,7 @@ class NabBuildDNAStructure(BiobbObject):
         """ Checks input/output paths correctness """
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -94,12 +94,13 @@ class NabBuildDNAStructure(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Creating temporary folder
-        #self.tmp_folder = fu.create_unique_dir()
-        #fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        # self.tmp_folder = fu.create_unique_dir()
+        # fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
         # create .nab file
         # molecule m;
@@ -121,29 +122,29 @@ class NabBuildDNAStructure(BiobbObject):
             fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
-        #instructions_file = str(PurePath(self.tmp_folder).joinpath("nuc.nab"))
+        # instructions_file = str(PurePath(self.tmp_folder).joinpath("nuc.nab"))
         with open(instructions_file, 'w') as nabin:
-                nabin.write("molecule m; \n")
-                nabin.write("m = fd_helix( \"" + self.helix_type + "\", \"" + self.sequence + "\", \"" + acid_type + "\" ); \n")
-                nabin.write("putpdb( \"" + self.stage_io_dict['out']['output_pdb_path'] + "\" , m, \"-wwpdb\");\n")
+            nabin.write("molecule m; \n")
+            nabin.write("m = fd_helix( \"" + self.helix_type + "\", \"" + self.sequence + "\", \"" + acid_type + "\" ); \n")
+            nabin.write("putpdb( \"" + self.stage_io_dict['out']['output_pdb_path'] + "\" , m, \"-wwpdb\");\n")
 
         # Command line
         if self.container_path: 
             nuc_path = self.container_volume_path
             self.cmd = [self.binary_path,
-                '--compile', self.compiler,
-                '-Xlinker', self.linker,
-                instructions_file_path,
-                ' ; ' + nuc_path +'/nuc'
-                ]
-        else: 
+                        '--compile', self.compiler,
+                        '-Xlinker', self.linker,
+                        instructions_file_path,
+                        ' ; ' + nuc_path + '/nuc'
+                        ]
+        else:
             nuc_path = './' + self.tmp_folder
             self.cmd = [self.binary_path,
-                '--compiler', self.compiler,
-                '--linker', self.linker,
-                instructions_file_path,
-                ' ; ' + nuc_path +'/nuc'
-                ]
+                        '--compiler', self.compiler,
+                        '--linker', self.linker,
+                        instructions_file_path,
+                        ' ; ' + nuc_path + '/nuc'
+                        ]
 
         # Run Biobb block
         self.run_biobb()
@@ -164,13 +165,15 @@ class NabBuildDNAStructure(BiobbObject):
 
         return self.return_code
 
+
 def nab_build_dna_structure(output_pdb_path: str,
-           properties: dict = None, **kwargs) -> int:
+                            properties: dict = None, **kwargs) -> int:
     """Create :class:`NabBuildDNAStructure <nab.nab_build_dna_structure.NabBuildDNAStructure>`nab.nab_build_dna_structure.NabBuildDNAStructure class and
     execute :meth:`launch() <nab.nab_build_dna_structure.NabBuildDNAStructure.launch>` method"""
 
-    return NabBuildDNAStructure( output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
+    return NabBuildDNAStructure(output_pdb_path=output_pdb_path,
+                                properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Building a 3D structure from a DNA sequence using nab.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -186,7 +189,8 @@ def main():
 
     # Specific call
     nab_build_dna_structure(output_pdb_path=args.output_pdb_path,
-             properties=properties)
+                            properties=properties)
+
 
 if __name__ == '__main__':
     main()

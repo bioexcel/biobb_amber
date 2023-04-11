@@ -2,13 +2,14 @@
 
 """Module containing the LeapSolvate class and the command line interface."""
 import argparse
-import shutil, re
-from pathlib import Path, PurePath
+import re
+from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.leap.common import *
+from biobb_amber.leap.common import check_input_path, check_output_path
+
 
 class LeapSolvate(BiobbObject):
     """
@@ -75,10 +76,10 @@ class LeapSolvate(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
-    output_top_path: str, output_crd_path: str,
-    input_lib_path: str = None, input_frcmod_path: str = None,
-    input_params_path: str = None, input_source_path: str = None,
-    properties: dict = None, **kwargs):
+                 output_top_path: str, output_crd_path: str,
+                 input_lib_path: str = None, input_frcmod_path: str = None,
+                 input_params_path: str = None, input_source_path: str = None,
+                 properties: dict = None, **kwargs):
 
         properties = properties or {}
 
@@ -88,15 +89,14 @@ class LeapSolvate(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path,
-                    'input_lib_path': input_lib_path,
-                    'input_frcmod_path': input_frcmod_path,
-                    'input_params_path': input_params_path,
-                    'input_source_path': input_source_path
-            },
-            'out': {    'output_pdb_path': output_pdb_path,
-                        'output_top_path': output_top_path,
-                        'output_crd_path': output_crd_path }
+            'in': {'input_pdb_path': input_pdb_path,
+                   'input_lib_path': input_lib_path,
+                   'input_frcmod_path': input_frcmod_path,
+                   'input_params_path': input_params_path,
+                   'input_source_path': input_source_path},
+            'out': {'output_pdb_path': output_pdb_path,
+                    'output_top_path': output_top_path,
+                    'output_crd_path': output_crd_path}
         }
 
         # # Ligand Parameter lists
@@ -110,7 +110,7 @@ class LeapSolvate(BiobbObject):
 
         # Properties specific for BB
         self.properties = properties
-        self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
+        self.forcefield = properties.get('forcefield', ["protein.ff14SB", "DNA.bsc1", "gaff"])
         self.water_type = properties.get('water_type', "TIP3PBOX")
         self.box_type = properties.get('box_type', "truncated_octahedron")
         self.ions_type = properties.get('ions_type', "ionsjc_tip3p")
@@ -135,13 +135,13 @@ class LeapSolvate(BiobbObject):
         self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", False, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_lib_path"] = check_input_path(self.io_dict["in"]["input_lib_path"], "input_lib_path", True, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_frcmod_path"] = check_input_path(self.io_dict["in"]["input_frcmod_path"], "input_frcmod_path", True, out_log, self.__class__.__name__)
-        #self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
-        #self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
+        # self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
+        # self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"],"output_crd_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"], "output_top_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"], "output_crd_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -151,7 +151,8 @@ class LeapSolvate(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         box_command = "solvateOct"
@@ -159,7 +160,7 @@ class LeapSolvate(BiobbObject):
             box_command = "solvateBox"
 
         # Forcefield
-        #source_ff_command = "source leaprc." + self.forcefield
+        # source_ff_command = "source leaprc." + self.forcefield
 
         # Water Type
         # leaprc.water.tip4pew, tip4pd, tip3p, spceb, spce, opc, fb4, fb3
@@ -225,58 +226,58 @@ class LeapSolvate(BiobbObject):
             instructions_file_path = instructions_file
 
         with open(instructions_file, 'w') as leapin:
-                # Forcefields loaded by default:
-                # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
-                #leapin.write("source leaprc.protein.ff14SB \n")
-                # DNA: parmBSC1 (ParmBSC1 (ff99 + bsc0 + bsc1) for DNA. Ivani et al. Nature Methods 13: 55, 2016)
-                #leapin.write("source leaprc.DNA.bsc1 \n")
-                # Ligands: GAFF (General Amber Force field, J. Comput. Chem. 2004 Jul 15;25(9):1157-74)
-                #leapin.write("source leaprc.gaff \n")
+            # Forcefields loaded by default:
+            # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
+            # leapin.write("source leaprc.protein.ff14SB \n")
+            # DNA: parmBSC1 (ParmBSC1 (ff99 + bsc0 + bsc1) for DNA. Ivani et al. Nature Methods 13: 55, 2016)
+            # leapin.write("source leaprc.DNA.bsc1 \n")
+            # Ligands: GAFF (General Amber Force field, J. Comput. Chem. 2004 Jul 15;25(9):1157-74)
+            # leapin.write("source leaprc.gaff \n")
 
-                # Forcefields loaded from input forcefield property
-                for t in self.forcefield:
-                    leapin.write("source leaprc.{}\n".format(t))
+            # Forcefields loaded from input forcefield property
+            for t in self.forcefield:
+                leapin.write("source leaprc.{}\n".format(t))
 
-                # Additional Leap commands
-                for leap_commands in leap_source_list:
-                    leapin.write("source " + leap_commands + "\n")
+            # Additional Leap commands
+            for leap_commands in leap_source_list:
+                leapin.write("source " + leap_commands + "\n")
 
-                # Ions Type
-                if self.ions_type != "None":
-                    leapin.write("loadamberparams frcmod." + self.ions_type + "\n")
+            # Ions Type
+            if self.ions_type != "None":
+                leapin.write("loadamberparams frcmod." + self.ions_type + "\n")
 
-                # Additional Amber parameters
-                for amber_params in amber_params_list:
-                    leapin.write("loadamberparams " + amber_params + "\n")
+            # Additional Amber parameters
+            for amber_params in amber_params_list:
+                leapin.write("loadamberparams " + amber_params + "\n")
 
-                # Water Model loaded from input water_model property
-                leapin.write(source_wat_command + " \n")
+            # Water Model loaded from input water_model property
+            leapin.write(source_wat_command + " \n")
 
-                # Ligand(s) libraries (if any)
-                for amber_lib in ligands_lib_list:
-                    leapin.write("loadOff " + amber_lib + "\n")
-                for amber_frcmod in ligands_frcmod_list:
-                    leapin.write("loadamberparams " + amber_frcmod + "\n")
+            # Ligand(s) libraries (if any)
+            for amber_lib in ligands_lib_list:
+                leapin.write("loadOff " + amber_lib + "\n")
+            for amber_frcmod in ligands_frcmod_list:
+                leapin.write("loadamberparams " + amber_frcmod + "\n")
 
-                # Loading PDB file
-                leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
+            # Loading PDB file
+            leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
 
-                # Generating box + adding water molecules
-                leapin.write(box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule))
-                leapin.write(" iso " + str(self.closeness) + "\n") if self.iso else leapin.write(" " + str(self.closeness) + "\n")
+            # Generating box + adding water molecules
+            leapin.write(box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule))
+            leapin.write(" iso " + str(self.closeness) + "\n") if self.iso else leapin.write(" " + str(self.closeness) + "\n")
 
-                # Adding counterions
-                leapin.write(ions_command)
+            # Adding counterions
+            leapin.write(ions_command)
 
-                # Saving output PDB file, coordinates and topology
-                leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
-                leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
-                leapin.write("quit \n");
+            # Saving output PDB file, coordinates and topology
+            leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
+            leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
+            leapin.write("quit \n")
 
         # Command line
         self.cmd = [self.binary_path,
-               '-f', instructions_file_path
-               ]
+                    '-f', instructions_file_path
+                    ]
 
         # Run Biobb block
         self.run_biobb()
@@ -310,23 +311,25 @@ class LeapSolvate(BiobbObject):
 
         return self.return_code
 
+
 def leap_solvate(input_pdb_path: str, output_pdb_path: str,
-           output_top_path: str, output_crd_path: str,
-           input_lib_path: str = None, input_frcmod_path: str = None,
-           input_params_path: str = None, input_source_path: str = None,
-           properties: dict = None, **kwargs) -> int:
+                 output_top_path: str, output_crd_path: str,
+                 input_lib_path: str = None, input_frcmod_path: str = None,
+                 input_params_path: str = None, input_source_path: str = None,
+                 properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapSolvate <leap.leap_solvate.LeapSolvate>`leap.leap_solvate.LeapSolvate class and
     execute :meth:`launch() <leap.leap_solvate.LeapSolvate.launch>` method"""
 
-    return LeapSolvate( input_pdb_path=input_pdb_path,
-                        input_lib_path=input_lib_path,
-                        input_frcmod_path=input_frcmod_path,
-                        input_params_path=input_params_path,
-                        input_source_path=input_source_path,
-                        output_pdb_path=output_pdb_path,
-                        output_top_path=output_top_path,
-                        output_crd_path=output_crd_path,
-                        properties=properties).launch()
+    return LeapSolvate(input_pdb_path=input_pdb_path,
+                       input_lib_path=input_lib_path,
+                       input_frcmod_path=input_frcmod_path,
+                       input_params_path=input_params_path,
+                       input_source_path=input_source_path,
+                       output_pdb_path=output_pdb_path,
+                       output_top_path=output_top_path,
+                       output_crd_path=output_crd_path,
+                       properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generating and solvating a system box for an AMBER MD system. using tLeap program from AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -348,15 +351,16 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    leap_solvate(    input_pdb_path=args.input_pdb_path,
-                    input_lib_path=args.input_lib_path,
-                    input_frcmod_path=args.input_frcmod_path,
-                    input_params_path=args.input_params_path,
-                    input_source_path=args.input_source_path,
-                    output_pdb_path=args.output_pdb_path,
-                    output_top_path=args.output_top_path,
-                    output_crd_path=args.output_crd_path,
-                    properties=properties)
+    leap_solvate(input_pdb_path=args.input_pdb_path,
+                 input_lib_path=args.input_lib_path,
+                 input_frcmod_path=args.input_frcmod_path,
+                 input_params_path=args.input_params_path,
+                 input_source_path=args.input_source_path,
+                 output_pdb_path=args.output_pdb_path,
+                 output_top_path=args.output_top_path,
+                 output_crd_path=args.output_crd_path,
+                 properties=properties)
+
 
 if __name__ == '__main__':
     main()

@@ -306,6 +306,20 @@ sander_mdrun:
       ioutfm: 0
     remove_tmp: True
 
+sander_mdrun_direct_mdin:
+  paths:
+    input_top_path: file:test_data_dir/sander/cln025.prmtop
+    input_crd_path: file:test_data_dir/sander/cln025.inpcrd
+    input_mdin_path: file:test_data_dir/sander/min.mdin
+    output_traj_path: sander.x
+    ref_output_traj_path: file:test_reference_dir/sander/sander.x
+    output_rst_path: sander.rst
+    ref_output_rst_path: file:test_reference_dir/sander/sander.rst
+    output_log_path: sander.log
+  properties:
+    direct_mdin: True
+    remove_tmp: False
+
 sander_mdrun_docker:
   paths:
     input_top_path: file:test_data_dir/sander/cln025.prmtop

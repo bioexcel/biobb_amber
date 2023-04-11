@@ -2,13 +2,13 @@
 
 """Module containing the LeapGenTop class and the command line interface."""
 import argparse
-import shutil
-from pathlib import Path, PurePath
+from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.leap.common import *
+from biobb_amber.leap.common import check_input_path, check_output_path
+
 
 class LeapGenTop(BiobbObject):
     """
@@ -62,10 +62,10 @@ class LeapGenTop(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
-    output_top_path: str, output_crd_path: str,
-    input_lib_path: str = None, input_frcmod_path: str = None,
-    input_params_path: str = None, input_source_path: str = None,
-    properties: dict = None, **kwargs):
+                 output_top_path: str, output_crd_path: str,
+                 input_lib_path: str = None, input_frcmod_path: str = None,
+                 input_params_path: str = None, input_source_path: str = None,
+                 properties: dict = None, **kwargs):
 
         properties = properties or {}
 
@@ -75,15 +75,14 @@ class LeapGenTop(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_pdb_path': input_pdb_path,
-                    'input_lib_path': input_lib_path,
-                    'input_frcmod_path': input_frcmod_path,
-                    'input_params_path': input_params_path,
-                    'input_source_path': input_source_path
-             },
-            'out': {    'output_pdb_path': output_pdb_path,
-                        'output_top_path': output_top_path,
-                        'output_crd_path': output_crd_path }
+            'in': {'input_pdb_path': input_pdb_path,
+                   'input_lib_path': input_lib_path,
+                   'input_frcmod_path': input_frcmod_path,
+                   'input_params_path': input_params_path,
+                   'input_source_path': input_source_path},
+            'out': {'output_pdb_path': output_pdb_path,
+                    'output_top_path': output_top_path,
+                    'output_crd_path': output_crd_path}
         }
 
         # # Ligand Parameter lists
@@ -97,7 +96,7 @@ class LeapGenTop(BiobbObject):
 
         # Properties specific for BB
         self.properties = properties
-        self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
+        self.forcefield = properties.get('forcefield', ["protein.ff14SB", "DNA.bsc1", "gaff"])
         self.binary_path = properties.get('binary_path', 'tleap')
 
         # Check the properties
@@ -111,13 +110,13 @@ class LeapGenTop(BiobbObject):
         self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", False, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_lib_path"] = check_input_path(self.io_dict["in"]["input_lib_path"], "input_lib_path", True, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_frcmod_path"] = check_input_path(self.io_dict["in"]["input_frcmod_path"], "input_frcmod_path", True, out_log, self.__class__.__name__)
-        #self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
-        #self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
+        # self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
+        # self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"],"output_top_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"],"output_crd_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"], "output_top_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"], "output_crd_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -127,7 +126,8 @@ class LeapGenTop(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         ligands_lib_list = []
@@ -170,47 +170,47 @@ class LeapGenTop(BiobbObject):
             instructions_file_path = instructions_file
 
         with open(instructions_file, 'w') as leapin:
-                # Forcefields loaded by default:
-                # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
-                #leapin.write("source leaprc.protein.ff14SB \n")
-                # DNA: parmBSC1 (ParmBSC1 (ff99 + bsc0 + bsc1) for DNA. Ivani et al. Nature Methods 13: 55, 2016)
-                #leapin.write("source leaprc.DNA.bsc1 \n")
-                # Ligands: GAFF (General Amber Force field, J. Comput. Chem. 2004 Jul 15;25(9):1157-74)
-                #leapin.write("source leaprc.gaff \n")
+            # Forcefields loaded by default:
+            # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
+            # leapin.write("source leaprc.protein.ff14SB \n")
+            # DNA: parmBSC1 (ParmBSC1 (ff99 + bsc0 + bsc1) for DNA. Ivani et al. Nature Methods 13: 55, 2016)
+            # leapin.write("source leaprc.DNA.bsc1 \n")
+            # Ligands: GAFF (General Amber Force field, J. Comput. Chem. 2004 Jul 15;25(9):1157-74)
+            # leapin.write("source leaprc.gaff \n")
 
-                # Forcefields loaded from input forcefield property
-                for t in self.forcefield:
-                    leapin.write("source leaprc.{}\n".format(t))
+            # Forcefields loaded from input forcefield property
+            for t in self.forcefield:
+                leapin.write("source leaprc.{}\n".format(t))
 
-                # Additional Leap commands
-                for leap_commands in leap_source_list:
-                    leapin.write("source " + leap_commands + "\n")
+            # Additional Leap commands
+            for leap_commands in leap_source_list:
+                leapin.write("source " + leap_commands + "\n")
 
-                # Additional Amber parameters
-                for amber_params in amber_params_list:
-                    leapin.write("loadamberparams " + amber_params + "\n")
+            # Additional Amber parameters
+            for amber_params in amber_params_list:
+                leapin.write("loadamberparams " + amber_params + "\n")
 
-                # Ions libraries
-                leapin.write("loadOff atomic_ions.lib \n")
-                
-                # Ligand(s) libraries (if any)
-                for amber_lib in ligands_lib_list:
-                    leapin.write("loadOff " + amber_lib + "\n")
-                for amber_frcmod in ligands_frcmod_list:
-                    leapin.write("loadamberparams " + amber_frcmod + "\n")
+            # Ions libraries
+            leapin.write("loadOff atomic_ions.lib \n")
 
-                # Loading PDB file
-                leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
+            # Ligand(s) libraries (if any)
+            for amber_lib in ligands_lib_list:
+                leapin.write("loadOff " + amber_lib + "\n")
+            for amber_frcmod in ligands_frcmod_list:
+                leapin.write("loadamberparams " + amber_frcmod + "\n")
 
-                # Saving output PDB file, coordinates and topology
-                leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
-                leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
-                leapin.write("quit \n");
+            # Loading PDB file
+            leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
+
+            # Saving output PDB file, coordinates and topology
+            leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
+            leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
+            leapin.write("quit \n")
 
         # Command line
         self.cmd = [self.binary_path,
-               '-f', instructions_file_path
-               ]
+                    '-f', instructions_file_path
+                    ]
 
         # Run Biobb block
         self.run_biobb()
@@ -230,23 +230,25 @@ class LeapGenTop(BiobbObject):
 
         return self.return_code
 
+
 def leap_gen_top(input_pdb_path: str, output_pdb_path: str,
-           output_top_path: str, output_crd_path: str,
-           input_lib_path: str = None, input_frcmod_path: str = None,
-           input_params_path: str = None, input_source_path: str = None,
-           properties: dict = None, **kwargs) -> int:
+                 output_top_path: str, output_crd_path: str,
+                 input_lib_path: str = None, input_frcmod_path: str = None,
+                 input_params_path: str = None, input_source_path: str = None,
+                 properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapGenTop <leap.leap_gen_top.LeapGenTop>`leap.leap_gen_top.LeapGenTop class and
     execute :meth:`launch() <leap.leap_gen_top.LeapGenTop.launch>` method"""
 
-    return LeapGenTop( input_pdb_path=input_pdb_path,
-                        input_lib_path=input_lib_path,
-                        input_frcmod_path=input_frcmod_path,
-                        input_params_path=input_params_path,
-                        input_source_path=input_source_path,
-                        output_pdb_path=output_pdb_path,
-                        output_top_path=output_top_path,
-                        output_crd_path=output_crd_path,
-                        properties=properties).launch()
+    return LeapGenTop(input_pdb_path=input_pdb_path,
+                      input_lib_path=input_lib_path,
+                      input_frcmod_path=input_frcmod_path,
+                      input_params_path=input_params_path,
+                      input_source_path=input_source_path,
+                      output_pdb_path=output_pdb_path,
+                      output_top_path=output_top_path,
+                      output_crd_path=output_crd_path,
+                      properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generating a MD topology from a molecule structure using tLeap program from AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -268,15 +270,16 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    leap_gen_top(     input_pdb_path=args.input_pdb_path,
-                    input_lib_path=args.input_lib_path,
-                    input_frcmod_path=args.input_frcmod_path,
-                    input_params_path=args.input_params_path,
-                    input_source_path=args.input_source_path,
-                    output_pdb_path=args.output_pdb_path,
-                    output_top_path=args.output_top_path,
-                    output_crd_path=args.output_crd_path,
-                    properties=properties)
+    leap_gen_top(input_pdb_path=args.input_pdb_path,
+                 input_lib_path=args.input_lib_path,
+                 input_frcmod_path=args.input_frcmod_path,
+                 input_params_path=args.input_params_path,
+                 input_source_path=args.input_source_path,
+                 output_pdb_path=args.output_pdb_path,
+                 output_top_path=args.output_top_path,
+                 output_crd_path=args.output_crd_path,
+                 properties=properties)
+
 
 if __name__ == '__main__':
     main()

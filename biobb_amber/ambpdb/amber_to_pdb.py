@@ -3,10 +3,10 @@
 """Module containing the AmberToPDB class and the command line interface."""
 import argparse
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
-from biobb_common.tools import file_utils as fu
+from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.ambpdb.common import *
+from biobb_amber.ambpdb.common import check_input_path, check_output_path
+
 
 class AmberToPDB(BiobbObject):
     """
@@ -61,9 +61,9 @@ class AmberToPDB(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_top_path': input_top_path,
-                    'input_crd_path': input_crd_path},
-            'out': { 'output_pdb_path': output_pdb_path }
+            'in': {'input_top_path': input_top_path,
+                   'input_crd_path': input_crd_path},
+            'out': {'output_pdb_path': output_pdb_path}
         }
 
         # Properties specific for BB
@@ -82,7 +82,7 @@ class AmberToPDB(BiobbObject):
         self.io_dict["in"]["input_crd_path"] = check_input_path(self.io_dict["in"]["input_crd_path"], "input_crd_path", False, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -91,17 +91,18 @@ class AmberToPDB(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Command line
         self.cmd = [self.binary_path,
-               '-p', self.stage_io_dict['in']['input_top_path'],
-               '-c', self.stage_io_dict['in']['input_crd_path'],
-               '> ', self.stage_io_dict['out']['output_pdb_path']
-               ]
-               
-         # Run Biobb block
+                    '-p', self.stage_io_dict['in']['input_top_path'],
+                    '-c', self.stage_io_dict['in']['input_crd_path'],
+                    '> ', self.stage_io_dict['out']['output_pdb_path']
+                    ]
+
+        # Run Biobb block
         self.run_biobb()
 
         # Copy files to host
@@ -117,15 +118,17 @@ class AmberToPDB(BiobbObject):
 
         return self.return_code
 
+
 def amber_to_pdb(input_top_path: str, input_crd_path: str, output_pdb_path: str,
-           properties: dict = None, **kwargs) -> int:
+                 properties: dict = None, **kwargs) -> int:
     """Create :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>`amber.amber_to_pdb.AmberToPDB class and
     execute :meth:`launch() <amber.amber_to_pdb.AmberToPDB.launch>` method"""
 
-    return AmberToPDB( input_top_path=input_top_path,
-                        input_crd_path=input_crd_path,
-                        output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
+    return AmberToPDB(input_top_path=input_top_path,
+                      input_crd_path=input_crd_path,
+                      output_pdb_path=output_pdb_path,
+                      properties=properties).launch()
+
 
 def main():
     """Command line execution of this building block. Please check the command line documentation."""
@@ -144,9 +147,10 @@ def main():
 
     # Specific call
     amber_to_pdb(input_top_path=args.input_top_path,
-                input_crd_path=args.input_crd_path,
-                output_pdb_path=args.output_pdb_path,
-                properties=properties)
+                 input_crd_path=args.input_crd_path,
+                 output_pdb_path=args.output_pdb_path,
+                 properties=properties)
+
 
 if __name__ == '__main__':
     main()

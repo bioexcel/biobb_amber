@@ -2,13 +2,13 @@
 
 """Module containing the LeapBuildLinearStructure class and the command line interface."""
 import argparse
-import shutil
-from pathlib import Path, PurePath
+from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.leap.common import *
+from biobb_amber.leap.common import check_output_path
+
 
 class LeapBuildLinearStructure(BiobbObject):
     """
@@ -66,13 +66,13 @@ class LeapBuildLinearStructure(BiobbObject):
         # Input/Output files
         self.io_dict = {
             'in': {},
-            'out': { 'output_pdb_path': output_pdb_path }
+            'out': {'output_pdb_path': output_pdb_path}
         }
 
         # Properties specific for BB
         self.properties = properties
         self.sequence = properties.get('sequence', "ALA GLY SER PRO ARG ALA PRO GLY")
-        self.forcefield = properties.get('forcefield', ["protein.ff14SB","DNA.bsc1","gaff"])
+        self.forcefield = properties.get('forcefield', ["protein.ff14SB", "DNA.bsc1", "gaff"])
         self.build_library = properties.get('build_library', False)
         self.binary_path = properties.get('binary_path', 'tleap')
 
@@ -84,7 +84,7 @@ class LeapBuildLinearStructure(BiobbObject):
         """ Checks input/output paths correctness """
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"],"output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
 
     @launchlogger
     def launch(self):
@@ -94,13 +94,14 @@ class LeapBuildLinearStructure(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # create .in file
-        #TC5b = sequence { NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER }
-        #savepdb TC5b TC5b_linear.pdb
-        #quit
+        # TC5b = sequence { NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER }
+        # savepdb TC5b TC5b_linear.pdb
+        # quit
 
         # Creating temporary folder & Leap configuration (instructions) file
         if self.container_path:
@@ -113,21 +114,21 @@ class LeapBuildLinearStructure(BiobbObject):
             fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
-        #instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+        # instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
         with open(instructions_file, 'w') as leapin:
 
-                # Forcefields loaded from input forcefield property
-                for t in self.forcefield:
-                    leapin.write("source leaprc.{}\n".format(t))
+            # Forcefields loaded from input forcefield property
+            for t in self.forcefield:
+                leapin.write("source leaprc.{}\n".format(t))
 
-                leapin.write("struct = sequence {" + self.sequence + " } \n")
-                leapin.write("savepdb struct " + self.stage_io_dict['out']['output_pdb_path'] + "\n")
-                leapin.write("quit \n");
+            leapin.write("struct = sequence {" + self.sequence + " } \n")
+            leapin.write("savepdb struct " + self.stage_io_dict['out']['output_pdb_path'] + "\n")
+            leapin.write("quit \n")
 
         # Command line
         self.cmd = [self.binary_path,
-               '-f', instructions_file_path
-               ]
+                    '-f', instructions_file_path
+                    ]
 
         # Run Biobb block
         self.run_biobb()
@@ -147,14 +148,15 @@ class LeapBuildLinearStructure(BiobbObject):
 
         return self.return_code
 
+
 def leap_build_linear_structure(output_pdb_path: str,
-           properties: dict = None, **kwargs) -> int:
+                                properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>`leap.leap_build_linear_structure.LeapBuildLinearStructure class and
     execute :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method"""
 
-    return LeapBuildLinearStructure(
-                        output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
+    return LeapBuildLinearStructure(output_pdb_path=output_pdb_path,
+                                    properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Building a linear (unfolded) 3D structure from an AA sequence.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -170,7 +172,8 @@ def main():
 
     # Specific call
     leap_build_linear_structure(output_pdb_path=args.output_pdb_path,
-             properties=properties)
+                                properties=properties)
+
 
 if __name__ == '__main__':
     main()

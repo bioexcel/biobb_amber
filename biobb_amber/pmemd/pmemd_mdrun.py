@@ -2,13 +2,14 @@
 
 """Module containing the PmemdMDRun class and the command line interface."""
 import argparse
-import shutil, re
-from pathlib import Path, PurePath
+import re
+from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.pmemd.common import *
+from biobb_amber.pmemd.common import check_input_path, check_output_path
+
 
 class PmemdMDRun(BiobbObject):
     """
@@ -78,17 +79,17 @@ class PmemdMDRun(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_top_path': input_top_path,
-                    'input_crd_path': input_crd_path,
-                    'input_mdin_path': input_mdin_path,
-                    'input_ref_path': input_ref_path,
-                    'input_cpin_path': input_cpin_path },
-            'out': {    'output_log_path': output_log_path,
-                        'output_traj_path': output_traj_path,
-                        'output_rst_path': output_rst_path,
-                        'output_cpout_path': output_cpout_path,
-                        'output_cprst_path': output_cprst_path,
-                        'output_mdinfo_path': output_mdinfo_path }
+            'in': {'input_top_path': input_top_path,
+                   'input_crd_path': input_crd_path,
+                   'input_mdin_path': input_mdin_path,
+                   'input_ref_path': input_ref_path,
+                   'input_cpin_path': input_cpin_path},
+            'out': {'output_log_path': output_log_path,
+                    'output_traj_path': output_traj_path,
+                    'output_rst_path': output_rst_path,
+                    'output_cpout_path': output_cpout_path,
+                    'output_cprst_path': output_cprst_path,
+                    'output_mdinfo_path': output_mdinfo_path}
         }
 
         # Properties specific for BB
@@ -117,12 +118,12 @@ class PmemdMDRun(BiobbObject):
         self.io_dict["in"]["input_ref_path"] = check_input_path(self.io_dict["in"]["input_ref_path"], "input_ref_path", True, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"],"output_log_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"],"output_traj_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"],"output_rst_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cpout_path"] = check_output_path(self.io_dict["out"]["output_cpout_path"],"output_cpout_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"],"output_cprst_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"],"output_mdinfo_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"], "output_log_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"], "output_traj_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"], "output_rst_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cpout_path"] = check_output_path(self.io_dict["out"]["output_cpout_path"], "output_cpout_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"], "output_cprst_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"], "output_mdinfo_path", True, out_log, self.__class__.__name__)
 
     def create_mdin(self, path: str = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""
@@ -147,7 +148,7 @@ class PmemdMDRun(BiobbObject):
                     else:
                         if (firstPart):
                             mdin_firstPart.append(line.rstrip())
-                        elif(secondPart):
+                        elif (secondPart):
                             mdin_lastPart.append(line.rstrip())
                         else:
                             secondPart = True
@@ -157,7 +158,7 @@ class PmemdMDRun(BiobbObject):
                 if ('!' in line or '#' in line) and not ('!@' in line or '!:' in line):
                     # Parsing lines with comments (#,!), e.g. :
                     # ntc=2, ntf=2, ! SHAKE, constrain lenghts of the bonds having H
-                    params = re.split('!|#',line)
+                    params = re.split('!|#', line)
                     for param in params[0].split(','):
                         if param.strip():
                             mdin_list.append("  " + param.strip() + " ! " + params[1])
@@ -177,7 +178,7 @@ class PmemdMDRun(BiobbObject):
             mdin_list.append("This mdin file has been created by the biobb_amber module from the BioBB library ")
 
             sim_type = self.properties.get('simulation_type', 'minimization')
-            #sim_type = self.mdin.get('simulation_type', 'minimization')
+            # sim_type = self.mdin.get('simulation_type', 'minimization')
             minimization = (sim_type == 'minimization')
             min_vacuo = (sim_type == 'min_vacuo')
             heat = (sim_type == 'heat')
@@ -226,21 +227,21 @@ class PmemdMDRun(BiobbObject):
                 mdin_list.append("  tempi = 0.0 ! BioBB simulation_type heat")
                 mdin_list.append("  temp0 = 300.0 ! BioBB simulation_type heat")
                 mdin_list.append("  irest = 0 ! BioBB simulation_type heat")
-                mdin_list.append("  ntb = 1 ! BioBB simulation_type heat") #periodic boundaries
+                mdin_list.append("  ntb = 1 ! BioBB simulation_type heat")  # periodic boundaries
                 mdin_list.append("  gamma_ln = 1.0 ! BioBB simulation_type heat")
-                #mdin_list.append("  nmropt = 1 ! BioBB simulation_type heat")
+                # mdin_list.append("  nmropt = 1 ! BioBB simulation_type heat")
 
-                #mdin_lastPart.append("/")
-                #mdin_lastPart.append("&wt")
-                #mdin_lastPart.append(" TYPE = 'TEMP0' ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" ISTEP1 = 1 ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" ISTEP2 = 4000 ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" VALUE1 = 10.0 ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" VALUE2 = 300.0 ! BioBB simulation_type heat")
-                #mdin_lastPart.append("/")
-                #mdin_lastPart.append("&wt")
-                #mdin_lastPart.append(" TYPE = 'END' ! BioBB simulation_type heat")
-                #mdin_lastPart.append("/")
+                # mdin_lastPart.append("/")
+                # mdin_lastPart.append("&wt")
+                # mdin_lastPart.append(" TYPE = 'TEMP0' ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" ISTEP1 = 1 ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" ISTEP2 = 4000 ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" VALUE1 = 10.0 ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" VALUE2 = 300.0 ! BioBB simulation_type heat")
+                # mdin_lastPart.append("/")
+                # mdin_lastPart.append("&wt")
+                # mdin_lastPart.append(" TYPE = 'END' ! BioBB simulation_type heat")
+                # mdin_lastPart.append("/")
 
         # Adding the rest of parameters in the config file to the mdin file
         # if the parameter has already been added replace the value
@@ -280,30 +281,31 @@ class PmemdMDRun(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Creating temporary folder
         self.tmp_folder = fu.create_unique_dir()
         fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
-        #if self.io_dict['in']['input_mdin_path']:
+        # if self.io_dict['in']['input_mdin_path']:
         #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
-        #else:
+        # else:
         #    self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("pmemd.mdin")))
         self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("pmemd.mdin")))
 
         # Command line
         # pmemd -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
         self.cmd = [self.binary_path,
-               '-O',
-               '-i', self.output_mdin_path,
-               '-p', self.io_dict['in']['input_top_path'],
-               '-c', self.io_dict['in']['input_crd_path'],
-               '-r', self.io_dict['out']['output_rst_path'],
-               '-o', self.io_dict['out']['output_log_path'],
-               '-x', self.io_dict['out']['output_traj_path']
-               ]
+                    '-O',
+                    '-i', self.output_mdin_path,
+                    '-p', self.io_dict['in']['input_top_path'],
+                    '-c', self.io_dict['in']['input_crd_path'],
+                    '-r', self.io_dict['out']['output_rst_path'],
+                    '-o', self.io_dict['out']['output_log_path'],
+                    '-x', self.io_dict['out']['output_traj_path']
+                    ]
 
         if self.io_dict['in']['input_ref_path']:
             self.cmd.append('-ref')
@@ -353,27 +355,29 @@ class PmemdMDRun(BiobbObject):
 
         return self.return_code
 
+
 def pmemd_mdrun(input_top_path: str, input_crd_path: str,
-            output_log_path: str, output_traj_path: str, output_rst_path: str,
-            input_mdin_path: str = None, input_cpin_path: str = None,
-            output_cpout_path: str = None, output_cprst_path: str = None,
-            output_mdinfo_path: str = None, input_ref_path: str=None,
-            properties: dict = None, **kwargs) -> int:
+                output_log_path: str, output_traj_path: str, output_rst_path: str,
+                input_mdin_path: str = None, input_cpin_path: str = None,
+                output_cpout_path: str = None, output_cprst_path: str = None,
+                output_mdinfo_path: str = None, input_ref_path: str = None,
+                properties: dict = None, **kwargs) -> int:
     """Create :class:`PmemdMDRun <pmemd.pmemd_mdrun.PmemdMDRun>`pmemd.pmemd_mdrun.PmemdMDRun class and
     execute :meth:`launch() <pmemd.pmemd_mdrun.PmemdMDRun.launch>` method"""
 
-    return PmemdMDRun( input_top_path=input_top_path,
-                    input_crd_path=input_crd_path,
-                    input_mdin_path=input_mdin_path,
-                    input_cpin_path=input_cpin_path,
-                    input_ref_path=input_ref_path,
-                    output_log_path=output_log_path,
-                    output_traj_path=output_traj_path,
-                    output_rst_path=output_rst_path,
-                    output_cpout_path=output_cpout_path,
-                    output_cprst_path=output_cprst_path,
-                    output_mdinfo_path=output_mdinfo_path,
-                    properties=properties).launch()
+    return PmemdMDRun(input_top_path=input_top_path,
+                      input_crd_path=input_crd_path,
+                      input_mdin_path=input_mdin_path,
+                      input_cpin_path=input_cpin_path,
+                      input_ref_path=input_ref_path,
+                      output_log_path=output_log_path,
+                      output_traj_path=output_traj_path,
+                      output_rst_path=output_rst_path,
+                      output_cpout_path=output_cpout_path,
+                      output_cprst_path=output_cprst_path,
+                      output_mdinfo_path=output_mdinfo_path,
+                      properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Running molecular dynamics using pmemd tool from the AMBER MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -398,18 +402,19 @@ def main():
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    pmemd_mdrun(    input_top_path=args.input_top_path,
-                    input_crd_path=args.input_crd_path,
-                    input_mdin_path=args.input_mdin_path,
-                    input_cpin_path=args.input_cpin_path,
-                    input_ref_path=args.input_ref_path,
-                    output_log_path=args.output_log_path,
-                    output_traj_path=args.output_traj_path,
-                    output_rst_path=args.output_rst_path,
-                    output_cpout_path=args.output_cpout_path,
-                    output_cprst_path=args.output_cprst_path,
-                    output_mdinfo_path=args.output_mdinfo_path,
-                    properties=properties)
+    pmemd_mdrun(input_top_path=args.input_top_path,
+                input_crd_path=args.input_crd_path,
+                input_mdin_path=args.input_mdin_path,
+                input_cpin_path=args.input_cpin_path,
+                input_ref_path=args.input_ref_path,
+                output_log_path=args.output_log_path,
+                output_traj_path=args.output_traj_path,
+                output_rst_path=args.output_rst_path,
+                output_cpout_path=args.output_cpout_path,
+                output_cprst_path=args.output_cprst_path,
+                output_mdinfo_path=args.output_mdinfo_path,
+                properties=properties)
+
 
 if __name__ == '__main__':
     main()

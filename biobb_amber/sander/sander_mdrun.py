@@ -2,13 +2,15 @@
 
 """Module containing the SanderMDRun class and the command line interface."""
 import argparse
-import shutil, re
+import shutil
+import re
 from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import  settings
+from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.sander.common import *
+from biobb_amber.sander.common import check_input_path, check_output_path 
+
 
 class SanderMDRun(BiobbObject):
     """
@@ -32,6 +34,7 @@ class SanderMDRun(BiobbObject):
             * **mdin** (*dict*) - ({}) Sander MD run options specification. (Used if *input_mdin_path* is None)
             * **simulation_type** (*str*) - ("minimization") Default options for the mdin file. Each creates a different mdin file. Values: `minimization <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min.mdin>`_ (Runs an energy minimization), `min_vacuo <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/min_vacuo.mdin>`_ (Runs an energy minimization in vacuo), `NVT <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/nvt.mdin>`_ (Runs an NVT equilibration), `npt <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/npt.mdin>`_ (Runs an NPT equilibration), `free <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/free.mdin>`_ (Runs a MD simulation), `heat <https://biobb-amber.readthedocs.io/en/latest/_static/mdins/heat.mdin>`_ (Heats the MD system).
             * **binary_path** (*str*) - ("sander") sander binary path to be used.
+            * **direct_mdin** (*bool*) - (False) Use input_mdin_path as it is, skip file parsing.
             * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
             * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
             * **mpi_flags** (*str*) - (None) Path to the MPI hostlist file.
@@ -43,7 +46,7 @@ class SanderMDRun(BiobbObject):
             * **container_working_dir** (*str*) - (None) Container working directory definition.
             * **container_user_id** (*str*) - (None) Container user_id definition.
             * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
-            
+
     Examples:
         This is a use example of how to use the building block from Python::
 
@@ -84,23 +87,25 @@ class SanderMDRun(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': { 'input_top_path': input_top_path,
-                    'input_crd_path': input_crd_path,
-                    'input_mdin_path': input_mdin_path,
-                    'input_ref_path': input_ref_path,
-                    'input_cpin_path': input_cpin_path },
-            'out': {    'output_log_path': output_log_path,
-                        'output_traj_path': output_traj_path,
-                        'output_rst_path': output_rst_path,
-                        'output_cpout_path': output_cpout_path,
-                        'output_cprst_path': output_cprst_path,
-                        'output_mdinfo_path': output_mdinfo_path }
+            'in': {'input_top_path': input_top_path,
+                   'input_crd_path': input_crd_path,
+                   'input_mdin_path': input_mdin_path,
+                   'input_ref_path': input_ref_path,
+                   'input_cpin_path': input_cpin_path},
+            'out': {'output_log_path': output_log_path,
+                    'output_traj_path': output_traj_path,
+                    'output_rst_path': output_rst_path,
+                    'output_cpout_path': output_cpout_path,
+                    'output_cprst_path': output_cprst_path,
+                    'output_mdinfo_path': output_mdinfo_path}
         }
 
         # Properties specific for BB
         self.properties = properties
         self.simulation_type = properties.get('simulation_type', "minimization")
         self.binary_path = properties.get('binary_path', "sander")
+
+        self.direct_mdin = properties.get('direct_mdin', False)
         self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
 
         if 'restraintmask' in self.mdin and self.mdin['restraintmask'][0] != '"' and self.mdin['restraintmask'][-1] != '"':
@@ -126,12 +131,12 @@ class SanderMDRun(BiobbObject):
         self.io_dict["in"]["input_ref_path"] = check_input_path(self.io_dict["in"]["input_ref_path"], "input_ref_path", True, out_log, self.__class__.__name__)
 
         # Check output(s)
-        self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"],"output_log_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"],"output_traj_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"],"output_rst_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cpout_path"] = check_output_path(self.io_dict["out"]["output_cpout_path"],"output_cpout_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"],"output_cprst_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"],"output_mdinfo_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"], "output_log_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"], "output_traj_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"], "output_rst_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cpout_path"] = check_output_path(self.io_dict["out"]["output_cpout_path"], "output_cpout_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"], "output_cprst_path", True, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"], "output_mdinfo_path", True, out_log, self.__class__.__name__)
 
     def create_mdin(self, path: str = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""
@@ -144,49 +149,50 @@ class SanderMDRun(BiobbObject):
 
         if self.io_dict['in']['input_mdin_path']:
             # MDIN parameters read from an input mdin file
-            mdin_firstPart.append("Mdin read from input file: " + self.stage_io_dict['in']['input_mdin_path'])
-            mdin_firstPart.append("and modified by the biobb_amber module from the BioBB library ")
-            with open(self.stage_io_dict['in']['input_mdin_path']) as input_params:
-                firstPart = True
-                secondPart = False
-                for line in input_params:
-                    if '=' in line and not secondPart:
-                        firstPart = False
-                        mdin_middlePart.append(line.rstrip())
-                    else:
-                        if (firstPart):
-                            mdin_firstPart.append(line.rstrip())
-                        elif(secondPart):
-                            mdin_lastPart.append(line.rstrip())
+            if (not self.direct_mdin):
+                mdin_firstPart.append("Mdin read from input file: " + self.stage_io_dict['in']['input_mdin_path'])
+                mdin_firstPart.append("and modified by the biobb_amber module from the BioBB library ")
+                with open(self.stage_io_dict['in']['input_mdin_path']) as input_params:
+                    firstPart = True
+                    secondPart = False
+                    for line in input_params:
+                        if '=' in line and not secondPart:
+                            firstPart = False
+                            mdin_middlePart.append(line.rstrip())
                         else:
-                            secondPart = True
-                            mdin_lastPart.append(line.rstrip())
+                            if (firstPart):
+                                mdin_firstPart.append(line.rstrip())
+                            elif (secondPart):
+                                mdin_lastPart.append(line.rstrip())
+                            else:
+                                secondPart = True
+                                mdin_lastPart.append(line.rstrip())
 
-            for line in mdin_middlePart:
-                if ('!' in line or '#' in line) and not ('!@' in line or '!:' in line):
-                    # Parsing lines with comments (#,!), e.g. :
-                    # ntc=2, ntf=2, ! SHAKE, constrain lenghts of the bonds having H
-                    params = re.split('!|#',line)
-                    for param in params[0].split(','):
-                        if param.strip():
-                            mdin_list.append("  " + param.strip() + " ! " + params[1])
-                elif ('@' in line or ':' in line):
-                    # Parsing masks, e.g. :
-                    # restraintmask = ":1-40@P,O5',C5',C4',C3',O3'", restraint_wt = 0.5
-                    mylist = re.findall(r'(?:[^,"]|"(?:\\.|[^"])*")+', line)
-                    [mdin_list.append("  " + i.lstrip()) for i in mylist]
-                else:
-                    for param in line.split(','):
-                        if param.strip():
-                            if not param.strip().startswith('!'):
-                                mdin_list.append("  " + param.strip())
+                for line in mdin_middlePart:
+                    if ('!' in line or '#' in line) and not ('!@' in line or '!:' in line):
+                        # Parsing lines with comments (#,!), e.g. :
+                        # ntc=2, ntf=2, ! SHAKE, constrain lenghts of the bonds having H
+                        params = re.split('!|#', line)
+                        for param in params[0].split(','):
+                            if param.strip():
+                                mdin_list.append("  " + param.strip() + " ! " + params[1])
+                    elif ('@' in line or ':' in line):
+                        # Parsing masks, e.g. :
+                        # restraintmask = ":1-40@P,O5',C5',C4',C3',O3'", restraint_wt = 0.5
+                        mylist = re.findall(r'(?:[^,"]|"(?:\\.|[^"])*")+', line)
+                        [mdin_list.append("  " + i.lstrip()) for i in mylist]
+                    else:
+                        for param in line.split(','):
+                            if param.strip():
+                                if not param.strip().startswith('!'):
+                                    mdin_list.append("  " + param.strip())
 
         else:
             # MDIN parameters added by the biobb_amber module
             mdin_list.append("This mdin file has been created by the biobb_amber module from the BioBB library ")
 
             sim_type = self.properties.get('simulation_type', 'minimization')
-            #sim_type = self.mdin.get('simulation_type', 'minimization')
+            # sim_type = self.mdin.get('simulation_type', 'minimization')
             minimization = (sim_type == 'minimization')
             min_vacuo = (sim_type == 'min_vacuo')
             heat = (sim_type == 'heat')
@@ -235,49 +241,54 @@ class SanderMDRun(BiobbObject):
                 mdin_list.append("  tempi = 0.0 ! BioBB simulation_type heat")
                 mdin_list.append("  temp0 = 300.0 ! BioBB simulation_type heat")
                 mdin_list.append("  irest = 0 ! BioBB simulation_type heat")
-                mdin_list.append("  ntb = 1 ! BioBB simulation_type heat") #periodic boundaries
+                mdin_list.append("  ntb = 1 ! BioBB simulation_type heat")  # periodic boundaries
                 mdin_list.append("  gamma_ln = 1.0 ! BioBB simulation_type heat")
-                #mdin_list.append("  nmropt = 1 ! BioBB simulation_type heat")
+                # mdin_list.append("  nmropt = 1 ! BioBB simulation_type heat")
 
-                #mdin_lastPart.append("/")
-                #mdin_lastPart.append("&wt")
-                #mdin_lastPart.append(" TYPE = 'TEMP0' ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" ISTEP1 = 1 ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" ISTEP2 = 4000 ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" VALUE1 = 10.0 ! BioBB simulation_type heat")
-                #mdin_lastPart.append(" VALUE2 = 300.0 ! BioBB simulation_type heat")
-                #mdin_lastPart.append("/")
-                #mdin_lastPart.append("&wt")
-                #mdin_lastPart.append(" TYPE = 'END' ! BioBB simulation_type heat")
-                #mdin_lastPart.append("/")
+                # mdin_lastPart.append("/")
+                # mdin_lastPart.append("&wt")
+                # mdin_lastPart.append(" TYPE = 'TEMP0' ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" ISTEP1 = 1 ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" ISTEP2 = 4000 ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" VALUE1 = 10.0 ! BioBB simulation_type heat")
+                # mdin_lastPart.append(" VALUE2 = 300.0 ! BioBB simulation_type heat")
+                # mdin_lastPart.append("/")
+                # mdin_lastPart.append("&wt")
+                # mdin_lastPart.append(" TYPE = 'END' ! BioBB simulation_type heat")
+                # mdin_lastPart.append("/")
 
-        # Adding the rest of parameters in the config file to the mdin file
-        # if the parameter has already been added replace the value
-        parameter_keys = [parameter.split('=')[0].strip() for parameter in mdin_list]
-        for k, v in self.mdin.items():
-            config_parameter_key = str(k).strip()
-            if config_parameter_key in parameter_keys:
-                mdin_list[parameter_keys.index(config_parameter_key)] = '  ' + config_parameter_key + ' = ' + str(v) + ' ! BioBB property'
-            else:
-                mdin_list.append('  ' + config_parameter_key + ' = '+str(v) + ' ! BioBB property')
+        if (not self.direct_mdin):
 
-        # Writing MD configuration file (mdin)
-        with open(self.output_mdin_path, 'w') as mdin:
-            # Start of file keyword(s)
-            if mdin_firstPart:
-                for line in mdin_firstPart:
+            # Adding the rest of parameters in the config file to the mdin file
+            # if the parameter has already been added replace the value
+            parameter_keys = [parameter.split('=')[0].strip() for parameter in mdin_list]
+            for k, v in self.mdin.items():
+                config_parameter_key = str(k).strip()
+                if config_parameter_key in parameter_keys:
+                    mdin_list[parameter_keys.index(config_parameter_key)] = '  ' + config_parameter_key + ' = ' + str(v) + ' ! BioBB property'
+                else:
+                    mdin_list.append('  ' + config_parameter_key + ' = '+str(v) + ' ! BioBB property')
+
+            # Writing MD configuration file (mdin)
+            with open(self.output_mdin_path, 'w') as mdin:
+                # Start of file keyword(s)
+                if mdin_firstPart:
+                    for line in mdin_firstPart:
+                        mdin.write(line + '\n')
+
+                # MD config parameters
+                for line in mdin_list:
                     mdin.write(line + '\n')
 
-            # MD config parameters
-            for line in mdin_list:
-                mdin.write(line + '\n')
-
-            # End of file keyword(s)
-            if mdin_lastPart:
-                for line in mdin_lastPart:
-                    mdin.write(line + '\n')
-            else:
-                mdin.write("&end\n")
+                # End of file keyword(s)
+                if mdin_lastPart:
+                    for line in mdin_lastPart:
+                        mdin.write(line + '\n')
+                else:
+                    mdin.write("&end\n")
+        else:
+            # Copying generated output file to the final (user-given) file name
+            shutil.copy2(self.io_dict['in']['input_mdin_path'], self.output_mdin_path)
 
         return self.output_mdin_path
 
@@ -289,24 +300,24 @@ class SanderMDRun(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         # Creating temporary folder
-        #self.tmp_folder = fu.create_unique_dir()
-        #fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        # self.tmp_folder = fu.create_unique_dir()
+        # fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
 
-        #if self.io_dict['in']['input_mdin_path']:
+        # if self.io_dict['in']['input_mdin_path']:
         #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
-        #else:
+        # else:
         #    self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
-        
-        #self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+        # self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
 
         # Creating temporary folder & Sander configuration (instructions) file
         if self.container_path:
-            #instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
-            #instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+            # instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
+            # instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
             instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("sander.mdin")))
             self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
             self.tmp_folder = None
@@ -318,14 +329,14 @@ class SanderMDRun(BiobbObject):
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
         self.cmd = [self.binary_path,
-               '-O',
-               '-i', self.output_mdin_path,
-               '-p', self.stage_io_dict['in']['input_top_path'],
-               '-c', self.stage_io_dict['in']['input_crd_path'],
-               '-r', self.stage_io_dict['out']['output_rst_path'],
-               '-o', self.stage_io_dict['out']['output_log_path'],
-               '-x', self.stage_io_dict['out']['output_traj_path']
-               ]
+                    '-O',
+                    '-i', self.output_mdin_path,
+                    '-p', self.stage_io_dict['in']['input_top_path'],
+                    '-c', self.stage_io_dict['in']['input_crd_path'],
+                    '-r', self.stage_io_dict['out']['output_rst_path'],
+                    '-o', self.stage_io_dict['out']['output_log_path'],
+                    '-x', self.stage_io_dict['out']['output_traj_path']
+                    ]
 
         if self.io_dict['in']['input_ref_path']:
             self.cmd.append('-ref')
@@ -366,7 +377,7 @@ class SanderMDRun(BiobbObject):
         # remove temporary folder(s)
         '''if self.remove_tmp:
             if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
-            else: 
+            else:
                 self.tmp_files.append(self.tmp_folder)
                 self.tmp_files.append("mdinfo")
             self.remove_tmp_files()'''
@@ -382,27 +393,29 @@ class SanderMDRun(BiobbObject):
 
         return self.return_code
 
+
 def sander_mdrun(input_top_path: str, input_crd_path: str,
-            output_log_path: str, output_traj_path: str, output_rst_path: str,
-            input_mdin_path: str = None, input_cpin_path: str = None,
-            output_cpout_path: str = None, output_cprst_path: str = None,
-            output_mdinfo_path: str = None, input_ref_path: str=None,
-            properties: dict = None, **kwargs) -> int:
+                 output_log_path: str, output_traj_path: str, output_rst_path: str,
+                 input_mdin_path: str = None, input_cpin_path: str = None,
+                 output_cpout_path: str = None, output_cprst_path: str = None,
+                 output_mdinfo_path: str = None, input_ref_path: str = None,
+                 properties: dict = None, **kwargs) -> int:
     """Create :class:`SanderMDRun <sander.sander_mdrun.SanderMDRun>`sander.sander_mdrun.SanderMDRun class and
     execute :meth:`launch() <sander.sander_mdrun.SanderMDRun.launch>` method"""
 
-    return SanderMDRun( input_top_path=input_top_path,
-                    input_crd_path=input_crd_path,
-                    input_mdin_path=input_mdin_path,
-                    input_cpin_path=input_cpin_path,
-                    input_ref_path=input_ref_path,
-                    output_log_path=output_log_path,
-                    output_traj_path=output_traj_path,
-                    output_rst_path=output_rst_path,
-                    output_cpout_path=output_cpout_path,
-                    output_cprst_path=output_cprst_path,
-                    output_mdinfo_path=output_mdinfo_path,
-                    properties=properties).launch()
+    return SanderMDRun(input_top_path=input_top_path,
+                       input_crd_path=input_crd_path,
+                       input_mdin_path=input_mdin_path,
+                       input_cpin_path=input_cpin_path,
+                       input_ref_path=input_ref_path,
+                       output_log_path=output_log_path,
+                       output_traj_path=output_traj_path,
+                       output_rst_path=output_rst_path,
+                       output_cpout_path=output_cpout_path,
+                       output_cprst_path=output_cprst_path,
+                       output_mdinfo_path=output_mdinfo_path,
+                       properties=properties).launch()
+
 
 def main():
     parser = argparse.ArgumentParser(description='Running energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
@@ -412,41 +425,42 @@ def main():
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('--input_top_path', required=True, help='Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.')
     required_args.add_argument('--input_crd_path', required=True, help='Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.')
-    #required_args.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
+    # required_args.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
     parser.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
-    #required_args.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
+    # required_args.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
     parser.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
-    #required_args.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
+    # required_args.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
     parser.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
     required_args.add_argument('--output_log_path', required=True, help='Output log file. Accepted formats: log, out, txt.')
     required_args.add_argument('--output_traj_path', required=True, help='Output trajectory file. Accepted formats: trj, crd, mdcrd, x.')
     required_args.add_argument('--output_rst_path', required=True, help='Output restart file. Accepted formats: rst, rst7.')
-    #required_args.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
+    # required_args.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
     parser.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
-    #required_args.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
+    # required_args.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
     parser.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
-    #required_args.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
+    # required_args.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
     parser.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
 
     args = parser.parse_args()
-    #config = args.config if args.config else None
+    # config = args.config if args.config else None
     args.config = args.config or "{}"
-    #properties = settings.ConfReader(config=config).get_prop_dic()
+    # properties = settings.ConfReader(config=config).get_prop_dic()
     properties = settings.ConfReader(config=args.config).get_prop_dic()
 
     # Specific call
-    sander_mdrun(    input_top_path=args.input_top_path,
-                    input_crd_path=args.input_crd_path,
-                    input_mdin_path=args.input_mdin_path,
-                    input_cpin_path=args.input_cpin_path,
-                    input_ref_path=args.input_ref_path,
-                    output_log_path=args.output_log_path,
-                    output_traj_path=args.output_traj_path,
-                    output_rst_path=args.output_rst_path,
-                    output_cpout_path=args.output_cpout_path,
-                    output_cprst_path=args.output_cprst_path,
-                    output_mdinfo_path=args.output_mdinfo_path,
-                    properties=properties)
+    sander_mdrun(input_top_path=args.input_top_path,
+                 input_crd_path=args.input_crd_path,
+                 input_mdin_path=args.input_mdin_path,
+                 input_cpin_path=args.input_cpin_path,
+                 input_ref_path=args.input_ref_path,
+                 output_log_path=args.output_log_path,
+                 output_traj_path=args.output_traj_path,
+                 output_rst_path=args.output_rst_path,
+                 output_cpout_path=args.output_cpout_path,
+                 output_cprst_path=args.output_cprst_path,
+                 output_mdinfo_path=args.output_mdinfo_path,
+                 properties=properties)
+
 
 if __name__ == '__main__':
     main()
