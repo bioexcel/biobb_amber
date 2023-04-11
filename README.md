@@ -1,12 +1,12 @@
 [![](https://img.shields.io/github/v/tag/bioexcel/biobb_amber?label=Version)](https://GitHub.com/bioexcel/biobb_amber/tags/)
-[![](https://img.shields.io/pypi/v/biobb-analysis.svg?label=Pypi)](https://pypi.python.org/pypi/biobb-analysis/)
+[![](https://img.shields.io/pypi/v/biobb-amber.svg?label=Pypi)](https://pypi.python.org/pypi/biobb-amber/)
 [![](https://img.shields.io/conda/vn/bioconda/biobb_amber?label=Conda)](https://anaconda.org/bioconda/biobb_amber)
 [![](https://img.shields.io/conda/dn/bioconda/biobb_amber?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_amber)
 [![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_amber?tab=tags)
 [![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_amber:4.0.0--pyhdfd78af_0)
 
 [![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_amber)
-[![](https://img.shields.io/pypi/pyversions/biobb-analysis.svg?label=Python%20Versions)](https://pypi.org/project/biobb-analysis/)
+[![](https://img.shields.io/pypi/pyversions/biobb-amber.svg?label=Python%20Versions)](https://pypi.org/project/biobb-amber/)
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![](https://img.shields.io/badge/Open%20Source%3f-Yes!-blue)](https://github.com/bioexcel/biobb_amber)
 
