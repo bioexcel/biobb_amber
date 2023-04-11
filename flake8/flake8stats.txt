@@ -1,36 +1,11 @@
-5     E101 indentation contains mixed spaces and tabs
-6     E111 indentation is not a multiple of 4
-5     E114 indentation is not a multiple of 4 (comment)
-1     E116 unexpected indentation (comment)
-31    E117 over-indented
-5     E122 continuation line missing indentation or outdented
-20    E124 closing bracket does not match visual indentation
-1     E125 continuation line with same indent as next logical line
-2     E126 continuation line over-indented for hanging indent
-16    E127 continuation line over-indented for visual indent
-218   E128 continuation line under-indented for visual indent
-53    E201 whitespace after '{'
-24    E202 whitespace before '}'
-9     E225 missing whitespace around operator
-174   E231 missing whitespace after ','
-8     E252 missing whitespace around parameter equals
-5     E261 at least two spaces before inline comment
-2     E262 inline comment should start with '# '
-108   E265 block comment should start with '# '
-15    E271 multiple spaces after keyword
-3     E275 missing whitespace after keyword
-121   E302 expected 2 blank lines, found 1
+5     E231 missing whitespace after ','
+20    E265 block comment should start with '# '
+41    E302 expected 2 blank lines, found 1
 1     E303 too many blank lines (2)
-30    E305 expected 2 blank lines after class or function definition, found 1
-9     E401 multiple imports on one line
-14    E402 module level import not at top of file
-16    E701 multiple statements on one line (colon)
-5     E703 statement ends with a semicolon
-46    F401 'biobb_common.tools.file_utils as fu' imported but unused
-16    F403 'from biobb_amber.ambpdb.common import *' used; unable to detect undefined names
-76    F405 'check_input_path' may be undefined, or defined from star imports: biobb_amber.ambpdb.common
-311   W191 indentation contains tabs
-3     W291 trailing whitespace
+13    E305 expected 2 blank lines after class or function definition, found 1
+13    E402 module level import not at top of file
+1     E701 multiple statements on one line (colon)
+2     W291 trailing whitespace
 3     W292 no newline at end of file
-6     W293 blank line contains whitespace
-3     W391 blank line at end of file
+1     W293 blank line contains whitespace
+2     W391 blank line at end of file
