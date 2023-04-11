@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: biobb_amber/leap/leap_add_ions.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="biobb_amber.leap.leap_add_ions.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/leap/leap_add_ions.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F405">
+               <span class="count sev-1">
+                  6
+               </span>
+               <strong>F405:</strong> 'check_input_path' may be undefined, or defined from star imports: biobb_amber.leap.common
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.leap.common:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l132">
+                  <tt><i>132</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_pdb_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.leap.common:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l133">
+                  <tt><i>133</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_lib_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_lib_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_lib_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.leap.common:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l134">
+                  <tt><i>134</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_frcmod_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_frcmod_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_frcmod_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.leap.common:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l139">
+                  <tt><i>139</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.leap.common:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l140">
+                  <tt><i>140</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.leap.common:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l141">
+                  <tt><i>141</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F401:</strong> 'pathlib.Path' imported but unused
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l7">
+                  <tt><i>7</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F403">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F403:</strong> 'from biobb_amber.leap.common import *' used; unable to detect undefined names
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l12">
+                  <tt><i>12</i> <span class="kn">from</span> <span class="nn">biobb_amber.leap.common</span> <span class="kn">import</span> <span class="o">*</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E265">
+               <span class="count sev-2">
+                  19
+               </span>
+               <strong>E265:</strong> block comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l135">
+                  <tt><i>135</i>         <span class="c1">#self.io_dict[&quot;in&quot;][&quot;input_params_path&quot;] = check_input_path(self.io_dict[&quot;in&quot;][&quot;input_params_path&quot;], &quot;input_params_path&quot;, True, out_log, self.__class__.__name__)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l136">
+                  <tt><i>136</i>         <span class="c1">#self.io_dict[&quot;in&quot;][&quot;input_source_path&quot;] = check_input_path(self.io_dict[&quot;in&quot;][&quot;input_source_path&quot;], &quot;input_source_path&quot;, True, out_log, self.__class__.__name__)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l147">
+                  <tt><i>147</i>         <span class="c1"># Finding number of water molecules in the box</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l193">
+                  <tt><i>193</i>             <span class="c1">#ions_command = ions_command + &quot;addions mol &quot; + self.negative_ions_type + &quot; 0 \n&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l194">
+                  <tt><i>194</i>             <span class="c1">#ions_command = ions_command + &quot;addions mol &quot; + self.positive_ions_type + &quot; 0 \n&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l202">
+                  <tt><i>202</i>             <span class="c1">#ions_command = ions_command + &quot;addions mol &quot; + self.negative_ions_type + &quot; &quot; + str(nneg) + &quot; \n&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l203">
+                  <tt><i>203</i>             <span class="c1">#ions_command = ions_command + &quot;addions mol &quot; + self.positive_ions_type + &quot; &quot; + str(npos) + &quot; \n&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l208">
+                  <tt><i>208</i>                 <span class="c1">#ions_command = ions_command + &quot;addions mol &quot; + self.negative_ions_type + &quot; &quot; + str(self.negative_ions_number) + &quot; \n&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l211">
+                  <tt><i>211</i>                 <span class="c1">#ions_command = ions_command + &quot;addions mol &quot; + self.positive_ions_type + &quot; &quot; + str(self.positive_ions_number) + &quot; \n&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l253">
+                  <tt><i>253</i>         <span class="c1">#instructions_file = str(PurePath(self.tmp_folder).joinpath(&quot;leap.in&quot;))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l255">
+                  <tt><i>255</i>                 <span class="c1"># Forcefields loaded by default:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l257">
+                  <tt><i>257</i>                 <span class="c1">#leapin.write(&quot;source leaprc.protein.ff14SB \n&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l259">
+                  <tt><i>259</i>                 <span class="c1">#leapin.write(&quot;source leaprc.DNA.bsc1 \n&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l261">
+                  <tt><i>261</i>                 <span class="c1">#leapin.write(&quot;source leaprc.gaff \n&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l326">
+                  <tt><i>326</i>                 <span class="c1">#regex_box = &#39;CRYST1\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*P 1&#39;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l356">
+                  <tt><i>356</i>                 <span class="c1">#%FLAG BOX_DIMENSIONS</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l357">
+                  <tt><i>357</i>                 <span class="c1">#%FORMAT(5E16.8)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l358">
+                  <tt><i>358</i>                 <span class="c1">#1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l376">
+                  <tt><i>376</i>                                 <span class="c1">#new_top.write(top_box_line + &quot;\n&quot;)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  17
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l77">
+                  <tt><i>77</i>         <span class="n">output_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_top_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_crd_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l78">
+                  <tt><i>78</i>         <span class="n">input_lib_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_frcmod_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l79">
+                  <tt><i>79</i>         <span class="n">input_params_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_source_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l80">
+                  <tt><i>80</i>         <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l304">
+                  <tt><i>304</i>                <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">instructions_file_path</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l395">
+                  <tt><i>395</i>            <span class="n">output_top_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_crd_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l396">
+                  <tt><i>396</i>            <span class="n">input_lib_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_frcmod_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l397">
+                  <tt><i>397</i>            <span class="n">input_params_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_source_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l398">
+                  <tt><i>398</i>            <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l433">
+                  <tt><i>433</i>                     <span class="n">input_lib_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_lib_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l434">
+                  <tt><i>434</i>                     <span class="n">input_frcmod_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_frcmod_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l435">
+                  <tt><i>435</i>                     <span class="n">input_params_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_params_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l436">
+                  <tt><i>436</i>                     <span class="n">input_source_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_source_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l437">
+                  <tt><i>437</i>                     <span class="n">output_pdb_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l438">
+                  <tt><i>438</i>                     <span class="n">output_top_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_top_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l439">
+                  <tt><i>439</i>                     <span class="n">output_crd_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_crd_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l440">
+                  <tt><i>440</i>                     <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E117">
+               <span class="count sev-2">
+                  9
+               </span>
+               <strong>E117:</strong> over-indented (comment)
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l255">
+                  <tt><i>255</i>                 <span class="c1"># Forcefields loaded by default:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l256">
+                  <tt><i>256</i>                 <span class="c1"># Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l257">
+                  <tt><i>257</i>                 <span class="c1">#leapin.write(&quot;source leaprc.protein.ff14SB \n&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l258">
+                  <tt><i>258</i>                 <span class="c1"># DNA: parmBSC1 (ParmBSC1 (ff99 + bsc0 + bsc1) for DNA. Ivani et al. Nature Methods 13: 55, 2016)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l259">
+                  <tt><i>259</i>                 <span class="c1">#leapin.write(&quot;source leaprc.DNA.bsc1 \n&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l260">
+                  <tt><i>260</i>                 <span class="c1"># Ligands: GAFF (General Amber Force field, J. Comput. Chem. 2004 Jul 15;25(9):1157-74)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l261">
+                  <tt><i>261</i>                 <span class="c1">#leapin.write(&quot;source leaprc.gaff \n&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented (comment):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l263">
+                  <tt><i>263</i>                 <span class="c1"># Forcefields loaded from input forcefield property</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Over-indented:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l264">
+                  <tt><i>264</i>                 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  9
+               </span>
+               <strong>E231:</strong> missing whitespace after ','
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace after ',' (in 2 places):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l112">
+                  <tt><i>112</i>         <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;forcefield&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;protein.ff14SB&quot;</span><span class="p">,</span><span class="s2">&quot;DNA.bsc1&quot;</span><span class="p">,</span><span class="s2">&quot;gaff&quot;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l139">
+                  <tt><i>139</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l140">
+                  <tt><i>140</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l141">
+                  <tt><i>141</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l322">
+                  <tt><i>322</i>                 <span class="n">fu</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_log</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l348">
+                  <tt><i>348</i>                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_crd_path&#39;</span><span class="p">],</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l363">
+                  <tt><i>363</i>                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_top_path&#39;</span><span class="p">],</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">new_top</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l364">
+                  <tt><i>364</i>                     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_parmtop</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">old_top</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  7
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace around operator (in 2 places):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l198">
+                  <tt><i>198</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ionic_concentration</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">negative_ions_number</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">positive_ions_number</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator (in 3 places):</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l372">
+                  <tt><i>372</i>                             <span class="k">elif</span> <span class="s1">&#39;FLAG POINTERS&#39;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="n">ifbox_flag</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">ifbox_flag</span><span class="o">==</span><span class="mi">2</span> <span class="ow">or</span> <span class="n">ifbox_flag</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l373">
+                  <tt><i>373</i>                                 <span class="n">ifbox_flag</span><span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace around operator:</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l378">
+                  <tt><i>378</i>                                 <span class="n">ifbox_flag</span><span class="o">+=</span><span class="mi">1</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E111">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E111:</strong> indentation is not a multiple of 4
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l150">
+                  <tt><i>150</i>            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fp</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l153">
+                  <tt><i>153</i>                <span class="n">pq</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;WAT|HOH|TP3|TIP3|SOL&#39;</span><span class="p">),</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l154">
+                  <tt><i>154</i>                <span class="k">if</span> <span class="n">pq</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l157">
+                  <tt><i>157</i>                    <span class="n">pq2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l158">
+                  <tt><i>158</i>                    <span class="k">if</span> <span class="ow">not</span> <span class="n">pq2</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l159">
+                  <tt><i>159</i>                        <span class="n">cnt</span> <span class="o">=</span> <span class="n">cnt</span> <span class="o">+</span> <span class="mi">1</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E114">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E114:</strong> indentation is not a multiple of 4 (comment)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l151">
+                  <tt><i>151</i>                <span class="c1"># Water molecules are identified with different resids</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l152">
+                  <tt><i>152</i>                <span class="c1"># by different forcefields / MD packages</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l155">
+                  <tt><i>155</i>                    <span class="c1"># Incrementing number of water molecules just in the water</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l156">
+                  <tt><i>156</i>                    <span class="c1"># oxygen atom, ignoring hydrogen atoms</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E201">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E201:</strong> whitespace after '{'
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l90">
+                  <tt><i>90</i>             <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;input_pdb_path&#39;</span><span class="p">:</span> <span class="n">input_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l96">
+                  <tt><i>96</i>             <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">{</span>    <span class="s1">&#39;output_pdb_path&#39;</span><span class="p">:</span> <span class="n">output_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l402">
+                  <tt><i>402</i>     <span class="k">return</span> <span class="n">LeapAddIons</span><span class="p">(</span> <span class="n">input_pdb_path</span><span class="o">=</span><span class="n">input_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l432">
+                  <tt><i>432</i>     <span class="n">leap_add_ions</span><span class="p">(</span>   <span class="n">input_pdb_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l14">
+                  <tt><i>14</i> <span class="k">class</span> <span class="nc">LeapAddIons</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l394">
+                  <tt><i>394</i> <span class="k">def</span> <span class="nf">leap_add_ions</span><span class="p">(</span><span class="n">input_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l412">
+                  <tt><i>412</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E124">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E124:</strong> closing bracket does not match visual indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l95">
+                  <tt><i>95</i>             <span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l305">
+                  <tt><i>305</i>                <span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E261">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E261:</strong> at least two spaces before inline comment
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l200">
+                  <tt><i>200</i>             <span class="n">nneg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nio</span> <span class="c1"># Update with function</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l201">
+                  <tt><i>201</i>             <span class="n">npos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nio</span> <span class="c1"># Update with function</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E125">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E125:</strong> continuation line with same indent as next logical line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l80">
+                  <tt><i>80</i>         <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E202">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E202:</strong> whitespace before '}'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l98">
+                  <tt><i>98</i>                         <span class="s1">&#39;output_crd_path&#39;</span><span class="p">:</span> <span class="n">output_crd_path</span> <span class="p">}</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E271">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E271:</strong> multiple spaces after keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l9">
+                  <tt><i>9</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span>  <span class="n">settings</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E305:</strong> expected 2 blank lines after class or function definition, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l442">
+                  <tt><i>442</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E401">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E401:</strong> multiple imports on one line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E701">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E701:</strong> multiple statements on one line (colon)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l174">
+                  <tt><i>174</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span> <span class="k">return</span> <span class="mi">0</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E703">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E703:</strong> statement ends with a semicolon
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_add_ions.source.html#l300">
+                  <tt><i>300</i>                 <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;quit </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">);</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

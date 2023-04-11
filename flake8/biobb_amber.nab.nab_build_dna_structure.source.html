@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>biobb_amber/nab/nab_build_dna_structure.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <h1>
+            <a href="biobb_amber.nab.nab_build_dna_structure.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/nab/nab_build_dna_structure.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="ch">#!/usr/bin/env python3</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> &nbsp;</tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="sd">&quot;&quot;&quot;Module containing the NabBuildDNAStructure class and the command line interface.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="kn">import</span> <span class="nn">argparse</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F401
+                     </span>
+                     'shutil' imported but unused</li>
+               
+               </ul><tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F401
+                     </span>
+                     'pathlib.Path' imported but unused</li>
+               
+               </ul><tt><i>6</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">biobb_common.generic.biobb_object</span> <span class="kn">import</span> <span class="n">BiobbObject</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E271
+                     </span>
+                     Multiple spaces after keyword</li>
+               
+               </ul><tt><i>8</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span>  <span class="n">settings</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> <span class="kn">from</span> <span class="nn">biobb_common.tools</span> <span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> <span class="kn">from</span> <span class="nn">biobb_common.tools.file_utils</span> <span class="kn">import</span> <span class="n">launchlogger</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F403
+                     </span>
+                     'from biobb_amber.nab.common import *' used; unable to detect undefined names</li>
+               
+               </ul><tt><i>11</i> <span class="kn">from</span> <span class="nn">biobb_amber.nab.common</span> <span class="kn">import</span> <span class="o">*</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> &nbsp;</tt>
+            </div>
+            <div id="l13"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>13</i> <span class="k">class</span> <span class="nc">NabBuildDNAStructure</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> <span class="sd">    | biobb_amber.nab.nab_build_dna_structure NabBuildDNAStructure</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> <span class="sd">    | Wrapper of the `AmberTools (AMBER MD Package) nab tool &lt;https://ambermd.org/AmberTools.php&gt;`_ module.</span></tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> <span class="sd">    | Builds a 3D structure from a DNA sequence using nab (Nucleic Acid Builder) tool from the AmberTools MD package.</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev- "><tt><i>18</i> &nbsp;</tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i> <span class="sd">    Args:</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i> <span class="sd">        output_pdb_path (str): DNA 3D structure PDB file. File type: output. `Sample file &lt;https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/nab/ref_nab_build_dna_structure.pdb&gt;`_. Accepted formats: pdb (edam:format_1476).</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i> <span class="sd">        properties (dic - Python dictionary object containing the tool parameters, not input/output files):</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i> <span class="sd">            * **sequence** (*str*) - (&quot;GCGCGGCTGATAAACGAAAGC&quot;) Nucleotide sequence to convert to a 3D structure. Nucleotides should be written in 1-letter code, with no spaces between them.</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i> <span class="sd">            * **helix_type** (*str*) - (&quot;lbdna&quot;) DNA/RNA helix type. Values: arna (Right Handed A-RNA - Arnott), aprna (Right Handed A’-RNA - Arnott), lbdna (Right Handed B-DNA - Langridge), abdna (Right Handed B-DNA - Arnott), sbdna (Left Handed B-DNA - Sasisekharan), adna (Right Handed A-DNA - Arnott).</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i> <span class="sd">            * **compiler** (*str*) - (&quot;gcc&quot;) Alternative C compiler for nab.</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i> <span class="sd">            * **linker** (*str*) - (&quot;gfortran&quot;) Alternative Fortran linker for nab.</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i> <span class="sd">            * **binary_path** (*str*) - (&quot;nab&quot;) Path to the nab executable binary.</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> <span class="sd">            * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i> <span class="sd">            * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> <span class="sd">            * **container_path** (*str*) - (None) Container path definition.</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i> <span class="sd">            * **container_image** (*str*) - (&#39;afandiadib/ambertools:serial&#39;) Container image definition.</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i> <span class="sd">            * **container_volume_path** (*str*) - (&#39;/tmp&#39;) Container volume path definition.</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i> <span class="sd">            * **container_working_dir** (*str*) - (None) Container working directory definition.</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i> <span class="sd">            * **container_user_id** (*str*) - (None) Container user_id definition.</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i> <span class="sd">            * **container_shell_path** (*str*) - (&#39;/bin/bash&#39;) Path to default shell inside the container.</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i> &nbsp;</tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i> <span class="sd">    Examples:</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i> <span class="sd">        This is a use example of how to use the building block from Python::</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i> &nbsp;</tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i> <span class="sd">            from biobb_amber.nab.nab_build_dna_structure import nab_build_dna_structure</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i> <span class="sd">            prop = {</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i> <span class="sd">                &#39;sequence&#39;: &#39;GCGCGGCTGATAAACGAAAGC&#39;</span></tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i> <span class="sd">            }</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i> <span class="sd">            nab_build_dna_structure(output_pdb_path=&#39;/path/to/newStructure.pdb&#39;,</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i> <span class="sd">                                    properties=prop)</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i> &nbsp;</tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i> <span class="sd">    Info:</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i> <span class="sd">        * wrapped_software:</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i> <span class="sd">            * name: AmberTools nab</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i> <span class="sd">            * version: &gt;20.9</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i> <span class="sd">            * license: LGPL 2.1</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i> <span class="sd">        * ontology:</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i> <span class="sd">            * name: EDAM</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i> <span class="sd">            * schema: http://edamontology.org/EDAM.owl</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i> &nbsp;</tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i> &nbsp;</tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_pdb_path</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> &nbsp;</tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i>         <span class="n">properties</span> <span class="o">=</span> <span class="n">properties</span> <span class="ow">or</span> <span class="p">{}</span></tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i> &nbsp;</tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i>         <span class="c1"># Call parent class constructor</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i>         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>         <span class="bp">self</span><span class="o">.</span><span class="n">locals_var_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i> &nbsp;</tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>         <span class="c1"># Input/Output files</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span> <span class="o">=</span> <span class="p">{</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i>             <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">{},</span></tt>
+            </div>
+            <div id="l68"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E201
+                     </span>
+                     Whitespace after '{'</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E202
+                     </span>
+                     Whitespace before '}'</li>
+               
+               </ul><tt><i>68</i>             <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;output_pdb_path&#39;</span><span class="p">:</span> <span class="n">output_pdb_path</span> <span class="p">}</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i>         <span class="p">}</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i> &nbsp;</tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i>         <span class="c1"># Properties specific for BB</span></tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i>         <span class="bp">self</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="n">properties</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>         <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sequence&#39;</span><span class="p">,</span> <span class="s2">&quot;GCGCGGCTGATAAACGAAAGC&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i>         <span class="bp">self</span><span class="o">.</span><span class="n">helix_type</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;helix_type&#39;</span><span class="p">,</span> <span class="s2">&quot;lbdna&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i>         <span class="bp">self</span><span class="o">.</span><span class="n">compiler</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;compiler&#39;</span><span class="p">,</span> <span class="s2">&quot;gcc&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>         <span class="bp">self</span><span class="o">.</span><span class="n">linker</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;linker&#39;</span><span class="p">,</span> <span class="s2">&quot;gfortran&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i>         <span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;binary_path&#39;</span><span class="p">,</span> <span class="s1">&#39;nab&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i> &nbsp;</tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>         <span class="c1"># Check the properties</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_properties</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">()</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i> &nbsp;</tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>     <span class="k">def</span> <span class="nf">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">):</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot; Checks input/output paths correctness &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i> &nbsp;</tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i>         <span class="c1"># Check output(s)</span></tt>
+            </div>
+            <div id="l87"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F405
+                     </span>
+                     'check_output_path' may be undefined, or defined from star imports: biobb_amber.nab.common</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E231
+                     </span>
+                     Missing whitespace after ','</li>
+               
+               </ul><tt><i>87</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i> &nbsp;</tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i>     <span class="nd">@launchlogger</span></tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i>     <span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Launches the execution of the NabBuildDNAStructure module.&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i> &nbsp;</tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i>         <span class="c1"># check input/output paths and parameters</span></tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_log</span><span class="p">)</span></tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i> &nbsp;</tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i>         <span class="c1"># Setup Biobb</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E701
+                     </span>
+                     Multiple statements on one line (colon)</li>
+               
+               </ul><tt><i>97</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span> <span class="k">return</span> <span class="mi">0</span></tt>
+            </div>
+            <div id="l98"
+               class="code sev- "><tt><i>98</i>         <span class="bp">self</span><span class="o">.</span><span class="n">stage_files</span><span class="p">()</span></tt>
+            </div>
+            <div id="l99"
+               class="code sev- "><tt><i>99</i> &nbsp;</tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i>         <span class="c1"># Creating temporary folder</span></tt>
+            </div>
+            <div id="l101"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E265
+                     </span>
+                     Block comment should start with '# '</li>
+               
+               </ul><tt><i>101</i>         <span class="c1">#self.tmp_folder = fu.create_unique_dir()</span></tt>
+            </div>
+            <div id="l102"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E265
+                     </span>
+                     Block comment should start with '# '</li>
+               
+               </ul><tt><i>102</i>         <span class="c1">#fu.log(&#39;Creating %s temporary folder&#39; % self.tmp_folder, self.out_log)</span></tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i> &nbsp;</tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i>         <span class="c1"># create .nab file</span></tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i>         <span class="c1"># molecule m;</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i>         <span class="c1"># m = fd_helix( &quot;abdna&quot;, &quot;aaaaaaaaaa&quot;, &quot;dna&quot; );</span></tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i>         <span class="c1"># putpdb( &quot;nuc.pdb&quot;, m, &quot;-wwpdb&quot;);</span></tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i> &nbsp;</tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i>         <span class="n">acid_type</span> <span class="o">=</span> <span class="s1">&#39;dna&#39;</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>         <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;rna&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">helix_type</span><span class="p">):</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>             <span class="n">acid_type</span> <span class="o">=</span> <span class="s1">&#39;rna&#39;</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i> &nbsp;</tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i>         <span class="c1"># Creating temporary folder &amp; Leap configuration (instructions) file</span></tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i>             <span class="n">instructions_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;unique_dir&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;nuc.nab&quot;</span><span class="p">))</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i>             <span class="n">instructions_file_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container_volume_path</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;nuc.nab&quot;</span><span class="p">))</span></tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i>             <span class="bp">self</span><span class="o">.</span><span class="n">tmp_folder</span> <span class="o">=</span> <span class="kc">None</span></tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i>             <span class="bp">self</span><span class="o">.</span><span class="n">tmp_folder</span> <span class="o">=</span> <span class="n">fu</span><span class="o">.</span><span class="n">create_unique_dir</span><span class="p">()</span></tt>
+            </div>
+            <div id="l120"
+               class="code sev- "><tt><i>120</i>             <span class="n">instructions_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_folder</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;nuc.nab&quot;</span><span class="p">))</span></tt>
+            </div>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i>             <span class="n">fu</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1"> temporary folder&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">tmp_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">)</span></tt>
+            </div>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i>             <span class="n">instructions_file_path</span> <span class="o">=</span> <span class="n">instructions_file</span></tt>
+            </div>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i> &nbsp;</tt>
+            </div>
+            <div id="l124"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E265
+                     </span>
+                     Block comment should start with '# '</li>
+               
+               </ul><tt><i>124</i>         <span class="c1">#instructions_file = str(PurePath(self.tmp_folder).joinpath(&quot;nuc.nab&quot;))</span></tt>
+            </div>
+            <div id="l125"
+               class="code sev- "><tt><i>125</i>         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">instructions_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">nabin</span><span class="p">:</span></tt>
+            </div>
+            <div id="l126"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E117
+                     </span>
+                     Over-indented</li>
+               
+               </ul><tt><i>126</i>                 <span class="n">nabin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;molecule m; </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l127"
+               class="code sev- "><tt><i>127</i>                 <span class="n">nabin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;m = fd_helix( </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">helix_type</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">acid_type</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> ); </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l128"
+               class="code sev- "><tt><i>128</i>                 <span class="n">nabin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;putpdb( </span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_pdb_path&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> , m, </span><span class="se">\&quot;</span><span class="s2">-wwpdb</span><span class="se">\&quot;</span><span class="s2">);</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l129"
+               class="code sev- "><tt><i>129</i> &nbsp;</tt>
+            </div>
+            <div id="l130"
+               class="code sev- "><tt><i>130</i>         <span class="c1"># Command line</span></tt>
+            </div>
+            <div id="l131"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>131</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span> </tt>
+            </div>
+            <div id="l132"
+               class="code sev- "><tt><i>132</i>             <span class="n">nuc_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_volume_path</span></tt>
+            </div>
+            <div id="l133"
+               class="code sev- "><tt><i>133</i>             <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l134"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>134</i>                 <span class="s1">&#39;--compile&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">compiler</span><span class="p">,</span></tt>
+            </div>
+            <div id="l135"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>135</i>                 <span class="s1">&#39;-Xlinker&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linker</span><span class="p">,</span></tt>
+            </div>
+            <div id="l136"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>136</i>                 <span class="n">instructions_file_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l137"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E225
+                     </span>
+                     Missing whitespace around operator</li>
+               
+               </ul><tt><i>137</i>                 <span class="s1">&#39; ; &#39;</span> <span class="o">+</span> <span class="n">nuc_path</span> <span class="o">+</span><span class="s1">&#39;/nuc&#39;</span></tt>
+            </div>
+            <div id="l138"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E124
+                     </span>
+                     Closing bracket does not match visual indentation</li>
+               
+               </ul><tt><i>138</i>                 <span class="p">]</span></tt>
+            </div>
+            <div id="l139"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W291
+                     </span>
+                     Trailing whitespace</li>
+               
+               </ul><tt><i>139</i>         <span class="k">else</span><span class="p">:</span> </tt>
+            </div>
+            <div id="l140"
+               class="code sev- "><tt><i>140</i>             <span class="n">nuc_path</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tmp_folder</span></tt>
+            </div>
+            <div id="l141"
+               class="code sev- "><tt><i>141</i>             <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l142"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>142</i>                 <span class="s1">&#39;--compiler&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">compiler</span><span class="p">,</span></tt>
+            </div>
+            <div id="l143"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>143</i>                 <span class="s1">&#39;--linker&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">linker</span><span class="p">,</span></tt>
+            </div>
+            <div id="l144"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>144</i>                 <span class="n">instructions_file_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l145"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E225
+                     </span>
+                     Missing whitespace around operator</li>
+               
+               </ul><tt><i>145</i>                 <span class="s1">&#39; ; &#39;</span> <span class="o">+</span> <span class="n">nuc_path</span> <span class="o">+</span><span class="s1">&#39;/nuc&#39;</span></tt>
+            </div>
+            <div id="l146"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E124
+                     </span>
+                     Closing bracket does not match visual indentation</li>
+               
+               </ul><tt><i>146</i>                 <span class="p">]</span></tt>
+            </div>
+            <div id="l147"
+               class="code sev- "><tt><i>147</i> &nbsp;</tt>
+            </div>
+            <div id="l148"
+               class="code sev- "><tt><i>148</i>         <span class="c1"># Run Biobb block</span></tt>
+            </div>
+            <div id="l149"
+               class="code sev- "><tt><i>149</i>         <span class="bp">self</span><span class="o">.</span><span class="n">run_biobb</span><span class="p">()</span></tt>
+            </div>
+            <div id="l150"
+               class="code sev- "><tt><i>150</i> &nbsp;</tt>
+            </div>
+            <div id="l151"
+               class="code sev- "><tt><i>151</i>         <span class="c1"># Copy files to host</span></tt>
+            </div>
+            <div id="l152"
+               class="code sev- "><tt><i>152</i>         <span class="bp">self</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span></tt>
+            </div>
+            <div id="l153"
+               class="code sev- "><tt><i>153</i> &nbsp;</tt>
+            </div>
+            <div id="l154"
+               class="code sev- "><tt><i>154</i>         <span class="c1"># remove temporary folder(s)</span></tt>
+            </div>
+            <div id="l155"
+               class="code sev- "><tt><i>155</i>         <span class="bp">self</span><span class="o">.</span><span class="n">tmp_files</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span></tt>
+            </div>
+            <div id="l156"
+               class="code sev- "><tt><i>156</i>             <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unique_dir&quot;</span><span class="p">),</span></tt>
+            </div>
+            <div id="l157"
+               class="code sev- "><tt><i>157</i>             <span class="bp">self</span><span class="o">.</span><span class="n">tmp_folder</span><span class="p">,</span></tt>
+            </div>
+            <div id="l158"
+               class="code sev- "><tt><i>158</i>             <span class="s2">&quot;nab.log&quot;</span><span class="p">,</span></tt>
+            </div>
+            <div id="l159"
+               class="code sev- "><tt><i>159</i>             <span class="s2">&quot;tleap.out&quot;</span></tt>
+            </div>
+            <div id="l160"
+               class="code sev- "><tt><i>160</i>         <span class="p">])</span></tt>
+            </div>
+            <div id="l161"
+               class="code sev- "><tt><i>161</i>         <span class="bp">self</span><span class="o">.</span><span class="n">remove_tmp_files</span><span class="p">()</span></tt>
+            </div>
+            <div id="l162"
+               class="code sev- "><tt><i>162</i> &nbsp;</tt>
+            </div>
+            <div id="l163"
+               class="code sev- "><tt><i>163</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">(</span><span class="n">output_files_created</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></tt>
+            </div>
+            <div id="l164"
+               class="code sev- "><tt><i>164</i> &nbsp;</tt>
+            </div>
+            <div id="l165"
+               class="code sev- "><tt><i>165</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_code</span></tt>
+            </div>
+            <div id="l166"
+               class="code sev- "><tt><i>166</i> &nbsp;</tt>
+            </div>
+            <div id="l167"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>167</i> <span class="k">def</span> <span class="nf">nab_build_dna_structure</span><span class="p">(</span><span class="n">output_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+            </div>
+            <div id="l168"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>168</i>            <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+            </div>
+            <div id="l169"
+               class="code sev- "><tt><i>169</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create :class:`NabBuildDNAStructure &lt;nab.nab_build_dna_structure.NabBuildDNAStructure&gt;`nab.nab_build_dna_structure.NabBuildDNAStructure class and</span></tt>
+            </div>
+            <div id="l170"
+               class="code sev- "><tt><i>170</i> <span class="sd">    execute :meth:`launch() &lt;nab.nab_build_dna_structure.NabBuildDNAStructure.launch&gt;` method&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l171"
+               class="code sev- "><tt><i>171</i> &nbsp;</tt>
+            </div>
+            <div id="l172"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E201
+                     </span>
+                     Whitespace after '('</li>
+               
+               </ul><tt><i>172</i>     <span class="k">return</span> <span class="n">NabBuildDNAStructure</span><span class="p">(</span> <span class="n">output_pdb_path</span><span class="o">=</span><span class="n">output_pdb_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l173"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>173</i>                         <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
+            </div>
+            <div id="l174"
+               class="code sev- "><tt><i>174</i> &nbsp;</tt>
+            </div>
+            <div id="l175"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E302
+                     </span>
+                     Expected 2 blank lines, found 1</li>
+               
+               </ul><tt><i>175</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+            </div>
+            <div id="l176"
+               class="code sev- "><tt><i>176</i>     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Building a 3D structure from a DNA sequence using nab.&#39;</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="k">lambda</span> <span class="n">prog</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">99999</span><span class="p">))</span></tt>
+            </div>
+            <div id="l177"
+               class="code sev- "><tt><i>177</i>     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Configuration file&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l178"
+               class="code sev- "><tt><i>178</i> &nbsp;</tt>
+            </div>
+            <div id="l179"
+               class="code sev- "><tt><i>179</i>     <span class="c1"># Specific args</span></tt>
+            </div>
+            <div id="l180"
+               class="code sev- "><tt><i>180</i>     <span class="n">required_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s1">&#39;required arguments&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l181"
+               class="code sev- "><tt><i>181</i>     <span class="n">required_args</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--output_pdb_path&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l182"
+               class="code sev- "><tt><i>182</i> &nbsp;</tt>
+            </div>
+            <div id="l183"
+               class="code sev- "><tt><i>183</i>     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span></tt>
+            </div>
+            <div id="l184"
+               class="code sev- "><tt><i>184</i>     <span class="n">config</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="k">else</span> <span class="kc">None</span></tt>
+            </div>
+            <div id="l185"
+               class="code sev- "><tt><i>185</i>     <span class="n">properties</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">ConfReader</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="n">get_prop_dic</span><span class="p">()</span></tt>
+            </div>
+            <div id="l186"
+               class="code sev- "><tt><i>186</i> &nbsp;</tt>
+            </div>
+            <div id="l187"
+               class="code sev- "><tt><i>187</i>     <span class="c1"># Specific call</span></tt>
+            </div>
+            <div id="l188"
+               class="code sev- "><tt><i>188</i>     <span class="n">nab_build_dna_structure</span><span class="p">(</span><span class="n">output_pdb_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_pdb_path</span><span class="p">,</span></tt>
+            </div>
+            <div id="l189"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E128
+                     </span>
+                     Continuation line under-indented for visual indent</li>
+               
+               </ul><tt><i>189</i>              <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span></tt>
+            </div>
+            <div id="l190"
+               class="code sev- "><tt><i>190</i> &nbsp;</tt>
+            </div>
+            <div id="l191"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E305
+                     </span>
+                     Expected 2 blank lines after class or function definition, found 1</li>
+               
+               </ul><tt><i>191</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l192"
+               class="code sev- "><tt><i>192</i>     <span class="n">main</span><span class="p">()</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

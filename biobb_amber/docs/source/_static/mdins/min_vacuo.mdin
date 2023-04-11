@@ -1,9 +1,0 @@
-This mdin file has been created by the biobb_amber module from the BioBB library 
-Type of mdin: min_vacuo
-&cntrl
-  imin = 1
-  ncyc = 250
-  ntb = 0
-  igb = 0
-  cut = 12
-&end

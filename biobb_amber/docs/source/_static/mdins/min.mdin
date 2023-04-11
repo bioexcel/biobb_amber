@@ -1,5 +1,0 @@
-This mdin file has been created by the biobb_amber module from the BioBB library 
-Type of mdin: minimization
-&cntrl
-  imin = 1
-&end

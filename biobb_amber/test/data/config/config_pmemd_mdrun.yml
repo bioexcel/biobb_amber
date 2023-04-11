@@ -1,7 +1,0 @@
-properties:
-  mdin:
-    ioutfm: 0
-    maxcyc: 500
-    ntwx: 100
-  remove_tmp: true
-  simulation_type: minimization

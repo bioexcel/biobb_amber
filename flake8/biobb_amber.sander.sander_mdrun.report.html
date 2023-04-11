@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: biobb_amber/sander/sander_mdrun.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="biobb_amber.sander.sander_mdrun.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/sander/sander_mdrun.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F405">
+               <span class="count sev-1">
+                  11
+               </span>
+               <strong>F405:</strong> 'check_input_path' may be undefined, or defined from star imports: biobb_amber.sander.common
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l122">
+                  <tt><i>122</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_top_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_top_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_top_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l123">
+                  <tt><i>123</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_crd_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_crd_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_crd_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l124">
+                  <tt><i>124</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_mdin_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_mdin_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_mdin_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l125">
+                  <tt><i>125</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_cpin_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_cpin_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_cpin_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l126">
+                  <tt><i>126</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_ref_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_ref_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_ref_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l129">
+                  <tt><i>129</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_log_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_log_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_log_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l130">
+                  <tt><i>130</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_traj_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_traj_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_traj_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l131">
+                  <tt><i>131</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_rst_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_rst_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_rst_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l132">
+                  <tt><i>132</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cpout_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cpout_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_cpout_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l133">
+                  <tt><i>133</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cprst_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cprst_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_cprst_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.sander.common:</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l134">
+                  <tt><i>134</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_mdinfo_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_mdinfo_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_mdinfo_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F401:</strong> 'shutil' imported but unused
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F403">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F403:</strong> 'from biobb_amber.sander.common import *' used; unable to detect undefined names
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l11">
+                  <tt><i>11</i> <span class="kn">from</span> <span class="nn">biobb_amber.sander.common</span> <span class="kn">import</span> <span class="o">*</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  34
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l321">
+                  <tt><i>321</i>                <span class="s1">&#39;-O&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l322">
+                  <tt><i>322</i>                <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_mdin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l323">
+                  <tt><i>323</i>                <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">][</span><span class="s1">&#39;input_top_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l324">
+                  <tt><i>324</i>                <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">][</span><span class="s1">&#39;input_crd_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l325">
+                  <tt><i>325</i>                <span class="s1">&#39;-r&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_rst_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l326">
+                  <tt><i>326</i>                <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_log_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l327">
+                  <tt><i>327</i>                <span class="s1">&#39;-x&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_traj_path&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l386">
+                  <tt><i>386</i>             <span class="n">output_log_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_traj_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_rst_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l387">
+                  <tt><i>387</i>             <span class="n">input_mdin_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_cpin_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l388">
+                  <tt><i>388</i>             <span class="n">output_cpout_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output_cprst_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l389">
+                  <tt><i>389</i>             <span class="n">output_mdinfo_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_ref_path</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l390">
+                  <tt><i>390</i>             <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l395">
+                  <tt><i>395</i>                     <span class="n">input_crd_path</span><span class="o">=</span><span class="n">input_crd_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l396">
+                  <tt><i>396</i>                     <span class="n">input_mdin_path</span><span class="o">=</span><span class="n">input_mdin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l397">
+                  <tt><i>397</i>                     <span class="n">input_cpin_path</span><span class="o">=</span><span class="n">input_cpin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l398">
+                  <tt><i>398</i>                     <span class="n">input_ref_path</span><span class="o">=</span><span class="n">input_ref_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l399">
+                  <tt><i>399</i>                     <span class="n">output_log_path</span><span class="o">=</span><span class="n">output_log_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l400">
+                  <tt><i>400</i>                     <span class="n">output_traj_path</span><span class="o">=</span><span class="n">output_traj_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l401">
+                  <tt><i>401</i>                     <span class="n">output_rst_path</span><span class="o">=</span><span class="n">output_rst_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l402">
+                  <tt><i>402</i>                     <span class="n">output_cpout_path</span><span class="o">=</span><span class="n">output_cpout_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l403">
+                  <tt><i>403</i>                     <span class="n">output_cprst_path</span><span class="o">=</span><span class="n">output_cprst_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l404">
+                  <tt><i>404</i>                     <span class="n">output_mdinfo_path</span><span class="o">=</span><span class="n">output_mdinfo_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l405">
+                  <tt><i>405</i>                     <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l439">
+                  <tt><i>439</i>                     <span class="n">input_crd_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_crd_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l440">
+                  <tt><i>440</i>                     <span class="n">input_mdin_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_mdin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l441">
+                  <tt><i>441</i>                     <span class="n">input_cpin_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_cpin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l442">
+                  <tt><i>442</i>                     <span class="n">input_ref_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_ref_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l443">
+                  <tt><i>443</i>                     <span class="n">output_log_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_log_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l444">
+                  <tt><i>444</i>                     <span class="n">output_traj_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_traj_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l445">
+                  <tt><i>445</i>                     <span class="n">output_rst_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_rst_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l446">
+                  <tt><i>446</i>                     <span class="n">output_cpout_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_cpout_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l447">
+                  <tt><i>447</i>                     <span class="n">output_cprst_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_cprst_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l448">
+                  <tt><i>448</i>                     <span class="n">output_mdinfo_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_mdinfo_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l449">
+                  <tt><i>449</i>                     <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E265">
+               <span class="count sev-2">
+                  28
+               </span>
+               <strong>E265:</strong> block comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l189">
+                  <tt><i>189</i>             <span class="c1">#sim_type = self.mdin.get(&#39;simulation_type&#39;, &#39;minimization&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l240">
+                  <tt><i>240</i>                 <span class="c1">#mdin_list.append(&quot;  nmropt = 1 ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l242">
+                  <tt><i>242</i>                 <span class="c1">#mdin_lastPart.append(&quot;/&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l243">
+                  <tt><i>243</i>                 <span class="c1">#mdin_lastPart.append(&quot;&amp;wt&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l244">
+                  <tt><i>244</i>                 <span class="c1">#mdin_lastPart.append(&quot; TYPE = &#39;TEMP0&#39; ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l245">
+                  <tt><i>245</i>                 <span class="c1">#mdin_lastPart.append(&quot; ISTEP1 = 1 ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l246">
+                  <tt><i>246</i>                 <span class="c1">#mdin_lastPart.append(&quot; ISTEP2 = 4000 ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l247">
+                  <tt><i>247</i>                 <span class="c1">#mdin_lastPart.append(&quot; VALUE1 = 10.0 ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l248">
+                  <tt><i>248</i>                 <span class="c1">#mdin_lastPart.append(&quot; VALUE2 = 300.0 ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l249">
+                  <tt><i>249</i>                 <span class="c1">#mdin_lastPart.append(&quot;/&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l250">
+                  <tt><i>250</i>                 <span class="c1">#mdin_lastPart.append(&quot;&amp;wt&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l251">
+                  <tt><i>251</i>                 <span class="c1">#mdin_lastPart.append(&quot; TYPE = &#39;END&#39; ! BioBB simulation_type heat&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l252">
+                  <tt><i>252</i>                 <span class="c1">#mdin_lastPart.append(&quot;/&quot;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l296">
+                  <tt><i>296</i>         <span class="c1">#self.tmp_folder = fu.create_unique_dir()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l297">
+                  <tt><i>297</i>         <span class="c1">#fu.log(&#39;Creating %s temporary folder&#39; % self.tmp_folder, self.out_log)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l299">
+                  <tt><i>299</i>         <span class="c1">#if self.io_dict[&#39;in&#39;][&#39;input_mdin_path&#39;]:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l301">
+                  <tt><i>301</i>         <span class="c1">#else:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l304">
+                  <tt><i>304</i>         <span class="c1">#self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath(&quot;sander.mdin&quot;)))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l308">
+                  <tt><i>308</i>             <span class="c1">#instructions_file = str(PurePath(self.stage_io_dict[&#39;unique_dir&#39;]).joinpath(&quot;leap.in&quot;))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l309">
+                  <tt><i>309</i>             <span class="c1">#instructions_file_path = str(PurePath(self.container_volume_path).joinpath(&quot;leap.in&quot;))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l415">
+                  <tt><i>415</i>     <span class="c1">#required_args.add_argument(&#39;--input_mdin_path&#39;, required=False, help=&#39;Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l417">
+                  <tt><i>417</i>     <span class="c1">#required_args.add_argument(&#39;--input_cpin_path&#39;, required=False, help=&#39;Input constant pH file (AMBER cpin). Accepted formats: cpin.&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l419">
+                  <tt><i>419</i>     <span class="c1">#required_args.add_argument(&#39;--input_ref_path&#39;, required=False, help=&#39;Input reference coordinates for position restraints. Accepted formats: rst, rst7.&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l424">
+                  <tt><i>424</i>     <span class="c1">#required_args.add_argument(&#39;--output_cpout_path&#39;, required=False, help=&#39;Output constant pH file (AMBER cpout). Accepted formats: cpout.&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l426">
+                  <tt><i>426</i>     <span class="c1">#required_args.add_argument(&#39;--output_cprst_path&#39;, required=False, help=&#39;Output constant pH restart file (AMBER rstout). Accepted formats: cprst.&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l428">
+                  <tt><i>428</i>     <span class="c1">#required_args.add_argument(&#39;--output_mdinfo_path&#39;, required=False, help=&#39;Output MD info. Accepted formats: mdinfo.&#39;)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l432">
+                  <tt><i>432</i>     <span class="c1">#config = args.config if args.config else None</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l434">
+                  <tt><i>434</i>     <span class="c1">#properties = settings.ConfReader(config=config).get_prop_dic()</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  7
+               </span>
+               <strong>E231:</strong> missing whitespace after ','
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l129">
+                  <tt><i>129</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_log_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_log_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_log_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l130">
+                  <tt><i>130</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_traj_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_traj_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_traj_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l131">
+                  <tt><i>131</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_rst_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_rst_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_rst_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l132">
+                  <tt><i>132</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cpout_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cpout_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_cpout_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l133">
+                  <tt><i>133</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cprst_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cprst_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_cprst_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l134">
+                  <tt><i>134</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_mdinfo_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_mdinfo_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_mdinfo_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l169">
+                  <tt><i>169</i>                     <span class="n">params</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;!|#&#39;</span><span class="p">,</span><span class="n">line</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E201">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E201:</strong> whitespace after '{'
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l87">
+                  <tt><i>87</i>             <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;input_top_path&#39;</span><span class="p">:</span> <span class="n">input_top_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l92">
+                  <tt><i>92</i>             <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">{</span>    <span class="s1">&#39;output_log_path&#39;</span><span class="p">:</span> <span class="n">output_log_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l394">
+                  <tt><i>394</i>     <span class="k">return</span> <span class="n">SanderMDRun</span><span class="p">(</span> <span class="n">input_top_path</span><span class="o">=</span><span class="n">input_top_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l438">
+                  <tt><i>438</i>     <span class="n">sander_mdrun</span><span class="p">(</span>    <span class="n">input_top_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_top_path</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l13">
+                  <tt><i>13</i> <span class="k">class</span> <span class="nc">SanderMDRun</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l385">
+                  <tt><i>385</i> <span class="k">def</span> <span class="nf">sander_mdrun</span><span class="p">(</span><span class="n">input_top_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_crd_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l407">
+                  <tt><i>407</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E202">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E202:</strong> whitespace before '}'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l91">
+                  <tt><i>91</i>                     <span class="s1">&#39;input_cpin_path&#39;</span><span class="p">:</span> <span class="n">input_cpin_path</span> <span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l97">
+                  <tt><i>97</i>                         <span class="s1">&#39;output_mdinfo_path&#39;</span><span class="p">:</span> <span class="n">output_mdinfo_path</span> <span class="p">}</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E252">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E252:</strong> missing whitespace around parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace around parameter equals (in 2 places):</p>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l389">
+                  <tt><i>389</i>             <span class="n">output_mdinfo_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">input_ref_path</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W293">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>W293:</strong> blank line contains whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l46">
+                  <tt><i>46</i> <span class="sd">            </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l303">
+                  <tt><i>303</i>         </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E124">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E124:</strong> closing bracket does not match visual indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l328">
+                  <tt><i>328</i>                <span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E261">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E261:</strong> at least two spaces before inline comment
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l238">
+                  <tt><i>238</i>                 <span class="n">mdin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;  ntb = 1 ! BioBB simulation_type heat&quot;</span><span class="p">)</span> <span class="c1">#periodic boundaries</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E262">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E262:</strong> inline comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l238">
+                  <tt><i>238</i>                 <span class="n">mdin_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;  ntb = 1 ! BioBB simulation_type heat&quot;</span><span class="p">)</span> <span class="c1">#periodic boundaries</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E271">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E271:</strong> multiple spaces after keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l8">
+                  <tt><i>8</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span>  <span class="n">settings</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E275">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E275:</strong> missing whitespace after keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l159">
+                  <tt><i>159</i>                         <span class="k">elif</span><span class="p">(</span><span class="n">secondPart</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E305:</strong> expected 2 blank lines after class or function definition, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l451">
+                  <tt><i>451</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E401">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E401:</strong> multiple imports on one line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E701">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E701:</strong> multiple statements on one line (colon)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l292">
+                  <tt><i>292</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span> <span class="k">return</span> <span class="mi">0</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.sander.sander_mdrun.source.html#l369">
+                  <tt><i>369</i> <span class="sd">            else: </span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

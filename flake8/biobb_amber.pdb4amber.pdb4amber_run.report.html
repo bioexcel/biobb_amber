@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: biobb_amber/pdb4amber/pdb4amber_run.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="biobb_amber.pdb4amber.pdb4amber_run.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/pdb4amber/pdb4amber_run.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  4
+               </span>
+               <strong>F401:</strong> 'shutil' imported but unused
+               
+                  (and 3 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'re' imported but unused:</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'shutil' imported but unused:</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'pathlib.Path' imported but unused:</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'pathlib.PurePath' imported but unused:</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F405">
+               <span class="count sev-1">
+                  2
+               </span>
+               <strong>F405:</strong> 'check_input_path' may be undefined, or defined from star imports: biobb_amber.pdb4amber.common
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.pdb4amber.common:</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l87">
+                  <tt><i>87</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_pdb_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.pdb4amber.common:</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l90">
+                  <tt><i>90</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F403">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F403:</strong> 'from biobb_amber.pdb4amber.common import *' used; unable to detect undefined names
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l11">
+                  <tt><i>11</i> <span class="kn">from</span> <span class="nn">biobb_amber.pdb4amber.common</span> <span class="kn">import</span> <span class="o">*</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  7
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l110">
+                  <tt><i>110</i>                <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">][</span><span class="s1">&#39;input_pdb_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l111">
+                  <tt><i>111</i>                <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_pdb_path&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l139">
+                  <tt><i>139</i>            <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l144">
+                  <tt><i>144</i>                         <span class="n">output_pdb_path</span><span class="o">=</span><span class="n">output_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l145">
+                  <tt><i>145</i>                         <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l162">
+                  <tt><i>162</i>                     <span class="n">output_pdb_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l163">
+                  <tt><i>163</i>                     <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E201">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E201:</strong> whitespace after '{'
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l68">
+                  <tt><i>68</i>             <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;input_pdb_path&#39;</span><span class="p">:</span> <span class="n">input_pdb_path</span> <span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l69">
+                  <tt><i>69</i>             <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;output_pdb_path&#39;</span><span class="p">:</span> <span class="n">output_pdb_path</span> <span class="p">}</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l143">
+                  <tt><i>143</i>     <span class="k">return</span> <span class="n">Pdb4amberRun</span><span class="p">(</span> <span class="n">input_pdb_path</span><span class="o">=</span><span class="n">input_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l161">
+                  <tt><i>161</i>     <span class="n">pdb4amber_run</span><span class="p">(</span>    <span class="n">input_pdb_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_pdb_path</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l13">
+                  <tt><i>13</i> <span class="k">class</span> <span class="nc">Pdb4amberRun</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l138">
+                  <tt><i>138</i> <span class="k">def</span> <span class="nf">pdb4amber_run</span><span class="p">(</span><span class="n">input_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l147">
+                  <tt><i>147</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E202">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E202:</strong> whitespace before '}'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l68">
+                  <tt><i>68</i>             <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;input_pdb_path&#39;</span><span class="p">:</span> <span class="n">input_pdb_path</span> <span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l69">
+                  <tt><i>69</i>             <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;output_pdb_path&#39;</span><span class="p">:</span> <span class="n">output_pdb_path</span> <span class="p">}</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E124">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E124:</strong> closing bracket does not match visual indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l112">
+                  <tt><i>112</i>                <span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E231:</strong> missing whitespace after ','
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l90">
+                  <tt><i>90</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E271">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E271:</strong> multiple spaces after keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l8">
+                  <tt><i>8</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span>  <span class="n">settings</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E305:</strong> expected 2 blank lines after class or function definition, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l165">
+                  <tt><i>165</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E401">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E401:</strong> multiple imports on one line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E701">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E701:</strong> multiple statements on one line (colon)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.pdb4amber.pdb4amber_run.source.html#l100">
+                  <tt><i>100</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span> <span class="k">return</span> <span class="mi">0</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

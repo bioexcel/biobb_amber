@@ -1,8 +1,0 @@
-properties:
-  box_type: truncated_octahedron
-  forcefield:
-  - DNA.bsc1
-  ionic_concentration: 100
-  ions_type: ionsjc_tip4pew
-  positive_ions_type: K+
-  water_type: OPCBOX

@@ -1,7 +1,0 @@
-properties:
-  box_type: truncated_octahedron
-  distance_to_molecule: '9.0'
-  forcefield:
-  - protein.ff14SB
-  remove_tmp: true
-  water_type: TIP3PBOX

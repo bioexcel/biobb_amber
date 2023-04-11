@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: biobb_amber/cphstats/cphstats_run.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="biobb_amber.cphstats.cphstats_run.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/cphstats/cphstats_run.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F405">
+               <span class="count sev-1">
+                  8
+               </span>
+               <strong>F405:</strong> 'check_input_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l117">
+                  <tt><i>117</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_cpin_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_cpin_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_cpin_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_input_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l118">
+                  <tt><i>118</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_cpout_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_input_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;in&quot;</span><span class="p">][</span><span class="s2">&quot;input_cpout_path&quot;</span><span class="p">],</span> <span class="s2">&quot;input_cpout_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l121">
+                  <tt><i>121</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_dat_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_dat_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_dat_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l122">
+                  <tt><i>122</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_population_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_population_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_population_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l123">
+                  <tt><i>123</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_chunk_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l124">
+                  <tt><i>124</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cumulative_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cumulative_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_cumulative_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l125">
+                  <tt><i>125</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_conditional_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_conditional_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_chunk_conditional_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'check_output_path' may be undefined, or defined from star imports: biobb_amber.cphstats.common:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l126">
+                  <tt><i>126</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_conditional_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_conditional_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_conditional_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  5
+               </span>
+               <strong>F401:</strong> 'shutil' imported but unused
+               
+                  (and 4 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'re' imported but unused:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'shutil' imported but unused:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'pathlib.Path' imported but unused:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'pathlib.PurePath' imported but unused:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'biobb_common.tools.file_utils as fu' imported but unused:</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l9">
+                  <tt><i>9</i> <span class="kn">from</span> <span class="nn">biobb_common.tools</span> <span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="F403">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F403:</strong> 'from biobb_amber.cphstats.common import *' used; unable to detect undefined names
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l11">
+                  <tt><i>11</i> <span class="kn">from</span> <span class="nn">biobb_amber.cphstats.common</span> <span class="kn">import</span> <span class="o">*</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  25
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l142">
+                  <tt><i>142</i>                <span class="s1">&#39;-O&#39;</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l143">
+                  <tt><i>143</i>                <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">][</span><span class="s1">&#39;input_cpin_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l144">
+                  <tt><i>144</i>                <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;out&#39;</span><span class="p">][</span><span class="s1">&#39;output_dat_path&#39;</span><span class="p">],</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l145">
+                  <tt><i>145</i>                <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">][</span><span class="s1">&#39;input_cpout_path&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l223">
+                  <tt><i>223</i>             <span class="n">output_dat_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l224">
+                  <tt><i>224</i>             <span class="n">output_population_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output_chunk_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l225">
+                  <tt><i>225</i>             <span class="n">output_conditional_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output_chunk_conditional_path</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l226">
+                  <tt><i>226</i>             <span class="n">output_cumulative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l227">
+                  <tt><i>227</i>             <span class="n">properties</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l232">
+                  <tt><i>232</i>                     <span class="n">input_cpout_path</span><span class="o">=</span><span class="n">input_cpout_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l233">
+                  <tt><i>233</i>                     <span class="n">output_dat_path</span><span class="o">=</span><span class="n">output_dat_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l234">
+                  <tt><i>234</i>                     <span class="n">output_population_path</span><span class="o">=</span><span class="n">output_population_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l235">
+                  <tt><i>235</i>                     <span class="n">output_chunk_path</span><span class="o">=</span><span class="n">output_chunk_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l236">
+                  <tt><i>236</i>                     <span class="n">output_chunk_conditional_path</span><span class="o">=</span><span class="n">output_chunk_conditional_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l237">
+                  <tt><i>237</i>                     <span class="n">output_conditional_path</span><span class="o">=</span><span class="n">output_conditional_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l238">
+                  <tt><i>238</i>                     <span class="n">output_cumulative_path</span><span class="o">=</span><span class="n">output_cumulative_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l239">
+                  <tt><i>239</i>                     <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l262">
+                  <tt><i>262</i>                     <span class="n">input_cpout_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_cpout_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l263">
+                  <tt><i>263</i>                     <span class="n">output_dat_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_dat_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l264">
+                  <tt><i>264</i>                     <span class="n">output_population_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_population_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l265">
+                  <tt><i>265</i>                     <span class="n">output_chunk_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_chunk_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l266">
+                  <tt><i>266</i>                     <span class="n">output_cumulative_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_cumulative_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l267">
+                  <tt><i>267</i>                     <span class="n">output_conditional_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_conditional_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l268">
+                  <tt><i>268</i>                     <span class="n">output_chunk_conditional_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_chunk_conditional_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l269">
+                  <tt><i>269</i>                     <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E231:</strong> missing whitespace after ','
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l121">
+                  <tt><i>121</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_dat_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_dat_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_dat_path&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l122">
+                  <tt><i>122</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_population_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_population_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_population_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l123">
+                  <tt><i>123</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_chunk_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l124">
+                  <tt><i>124</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cumulative_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_cumulative_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_cumulative_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l125">
+                  <tt><i>125</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_conditional_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_chunk_conditional_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_chunk_conditional_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l126">
+                  <tt><i>126</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_conditional_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_conditional_path&quot;</span><span class="p">],</span><span class="s2">&quot;output_conditional_path&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E201">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E201:</strong> whitespace after '{'
+               
+                  (and 1 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l84">
+                  <tt><i>84</i>             <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;input_cpin_path&#39;</span><span class="p">:</span> <span class="n">input_cpin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '{':</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l86">
+                  <tt><i>86</i>             <span class="s1">&#39;out&#39;</span><span class="p">:</span> <span class="p">{</span>    <span class="s1">&#39;output_dat_path&#39;</span><span class="p">:</span> <span class="n">output_dat_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l231">
+                  <tt><i>231</i>     <span class="k">return</span> <span class="n">CphstatsRun</span><span class="p">(</span> <span class="n">input_cpin_path</span><span class="o">=</span><span class="n">input_cpin_path</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Whitespace after '(':</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l261">
+                  <tt><i>261</i>     <span class="n">cphstats_run</span><span class="p">(</span>    <span class="n">input_cpin_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">input_cpin_path</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l13">
+                  <tt><i>13</i> <span class="k">class</span> <span class="nc">CphstatsRun</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l222">
+                  <tt><i>222</i> <span class="k">def</span> <span class="nf">cphstats_run</span><span class="p">(</span><span class="n">input_cpin_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_cpout_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l241">
+                  <tt><i>241</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E202">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E202:</strong> whitespace before '}'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l85">
+                  <tt><i>85</i>                     <span class="s1">&#39;input_cpout_path&#39;</span><span class="p">:</span> <span class="n">input_cpout_path</span> <span class="p">},</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l91">
+                  <tt><i>91</i>                         <span class="s1">&#39;output_chunk_conditional_path&#39;</span><span class="p">:</span> <span class="n">output_chunk_conditional_path</span> <span class="p">}</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E252">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E252:</strong> missing whitespace around parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace around parameter equals (in 2 places):</p>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l225">
+                  <tt><i>225</i>             <span class="n">output_conditional_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output_chunk_conditional_path</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E124">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E124:</strong> closing bracket does not match visual indentation
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l146">
+                  <tt><i>146</i>                <span class="p">]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E271">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E271:</strong> multiple spaces after keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l8">
+                  <tt><i>8</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span>  <span class="n">settings</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E305">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E305:</strong> expected 2 blank lines after class or function definition, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l271">
+                  <tt><i>271</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E401">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E401:</strong> multiple imports on one line
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">shutil</span><span class="o">,</span> <span class="nn">re</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E701">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E701:</strong> multiple statements on one line (colon)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.cphstats.cphstats_run.source.html#l136">
+                  <tt><i>136</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span> <span class="k">return</span> <span class="mi">0</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

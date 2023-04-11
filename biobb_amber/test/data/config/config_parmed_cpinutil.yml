@@ -1,5 +1,0 @@
-properties:
-  igb: 2
-  remove_tmp: true
-  resnames: AS4 GL4
-  system: cln025

@@ -1,6 +1,0 @@
-properties:
-  build_library: false
-  forcefield:
-  - protein.ff14SB
-  remove_tmp: true
-  sequence: ALA PRO SER ARG LYS ASP GLU GLY GLY ALA

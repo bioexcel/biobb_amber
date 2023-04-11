@@ -1,7 +1,0 @@
-properties:
-  container_image: afandiadib/ambertools:serial
-  container_path: docker
-  container_volume_path: /tmp
-  igb: 2
-  resnames: AS4 GL4
-  system: cln025

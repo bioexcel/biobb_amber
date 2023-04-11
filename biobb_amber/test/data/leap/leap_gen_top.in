@@ -1,5 +1,0 @@
-source leaprc.protein.ff14SB
-mol = loadpdb structure.pdb4amber.pdb 
-savepdb mol structure.leap.pdb 
-saveAmberParm mol structure.leap.top structure.leap.crd
-quit 
