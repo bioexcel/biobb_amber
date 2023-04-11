@@ -20,7 +20,7 @@ jobs:
       matrix:
         os: [self-hosted]
         python-version: ["3.7", "3.8", "3.9"]
-    runs-on: self-hosted
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -43,8 +43,14 @@ jobs:
             python=${{ matrix.python-version }}
             pytest
             pytest-cov
+            pytest-html
             flake8
+            pip
       
+      - name: Install genbadge from pip
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: pip install genbadge[all]
+
       - name: List installed package versions
         shell: bash -l {0}  # necessary for conda env to be active
         run: micromamba list
@@ -57,9 +63,17 @@ jobs:
 
           # Workflow fails: Stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          
+          # Create directory for flake8 reports
+          mkdir -p ./reports/flake8
 
           # Exit-zero treats all errors as warnings, workflow will not fail:
-          flake8 . --exclude=docs --ignore=C901,E226 --count --exit-zero --max-complexity=10 --max-line-length=999 --statistics
+          flake8 . --exclude=docs --ignore=C901,E226 --count --exit-zero --max-complexity=10 --max-line-length=999 --statistics --format=html --htmldir=./reports/flake8/ --tee --output-file=./reports/flake8/flake8stats.txt
+
+      - name: Generate Flake8 badge
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: |
+          genbadge flake8 --name "Flake8" --input-file ./reports/flake8/flake8stats.txt  --output-file ./reports/flake8/flake8badge.svg
 
       - name: Checkout biobb_common
         uses: actions/checkout@v3
@@ -72,13 +86,33 @@ jobs:
         run: |
           # Ignoring docker and singularity tests
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
-          # Production one
-          pytest biobb_amber/test/unitests/ --cov=./ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd*
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+          # Create directory for tests reports
+          mkdir -p ./reports/junit
+
+          # Production one
+          pytest biobb_amber/test/unitests/ --cov=./ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
+
+      - name: Generate Tests badge
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: |
+          genbadge tests --name "Tests" --input-file ./reports/junit/junit.xml  --output-file ./reports/junit/testsbadge.svg
+
+      - name: Generate Coverage badge
+        shell: bash -l {0}  # necessary for conda env to be active
+        run: |
+          # Create directory for flake8 reports
+          mkdir -p ./reports/coverage
+
+          coverage xml -o ./reports/coverage/coverage.xml
+          coverage html -d ./reports/coverage/
+
+          genbadge coverage --name "Coverage" --input-file ./reports/coverage/coverage.xml  --output-file ./reports/coverage/coveragebadge.svg
+
+      - name: Publish coverage report to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          folder: ./reports
       
       - name: Restore .bash_profile
         run: cp ~/.bash_profile_orig ~/.bash_profile
