@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.parmed.parmed_hmassrepartition import parmed_hmassrepartition
+import pytest
+
 
 class TestParmedHMassRepartitionDocker():
     def setup_class(self):
@@ -14,7 +16,7 @@ class TestParmedHMassRepartitionDocker():
         assert fx.not_empty(self.paths['output_top_path'])
         assert fx.equal(self.paths['output_top_path'], self.paths['ref_output_top_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestParmedHMassRepartitionSingularity():
     def setup_class(self):

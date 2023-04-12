@@ -1,2 +1,2 @@
 name = "cphstats"
-__all__ = ["cphstats_run","cestats_run"]
+__all__ = ["cphstats_run", "cestats_run"]

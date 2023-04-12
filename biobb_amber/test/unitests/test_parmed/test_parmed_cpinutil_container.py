@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.parmed.parmed_cpinutil import parmed_cpinutil
+import pytest
+
 
 class TestParmedCpinUtilDocker():
     def setup_class(self):
@@ -14,7 +16,7 @@ class TestParmedCpinUtilDocker():
         assert fx.not_empty(self.paths['output_cpin_path'])
         assert fx.equal(self.paths['output_cpin_path'], self.paths['ref_output_cpin_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestParmedCpinUtilSingularity():
     def setup_class(self):

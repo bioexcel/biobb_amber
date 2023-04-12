@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_build_linear_structure import leap_build_linear_structure
+import pytest
+
 
 class TestLeapBuildLinearStructureDocker():
     def setup_class(self):
@@ -14,7 +16,7 @@ class TestLeapBuildLinearStructureDocker():
         assert fx.not_empty(self.paths['output_pdb_path'])
         assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestLeapBuildLinearStructureSingularity():
     def setup_class(self):

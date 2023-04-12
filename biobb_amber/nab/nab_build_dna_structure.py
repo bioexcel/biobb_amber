@@ -129,7 +129,7 @@ class NabBuildDNAStructure(BiobbObject):
             nabin.write("putpdb( \"" + self.stage_io_dict['out']['output_pdb_path'] + "\" , m, \"-wwpdb\");\n")
 
         # Command line
-        if self.container_path: 
+        if self.container_path:
             nuc_path = self.container_volume_path
             self.cmd = [self.binary_path,
                         '--compile', self.compiler,

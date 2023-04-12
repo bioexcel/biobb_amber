@@ -1,6 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.pdb4amber.pdb4amber_run import pdb4amber_run
 
+
 class TestPdb4amberRun():
     def setup_class(self):
         fx.test_setup(self, 'pdb4amber_run')

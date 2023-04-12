@@ -111,7 +111,8 @@ class CpptrajRandomizeIons(BiobbObject):
         self.check_data_params(self.out_log, self.err_log)
 
         # Setup Biobb
-        if self.check_restart(): return 0
+        if self.check_restart():
+            return 0
         self.stage_files()
 
         if self.container_path:
@@ -123,14 +124,13 @@ class CpptrajRandomizeIons(BiobbObject):
             fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
-
         # create cpptraj.in file
         # trajin randomizeIons.crd
         # randomizeions :K+,Cl-,Na+ around :DA,DC,DG,DT,D?3,D?5 by 5.0 overlap 3.5
         # trajout solv_randion.crd restart
         # trajout solv_randion.pdb pdb
         # go
-        
+
         with open(instructions_file, 'w') as cpptrajin:
             cpptrajin.write("trajin " + self.stage_io_dict['in']['input_crd_path'] + " \n")
             cpptrajin.write("randomizeions " + self.ion_mask + " around " + self.solute_mask + " by " + str(self.distance) + " overlap " + str(self.overlap) + " \n")

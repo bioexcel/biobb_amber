@@ -1,6 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.parmed.parmed_hmassrepartition import parmed_hmassrepartition
 
+
 class TestParmedHMassRepartition():
     def setup_class(self):
         fx.test_setup(self, 'parmed_hmassrepartition')

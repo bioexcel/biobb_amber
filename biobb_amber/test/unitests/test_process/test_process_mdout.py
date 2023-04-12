@@ -1,6 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.process.process_mdout import process_mdout
 
+
 class TestProcessMDOut():
     def setup_class(self):
         fx.test_setup(self, 'process_mdout')

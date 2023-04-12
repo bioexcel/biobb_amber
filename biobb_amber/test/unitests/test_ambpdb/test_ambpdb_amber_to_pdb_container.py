@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.ambpdb.amber_to_pdb import amber_to_pdb
+import pytest
+
 
 class TestAmberToPDBDocker():
     def setup_class(self):
@@ -14,7 +16,7 @@ class TestAmberToPDBDocker():
         assert fx.not_empty(self.paths['output_pdb_path'])
         assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestAmberToPDBSingularity():
     def setup_class(self):

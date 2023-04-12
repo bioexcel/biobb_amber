@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.cpptraj.cpptraj_randomize_ions import cpptraj_randomize_ions
+import pytest
+
 
 class TestCpptrajRandomizeIonsDocker():
     def setup_class(self):
@@ -13,10 +15,10 @@ class TestCpptrajRandomizeIonsDocker():
         cpptraj_randomize_ions(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_pdb_path'])
         assert fx.not_empty(self.paths['output_crd_path'])
-        #assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
-        #assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])
+        # assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
+        # assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestCpptrajRandomizeIonsSingularity():
     def setup_class(self):
@@ -30,5 +32,5 @@ class TestCpptrajRandomizeIonsSingularity():
         cpptraj_randomize_ions(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_pdb_path'])
         assert fx.not_empty(self.paths['output_crd_path'])
-        #assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
-        #assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])
+        # assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
+        # assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])

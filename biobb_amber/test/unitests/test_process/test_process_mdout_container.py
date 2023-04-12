@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.process.process_mdout import process_mdout
+import pytest
+
 
 class TestProcessMDOutDocker():
     def setup_class(self):
@@ -14,7 +16,7 @@ class TestProcessMDOutDocker():
         assert fx.not_empty(self.paths['output_dat_path'])
         assert fx.equal(self.paths['output_dat_path'], self.paths['ref_output_dat_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestProcessMDOutSingularity():
     def setup_class(self):
@@ -28,4 +30,3 @@ class TestProcessMDOutSingularity():
         process_mdout(properties=self.properties, **self.paths)
         assert fx.not_empty(self.paths['output_dat_path'])
         assert fx.equal(self.paths['output_dat_path'], self.paths['ref_output_dat_path'])
-

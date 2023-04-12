@@ -1,6 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_gen_top import leap_gen_top
 
+
 class TestLeapGenTop():
     def setup_class(self):
         fx.test_setup(self, 'leap_gen_top')

@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_gen_top import leap_gen_top
+import pytest
+
 
 class TestLeapGenTopDocker():
     def setup_class(self):
@@ -18,7 +20,7 @@ class TestLeapGenTopDocker():
         assert fx.equal(self.paths['output_top_path'], self.paths['ref_output_top_path'])
         assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestLeapGenTopSingularity():
     def setup_class(self):
@@ -36,4 +38,3 @@ class TestLeapGenTopSingularity():
         assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
         assert fx.equal(self.paths['output_top_path'], self.paths['ref_output_top_path'])
         assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])
-

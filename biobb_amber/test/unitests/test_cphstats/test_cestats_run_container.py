@@ -1,5 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.cphstats.cestats_run import cestats_run
+import pytest
+
 
 class TestCestatsRunDocker():
     def setup_class(self):
@@ -14,7 +16,7 @@ class TestCestatsRunDocker():
         assert fx.not_empty(self.paths['output_dat_path'])
         assert fx.equal(self.paths['output_dat_path'], self.paths['ref_output_dat_path'])
 
-import pytest
+
 @pytest.mark.skip(reason="singularity currently not available")
 class TestCestatsRunSingularity():
     def setup_class(self):

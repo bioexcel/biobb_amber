@@ -1,6 +1,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_build_linear_structure import leap_build_linear_structure
 
+
 class TestLeapBuildLinearStructure():
     def setup_class(self):
         fx.test_setup(self, 'leap_build_linear_structure')
