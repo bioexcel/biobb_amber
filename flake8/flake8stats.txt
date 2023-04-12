@@ -1,2 +1,0 @@
-1     W291 trailing whitespace
-2     W292 no newline at end of file
