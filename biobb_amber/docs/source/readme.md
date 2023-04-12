@@ -1,12 +1,26 @@
-[![](https://github.com/bioexcel/biobb_amber/actions/workflows/linting_and_testing.yml/badge.svg)](https://github.com/bioexcel/biobb_amber/actions/workflows/linting_and_testing.yml)
-[![](https://codecov.io/gh/bioexcel/biobb_amber/branch/master/graph/badge.svg?token=1WU81J2VLP)](https://codecov.io/gh/bioexcel/biobb_amber)
-[![](https://readthedocs.org/projects/biobb-amber/badge/?version=latest)](https://biobb-amber.readthedocs.io/en/latest/?badge=latest)
+[![](https://img.shields.io/github/v/tag/bioexcel/biobb_amber?label=Version)](https://GitHub.com/bioexcel/biobb_amber/tags/)
+[![](https://img.shields.io/pypi/v/biobb-amber.svg?label=Pypi)](https://pypi.python.org/pypi/biobb-amber/)
+[![](https://img.shields.io/conda/vn/bioconda/biobb_amber?label=Conda)](https://anaconda.org/bioconda/biobb_amber)
+[![](https://img.shields.io/conda/dn/bioconda/biobb_amber?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_amber)
+[![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_amber?tab=tags)
+[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_amber:4.0.0--pyhdfd78af_0)
 
-[![](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](https://anaconda.org/bioconda/biobb_amber)
-[![](https://img.shields.io/badge/docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_amber?tab=tags)
-[![](https://img.shields.io/badge/singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_amber:3.9.0--pyhdfd78af_0)
-
+[![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_amber)
+[![](https://img.shields.io/pypi/pyversions/biobb-amber.svg?label=Python%20Versions)](https://pypi.org/project/biobb-amber/)
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![](https://img.shields.io/badge/Open%20Source%3f-Yes!-blue)](https://github.com/bioexcel/biobb_amber)
+
+[![](https://readthedocs.org/projects/biobb-amber/badge/?version=latest&label=Docs)](https://biobb-amber.readthedocs.io/en/latest/?badge=latest)
+[![](https://img.shields.io/website?down_message=Offline&label=Biobb%20Website&up_message=Online&url=https%3A%2F%2Fmmb.irbbarcelona.org%2Fbiobb%2F)](https://mmb.irbbarcelona.org/biobb/)
+[![](https://img.shields.io/badge/Youtube-tutorial-blue?logo=youtube&logoColor=red)](https://www.youtube.com/watch?v=ou1DOGNs0xM)
+[![](https://zenodo.org/badge/DOI/10.1038/s41597-019-0177-4.svg)](https://doi.org/10.1038/s41597-019-0177-4)
+[![](https://img.shields.io/endpoint?color=brightgreen&url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1038%2Fs41597-019-0177-4)](https://www.nature.com/articles/s41597-019-0177-4#citeas)
+
+[![](https://docs.bioexcel.eu/biobb_amber/junit/testsbadge.svg)](https://docs.bioexcel.eu/biobb_amber/junit/report.html)
+[![](https://docs.bioexcel.eu/biobb_amber/coverage/coveragebadge.svg)](https://docs.bioexcel.eu/biobb_amber/coverage/)
+[![](https://docs.bioexcel.eu/biobb_amber/flake8/flake8badge.svg)](https://docs.bioexcel.eu/biobb_amber/flake8/)
+[![](https://img.shields.io/github/last-commit/bioexcel/biobb_amber?label=Last%20Commit)](https://github.com/bioexcel/biobb_amber/commits/master)
+[![](https://img.shields.io/github/issues/bioexcel/biobb_amber.svg?color=brightgreen&label=Issues)](https://GitHub.com/bioexcel/biobb_amber/issues/)
 
 # biobb_amber
 
@@ -20,7 +34,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest API documentation](http://biobb_amber.readthedocs.io/en/latest/).
 
 ### Version
-v3.9.0 2022.4
+v4.0.0 2023.1
 
 ### Installation
 Using PIP:
@@ -30,7 +44,7 @@ Using PIP:
 * Installation:
 
 
-        pip install "biobb_amber>=3.9.0"
+        pip install "biobb_amber>=4.0.0"
 
 
 * Usage: [Python API documentation](https://biobb-amber.readthedocs.io/en/latest/modules.html)
@@ -40,7 +54,7 @@ Using ANACONDA:
 * Installation:
 
 
-        conda install -c bioconda "biobb_amber>=3.9.0"
+        conda install -c bioconda "biobb_amber>=4.0.0"
 
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-amber.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-amber.readthedocs.io/en/latest/command_line.html)
@@ -50,13 +64,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_amber:3.9.0--pyhdfd78af_0
+        docker pull quay.io/biocontainers/biobb_amber:4.0.0--pyhdfd78af_0
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_amber:3.9.0--pyhdfd78af_0
+        docker run quay.io/biocontainers/biobb_amber:4.0.0--pyhdfd78af_0
 
 
 Using SINGULARITY:
@@ -66,7 +80,7 @@ Using SINGULARITY:
 * Installation:
 
 
-        singularity pull --name biobb_amber.sif https://depot.galaxyproject.org/singularity/biobb_amber:3.9.0--pyhdfd78af_0
+        singularity pull --name biobb_amber.sif https://depot.galaxyproject.org/singularity/biobb_amber:4.0.0--pyhdfd78af_0
 
 
 * Usage:
@@ -80,8 +94,8 @@ The command list and specification can be found at the [Command Line documentati
 ### Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).
 
-* (c) 2015-2022 [Barcelona Supercomputing Center](https://www.bsc.es/)
-* (c) 2015-2022 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
+* (c) 2015-2023 [Barcelona Supercomputing Center](https://www.bsc.es/)
+* (c) 2015-2023 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
 
 Licensed under the
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0), see the file LICENSE for details.

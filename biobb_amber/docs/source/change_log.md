@@ -1,5 +1,12 @@
 # Biobb Amber changelog
 
+## What's new in version [4.0.0](https://github.com/bioexcel/biobb_amber/releases/tag/v4.0.0)?
+In version 4.0.0 the dependency biobb_common has been updated to 4.0.0 version.
+
+### New features
+
+* Update to biobb_common 4.0.0 (general)
+
 ## What's new in version [3.9.0](https://github.com/bioexcel/biobb_amber/releases/tag/v3.9.0)?
 In version 3.9.0 the dependency biobb_common has been updated to 3.9.0 version.
 
