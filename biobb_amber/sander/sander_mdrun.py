@@ -9,7 +9,7 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.sander.common import check_input_path, check_output_path 
+from biobb_amber.sander.common import check_input_path, check_output_path
 
 
 class SanderMDRun(BiobbObject):
