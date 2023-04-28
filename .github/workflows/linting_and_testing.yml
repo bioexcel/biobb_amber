@@ -3,7 +3,7 @@ name: tests
 on: 
   # workflow_dispatch
   push:
-    branches: [ dev ]
+    branches: [ master ]
     paths-ignore:
       - '.gitignore'
       - '.readthedocs.yaml'
