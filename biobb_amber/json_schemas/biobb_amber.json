@@ -4,9 +4,9 @@
     "github": "https://github.com/bioexcel/biobb_amber",
     "readthedocs": "https://biobb-amber.readthedocs.io/en/latest/",
     "conda": "https://anaconda.org/bioconda/biobb_amber",
-    "docker": "https://quay.io/biocontainers/biobb_amber:4.0.0--pyhdfd78af_0",
-    "singularity": "https://depot.galaxyproject.org/singularity/biobb_amber:4.0.0--pyhdfd78af_0",
-    "version": "4.0.0",
+    "docker": "https://quay.io/biocontainers/biobb_amber:4.0.1--pyhdfd78af_0",
+    "singularity": "https://depot.galaxyproject.org/singularity/biobb_amber:4.0.1--pyhdfd78af_0",
+    "version": "4.0.1",
     "rest": true,
     "tools" : [
         {

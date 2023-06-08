@@ -1,5 +1,12 @@
 # Biobb Amber changelog
 
+## What's new in version [4.0.1](https://github.com/bioexcel/biobb_amber/releases/tag/v4.0.1)?
+In version 4.0.1 some minor bugs have been fixed in leap submodule.
+
+### New features
+
+* Minor bug fixes (leap)
+
 ## What's new in version [4.0.0](https://github.com/bioexcel/biobb_amber/releases/tag/v4.0.0)?
 In version 4.0.0 the dependency biobb_common has been updated to 4.0.0 version.
 

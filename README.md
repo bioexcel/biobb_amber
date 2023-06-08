@@ -3,7 +3,7 @@
 [![](https://img.shields.io/conda/vn/bioconda/biobb_amber?label=Conda)](https://anaconda.org/bioconda/biobb_amber)
 [![](https://img.shields.io/conda/dn/bioconda/biobb_amber?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_amber)
 [![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_amber?tab=tags)
-[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_amber:4.0.0--pyhdfd78af_0)
+[![](https://img.shields.io/badge/Singularity-GalaxyProject-blue)](https://depot.galaxyproject.org/singularity/biobb_amber:4.0.1--pyhdfd78af_0)
 
 [![](https://img.shields.io/badge/OS-Unix%20%7C%20MacOS-blue)](https://github.com/bioexcel/biobb_amber)
 [![](https://img.shields.io/pypi/pyversions/biobb-amber.svg?label=Python%20Versions)](https://pypi.org/project/biobb-amber/)
@@ -34,7 +34,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest API documentation](http://biobb_amber.readthedocs.io/en/latest/).
 
 ### Version
-v4.0.0 2023.1
+v4.0.1 2023.1
 
 ### Installation
 Using PIP:
@@ -44,7 +44,7 @@ Using PIP:
 * Installation:
 
 
-        pip install "biobb_amber>=4.0.0"
+        pip install "biobb_amber>=4.0.1"
 
 
 * Usage: [Python API documentation](https://biobb-amber.readthedocs.io/en/latest/modules.html)
@@ -54,7 +54,7 @@ Using ANACONDA:
 * Installation:
 
 
-        conda install -c bioconda "biobb_amber>=4.0.0"
+        conda install -c bioconda "biobb_amber>=4.0.1"
 
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-amber.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://biobb-amber.readthedocs.io/en/latest/command_line.html)
@@ -64,13 +64,13 @@ Using DOCKER:
 * Installation:
 
 
-        docker pull quay.io/biocontainers/biobb_amber:4.0.0--pyhdfd78af_0
+        docker pull quay.io/biocontainers/biobb_amber:4.0.1--pyhdfd78af_0
 
 
 * Usage:
 
 
-        docker run quay.io/biocontainers/biobb_amber:4.0.0--pyhdfd78af_0
+        docker run quay.io/biocontainers/biobb_amber:4.0.1--pyhdfd78af_0
 
 
 Using SINGULARITY:
@@ -80,7 +80,7 @@ Using SINGULARITY:
 * Installation:
 
 
-        singularity pull --name biobb_amber.sif https://depot.galaxyproject.org/singularity/biobb_amber:4.0.0--pyhdfd78af_0
+        singularity pull --name biobb_amber.sif https://depot.galaxyproject.org/singularity/biobb_amber:4.0.1--pyhdfd78af_0
 
 
 * Usage:
