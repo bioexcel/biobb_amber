@@ -186,6 +186,17 @@ class LeapSolvate(BiobbObject):
         if self.positive_ions_number != 0:
             ions_command = ions_command + "addions mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
 
+        # Creating temporary folder & Leap configuration (instructions) file
+        if self.container_path:
+            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
+            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+            self.tmp_folder = None
+        else:
+            self.tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            instructions_file_path = instructions_file
+
         ligands_lib_list = []
         if self.io_dict['in']['input_lib_path'] is not None:
             if self.io_dict['in']['input_lib_path'].endswith('.zip'):
@@ -213,17 +224,6 @@ class LeapSolvate(BiobbObject):
                 leap_source_list = fu.unzip_list(self.stage_io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
             else:
                 leap_source_list.append(self.stage_io_dict['in']['input_source_path'])
-
-        # Creating temporary folder & Leap configuration (instructions) file
-        if self.container_path:
-            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
-            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
-            self.tmp_folder = None
-        else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
-            instructions_file_path = instructions_file
 
         with open(instructions_file, 'w') as leapin:
             # Forcefields loaded by default:
