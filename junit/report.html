@@ -253,9 +253,9 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 06-Sep-2023 at 11:14:24 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
+    <p>Report generated on 06-Sep-2023 at 11:18:09 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.2.0</p>
     <h2>Summary</h2>
-    <p>15 tests ran in 51.82 seconds. </p>
+    <p>15 tests ran in 51.66 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">15 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -271,18 +271,18 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_ambpdb/test_ambpdb_amber_to_pdb.py::TestAmberToPDB::test_amber_to_pdb</td>
-          <td class="col-duration">0.15</td>
+          <td class="col-duration">0.21</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:33,151 [MainThread  ] [INFO ]  Executing biobb_amber.ambpdb.amber_to_pdb Version: 4.1.0
-2023-09-06 11:13:33,152 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.top to /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa
-2023-09-06 11:13:33,152 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.crd to /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa
-2023-09-06 11:13:33,153 [MainThread  ] [INFO ]  ambpdb -p /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa/structure.leap.top -c /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa/structure.leap.crd &gt;  /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa/output.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:18,243 [MainThread  ] [INFO ]  Executing biobb_amber.ambpdb.amber_to_pdb Version: 4.1.0
+2023-09-06 11:17:18,244 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.top to /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf
+2023-09-06 11:17:18,244 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.crd to /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf
+2023-09-06 11:17:18,244 [MainThread  ] [INFO ]  ambpdb -p /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf/structure.leap.top -c /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf/structure.leap.crd &gt;  /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf/output.pdb
 
-2023-09-06 11:13:33,175 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:18,262 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:33,177 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa&#x27;]
+2023-09-06 11:17:18,262 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf&#x27;]
 Checking if empty file: /tmp/biobb/unitests/amber_to_pdb/output.pdb
 Checking RMSD between:
      PDB_A: /tmp/biobb/unitests/amber_to_pdb/output.pdb
@@ -294,31 +294,31 @@ Checking RMSD between:
      RMS: 1.7793129634901876e-14
      RMS_CUTOFF: 1
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Executing biobb_amber.ambpdb.amber_to_pdb Version: 4.1.0
-INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.top to /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa
-INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.crd to /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa
-INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:cmd_wrapper.py:33 ambpdb -p /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa/structure.leap.top -c /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa/structure.leap.crd &gt;  /tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa/output.pdb
+INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.top to /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf
+INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/ambpdb/structure.leap.crd to /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf
+INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:cmd_wrapper.py:33 ambpdb -p /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf/structure.leap.top -c /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf/structure.leap.crd &gt;  /tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf/output.pdb
 
 INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:cmd_wrapper.py:50 Exit code 0
 
-INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/amber_to_pdb/bcba49e9-bc6c-41d7-b51a-4bbe53f7fefa&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/amber_to_pdb/amber_to_pdb_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/amber_to_pdb/e83d2013-b1d5-4450-9af2-1008ed1c1bbf&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_cphstats/test_cestats_run.py::TestCestatsRun::test_cestats_run</td>
-          <td class="col-duration">0.98</td>
+          <td class="col-duration">0.99</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:33,322 [MainThread  ] [INFO ]  Executing biobb_amber.cphstats.cestats_run Version: 4.1.0
-2023-09-06 11:13:33,322 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cein to /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1
-2023-09-06 11:13:33,323 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.ceout.gz to /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1
-2023-09-06 11:13:33,323 [MainThread  ] [INFO ]  cestats -O -i /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1/structure.cein -o /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1/output.dat /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1/sander.ceout.gz -n 1000 -p --calceo -r 100
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:18,472 [MainThread  ] [INFO ]  Executing biobb_amber.cphstats.cestats_run Version: 4.1.0
+2023-09-06 11:17:18,472 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cein to /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43
+2023-09-06 11:17:18,473 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.ceout.gz to /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43
+2023-09-06 11:17:18,473 [MainThread  ] [INFO ]  cestats -O -i /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43/structure.cein -o /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43/output.dat /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43/sander.ceout.gz -n 1000 -p --calceo -r 100
 
-2023-09-06 11:13:34,241 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:19,400 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:34,242 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1&#x27;]
+2023-09-06 11:17:19,400 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43&#x27;]
 Checking if empty file: /tmp/biobb/unitests/cestats_run/output.dat
 Comparing: 
         File_A: /tmp/biobb/unitests/cestats_run/output.dat
@@ -326,31 +326,31 @@ Comparing:
         File_A hash: b&#x27;\xb7\xfd\xe0\xc7\xad\x91/\x82#\xe8\xa2j?\xc6wd\x9b\xf1\x84\x8b\x88\x06&quot;\x19v\xbb\x17!5\x81)\xa7&#x27;
         File_B hash: b&#x27;\xb7\xfd\xe0\xc7\xad\x91/\x82#\xe8\xa2j?\xc6wd\x9b\xf1\x84\x8b\x88\x06&quot;\x19v\xbb\x17!5\x81)\xa7&#x27;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Executing biobb_amber.cphstats.cestats_run Version: 4.1.0
-INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cein to /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1
-INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.ceout.gz to /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1
-INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:cmd_wrapper.py:33 cestats -O -i /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1/structure.cein -o /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1/output.dat /tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1/sander.ceout.gz -n 1000 -p --calceo -r 100
+INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cein to /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43
+INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.ceout.gz to /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43
+INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:cmd_wrapper.py:33 cestats -O -i /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43/structure.cein -o /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43/output.dat /tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43/sander.ceout.gz -n 1000 -p --calceo -r 100
 
 INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:cmd_wrapper.py:50 Exit code 0
 
-INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/cestats_run/37f0e847-2b6e-4536-a802-db63464c0dd1&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/cestats_run/cestats_run_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/cestats_run/332b9051-1be8-4a88-b833-efb8a0906b43&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_cphstats/test_cphstats_run.py::TestCphstatsRun::test_cphstats_run</td>
-          <td class="col-duration">0.07</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:34,308 [MainThread  ] [INFO ]  Executing biobb_amber.cphstats.cphstats_run Version: 4.1.0
-2023-09-06 11:13:34,308 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cpin to /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244
-2023-09-06 11:13:34,308 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.pH.cpout to /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244
-2023-09-06 11:13:34,308 [MainThread  ] [INFO ]  cphstats -O -i /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244/structure.cpin -o /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244/output.dat /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244/sander.pH.cpout -n 1000 -p --calcpka -r 100
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:19,464 [MainThread  ] [INFO ]  Executing biobb_amber.cphstats.cphstats_run Version: 4.1.0
+2023-09-06 11:17:19,464 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cpin to /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51
+2023-09-06 11:17:19,464 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.pH.cpout to /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51
+2023-09-06 11:17:19,465 [MainThread  ] [INFO ]  cphstats -O -i /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51/structure.cpin -o /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51/output.dat /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51/sander.pH.cpout -n 1000 -p --calcpka -r 100
 
-2023-09-06 11:13:34,316 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:19,469 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:34,317 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244&#x27;]
+2023-09-06 11:17:19,469 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51&#x27;]
 Checking if empty file: /tmp/biobb/unitests/cphstats_run/output.dat
 Comparing: 
         File_A: /tmp/biobb/unitests/cphstats_run/output.dat
@@ -358,48 +358,48 @@ Comparing:
         File_A hash: b&#x27;\\*\x04\xdc\x004\x1c\x0e\x0c&gt;\x8f\x05\x88\xebP\x87uW\xf1\x02\xe4\x9782#\xadj^\xd2\x01d4&#x27;
         File_B hash: b&#x27;\\*\x04\xdc\x004\x1c\x0e\x0c&gt;\x8f\x05\x88\xebP\x87uW\xf1\x02\xe4\x9782#\xadj^\xd2\x01d4&#x27;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Executing biobb_amber.cphstats.cphstats_run Version: 4.1.0
-INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cpin to /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244
-INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.pH.cpout to /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244
-INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:cmd_wrapper.py:33 cphstats -O -i /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244/structure.cpin -o /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244/output.dat /tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244/sander.pH.cpout -n 1000 -p --calcpka -r 100
+INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/structure.cpin to /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51
+INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cphstats/sander.pH.cpout to /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51
+INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:cmd_wrapper.py:33 cphstats -O -i /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51/structure.cpin -o /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51/output.dat /tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51/sander.pH.cpout -n 1000 -p --calcpka -r 100
 
 INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:cmd_wrapper.py:50 Exit code 0
 
-INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/cphstats_run/29e663f1-2a00-40dd-9955-d9a2d4968244&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/cphstats_run/cphstats_run_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/cphstats_run/8a3403f3-1d99-4f00-8963-b2a216e6de51&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_cpptraj/test_cpptraj_randomize_ions.py::TestCpptrajRandomizeIons::test_cpptraj_randomize_ions</td>
-          <td class="col-duration">1.82</td>
+          <td class="col-duration">1.72</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:34,382 [MainThread  ] [INFO ]  Executing biobb_amber.cpptraj.cpptraj_randomize_ions Version: 4.1.0
-2023-09-06 11:13:34,388 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.parmtop to /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae
-2023-09-06 11:13:34,390 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.crd to /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae
-2023-09-06 11:13:34,390 [MainThread  ] [INFO ]  Creating ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471 temporary folder
-2023-09-06 11:13:34,390 [MainThread  ] [INFO ]  cpptraj /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.parmtop -i ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471/cpptraj.in
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:19,531 [MainThread  ] [INFO ]  Executing biobb_amber.cpptraj.cpptraj_randomize_ions Version: 4.1.0
+2023-09-06 11:17:19,537 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.parmtop to /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80
+2023-09-06 11:17:19,538 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.crd to /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80
+2023-09-06 11:17:19,538 [MainThread  ] [INFO ]  Creating db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3 temporary folder
+2023-09-06 11:17:19,538 [MainThread  ] [INFO ]  cpptraj /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.parmtop -i db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3/cpptraj.in
 
-2023-09-06 11:13:36,136 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:21,192 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:36,136 [MainThread  ] [INFO ]  
+2023-09-06 11:17:21,192 [MainThread  ] [INFO ]  
 CPPTRAJ: Trajectory Analysis. V6.18.1 (AmberTools)
     ___  ___  ___  ___
      | \/ | \/ | \/ | 
     _|_/\_|_/\_|_/\_|_
 
-| Date/time: 09/06/23 11:13:34
-| Available memory: 11.081 GB
+| Date/time: 09/06/23 11:17:19
+| Available memory: 11.076 GB
 
-	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.parmtop&#x27; as Amber Topology
+	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.parmtop&#x27; as Amber Topology
 Warning: Low precision truncated octahedron angles detected (109.47 vs 109.471).
 Warning:   If desired, the &#x27;box&#x27; command can be used during processing
 Warning:   to set higher-precision angles.
 	Radius Set: modified Bondi radii (mbondi)
-INPUT: Reading input from &#x27;ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471/cpptraj.in&#x27;
-  [trajin /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.crd]
-	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.crd&#x27; as Amber Restart
+INPUT: Reading input from &#x27;db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3/cpptraj.in&#x27;
+  [trajin /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.crd]
+	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.crd&#x27; as Amber Restart
 Warning: Low precision truncated octahedron angles detected (109.47 vs 109.471).
 Warning:   If desired, the &#x27;box&#x27; command can be used during processing
 Warning:   to set higher-precision angles.
@@ -408,11 +408,11 @@ Warning:   to set higher-precision angles.
 	No ion can get closer than 3.50 angstroms to another ion.
 	No ion can get closer than 5.00 angstroms to atoms in mask &#x27;:DA,DC,DG,DT,D?3,D?5&#x27;
 	RNG: Marsaglia
-Random_Number: seed is &lt;= 0, using wallclock time as seed ( 268528 )
-  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.crd restart]
-	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.crd&#x27; as Amber Restart
-  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.pdb pdb]
-	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.pdb&#x27; as PDB
+Random_Number: seed is &lt;= 0, using wallclock time as seed ( 282637 )
+  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.crd restart]
+	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.crd&#x27; as Amber Restart
+  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.pdb pdb]
+	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.pdb&#x27; as PDB
   [go]
 ---------- RUN BEGIN -------------------------------------------------
 
@@ -436,27 +436,27 @@ ACTION SETUP FOR PARM &#x27;structure.ions.parmtop&#x27; (1 actions):
 Warning: No PDB space group specified.
 .....................................................
 ACTIVE OUTPUT TRAJECTORIES (2):
-  /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.crd (coordinates, box)
-  /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.pdb (coordinates, box)
+  /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.crd (coordinates, box)
+  /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.pdb (coordinates, box)
 ----- structure.ions.crd (1-1, 1) -----
 100% Complete.
 
 Read 1 frames and processed 1 frames.
-TIME: Avg. throughput= 0.6053 frames / second.
+TIME: Avg. throughput= 0.6408 frames / second.
 
 ACTION OUTPUT:
 TIME: Analyses took 0.0000 seconds.
 
 RUN TIMING:
 TIME:		Init               : 0.0000 s (  0.00%)
-TIME:		Trajectory Process : 1.6520 s ( 99.97%)
+TIME:		Trajectory Process : 1.5605 s ( 99.97%)
 TIME:		Action Post        : 0.0000 s (  0.00%)
 TIME:		Analysis           : 0.0000 s (  0.00%)
 TIME:		Data File Write    : 0.0000 s (  0.00%)
-TIME:		Other              : 0.0005 s (  0.00%)
-TIME:	Run Total 1.6524 s
+TIME:		Other              : 0.0004 s (  0.00%)
+TIME:	Run Total 1.5609 s
 ---------- RUN END ---------------------------------------------------
-TIME: Total execution time: 1.7129 seconds.
+TIME: Total execution time: 1.6322 seconds.
 --------------------------------------------------------------------------------
 To cite CPPTRAJ use:
 Daniel R. Roe and Thomas E. Cheatham, III, &quot;PTRAJ and CPPTRAJ: Software for
@@ -464,14 +464,14 @@ Daniel R. Roe and Thomas E. Cheatham, III, &quot;PTRAJ and CPPTRAJ: Software for
   Theory Comput., 2013, 9 (7), pp 3084-3095.
 
 
-2023-09-06 11:13:36,143 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae&#x27;, &#x27;ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471&#x27;]
+2023-09-06 11:17:21,198 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80&#x27;, &#x27;db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3&#x27;]
 Checking if empty file: /tmp/biobb/unitests/cpptraj_randomize_ions/output.pdb
 Checking if empty file: /tmp/biobb/unitests/cpptraj_randomize_ions/output.crd
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Executing biobb_amber.cpptraj.cpptraj_randomize_ions Version: 4.1.0
-INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.parmtop to /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae
-INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.crd to /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae
-INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Creating ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471 temporary folder
-INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:cmd_wrapper.py:33 cpptraj /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.parmtop -i ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471/cpptraj.in
+INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.parmtop to /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80
+INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/cpptraj/structure.ions.crd to /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80
+INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Creating db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3 temporary folder
+INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:cmd_wrapper.py:33 cpptraj /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.parmtop -i db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3/cpptraj.in
 
 INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -481,17 +481,17 @@ CPPTRAJ: Trajectory Analysis. V6.18.1 (AmberTools)
      | \/ | \/ | \/ | 
     _|_/\_|_/\_|_/\_|_
 
-| Date/time: 09/06/23 11:13:34
-| Available memory: 11.081 GB
+| Date/time: 09/06/23 11:17:19
+| Available memory: 11.076 GB
 
-	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.parmtop&#x27; as Amber Topology
+	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.parmtop&#x27; as Amber Topology
 Warning: Low precision truncated octahedron angles detected (109.47 vs 109.471).
 Warning:   If desired, the &#x27;box&#x27; command can be used during processing
 Warning:   to set higher-precision angles.
 	Radius Set: modified Bondi radii (mbondi)
-INPUT: Reading input from &#x27;ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471/cpptraj.in&#x27;
-  [trajin /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.crd]
-	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/structure.ions.crd&#x27; as Amber Restart
+INPUT: Reading input from &#x27;db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3/cpptraj.in&#x27;
+  [trajin /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.crd]
+	Reading &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/structure.ions.crd&#x27; as Amber Restart
 Warning: Low precision truncated octahedron angles detected (109.47 vs 109.471).
 Warning:   If desired, the &#x27;box&#x27; command can be used during processing
 Warning:   to set higher-precision angles.
@@ -500,11 +500,11 @@ Warning:   to set higher-precision angles.
 	No ion can get closer than 3.50 angstroms to another ion.
 	No ion can get closer than 5.00 angstroms to atoms in mask &#x27;:DA,DC,DG,DT,D?3,D?5&#x27;
 	RNG: Marsaglia
-Random_Number: seed is &lt;= 0, using wallclock time as seed ( 268528 )
-  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.crd restart]
-	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.crd&#x27; as Amber Restart
-  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.pdb pdb]
-	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.pdb&#x27; as PDB
+Random_Number: seed is &lt;= 0, using wallclock time as seed ( 282637 )
+  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.crd restart]
+	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.crd&#x27; as Amber Restart
+  [trajout /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.pdb pdb]
+	Writing &#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.pdb&#x27; as PDB
   [go]
 ---------- RUN BEGIN -------------------------------------------------
 
@@ -528,27 +528,27 @@ ACTION SETUP FOR PARM &#x27;structure.ions.parmtop&#x27; (1 actions):
 Warning: No PDB space group specified.
 .....................................................
 ACTIVE OUTPUT TRAJECTORIES (2):
-  /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.crd (coordinates, box)
-  /tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae/output.pdb (coordinates, box)
+  /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.crd (coordinates, box)
+  /tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80/output.pdb (coordinates, box)
 ----- structure.ions.crd (1-1, 1) -----
 100% Complete.
 
 Read 1 frames and processed 1 frames.
-TIME: Avg. throughput= 0.6053 frames / second.
+TIME: Avg. throughput= 0.6408 frames / second.
 
 ACTION OUTPUT:
 TIME: Analyses took 0.0000 seconds.
 
 RUN TIMING:
 TIME:		Init               : 0.0000 s (  0.00%)
-TIME:		Trajectory Process : 1.6520 s ( 99.97%)
+TIME:		Trajectory Process : 1.5605 s ( 99.97%)
 TIME:		Action Post        : 0.0000 s (  0.00%)
 TIME:		Analysis           : 0.0000 s (  0.00%)
 TIME:		Data File Write    : 0.0000 s (  0.00%)
-TIME:		Other              : 0.0005 s (  0.00%)
-TIME:	Run Total 1.6524 s
+TIME:		Other              : 0.0004 s (  0.00%)
+TIME:	Run Total 1.5609 s
 ---------- RUN END ---------------------------------------------------
-TIME: Total execution time: 1.7129 seconds.
+TIME: Total execution time: 1.6322 seconds.
 --------------------------------------------------------------------------------
 To cite CPPTRAJ use:
 Daniel R. Roe and Thomas E. Cheatham, III, &quot;PTRAJ and CPPTRAJ: Software for
@@ -556,33 +556,33 @@ Daniel R. Roe and Thomas E. Cheatham, III, &quot;PTRAJ and CPPTRAJ: Software for
   Theory Comput., 2013, 9 (7), pp 3084-3095.
 
 
-INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/197f7df5-b9ef-476f-ad79-bc25a3bc5aae&#x27;, &#x27;ee9c1b94-dfd7-48ef-9bf9-3b39e39a8471&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/cpptraj_randomize_ions/cpptraj_randomize_ions_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/cpptraj_randomize_ions/695de0b3-a741-4883-8cfa-a75533e35e80&#x27;, &#x27;db1ecf62-8722-4ee5-b4dc-2269cb4c3bc3&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_leap/test_leap_add_ions.py::TestLeapAddIons::test_leap_add_ions</td>
-          <td class="col-duration">5.10</td>
+          <td class="col-duration">5.09</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:36,211 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_add_ions Version: 4.1.0
-2023-09-06 11:13:36,214 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.ions.input.pdb to /tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0
-2023-09-06 11:13:36,370 [MainThread  ] [INFO ]  Creating 3b7ca18d-d730-44e5-b80b-e18a36588540 temporary folder
-2023-09-06 11:13:36,371 [MainThread  ] [INFO ]  tleap -f 3b7ca18d-d730-44e5-b80b-e18a36588540/leap.in
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:21,261 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_add_ions Version: 4.1.0
+2023-09-06 11:17:21,264 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.ions.input.pdb to /tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594
+2023-09-06 11:17:21,442 [MainThread  ] [INFO ]  Creating 360b9836-3e31-48ea-ac30-e3d1dd611e2e temporary folder
+2023-09-06 11:17:21,442 [MainThread  ] [INFO ]  tleap -f 360b9836-3e31-48ea-ac30-e3d1dd611e2e/leap.in
 
-2023-09-06 11:13:41,221 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:26,266 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:41,221 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
+2023-09-06 11:17:26,267 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source 3b7ca18d-d730-44e5-b80b-e18a36588540/leap.in.
+-f: Source 360b9836-3e31-48ea-ac30-e3d1dd611e2e/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./3b7ca18d-d730-44e5-b80b-e18a36588540/leap.in
+Sourcing: ./360b9836-3e31-48ea-ac30-e3d1dd611e2e/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.DNA.bsc1
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.DNA.bsc1 done
 Log file: ./leap.log
@@ -610,7 +610,7 @@ Loading parameters: /home/user/micromamba/envs/test_environment/dat/leap/parm/fr
 Reading force field modification type file (frcmod)
 Reading title:
 Monovalent ion parameters for Ewald and TIP4P/EW water from Joung &amp; Cheatham JPCB (2008)
-Loading PDB file: /tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0/structure.ions.input.pdb
+Loading PDB file: /tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594/structure.ions.input.pdb
   total atoms in file: 44233
   Leap added 14301 missing atoms according to residue templates:
        14301 H / lone pairs
@@ -621,102 +621,102 @@ addIonsRand: 1st Ion &amp; target unit have charges of the same sign:
      can&#x27;t neutralize.
 40 K+ ions required to neutralize.
 Adding 40 counter ions to &quot;mol&quot;. 14261 solvent molecules will remain.
-0: Placed K+ in mol at (17.60, -36.82, -29.01).
-0: Placed K+ in mol at (13.76, -23.59, -8.64).
-0: Placed K+ in mol at (0.31, -15.70, 31.62).
-0: Placed K+ in mol at (39.71, 18.12, 23.07).
-0: Placed K+ in mol at (14.94, -38.48, -28.02).
-0: Placed K+ in mol at (-2.04, -15.43, -26.48).
-0: Placed K+ in mol at (23.84, 4.84, 20.47).
-0: Placed K+ in mol at (18.41, -24.94, -7.70).
-0: Placed K+ in mol at (-11.92, 11.55, 11.65).
-0: Placed K+ in mol at (-30.26, 16.56, 22.73).
-0: Placed K+ in mol at (-18.06, -3.25, -11.40).
-0: Placed K+ in mol at (-14.87, 6.87, 29.39).
-0: Placed K+ in mol at (-0.24, 29.89, -9.49).
-0: Placed K+ in mol at (-15.95, 22.92, 23.35).
-0: Placed K+ in mol at (-8.17, 37.07, -22.82).
-0: Placed K+ in mol at (35.81, -2.89, -32.83).
-0: Placed K+ in mol at (3.54, -1.30, -47.71).
-0: Placed K+ in mol at (-31.70, 15.66, -9.97).
-0: Placed K+ in mol at (-2.41, -27.95, 22.86).
-0: Placed K+ in mol at (38.04, -12.47, -16.32).
-0: Placed K+ in mol at (-36.51, 24.34, -21.88).
-0: Placed K+ in mol at (-24.52, -4.44, 29.87).
-0: Placed K+ in mol at (1.65, -25.04, 35.93).
-0: Placed K+ in mol at (24.18, -19.84, 14.56).
-0: Placed K+ in mol at (-13.67, -23.63, -28.13).
-0: Placed K+ in mol at (9.32, -22.04, -10.30).
-0: Placed K+ in mol at (11.08, -31.13, 2.91).
-0: Placed K+ in mol at (-14.21, 34.32, -26.67).
-0: Placed K+ in mol at (-35.79, -9.61, 18.85).
-0: Placed K+ in mol at (-24.05, 15.63, 32.35).
-0: Placed K+ in mol at (-15.10, -39.06, 15.76).
-0: Placed K+ in mol at (-7.80, -3.32, 29.32).
-0: Placed K+ in mol at (-19.17, 10.81, 14.56).
-0: Placed K+ in mol at (-0.67, 36.71, -5.21).
-0: Placed K+ in mol at (-14.87, 6.87, -23.71).
-0: Placed K+ in mol at (2.25, 39.55, 9.45).
-0: Placed K+ in mol at (-11.96, 33.93, -31.28).
-0: Placed K+ in mol at (20.86, -21.49, -20.83).
-0: Placed K+ in mol at (24.60, -0.08, 29.20).
-0: Placed K+ in mol at (28.12, 5.03, 7.57).
+0: Placed K+ in mol at (14.06, -3.47, 12.13).
+0: Placed K+ in mol at (-35.04, -0.85, -32.90).
+0: Placed K+ in mol at (-12.54, 13.78, 20.98).
+0: Placed K+ in mol at (-3.63, 37.13, -17.34).
+0: Placed K+ in mol at (-36.92, -17.96, 20.84).
+0: Placed K+ in mol at (40.70, 9.30, -26.56).
+0: Placed K+ in mol at (23.75, -1.22, 13.62).
+0: Placed K+ in mol at (33.54, 22.52, 11.61).
+0: Placed K+ in mol at (-25.33, -27.87, -3.48).
+0: Placed K+ in mol at (12.15, -25.24, -39.23).
+0: Placed K+ in mol at (-21.74, -34.11, 18.99).
+0: Placed K+ in mol at (13.32, 0.58, -7.27).
+0: Placed K+ in mol at (7.03, -28.28, 4.55).
+0: Placed K+ in mol at (22.15, 42.71, 3.68).
+0: Placed K+ in mol at (-25.15, 25.06, -25.12).
+0: Placed K+ in mol at (-30.40, -34.08, 11.63).
+0: Placed K+ in mol at (13.09, 31.89, 22.73).
+0: Placed K+ in mol at (7.10, 22.78, 30.96).
+0: Placed K+ in mol at (16.57, -23.07, 23.35).
+0: Placed K+ in mol at (6.84, -6.32, 31.22).
+0: Placed K+ in mol at (2.95, 31.26, 8.29).
+0: Placed K+ in mol at (-13.33, -47.52, 15.96).
+0: Placed K+ in mol at (-40.85, 3.15, 1.28).
+0: Placed K+ in mol at (11.66, -38.00, -23.24).
+0: Placed K+ in mol at (-0.57, 24.31, 4.61).
+0: Placed K+ in mol at (-41.13, -12.61, 23.22).
+0: Placed K+ in mol at (20.29, -4.31, 24.33).
+0: Placed K+ in mol at (-6.56, 24.48, 2.59).
+0: Placed K+ in mol at (5.31, -21.20, -3.24).
+0: Placed K+ in mol at (-11.54, -37.81, -4.71).
+0: Placed K+ in mol at (26.00, 18.13, -28.76).
+0: Placed K+ in mol at (-16.38, 37.28, -31.56).
+0: Placed K+ in mol at (9.45, 7.87, 34.94).
+0: Placed K+ in mol at (-14.40, -5.83, 38.74).
+0: Placed K+ in mol at (2.83, 44.61, -25.26).
+0: Placed K+ in mol at (10.71, -16.46, -15.78).
+0: Placed K+ in mol at (14.13, 44.97, -5.12).
+0: Placed K+ in mol at (1.35, -12.88, -25.68).
+0: Placed K+ in mol at (34.63, -11.08, -1.64).
+0: Placed K+ in mol at (-26.40, -11.09, 26.11).
 Adding 26 counter ions to &quot;mol&quot;. 14235 solvent molecules will remain.
-0: Placed Cl- in mol at (26.23, 20.31, 28.76).
-0: Placed Cl- in mol at (39.80, 1.84, 25.46).
-0: Placed Cl- in mol at (-23.38, 21.44, -18.84).
-0: Placed Cl- in mol at (8.38, -35.88, -6.44).
-0: Placed Cl- in mol at (-9.26, 13.00, 9.01).
-0: Placed Cl- in mol at (-8.73, 2.88, 36.01).
-0: Placed Cl- in mol at (17.71, -6.07, -43.70).
-0: Placed Cl- in mol at (-3.56, 9.50, 12.19).
-0: Placed Cl- in mol at (-35.94, -13.70, 11.94).
-0: Placed Cl- in mol at (-22.55, -38.41, 11.78).
-0: Placed Cl- in mol at (25.47, -31.87, 25.55).
-0: Placed Cl- in mol at (1.65, 43.94, 22.65).
-0: Placed Cl- in mol at (-3.74, 30.44, 17.69).
-0: Placed Cl- in mol at (34.43, 17.37, 20.18).
-0: Placed Cl- in mol at (-20.19, 2.10, -37.23).
-0: Placed Cl- in mol at (29.03, 7.01, 19.62).
-0: Placed Cl- in mol at (13.32, -22.41, 32.56).
-0: Placed Cl- in mol at (32.17, -11.40, 14.15).
-0: Placed Cl- in mol at (-40.13, 3.27, 30.48).
-0: Placed Cl- in mol at (-9.82, 7.19, 11.61).
-0: Placed Cl- in mol at (17.06, 20.42, 13.87).
-0: Placed Cl- in mol at (34.75, 11.40, -3.82).
-0: Placed Cl- in mol at (12.90, 16.04, -33.18).
-0: Placed Cl- in mol at (-9.49, 17.78, -25.68).
-0: Placed Cl- in mol at (7.35, -23.65, -6.94).
-0: Placed Cl- in mol at (-36.15, -31.85, -4.06).
+0: Placed Cl- in mol at (-17.35, 2.80, 24.34).
+0: Placed Cl- in mol at (36.13, 27.41, 15.15).
+0: Placed Cl- in mol at (-40.83, -13.56, -20.30).
+0: Placed Cl- in mol at (20.16, -29.71, 29.53).
+0: Placed Cl- in mol at (-7.92, 37.72, 17.91).
+0: Placed Cl- in mol at (37.83, 1.80, -16.51).
+0: Placed Cl- in mol at (-17.55, -37.59, 22.76).
+0: Placed Cl- in mol at (-3.65, 25.78, -16.75).
+0: Placed Cl- in mol at (3.29, -2.89, 20.27).
+0: Placed Cl- in mol at (39.14, 2.40, 33.65).
+0: Placed Cl- in mol at (19.97, -9.22, 34.26).
+0: Placed Cl- in mol at (-12.58, 40.00, -22.75).
+0: Placed Cl- in mol at (4.88, -17.84, -22.16).
+0: Placed Cl- in mol at (1.79, -17.83, 23.41).
+0: Placed Cl- in mol at (24.76, -13.89, -9.01).
+0: Placed Cl- in mol at (-14.11, 21.05, -34.26).
+0: Placed Cl- in mol at (20.55, -35.05, -18.01).
+0: Placed Cl- in mol at (9.63, 43.67, -3.06).
+0: Placed Cl- in mol at (-12.31, 35.07, -20.84).
+0: Placed Cl- in mol at (9.45, 30.86, -4.88).
+0: Placed Cl- in mol at (-3.65, 2.79, -30.03).
+0: Placed Cl- in mol at (-3.56, 32.49, 25.46).
+0: Placed Cl- in mol at (-25.04, -11.46, -14.74).
+0: Placed Cl- in mol at (33.91, 4.06, -6.95).
+0: Placed Cl- in mol at (-11.77, -18.06, 33.84).
+0: Placed Cl- in mol at (38.24, 0.91, -6.95).
 Adding 26 counter ions to &quot;mol&quot;. 14209 solvent molecules will remain.
-0: Placed K+ in mol at (-12.36, -6.71, -36.85).
-0: Placed K+ in mol at (-3.27, -32.61, -20.98).
-0: Placed K+ in mol at (18.19, -8.32, 46.17).
-0: Placed K+ in mol at (24.94, -21.15, 0.13).
-0: Placed K+ in mol at (18.85, -0.63, 38.24).
-0: Placed K+ in mol at (10.17, 29.05, -18.48).
-0: Placed K+ in mol at (-1.52, 8.62, -10.30).
-0: Placed K+ in mol at (21.48, -28.38, 32.23).
-0: Placed K+ in mol at (-33.14, 8.65, 34.69).
-0: Placed K+ in mol at (18.61, -10.26, 39.81).
-0: Placed K+ in mol at (-33.09, -21.68, 4.61).
-0: Placed K+ in mol at (2.36, 35.97, -13.92).
-0: Placed K+ in mol at (2.92, 15.25, 29.20).
-0: Placed K+ in mol at (-30.26, -6.44, 9.45).
-0: Placed K+ in mol at (-41.87, -5.56, 29.15).
-0: Placed K+ in mol at (22.38, -32.36, -14.41).
-0: Placed K+ in mol at (-38.23, 15.33, 27.64).
-0: Placed K+ in mol at (33.82, -20.30, 2.18).
-0: Placed K+ in mol at (17.87, -12.95, 31.11).
-0: Placed K+ in mol at (-22.15, -30.75, 13.44).
-0: Placed K+ in mol at (26.69, 0.81, -29.62).
-0: Placed K+ in mol at (-34.04, 8.62, -10.30).
-0: Placed K+ in mol at (-23.84, -6.70, 15.22).
-0: Placed K+ in mol at (-10.21, 10.91, 21.39).
-0: Placed K+ in mol at (4.01, 23.95, 35.53).
-0: Placed K+ in mol at (10.64, -20.71, -34.15).
+0: Placed K+ in mol at (13.00, 35.50, 20.47).
+0: Placed K+ in mol at (-2.41, 18.04, 22.86).
+0: Placed K+ in mol at (4.66, 18.51, 38.29).
+0: Placed K+ in mol at (16.18, 36.39, -14.06).
+0: Placed K+ in mol at (-25.39, -34.54, -10.06).
+0: Placed K+ in mol at (31.12, -11.94, 0.11).
+0: Placed K+ in mol at (25.03, 32.81, 13.91).
+0: Placed K+ in mol at (25.22, 6.37, 18.66).
+0: Placed K+ in mol at (-12.05, 22.13, 16.58).
+0: Placed K+ in mol at (-12.45, -8.06, 24.71).
+0: Placed K+ in mol at (34.58, 23.71, 6.65).
+0: Placed K+ in mol at (-30.62, -8.53, 5.53).
+0: Placed K+ in mol at (-12.36, -12.55, 36.93).
+0: Placed K+ in mol at (17.60, 9.17, -29.01).
+0: Placed K+ in mol at (36.53, 0.96, 22.25).
+0: Placed K+ in mol at (-12.45, 37.93, -28.39).
+0: Placed K+ in mol at (-26.31, -2.39, 2.40).
+0: Placed K+ in mol at (-12.55, -39.14, -2.45).
+0: Placed K+ in mol at (-27.77, -6.50, 32.78).
+0: Placed K+ in mol at (-35.52, -4.30, 32.89).
+0: Placed K+ in mol at (-21.23, 10.29, 0.38).
+0: Placed K+ in mol at (-25.90, 25.39, -6.17).
+0: Placed K+ in mol at (-41.20, 4.84, 20.47).
+0: Placed K+ in mol at (-17.01, 27.12, -34.76).
+0: Placed K+ in mol at (-35.20, 0.86, 25.79).
+0: Placed K+ in mol at (-6.79, -11.62, -41.29).
 Box dimensions:  88.538335 101.456335 105.094335
-Writing pdb file: /tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0/output.solv.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594/output.solv.pdb
    printing CRYST1 record to PDB file with box info
 Checking Unit.
 
@@ -746,16 +746,16 @@ Marking per-residue atom chain types.
 
 Exiting LEaP: Errors = 0; Warnings = 1; Notes = 1.
 
-2023-09-06 11:13:41,233 [MainThread  ] [INFO ]  Fixing truncated octahedron Box in the topology and coordinates files
-2023-09-06 11:13:41,240 [MainThread  ] [INFO ]  WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.
-2023-09-06 11:13:41,243 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0&#x27;, &#x27;3b7ca18d-d730-44e5-b80b-e18a36588540&#x27;, &#x27;leap.log&#x27;]
+2023-09-06 11:17:26,278 [MainThread  ] [INFO ]  Fixing truncated octahedron Box in the topology and coordinates files
+2023-09-06 11:17:26,285 [MainThread  ] [INFO ]  WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.
+2023-09-06 11:17:26,288 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594&#x27;, &#x27;360b9836-3e31-48ea-ac30-e3d1dd611e2e&#x27;, &#x27;leap.log&#x27;]
 Checking if empty file: /tmp/biobb/unitests/leap_add_ions/output.solv.pdb
 Checking if empty file: /tmp/biobb/unitests/leap_add_ions/output.solv.top
 Checking if empty file: /tmp/biobb/unitests/leap_add_ions/output.solv.crd
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Executing biobb_amber.leap.leap_add_ions Version: 4.1.0
-INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.ions.input.pdb to /tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0
-INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Creating 3b7ca18d-d730-44e5-b80b-e18a36588540 temporary folder
-INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:cmd_wrapper.py:33 tleap -f 3b7ca18d-d730-44e5-b80b-e18a36588540/leap.in
+INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.ions.input.pdb to /tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594
+INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Creating 360b9836-3e31-48ea-ac30-e3d1dd611e2e temporary folder
+INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:cmd_wrapper.py:33 tleap -f 360b9836-3e31-48ea-ac30-e3d1dd611e2e/leap.in
 
 INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -763,11 +763,11 @@ INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:cmd_wrapper.py:
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source 3b7ca18d-d730-44e5-b80b-e18a36588540/leap.in.
+-f: Source 360b9836-3e31-48ea-ac30-e3d1dd611e2e/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./3b7ca18d-d730-44e5-b80b-e18a36588540/leap.in
+Sourcing: ./360b9836-3e31-48ea-ac30-e3d1dd611e2e/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.DNA.bsc1
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.DNA.bsc1 done
 Log file: ./leap.log
@@ -795,7 +795,7 @@ Loading parameters: /home/user/micromamba/envs/test_environment/dat/leap/parm/fr
 Reading force field modification type file (frcmod)
 Reading title:
 Monovalent ion parameters for Ewald and TIP4P/EW water from Joung &amp; Cheatham JPCB (2008)
-Loading PDB file: /tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0/structure.ions.input.pdb
+Loading PDB file: /tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594/structure.ions.input.pdb
   total atoms in file: 44233
   Leap added 14301 missing atoms according to residue templates:
        14301 H / lone pairs
@@ -806,102 +806,102 @@ addIonsRand: 1st Ion &amp; target unit have charges of the same sign:
      can&#x27;t neutralize.
 40 K+ ions required to neutralize.
 Adding 40 counter ions to &quot;mol&quot;. 14261 solvent molecules will remain.
-0: Placed K+ in mol at (17.60, -36.82, -29.01).
-0: Placed K+ in mol at (13.76, -23.59, -8.64).
-0: Placed K+ in mol at (0.31, -15.70, 31.62).
-0: Placed K+ in mol at (39.71, 18.12, 23.07).
-0: Placed K+ in mol at (14.94, -38.48, -28.02).
-0: Placed K+ in mol at (-2.04, -15.43, -26.48).
-0: Placed K+ in mol at (23.84, 4.84, 20.47).
-0: Placed K+ in mol at (18.41, -24.94, -7.70).
-0: Placed K+ in mol at (-11.92, 11.55, 11.65).
-0: Placed K+ in mol at (-30.26, 16.56, 22.73).
-0: Placed K+ in mol at (-18.06, -3.25, -11.40).
-0: Placed K+ in mol at (-14.87, 6.87, 29.39).
-0: Placed K+ in mol at (-0.24, 29.89, -9.49).
-0: Placed K+ in mol at (-15.95, 22.92, 23.35).
-0: Placed K+ in mol at (-8.17, 37.07, -22.82).
-0: Placed K+ in mol at (35.81, -2.89, -32.83).
-0: Placed K+ in mol at (3.54, -1.30, -47.71).
-0: Placed K+ in mol at (-31.70, 15.66, -9.97).
-0: Placed K+ in mol at (-2.41, -27.95, 22.86).
-0: Placed K+ in mol at (38.04, -12.47, -16.32).
-0: Placed K+ in mol at (-36.51, 24.34, -21.88).
-0: Placed K+ in mol at (-24.52, -4.44, 29.87).
-0: Placed K+ in mol at (1.65, -25.04, 35.93).
-0: Placed K+ in mol at (24.18, -19.84, 14.56).
-0: Placed K+ in mol at (-13.67, -23.63, -28.13).
-0: Placed K+ in mol at (9.32, -22.04, -10.30).
-0: Placed K+ in mol at (11.08, -31.13, 2.91).
-0: Placed K+ in mol at (-14.21, 34.32, -26.67).
-0: Placed K+ in mol at (-35.79, -9.61, 18.85).
-0: Placed K+ in mol at (-24.05, 15.63, 32.35).
-0: Placed K+ in mol at (-15.10, -39.06, 15.76).
-0: Placed K+ in mol at (-7.80, -3.32, 29.32).
-0: Placed K+ in mol at (-19.17, 10.81, 14.56).
-0: Placed K+ in mol at (-0.67, 36.71, -5.21).
-0: Placed K+ in mol at (-14.87, 6.87, -23.71).
-0: Placed K+ in mol at (2.25, 39.55, 9.45).
-0: Placed K+ in mol at (-11.96, 33.93, -31.28).
-0: Placed K+ in mol at (20.86, -21.49, -20.83).
-0: Placed K+ in mol at (24.60, -0.08, 29.20).
-0: Placed K+ in mol at (28.12, 5.03, 7.57).
+0: Placed K+ in mol at (14.06, -3.47, 12.13).
+0: Placed K+ in mol at (-35.04, -0.85, -32.90).
+0: Placed K+ in mol at (-12.54, 13.78, 20.98).
+0: Placed K+ in mol at (-3.63, 37.13, -17.34).
+0: Placed K+ in mol at (-36.92, -17.96, 20.84).
+0: Placed K+ in mol at (40.70, 9.30, -26.56).
+0: Placed K+ in mol at (23.75, -1.22, 13.62).
+0: Placed K+ in mol at (33.54, 22.52, 11.61).
+0: Placed K+ in mol at (-25.33, -27.87, -3.48).
+0: Placed K+ in mol at (12.15, -25.24, -39.23).
+0: Placed K+ in mol at (-21.74, -34.11, 18.99).
+0: Placed K+ in mol at (13.32, 0.58, -7.27).
+0: Placed K+ in mol at (7.03, -28.28, 4.55).
+0: Placed K+ in mol at (22.15, 42.71, 3.68).
+0: Placed K+ in mol at (-25.15, 25.06, -25.12).
+0: Placed K+ in mol at (-30.40, -34.08, 11.63).
+0: Placed K+ in mol at (13.09, 31.89, 22.73).
+0: Placed K+ in mol at (7.10, 22.78, 30.96).
+0: Placed K+ in mol at (16.57, -23.07, 23.35).
+0: Placed K+ in mol at (6.84, -6.32, 31.22).
+0: Placed K+ in mol at (2.95, 31.26, 8.29).
+0: Placed K+ in mol at (-13.33, -47.52, 15.96).
+0: Placed K+ in mol at (-40.85, 3.15, 1.28).
+0: Placed K+ in mol at (11.66, -38.00, -23.24).
+0: Placed K+ in mol at (-0.57, 24.31, 4.61).
+0: Placed K+ in mol at (-41.13, -12.61, 23.22).
+0: Placed K+ in mol at (20.29, -4.31, 24.33).
+0: Placed K+ in mol at (-6.56, 24.48, 2.59).
+0: Placed K+ in mol at (5.31, -21.20, -3.24).
+0: Placed K+ in mol at (-11.54, -37.81, -4.71).
+0: Placed K+ in mol at (26.00, 18.13, -28.76).
+0: Placed K+ in mol at (-16.38, 37.28, -31.56).
+0: Placed K+ in mol at (9.45, 7.87, 34.94).
+0: Placed K+ in mol at (-14.40, -5.83, 38.74).
+0: Placed K+ in mol at (2.83, 44.61, -25.26).
+0: Placed K+ in mol at (10.71, -16.46, -15.78).
+0: Placed K+ in mol at (14.13, 44.97, -5.12).
+0: Placed K+ in mol at (1.35, -12.88, -25.68).
+0: Placed K+ in mol at (34.63, -11.08, -1.64).
+0: Placed K+ in mol at (-26.40, -11.09, 26.11).
 Adding 26 counter ions to &quot;mol&quot;. 14235 solvent molecules will remain.
-0: Placed Cl- in mol at (26.23, 20.31, 28.76).
-0: Placed Cl- in mol at (39.80, 1.84, 25.46).
-0: Placed Cl- in mol at (-23.38, 21.44, -18.84).
-0: Placed Cl- in mol at (8.38, -35.88, -6.44).
-0: Placed Cl- in mol at (-9.26, 13.00, 9.01).
-0: Placed Cl- in mol at (-8.73, 2.88, 36.01).
-0: Placed Cl- in mol at (17.71, -6.07, -43.70).
-0: Placed Cl- in mol at (-3.56, 9.50, 12.19).
-0: Placed Cl- in mol at (-35.94, -13.70, 11.94).
-0: Placed Cl- in mol at (-22.55, -38.41, 11.78).
-0: Placed Cl- in mol at (25.47, -31.87, 25.55).
-0: Placed Cl- in mol at (1.65, 43.94, 22.65).
-0: Placed Cl- in mol at (-3.74, 30.44, 17.69).
-0: Placed Cl- in mol at (34.43, 17.37, 20.18).
-0: Placed Cl- in mol at (-20.19, 2.10, -37.23).
-0: Placed Cl- in mol at (29.03, 7.01, 19.62).
-0: Placed Cl- in mol at (13.32, -22.41, 32.56).
-0: Placed Cl- in mol at (32.17, -11.40, 14.15).
-0: Placed Cl- in mol at (-40.13, 3.27, 30.48).
-0: Placed Cl- in mol at (-9.82, 7.19, 11.61).
-0: Placed Cl- in mol at (17.06, 20.42, 13.87).
-0: Placed Cl- in mol at (34.75, 11.40, -3.82).
-0: Placed Cl- in mol at (12.90, 16.04, -33.18).
-0: Placed Cl- in mol at (-9.49, 17.78, -25.68).
-0: Placed Cl- in mol at (7.35, -23.65, -6.94).
-0: Placed Cl- in mol at (-36.15, -31.85, -4.06).
+0: Placed Cl- in mol at (-17.35, 2.80, 24.34).
+0: Placed Cl- in mol at (36.13, 27.41, 15.15).
+0: Placed Cl- in mol at (-40.83, -13.56, -20.30).
+0: Placed Cl- in mol at (20.16, -29.71, 29.53).
+0: Placed Cl- in mol at (-7.92, 37.72, 17.91).
+0: Placed Cl- in mol at (37.83, 1.80, -16.51).
+0: Placed Cl- in mol at (-17.55, -37.59, 22.76).
+0: Placed Cl- in mol at (-3.65, 25.78, -16.75).
+0: Placed Cl- in mol at (3.29, -2.89, 20.27).
+0: Placed Cl- in mol at (39.14, 2.40, 33.65).
+0: Placed Cl- in mol at (19.97, -9.22, 34.26).
+0: Placed Cl- in mol at (-12.58, 40.00, -22.75).
+0: Placed Cl- in mol at (4.88, -17.84, -22.16).
+0: Placed Cl- in mol at (1.79, -17.83, 23.41).
+0: Placed Cl- in mol at (24.76, -13.89, -9.01).
+0: Placed Cl- in mol at (-14.11, 21.05, -34.26).
+0: Placed Cl- in mol at (20.55, -35.05, -18.01).
+0: Placed Cl- in mol at (9.63, 43.67, -3.06).
+0: Placed Cl- in mol at (-12.31, 35.07, -20.84).
+0: Placed Cl- in mol at (9.45, 30.86, -4.88).
+0: Placed Cl- in mol at (-3.65, 2.79, -30.03).
+0: Placed Cl- in mol at (-3.56, 32.49, 25.46).
+0: Placed Cl- in mol at (-25.04, -11.46, -14.74).
+0: Placed Cl- in mol at (33.91, 4.06, -6.95).
+0: Placed Cl- in mol at (-11.77, -18.06, 33.84).
+0: Placed Cl- in mol at (38.24, 0.91, -6.95).
 Adding 26 counter ions to &quot;mol&quot;. 14209 solvent molecules will remain.
-0: Placed K+ in mol at (-12.36, -6.71, -36.85).
-0: Placed K+ in mol at (-3.27, -32.61, -20.98).
-0: Placed K+ in mol at (18.19, -8.32, 46.17).
-0: Placed K+ in mol at (24.94, -21.15, 0.13).
-0: Placed K+ in mol at (18.85, -0.63, 38.24).
-0: Placed K+ in mol at (10.17, 29.05, -18.48).
-0: Placed K+ in mol at (-1.52, 8.62, -10.30).
-0: Placed K+ in mol at (21.48, -28.38, 32.23).
-0: Placed K+ in mol at (-33.14, 8.65, 34.69).
-0: Placed K+ in mol at (18.61, -10.26, 39.81).
-0: Placed K+ in mol at (-33.09, -21.68, 4.61).
-0: Placed K+ in mol at (2.36, 35.97, -13.92).
-0: Placed K+ in mol at (2.92, 15.25, 29.20).
-0: Placed K+ in mol at (-30.26, -6.44, 9.45).
-0: Placed K+ in mol at (-41.87, -5.56, 29.15).
-0: Placed K+ in mol at (22.38, -32.36, -14.41).
-0: Placed K+ in mol at (-38.23, 15.33, 27.64).
-0: Placed K+ in mol at (33.82, -20.30, 2.18).
-0: Placed K+ in mol at (17.87, -12.95, 31.11).
-0: Placed K+ in mol at (-22.15, -30.75, 13.44).
-0: Placed K+ in mol at (26.69, 0.81, -29.62).
-0: Placed K+ in mol at (-34.04, 8.62, -10.30).
-0: Placed K+ in mol at (-23.84, -6.70, 15.22).
-0: Placed K+ in mol at (-10.21, 10.91, 21.39).
-0: Placed K+ in mol at (4.01, 23.95, 35.53).
-0: Placed K+ in mol at (10.64, -20.71, -34.15).
+0: Placed K+ in mol at (13.00, 35.50, 20.47).
+0: Placed K+ in mol at (-2.41, 18.04, 22.86).
+0: Placed K+ in mol at (4.66, 18.51, 38.29).
+0: Placed K+ in mol at (16.18, 36.39, -14.06).
+0: Placed K+ in mol at (-25.39, -34.54, -10.06).
+0: Placed K+ in mol at (31.12, -11.94, 0.11).
+0: Placed K+ in mol at (25.03, 32.81, 13.91).
+0: Placed K+ in mol at (25.22, 6.37, 18.66).
+0: Placed K+ in mol at (-12.05, 22.13, 16.58).
+0: Placed K+ in mol at (-12.45, -8.06, 24.71).
+0: Placed K+ in mol at (34.58, 23.71, 6.65).
+0: Placed K+ in mol at (-30.62, -8.53, 5.53).
+0: Placed K+ in mol at (-12.36, -12.55, 36.93).
+0: Placed K+ in mol at (17.60, 9.17, -29.01).
+0: Placed K+ in mol at (36.53, 0.96, 22.25).
+0: Placed K+ in mol at (-12.45, 37.93, -28.39).
+0: Placed K+ in mol at (-26.31, -2.39, 2.40).
+0: Placed K+ in mol at (-12.55, -39.14, -2.45).
+0: Placed K+ in mol at (-27.77, -6.50, 32.78).
+0: Placed K+ in mol at (-35.52, -4.30, 32.89).
+0: Placed K+ in mol at (-21.23, 10.29, 0.38).
+0: Placed K+ in mol at (-25.90, 25.39, -6.17).
+0: Placed K+ in mol at (-41.20, 4.84, 20.47).
+0: Placed K+ in mol at (-17.01, 27.12, -34.76).
+0: Placed K+ in mol at (-35.20, 0.86, 25.79).
+0: Placed K+ in mol at (-6.79, -11.62, -41.29).
 Box dimensions:  88.538335 101.456335 105.094335
-Writing pdb file: /tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0/output.solv.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594/output.solv.pdb
    printing CRYST1 record to PDB file with box info
 Checking Unit.
 
@@ -933,7 +933,7 @@ Exiting LEaP: Errors = 0; Warnings = 1; Notes = 1.
 
 INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Fixing truncated octahedron Box in the topology and coordinates files
 INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.
-INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_add_ions/fd63e2b4-5d61-47be-83d2-da8093a885f0&#x27;, &#x27;3b7ca18d-d730-44e5-b80b-e18a36588540&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/leap_add_ions/leap_add_ions_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_add_ions/90973524-e2b2-474d-9ec9-ffe2558d0594&#x27;, &#x27;360b9836-3e31-48ea-ac30-e3d1dd611e2e&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -944,21 +944,21 @@ Removing: /tmp/biobb/unitests
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:41,312 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_build_linear_structure Version: 4.1.0
-2023-09-06 11:13:41,313 [MainThread  ] [INFO ]  Creating 88aa4501-55fe-4ee9-b67f-de5c7e31980e temporary folder
-2023-09-06 11:13:41,313 [MainThread  ] [INFO ]  tleap -f 88aa4501-55fe-4ee9-b67f-de5c7e31980e/leap.in
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:26,354 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_build_linear_structure Version: 4.1.0
+2023-09-06 11:17:26,354 [MainThread  ] [INFO ]  Creating 7af8aa50-6efc-4c54-a2ec-70c6277929bb temporary folder
+2023-09-06 11:17:26,354 [MainThread  ] [INFO ]  tleap -f 7af8aa50-6efc-4c54-a2ec-70c6277929bb/leap.in
 
-2023-09-06 11:13:41,339 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:26,381 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:41,340 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
+2023-09-06 11:17:26,381 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source 88aa4501-55fe-4ee9-b67f-de5c7e31980e/leap.in.
+-f: Source 7af8aa50-6efc-4c54-a2ec-70c6277929bb/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./88aa4501-55fe-4ee9-b67f-de5c7e31980e/leap.in
+Sourcing: ./7af8aa50-6efc-4c54-a2ec-70c6277929bb/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB done
 Log file: ./leap.log
@@ -972,12 +972,12 @@ ff14SB protein backbone and sidechain parameters
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/amino12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminoct12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminont12.lib
-Writing pdb file: /tmp/biobb/unitests/leap_build_linear_structure/ff741b1c-5218-4ab4-ac9f-55fca33066c7/output.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_build_linear_structure/bbe5f074-af1e-4749-b7c0-85263524d878/output.pdb
 	Quit
 
 Exiting LEaP: Errors = 0; Warnings = 0; Notes = 0.
 
-2023-09-06 11:13:41,340 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_build_linear_structure/ff741b1c-5218-4ab4-ac9f-55fca33066c7&#x27;, &#x27;88aa4501-55fe-4ee9-b67f-de5c7e31980e&#x27;, &#x27;leap.log&#x27;]
+2023-09-06 11:17:26,382 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_build_linear_structure/bbe5f074-af1e-4749-b7c0-85263524d878&#x27;, &#x27;7af8aa50-6efc-4c54-a2ec-70c6277929bb&#x27;, &#x27;leap.log&#x27;]
 Checking if empty file: /tmp/biobb/unitests/leap_build_linear_structure/output.pdb
 Checking RMSD between:
      PDB_A: /tmp/biobb/unitests/leap_build_linear_structure/output.pdb
@@ -989,8 +989,8 @@ Checking RMSD between:
      RMS: 2.726949933398165e-15
      RMS_CUTOFF: 1
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:file_utils.py:390 Executing biobb_amber.leap.leap_build_linear_structure Version: 4.1.0
-INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:file_utils.py:390 Creating 88aa4501-55fe-4ee9-b67f-de5c7e31980e temporary folder
-INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:cmd_wrapper.py:33 tleap -f 88aa4501-55fe-4ee9-b67f-de5c7e31980e/leap.in
+INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:file_utils.py:390 Creating 7af8aa50-6efc-4c54-a2ec-70c6277929bb temporary folder
+INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:cmd_wrapper.py:33 tleap -f 7af8aa50-6efc-4c54-a2ec-70c6277929bb/leap.in
 
 INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -998,11 +998,11 @@ INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_struc
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source 88aa4501-55fe-4ee9-b67f-de5c7e31980e/leap.in.
+-f: Source 7af8aa50-6efc-4c54-a2ec-70c6277929bb/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./88aa4501-55fe-4ee9-b67f-de5c7e31980e/leap.in
+Sourcing: ./7af8aa50-6efc-4c54-a2ec-70c6277929bb/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB done
 Log file: ./leap.log
@@ -1016,38 +1016,38 @@ ff14SB protein backbone and sidechain parameters
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/amino12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminoct12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminont12.lib
-Writing pdb file: /tmp/biobb/unitests/leap_build_linear_structure/ff741b1c-5218-4ab4-ac9f-55fca33066c7/output.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_build_linear_structure/bbe5f074-af1e-4749-b7c0-85263524d878/output.pdb
 	Quit
 
 Exiting LEaP: Errors = 0; Warnings = 0; Notes = 0.
 
-INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_build_linear_structure/ff741b1c-5218-4ab4-ac9f-55fca33066c7&#x27;, &#x27;88aa4501-55fe-4ee9-b67f-de5c7e31980e&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/leap_build_linear_structure/leap_build_linear_structure_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_build_linear_structure/bbe5f074-af1e-4749-b7c0-85263524d878&#x27;, &#x27;7af8aa50-6efc-4c54-a2ec-70c6277929bb&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_leap/test_leap_gen_top.py::TestLeapGenTop::test_leap_gen_top</td>
-          <td class="col-duration">0.11</td>
+          <td class="col-duration">0.12</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:41,413 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_gen_top Version: 4.1.0
-2023-09-06 11:13:41,413 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203
-2023-09-06 11:13:41,414 [MainThread  ] [INFO ]  Creating ebafb6f2-58ac-4b57-be45-83e4b0ec5e00 temporary folder
-2023-09-06 11:13:41,414 [MainThread  ] [INFO ]  tleap -f ebafb6f2-58ac-4b57-be45-83e4b0ec5e00/leap.in
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:26,459 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_gen_top Version: 4.1.0
+2023-09-06 11:17:26,459 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410
+2023-09-06 11:17:26,459 [MainThread  ] [INFO ]  Creating 0e8a7265-16ad-48df-9f9b-a3b0de9d056e temporary folder
+2023-09-06 11:17:26,460 [MainThread  ] [INFO ]  tleap -f 0e8a7265-16ad-48df-9f9b-a3b0de9d056e/leap.in
 
-2023-09-06 11:13:41,445 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:26,497 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:41,445 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
+2023-09-06 11:17:26,497 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source ebafb6f2-58ac-4b57-be45-83e4b0ec5e00/leap.in.
+-f: Source 0e8a7265-16ad-48df-9f9b-a3b0de9d056e/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./ebafb6f2-58ac-4b57-be45-83e4b0ec5e00/leap.in
+Sourcing: ./0e8a7265-16ad-48df-9f9b-a3b0de9d056e/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB done
 Log file: ./leap.log
@@ -1062,13 +1062,13 @@ Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/amino1
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminoct12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminont12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/atomic_ions.lib
-Loading PDB file: /tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203/structure.leapin.pdb
+Loading PDB file: /tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410/structure.leapin.pdb
   Added missing heavy atom: .R&lt;CALA 10&gt;.A&lt;OXT 11&gt;
   total atoms in file: 68
   Leap added 67 missing atoms according to residue templates:
        1 Heavy
        66 H / lone pairs
-Writing pdb file: /tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203/output.leap.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410/output.leap.pdb
 
 /home/user/micromamba/envs/test_environment/bin/teLeap: Warning!
  Converting N-terminal residue name to PDB format: NALA -&gt; ALA
@@ -1100,7 +1100,7 @@ Marking per-residue atom chain types.
 
 Exiting LEaP: Errors = 0; Warnings = 2; Notes = 0.
 
-2023-09-06 11:13:41,446 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203&#x27;, &#x27;ebafb6f2-58ac-4b57-be45-83e4b0ec5e00&#x27;, &#x27;leap.log&#x27;]
+2023-09-06 11:17:26,498 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410&#x27;, &#x27;0e8a7265-16ad-48df-9f9b-a3b0de9d056e&#x27;, &#x27;leap.log&#x27;]
 Checking if empty file: /tmp/biobb/unitests/leap_gen_top/output.leap.pdb
 Checking if empty file: /tmp/biobb/unitests/leap_gen_top/output.leap.top
 Checking if empty file: /tmp/biobb/unitests/leap_gen_top/output.leap.crd
@@ -1122,9 +1122,9 @@ Comparing:
         File_A hash: b&#x27;\xa2\xf5\xcd\x83+\xe2v\xfc\xd4\xc5\x87l{\x83\xfd\xb3i\xc0`\xf1S\xbe\x83\xecQ\xe2`v\xac\xeb\xb5\xcf&#x27;
         File_B hash: b&#x27;\xa2\xf5\xcd\x83+\xe2v\xfc\xd4\xc5\x87l{\x83\xfd\xb3i\xc0`\xf1S\xbe\x83\xecQ\xe2`v\xac\xeb\xb5\xcf&#x27;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Executing biobb_amber.leap.leap_gen_top Version: 4.1.0
-INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203
-INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Creating ebafb6f2-58ac-4b57-be45-83e4b0ec5e00 temporary folder
-INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:cmd_wrapper.py:33 tleap -f ebafb6f2-58ac-4b57-be45-83e4b0ec5e00/leap.in
+INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410
+INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Creating 0e8a7265-16ad-48df-9f9b-a3b0de9d056e temporary folder
+INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:cmd_wrapper.py:33 tleap -f 0e8a7265-16ad-48df-9f9b-a3b0de9d056e/leap.in
 
 INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -1132,11 +1132,11 @@ INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:cmd_wrapper.py:52
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source ebafb6f2-58ac-4b57-be45-83e4b0ec5e00/leap.in.
+-f: Source 0e8a7265-16ad-48df-9f9b-a3b0de9d056e/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./ebafb6f2-58ac-4b57-be45-83e4b0ec5e00/leap.in
+Sourcing: ./0e8a7265-16ad-48df-9f9b-a3b0de9d056e/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB done
 Log file: ./leap.log
@@ -1151,13 +1151,13 @@ Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/amino1
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminoct12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/aminont12.lib
 Loading library: /home/user/micromamba/envs/test_environment/dat/leap/lib/atomic_ions.lib
-Loading PDB file: /tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203/structure.leapin.pdb
+Loading PDB file: /tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410/structure.leapin.pdb
   Added missing heavy atom: .R&lt;CALA 10&gt;.A&lt;OXT 11&gt;
   total atoms in file: 68
   Leap added 67 missing atoms according to residue templates:
        1 Heavy
        66 H / lone pairs
-Writing pdb file: /tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203/output.leap.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410/output.leap.pdb
 
 /home/user/micromamba/envs/test_environment/bin/teLeap: Warning!
  Converting N-terminal residue name to PDB format: NALA -&gt; ALA
@@ -1189,33 +1189,33 @@ Marking per-residue atom chain types.
 
 Exiting LEaP: Errors = 0; Warnings = 2; Notes = 0.
 
-INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_gen_top/656735a4-f0f2-434e-93a6-6046c4eca203&#x27;, &#x27;ebafb6f2-58ac-4b57-be45-83e4b0ec5e00&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/leap_gen_top/leap_gen_top_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_gen_top/c2d9e00a-9936-47bf-a09d-d0577d8b2410&#x27;, &#x27;0e8a7265-16ad-48df-9f9b-a3b0de9d056e&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_leap/test_leap_solvate.py::TestLeapSolvate::test_leap_solvate</td>
-          <td class="col-duration">0.81</td>
+          <td class="col-duration">0.75</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:41,531 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_solvate Version: 4.1.0
-2023-09-06 11:13:41,531 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e
-2023-09-06 11:13:41,531 [MainThread  ] [INFO ]  Creating e0008353-391f-4c3a-90c1-019491ee0b44 temporary folder
-2023-09-06 11:13:41,532 [MainThread  ] [INFO ]  tleap -f e0008353-391f-4c3a-90c1-019491ee0b44/leap.in
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:26,580 [MainThread  ] [INFO ]  Executing biobb_amber.leap.leap_solvate Version: 4.1.0
+2023-09-06 11:17:26,581 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1
+2023-09-06 11:17:26,581 [MainThread  ] [INFO ]  Creating 862495ef-6604-4b0e-9242-5b29a90ac131 temporary folder
+2023-09-06 11:17:26,581 [MainThread  ] [INFO ]  tleap -f 862495ef-6604-4b0e-9242-5b29a90ac131/leap.in
 
-2023-09-06 11:13:41,759 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:26,817 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:41,759 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
+2023-09-06 11:17:26,817 [MainThread  ] [INFO ]  -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/prep to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source e0008353-391f-4c3a-90c1-019491ee0b44/leap.in.
+-f: Source 862495ef-6604-4b0e-9242-5b29a90ac131/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./e0008353-391f-4c3a-90c1-019491ee0b44/leap.in
+Sourcing: ./862495ef-6604-4b0e-9242-5b29a90ac131/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB done
 Log file: ./leap.log
@@ -1253,7 +1253,7 @@ Loading parameters: /home/user/micromamba/envs/test_environment/dat/leap/parm/fr
 Reading force field modification type file (frcmod)
 Reading title:
 Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
-Loading PDB file: /tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e/structure.leapin.pdb
+Loading PDB file: /tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1/structure.leapin.pdb
   Added missing heavy atom: .R&lt;CALA 10&gt;.A&lt;OXT 11&gt;
   total atoms in file: 68
   Leap added 67 missing atoms according to residue templates:
@@ -1267,7 +1267,7 @@ Scaling up box by a factor of 1.056709 to meet diagonal cut criterion
   Volume: 99797.842 A^3 (oct)
   Total mass 51864.242 amu,  Density 0.863 g/cc
   Added 2824 residues.
-Writing pdb file: /tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e/output.solv.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1/output.solv.pdb
    printing CRYST1 record to PDB file with box info
 
 /home/user/micromamba/envs/test_environment/bin/teLeap: Warning!
@@ -1301,7 +1301,7 @@ Marking per-residue atom chain types.
 
 Exiting LEaP: Errors = 0; Warnings = 2; Notes = 0.
 
-2023-09-06 11:13:41,765 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e&#x27;, &#x27;e0008353-391f-4c3a-90c1-019491ee0b44&#x27;, &#x27;leap.log&#x27;]
+2023-09-06 11:17:26,822 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1&#x27;, &#x27;862495ef-6604-4b0e-9242-5b29a90ac131&#x27;, &#x27;leap.log&#x27;]
 Checking if empty file: /tmp/biobb/unitests/leap_solvate/output.solv.pdb
 Checking if empty file: /tmp/biobb/unitests/leap_solvate/output.solv.top
 Checking if empty file: /tmp/biobb/unitests/leap_solvate/output.solv.crd
@@ -1320,9 +1320,9 @@ Comparing:
         File_A hash: b&quot;_\xaa\xce\x8f\x12\xc9w.4\x83\xa6\x12\xd9\xdd\xb2J\xe1\xfe\xd0V\x92\x0fi&#x27;\xb0\x98\xe7\xc8lh)\xbf&quot;
         File_B hash: b&quot;_\xaa\xce\x8f\x12\xc9w.4\x83\xa6\x12\xd9\xdd\xb2J\xe1\xfe\xd0V\x92\x0fi&#x27;\xb0\x98\xe7\xc8lh)\xbf&quot;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Executing biobb_amber.leap.leap_solvate Version: 4.1.0
-INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e
-INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Creating e0008353-391f-4c3a-90c1-019491ee0b44 temporary folder
-INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:cmd_wrapper.py:33 tleap -f e0008353-391f-4c3a-90c1-019491ee0b44/leap.in
+INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/leap/structure.leapin.pdb to /tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1
+INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Creating 862495ef-6604-4b0e-9242-5b29a90ac131 temporary folder
+INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:cmd_wrapper.py:33 tleap -f 862495ef-6604-4b0e-9242-5b29a90ac131/leap.in
 
 INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -1330,11 +1330,11 @@ INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:cmd_wrapper.py:52
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/lib to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/parm to search path.
 -I: Adding /home/user/micromamba/envs/test_environment/dat/leap/cmd to search path.
--f: Source e0008353-391f-4c3a-90c1-019491ee0b44/leap.in.
+-f: Source 862495ef-6604-4b0e-9242-5b29a90ac131/leap.in.
 
 Welcome to LEaP!
 (no leaprc in search path)
-Sourcing: ./e0008353-391f-4c3a-90c1-019491ee0b44/leap.in
+Sourcing: ./862495ef-6604-4b0e-9242-5b29a90ac131/leap.in
 ----- Source: /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB
 ----- Source of /home/user/micromamba/envs/test_environment/dat/leap/cmd/leaprc.protein.ff14SB done
 Log file: ./leap.log
@@ -1372,7 +1372,7 @@ Loading parameters: /home/user/micromamba/envs/test_environment/dat/leap/parm/fr
 Reading force field modification type file (frcmod)
 Reading title:
 Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
-Loading PDB file: /tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e/structure.leapin.pdb
+Loading PDB file: /tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1/structure.leapin.pdb
   Added missing heavy atom: .R&lt;CALA 10&gt;.A&lt;OXT 11&gt;
   total atoms in file: 68
   Leap added 67 missing atoms according to residue templates:
@@ -1386,7 +1386,7 @@ Scaling up box by a factor of 1.056709 to meet diagonal cut criterion
   Volume: 99797.842 A^3 (oct)
   Total mass 51864.242 amu,  Density 0.863 g/cc
   Added 2824 residues.
-Writing pdb file: /tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e/output.solv.pdb
+Writing pdb file: /tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1/output.solv.pdb
    printing CRYST1 record to PDB file with box info
 
 /home/user/micromamba/envs/test_environment/bin/teLeap: Warning!
@@ -1420,30 +1420,30 @@ Marking per-residue atom chain types.
 
 Exiting LEaP: Errors = 0; Warnings = 2; Notes = 0.
 
-INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_solvate/4f0ed6ad-8508-444b-9f55-9974855d817e&#x27;, &#x27;e0008353-391f-4c3a-90c1-019491ee0b44&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/leap_solvate/leap_solvate_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/leap_solvate/6a02cea7-c1a3-4fcb-9bb4-ddd65d69abd1&#x27;, &#x27;862495ef-6604-4b0e-9242-5b29a90ac131&#x27;, &#x27;leap.log&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_parmed/test_parmed_cpinutil.py::TestParmedCpinUtil::test_parmed_cpinutil</td>
-          <td class="col-duration">1.17</td>
+          <td class="col-duration">1.15</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:42,351 [MainThread  ] [INFO ]  Executing biobb_amber.parmed.parmed_cpinutil Version: 4.1.0
-2023-09-06 11:13:42,353 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/cln025.prmtop to /tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc
-2023-09-06 11:13:42,353 [MainThread  ] [INFO ]  Creating 0952bafc-cbc9-41ba-8557-c07d2e574811 temporary folder
-2023-09-06 11:13:42,353 [MainThread  ] [INFO ]  Creating command line with instructions and required arguments
-2023-09-06 11:13:42,353 [MainThread  ] [INFO ]  cpinutil.py -p /tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc/cln025.prmtop -o /tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc/output.pH.cpin -igb 2 -system cln025 -resnames AS4 GL4
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:27,333 [MainThread  ] [INFO ]  Executing biobb_amber.parmed.parmed_cpinutil Version: 4.1.0
+2023-09-06 11:17:27,335 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/cln025.prmtop to /tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136
+2023-09-06 11:17:27,336 [MainThread  ] [INFO ]  Creating 654a08e9-75db-4fb3-8db6-a62a941ba547 temporary folder
+2023-09-06 11:17:27,336 [MainThread  ] [INFO ]  Creating command line with instructions and required arguments
+2023-09-06 11:17:27,336 [MainThread  ] [INFO ]  cpinutil.py -p /tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136/cln025.prmtop -o /tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136/output.pH.cpin -igb 2 -system cln025 -resnames AS4 GL4
 
-2023-09-06 11:13:43,465 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:28,427 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:43,466 [MainThread  ] [INFO ]  Warning: Carboxylate residues in explicit solvent simulations require a modified topology file!
+2023-09-06 11:17:28,427 [MainThread  ] [INFO ]  Warning: Carboxylate residues in explicit solvent simulations require a modified topology file!
          Use the -op flag to print one.
 CPIN generation complete!
 
-2023-09-06 11:13:43,467 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc&#x27;, &#x27;0952bafc-cbc9-41ba-8557-c07d2e574811&#x27;]
+2023-09-06 11:17:28,428 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136&#x27;, &#x27;654a08e9-75db-4fb3-8db6-a62a941ba547&#x27;]
 Checking if empty file: /tmp/biobb/unitests/parmed_cpinutil/output.pH.cpin
 Comparing: 
         File_A: /tmp/biobb/unitests/parmed_cpinutil/output.pH.cpin
@@ -1451,10 +1451,10 @@ Comparing:
         File_A hash: b&#x27;\\4\xdaZ/m\x0e\xf2\xdfX$\xdc\xfb\x14\x15\xfbad\x08\xd0\x9e\x00\xf2\xc5\xac\x8a\xf59cnJ\xb9&#x27;
         File_B hash: b&#x27;\\4\xdaZ/m\x0e\xf2\xdfX$\xdc\xfb\x14\x15\xfbad\x08\xd0\x9e\x00\xf2\xc5\xac\x8a\xf59cnJ\xb9&#x27;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Executing biobb_amber.parmed.parmed_cpinutil Version: 4.1.0
-INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/cln025.prmtop to /tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc
-INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Creating 0952bafc-cbc9-41ba-8557-c07d2e574811 temporary folder
+INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/cln025.prmtop to /tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136
+INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Creating 654a08e9-75db-4fb3-8db6-a62a941ba547 temporary folder
 INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Creating command line with instructions and required arguments
-INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:cmd_wrapper.py:33 cpinutil.py -p /tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc/cln025.prmtop -o /tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc/output.pH.cpin -igb 2 -system cln025 -resnames AS4 GL4
+INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:cmd_wrapper.py:33 cpinutil.py -p /tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136/cln025.prmtop -o /tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136/output.pH.cpin -igb 2 -system cln025 -resnames AS4 GL4
 
 INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:cmd_wrapper.py:50 Exit code 0
 
@@ -1462,133 +1462,121 @@ INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.err:cmd_wrapper
          Use the -op flag to print one.
 CPIN generation complete!
 
-INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/parmed_cpinutil/473effc2-9271-4d01-8d1b-8874f36213bc&#x27;, &#x27;0952bafc-cbc9-41ba-8557-c07d2e574811&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/parmed_cpinutil/parmed_cpinutil_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/parmed_cpinutil/28a53488-2882-4e54-9852-8c1541b0a136&#x27;, &#x27;654a08e9-75db-4fb3-8db6-a62a941ba547&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_parmed/test_parmed_hmassrepartition.py::TestParmedHMassRepartition::test_parmed_hmassrepartition</td>
-          <td class="col-duration">0.71</td>
+          <td class="col-duration">0.70</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:43,533 [MainThread  ] [INFO ]  Executing biobb_amber.parmed.parmed_hmassrepartition Version: 4.1.0
-2023-09-06 11:13:43,534 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/input.hmass.prmtop to /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876
-2023-09-06 11:13:43,534 [MainThread  ] [INFO ]  Creating 880a6981-afc4-49b8-8cfe-f38d0a620712 temporary folder
-2023-09-06 11:13:43,534 [MainThread  ] [INFO ]  parmed -p /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876/input.hmass.prmtop -i 880a6981-afc4-49b8-8cfe-f38d0a620712/parmed.in -O
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:28,492 [MainThread  ] [INFO ]  Executing biobb_amber.parmed.parmed_hmassrepartition Version: 4.1.0
+2023-09-06 11:17:28,493 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/input.hmass.prmtop to /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d
+2023-09-06 11:17:28,493 [MainThread  ] [INFO ]  Creating 59311e57-6b85-4e41-bbb8-eb9c9d3d7a16 temporary folder
+2023-09-06 11:17:28,493 [MainThread  ] [INFO ]  parmed -p /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d/input.hmass.prmtop -i 59311e57-6b85-4e41-bbb8-eb9c9d3d7a16/parmed.in -O
 
-2023-09-06 11:13:44,173 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:29,130 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:44,173 [MainThread  ] [INFO ]  
-.     .       .  .   . .   .   . .    +  .
-  .     .  :     .    .. :. .___---------___.
-       .  .   .    .  :.:. _&quot;.^ .^ ^.  &#x27;.. :&quot;-_. .
-    .  :       .  .  .:../:            . .^  :.:\.
-        .   . :: +. :.:/: .   .    .        . . .:\
- .  :    .     . _ :::/:               .  ^ .  . .:\
-  .. . .   . - : :.:./.                        .  .:\
-  .      .     . :..|:                    .  .  ^. .:|
-    .       . : : ..||        .                . . !:|
-  .     . . . ::. ::\(                           . :)/
- .   .     : . : .:.|. ######              .#######::|
-  :.. .  :-  : .:  ::|.#######           ..########:|
- .  .  .  ..  .  .. :\ ########          :######## :/
-  .        .+ :: : -.:\ ########       . ########.:/
-    .  .+   . . . . :.:\. #######       #######..:/
-      :: . . . . ::.:..:.\           .   .   ..:/
-   .   .   .  .. :  -::::.\.       | |     . .:/
-      .  :  .  .  .-:.&quot;:.::.\             ..:/ .~~~~~~~~~~~.
- .      -.   . . . .: .:::.:.\.           .:/,: Prepare to  \
-.   .   .  :      : ....::_:..:\   ___.  :/ .       be       |
-   .   .  .   .:. .. .  .: :.:.:\       :/   \  P A R M E D |
-     +   .   .   : . ::. :.:. .:.|\  .:/|      \~~~~~~~~~~~&#x27;
-     .         +   .  .  ...:: ..|  --.:|
-.      . . .   .  .  . ... :..:..&quot;(  ..)&quot;
- .   .       .      :  .   .: ::/  .  .::\
-
+2023-09-06 11:17:29,130 [MainThread  ] [INFO ]  
+ _~__________________
+ |_|_______________|_|
+ |  ,-------------.  |
+ | |  .---------.  | |
+ | |  |P        |  | |
+ | |  | a       |  | |
+ | |  |  r      |  | |
+ | |  |   m  ED |  | |
+ | |  `---------&#x27;  | |
+ | `---------------&#x27; |
+ |   _ ParmedBoy     |
+ | _| |_         ,-. |
+ ||_ O _|   ,-. &quot;._,&quot;|
+ |  |_|    &quot;._,&quot;   A |
+ |    _  _    B      |
+ |   // //           |
+ |  // //    \\\\\\  |
+ |  `  `      \\\\\\ ,
+ |________...______,&quot;
+ 
 ParmEd: a Parameter file Editor
 
 
-Loaded Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876/input.hmass.prmtop
-[&#x27;880a6981-afc4-49b8-8cfe-f38d0a620712/parmed.in&#x27;]
-Reading actions from 880a6981-afc4-49b8-8cfe-f38d0a620712/parmed.in
+Loaded Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d/input.hmass.prmtop
+[&#x27;59311e57-6b85-4e41-bbb8-eb9c9d3d7a16/parmed.in&#x27;]
+Reading actions from 59311e57-6b85-4e41-bbb8-eb9c9d3d7a16/parmed.in
 
 Repartitioning hydrogen masses to 3.024 daltons. Not changing water hydrogen masses.
-Outputting Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876/output.prmtop
+Outputting Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d/output.prmtop
 Done!
 
-2023-09-06 11:13:44,175 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876&#x27;, &#x27;880a6981-afc4-49b8-8cfe-f38d0a620712&#x27;]
+2023-09-06 11:17:29,131 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d&#x27;, &#x27;59311e57-6b85-4e41-bbb8-eb9c9d3d7a16&#x27;]
 Checking if empty file: /tmp/biobb/unitests/parmed_hmassrepartition/output.prmtop
 Comparing ignoring first line of both files:
      FILE_A: /tmp/biobb/unitests/parmed_hmassrepartition/output.prmtop
      FILE_B: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/reference/parmed/output.hmass.prmtop
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Executing biobb_amber.parmed.parmed_hmassrepartition Version: 4.1.0
-INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/input.hmass.prmtop to /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876
-INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Creating 880a6981-afc4-49b8-8cfe-f38d0a620712 temporary folder
-INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:cmd_wrapper.py:33 parmed -p /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876/input.hmass.prmtop -i 880a6981-afc4-49b8-8cfe-f38d0a620712/parmed.in -O
+INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/parmed/input.hmass.prmtop to /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d
+INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Creating 59311e57-6b85-4e41-bbb8-eb9c9d3d7a16 temporary folder
+INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:cmd_wrapper.py:33 parmed -p /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d/input.hmass.prmtop -i 59311e57-6b85-4e41-bbb8-eb9c9d3d7a16/parmed.in -O
 
 INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:cmd_wrapper.py:50 Exit code 0
 
 INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:cmd_wrapper.py:52 
-.     .       .  .   . .   .   . .    +  .
-  .     .  :     .    .. :. .___---------___.
-       .  .   .    .  :.:. _&quot;.^ .^ ^.  &#x27;.. :&quot;-_. .
-    .  :       .  .  .:../:            . .^  :.:\.
-        .   . :: +. :.:/: .   .    .        . . .:\
- .  :    .     . _ :::/:               .  ^ .  . .:\
-  .. . .   . - : :.:./.                        .  .:\
-  .      .     . :..|:                    .  .  ^. .:|
-    .       . : : ..||        .                . . !:|
-  .     . . . ::. ::\(                           . :)/
- .   .     : . : .:.|. ######              .#######::|
-  :.. .  :-  : .:  ::|.#######           ..########:|
- .  .  .  ..  .  .. :\ ########          :######## :/
-  .        .+ :: : -.:\ ########       . ########.:/
-    .  .+   . . . . :.:\. #######       #######..:/
-      :: . . . . ::.:..:.\           .   .   ..:/
-   .   .   .  .. :  -::::.\.       | |     . .:/
-      .  :  .  .  .-:.&quot;:.::.\             ..:/ .~~~~~~~~~~~.
- .      -.   . . . .: .:::.:.\.           .:/,: Prepare to  \
-.   .   .  :      : ....::_:..:\   ___.  :/ .       be       |
-   .   .  .   .:. .. .  .: :.:.:\       :/   \  P A R M E D |
-     +   .   .   : . ::. :.:. .:.|\  .:/|      \~~~~~~~~~~~&#x27;
-     .         +   .  .  ...:: ..|  --.:|
-.      . . .   .  .  . ... :..:..&quot;(  ..)&quot;
- .   .       .      :  .   .: ::/  .  .::\
-
+ _~__________________
+ |_|_______________|_|
+ |  ,-------------.  |
+ | |  .---------.  | |
+ | |  |P        |  | |
+ | |  | a       |  | |
+ | |  |  r      |  | |
+ | |  |   m  ED |  | |
+ | |  `---------&#x27;  | |
+ | `---------------&#x27; |
+ |   _ ParmedBoy     |
+ | _| |_         ,-. |
+ ||_ O _|   ,-. &quot;._,&quot;|
+ |  |_|    &quot;._,&quot;   A |
+ |    _  _    B      |
+ |   // //           |
+ |  // //    \\\\\\  |
+ |  `  `      \\\\\\ ,
+ |________...______,&quot;
+ 
 ParmEd: a Parameter file Editor
 
 
-Loaded Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876/input.hmass.prmtop
-[&#x27;880a6981-afc4-49b8-8cfe-f38d0a620712/parmed.in&#x27;]
-Reading actions from 880a6981-afc4-49b8-8cfe-f38d0a620712/parmed.in
+Loaded Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d/input.hmass.prmtop
+[&#x27;59311e57-6b85-4e41-bbb8-eb9c9d3d7a16/parmed.in&#x27;]
+Reading actions from 59311e57-6b85-4e41-bbb8-eb9c9d3d7a16/parmed.in
 
 Repartitioning hydrogen masses to 3.024 daltons. Not changing water hydrogen masses.
-Outputting Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876/output.prmtop
+Outputting Amber topology file /tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d/output.prmtop
 Done!
 
-INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/parmed_hmassrepartition/20aea419-366f-4153-b175-1690a3238876&#x27;, &#x27;880a6981-afc4-49b8-8cfe-f38d0a620712&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/parmed_hmassrepartition/parmed_hmassrepartition_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/parmed_hmassrepartition/50ecb3eb-2369-4457-8c76-947d8a0b1a2d&#x27;, &#x27;59311e57-6b85-4e41-bbb8-eb9c9d3d7a16&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_pdb4amber/test_pdb4amber_pdb4amber.py::TestPdb4amberRun::test_pdb4amber_run</td>
-          <td class="col-duration">0.62</td>
+          <td class="col-duration">0.61</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:44,249 [MainThread  ] [INFO ]  Executing biobb_amber.pdb4amber.pdb4amber_run Version: 4.1.0
-2023-09-06 11:13:44,250 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb to /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979
-2023-09-06 11:13:44,250 [MainThread  ] [INFO ]  Creating 6264042a-0bae-4a8b-bdd0-22257cea7fd4 temporary folder
-2023-09-06 11:13:44,250 [MainThread  ] [INFO ]  pdb4amber -i /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979/1aki_fixed.pdb -o /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979/output.pdb
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:29,200 [MainThread  ] [INFO ]  Executing biobb_amber.pdb4amber.pdb4amber_run Version: 4.1.0
+2023-09-06 11:17:29,200 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb to /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16
+2023-09-06 11:17:29,201 [MainThread  ] [INFO ]  Creating 8ca2d0b1-294f-4b29-9cc5-b11dc8554293 temporary folder
+2023-09-06 11:17:29,201 [MainThread  ] [INFO ]  pdb4amber -i /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16/1aki_fixed.pdb -o /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16/output.pdb
 
-2023-09-06 11:13:44,757 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:29,706 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:44,757 [MainThread  ] [INFO ]  
+2023-09-06 11:17:29,706 [MainThread  ] [INFO ]  
 ==================================================
-Summary of pdb4amber for: /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979/1aki_fixed.pdb
+Summary of pdb4amber for: /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16/1aki_fixed.pdb
 ===================================================
 
 ----------Chains
@@ -1606,7 +1594,7 @@ None
 
 None
 
-2023-09-06 11:13:44,758 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979&#x27;, &#x27;6264042a-0bae-4a8b-bdd0-22257cea7fd4&#x27;]
+2023-09-06 11:17:29,707 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16&#x27;, &#x27;8ca2d0b1-294f-4b29-9cc5-b11dc8554293&#x27;]
 Checking if empty file: /tmp/biobb/unitests/pdb4amber_run/output.pdb
 Checking RMSD between:
      PDB_A: /tmp/biobb/unitests/pdb4amber_run/output.pdb
@@ -1618,15 +1606,15 @@ Checking RMSD between:
      RMS: 1.4828848083881487e-14
      RMS_CUTOFF: 1
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Executing biobb_amber.pdb4amber.pdb4amber_run Version: 4.1.0
-INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb to /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979
-INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Creating 6264042a-0bae-4a8b-bdd0-22257cea7fd4 temporary folder
-INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:cmd_wrapper.py:33 pdb4amber -i /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979/1aki_fixed.pdb -o /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979/output.pdb
+INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/pdb4amber/1aki_fixed.pdb to /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16
+INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Creating 8ca2d0b1-294f-4b29-9cc5-b11dc8554293 temporary folder
+INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:cmd_wrapper.py:33 pdb4amber -i /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16/1aki_fixed.pdb -o /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16/output.pdb
 
 INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:cmd_wrapper.py:50 Exit code 0
 
 INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.err:cmd_wrapper.py:60 
 ==================================================
-Summary of pdb4amber for: /tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979/1aki_fixed.pdb
+Summary of pdb4amber for: /tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16/1aki_fixed.pdb
 ===================================================
 
 ----------Chains
@@ -1644,25 +1632,25 @@ None
 
 None
 
-INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/pdb4amber_run/3688c045-b612-426e-a607-f2fe59c57979&#x27;, &#x27;6264042a-0bae-4a8b-bdd0-22257cea7fd4&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/pdb4amber_run/pdb4amber_run_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/pdb4amber_run/24e02ac4-7c9f-4fbf-a617-d2f30fafca16&#x27;, &#x27;8ca2d0b1-294f-4b29-9cc5-b11dc8554293&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_process/test_process_mdout.py::TestProcessMDOut::test_process_mdout</td>
-          <td class="col-duration">0.08</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:44,871 [MainThread  ] [INFO ]  Executing biobb_amber.process.process_mdout Version: 4.1.0
-2023-09-06 11:13:44,872 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.heat.log to /tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa
-2023-09-06 11:13:44,872 [MainThread  ] [INFO ]  Creating d110937a-11f8-413b-a0a2-6b192f497f4d temporary folder
-2023-09-06 11:13:44,872 [MainThread  ] [INFO ]  cd d110937a-11f8-413b-a0a2-6b192f497f4d ; process_mdout.perl /tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa/sander.heat.log
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:29,817 [MainThread  ] [INFO ]  Executing biobb_amber.process.process_mdout Version: 4.1.0
+2023-09-06 11:17:29,817 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.heat.log to /tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e
+2023-09-06 11:17:29,818 [MainThread  ] [INFO ]  Creating 9afa0e7e-af7d-4b0b-b305-6903e4a6b86c temporary folder
+2023-09-06 11:17:29,818 [MainThread  ] [INFO ]  cd 9afa0e7e-af7d-4b0b-b305-6903e4a6b86c ; process_mdout.perl /tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e/sander.heat.log
 
-2023-09-06 11:13:44,888 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:29,826 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:44,888 [MainThread  ] [INFO ]  Processing sander output file (/tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa/sander.heat.log)...
+2023-09-06 11:17:29,826 [MainThread  ] [INFO ]  Processing sander output file (/tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e/sander.heat.log)...
 Starting output...
 Outputing summary.TEMP
 Outputing summary_avg.TEMP
@@ -1698,7 +1686,7 @@ Outputing summary.ESCF
 Outputing summary_avg.ESCF
 Outputing summary_rms.ESCF
 
-2023-09-06 11:13:44,890 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa&#x27;, &#x27;d110937a-11f8-413b-a0a2-6b192f497f4d&#x27;]
+2023-09-06 11:17:29,827 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e&#x27;, &#x27;9afa0e7e-af7d-4b0b-b305-6903e4a6b86c&#x27;]
 Checking if empty file: /tmp/biobb/unitests/process_mdout/output.dat
 Comparing: 
         File_A: /tmp/biobb/unitests/process_mdout/output.dat
@@ -1706,13 +1694,13 @@ Comparing:
         File_A hash: b&#x27;\xa3\xde2j\x14Z\x13\x01\xd3\xb4\xcb\xef\xf4\xb8\xd5[.7\x8aIu%a@\xaa\x85\xbf\x8b\xc4\xa0\x7f\xb2&#x27;
         File_B hash: b&#x27;\xa3\xde2j\x14Z\x13\x01\xd3\xb4\xcb\xef\xf4\xb8\xd5[.7\x8aIu%a@\xaa\x85\xbf\x8b\xc4\xa0\x7f\xb2&#x27;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Executing biobb_amber.process.process_mdout Version: 4.1.0
-INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.heat.log to /tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa
-INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Creating d110937a-11f8-413b-a0a2-6b192f497f4d temporary folder
-INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:cmd_wrapper.py:33 cd d110937a-11f8-413b-a0a2-6b192f497f4d ; process_mdout.perl /tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa/sander.heat.log
+INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.heat.log to /tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e
+INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Creating 9afa0e7e-af7d-4b0b-b305-6903e4a6b86c temporary folder
+INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:cmd_wrapper.py:33 cd 9afa0e7e-af7d-4b0b-b305-6903e4a6b86c ; process_mdout.perl /tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e/sander.heat.log
 
 INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:cmd_wrapper.py:50 Exit code 0
 
-INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:cmd_wrapper.py:52 Processing sander output file (/tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa/sander.heat.log)...
+INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:cmd_wrapper.py:52 Processing sander output file (/tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e/sander.heat.log)...
 Starting output...
 Outputing summary.TEMP
 Outputing summary_avg.TEMP
@@ -1748,25 +1736,25 @@ Outputing summary.ESCF
 Outputing summary_avg.ESCF
 Outputing summary_rms.ESCF
 
-INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/process_mdout/5e91db1b-9d0b-4a24-beb6-d203635c1bfa&#x27;, &#x27;d110937a-11f8-413b-a0a2-6b192f497f4d&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/process_mdout/process_mdout_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/process_mdout/34c37bc0-46af-4072-88dc-0ccf72e91b0e&#x27;, &#x27;9afa0e7e-af7d-4b0b-b305-6903e4a6b86c&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_process/test_process_minout.py::TestProcessMinOut::test_process_minout</td>
-          <td class="col-duration">0.19</td>
+          <td class="col-duration">0.18</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:44,957 [MainThread  ] [INFO ]  Executing biobb_amber.process.process_minout Version: 4.1.0
-2023-09-06 11:13:44,957 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.min.log to /tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f
-2023-09-06 11:13:44,957 [MainThread  ] [INFO ]  Creating 41f461c1-468d-4362-97a1-374da08a18e4 temporary folder
-2023-09-06 11:13:44,958 [MainThread  ] [INFO ]  cd 41f461c1-468d-4362-97a1-374da08a18e4 ; process_minout.perl /tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f/sander.min.log
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:29,893 [MainThread  ] [INFO ]  Executing biobb_amber.process.process_minout Version: 4.1.0
+2023-09-06 11:17:29,893 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.min.log to /tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58
+2023-09-06 11:17:29,894 [MainThread  ] [INFO ]  Creating 6a9b45d9-86da-4e59-bc2b-8f8b259078a4 temporary folder
+2023-09-06 11:17:29,894 [MainThread  ] [INFO ]  cd 6a9b45d9-86da-4e59-bc2b-8f8b259078a4 ; process_minout.perl /tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58/sander.min.log
 
-2023-09-06 11:13:45,082 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:17:30,017 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:13:45,082 [MainThread  ] [INFO ]  Processing sander output file (/tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f/sander.min.log)...
+2023-09-06 11:17:30,017 [MainThread  ] [INFO ]  Processing sander output file (/tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58/sander.min.log)...
 Processing step 50 of a possible 500...
 Processing step 100 of a possible 500...
 Processing step 150 of a possible 500...
@@ -1795,7 +1783,7 @@ Outputing summary.VDW14
 Outputing summary.EEL14
 Outputing summary.RESTRAINT
 
-2023-09-06 11:13:45,083 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f&#x27;, &#x27;41f461c1-468d-4362-97a1-374da08a18e4&#x27;]
+2023-09-06 11:17:30,018 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58&#x27;, &#x27;6a9b45d9-86da-4e59-bc2b-8f8b259078a4&#x27;]
 Checking if empty file: /tmp/biobb/unitests/process_minout/output.dat
 Comparing: 
         File_A: /tmp/biobb/unitests/process_minout/output.dat
@@ -1803,13 +1791,13 @@ Comparing:
         File_A hash: b&#x27;\x91\xe4\x84\xa2-\x9e#\x15H\xc4K\x9a\xbde?,\xc2\x01\xa4*\xbf:\xef\x14t\xbfV\xb7\xf7\xdc\x83\xd4&#x27;
         File_B hash: b&#x27;\x91\xe4\x84\xa2-\x9e#\x15H\xc4K\x9a\xbde?,\xc2\x01\xa4*\xbf:\xef\x14t\xbfV\xb7\xf7\xdc\x83\xd4&#x27;
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Executing biobb_amber.process.process_minout Version: 4.1.0
-INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.min.log to /tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f
-INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Creating 41f461c1-468d-4362-97a1-374da08a18e4 temporary folder
-INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:cmd_wrapper.py:33 cd 41f461c1-468d-4362-97a1-374da08a18e4 ; process_minout.perl /tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f/sander.min.log
+INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/process/sander.min.log to /tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58
+INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Creating 6a9b45d9-86da-4e59-bc2b-8f8b259078a4 temporary folder
+INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:cmd_wrapper.py:33 cd 6a9b45d9-86da-4e59-bc2b-8f8b259078a4 ; process_minout.perl /tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58/sander.min.log
 
 INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:cmd_wrapper.py:50 Exit code 0
 
-INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:cmd_wrapper.py:52 Processing sander output file (/tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f/sander.min.log)...
+INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:cmd_wrapper.py:52 Processing sander output file (/tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58/sander.min.log)...
 Processing step 50 of a possible 500...
 Processing step 100 of a possible 500...
 Processing step 150 of a possible 500...
@@ -1838,66 +1826,66 @@ Outputing summary.VDW14
 Outputing summary.EEL14
 Outputing summary.RESTRAINT
 
-INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/process_minout/3859bef7-9bbd-40e5-a72f-df8204d4920f&#x27;, &#x27;41f461c1-468d-4362-97a1-374da08a18e4&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/process_minout/process_minout_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/process_minout/65f1b494-1e92-45fb-be41-e077e643da58&#x27;, &#x27;6a9b45d9-86da-4e59-bc2b-8f8b259078a4&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_sander/test_sander_mdrun.py::TestSanderMDRun::test_sander_mdrun</td>
-          <td class="col-duration">38.50</td>
+          <td class="col-duration">38.76</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:13:45,150 [MainThread  ] [INFO ]  Executing biobb_amber.sander.sander_mdrun Version: 4.1.0
-2023-09-06 11:13:45,152 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624
-2023-09-06 11:13:45,153 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624
-2023-09-06 11:13:45,153 [MainThread  ] [INFO ]  Creating c3be6433-c3ea-49bb-b47d-d467fb0e0be2 temporary folder
-2023-09-06 11:13:45,153 [MainThread  ] [INFO ]  sander -O -i c3be6433-c3ea-49bb-b47d-d467fb0e0be2/sander.mdin -p /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/sander.rst -o /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/sander.log -x /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/sander.x
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:17:30,083 [MainThread  ] [INFO ]  Executing biobb_amber.sander.sander_mdrun Version: 4.1.0
+2023-09-06 11:17:30,085 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3
+2023-09-06 11:17:30,086 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3
+2023-09-06 11:17:30,086 [MainThread  ] [INFO ]  Creating 2868c225-c1f5-4454-80e6-b4c0241327cc temporary folder
+2023-09-06 11:17:30,086 [MainThread  ] [INFO ]  sander -O -i 2868c225-c1f5-4454-80e6-b4c0241327cc/sander.mdin -p /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/sander.rst -o /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/sander.log -x /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/sander.x
 
-2023-09-06 11:14:23,582 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:18:08,781 [MainThread  ] [INFO ]  Exit code 0
 
-2023-09-06 11:14:23,587 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624&#x27;, &#x27;mdinfo&#x27;, &#x27;c3be6433-c3ea-49bb-b47d-d467fb0e0be2&#x27;]
+2023-09-06 11:18:08,784 [MainThread  ] [INFO ]  Removed: [&#x27;/tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3&#x27;, &#x27;mdinfo&#x27;, &#x27;2868c225-c1f5-4454-80e6-b4c0241327cc&#x27;]
 Checking if empty file: /tmp/biobb/unitests/sander_mdrun/sander.log
 Checking if empty file: /tmp/biobb/unitests/sander_mdrun/sander.rst
 Checking if empty file: /tmp/biobb/unitests/sander_mdrun/sander.x
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Executing biobb_amber.sander.sander_mdrun Version: 4.1.0
-INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624
-INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624
-INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Creating c3be6433-c3ea-49bb-b47d-d467fb0e0be2 temporary folder
-INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:cmd_wrapper.py:33 sander -O -i c3be6433-c3ea-49bb-b47d-d467fb0e0be2/sander.mdin -p /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/sander.rst -o /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/sander.log -x /tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624/sander.x
+INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3
+INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3
+INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Creating 2868c225-c1f5-4454-80e6-b4c0241327cc temporary folder
+INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:cmd_wrapper.py:33 sander -O -i 2868c225-c1f5-4454-80e6-b4c0241327cc/sander.mdin -p /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/sander.rst -o /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/sander.log -x /tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3/sander.x
 
 INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:cmd_wrapper.py:50 Exit code 0
 
-INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/sander_mdrun/54064f4b-11e2-4b27-8330-b39ea21d6624&#x27;, &#x27;mdinfo&#x27;, &#x27;c3be6433-c3ea-49bb-b47d-d467fb0e0be2&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
+INFO     /tmp/biobb/unitests/sander_mdrun/sander_mdrun_log.out:file_utils.py:390 Removed: [&#x27;/tmp/biobb/unitests/sander_mdrun/39520d7c-8b94-4667-8a0c-7960189d14f3&#x27;, &#x27;mdinfo&#x27;, &#x27;2868c225-c1f5-4454-80e6-b4c0241327cc&#x27;]<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">biobb_amber/test/unitests/test_sander/test_sander_mdrun.py::TestSanderMDRunDirectMDin::test_sander_mdrun</td>
-          <td class="col-duration">0.56</td>
+          <td class="col-duration">0.53</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:14:23,717 [MainThread  ] [INFO ]  Executing biobb_amber.sander.sander_mdrun Version: 4.1.0
-2023-09-06 11:14:23,719 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b
-2023-09-06 11:14:23,720 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b
-2023-09-06 11:14:23,720 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/min.mdin to /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b
-2023-09-06 11:14:23,721 [MainThread  ] [INFO ]  Creating 0e6780a3-25dd-4ea7-a30c-bc6ffa0811ce temporary folder
-2023-09-06 11:14:23,721 [MainThread  ] [INFO ]  sander -O -i 0e6780a3-25dd-4ea7-a30c-bc6ffa0811ce/sander.mdin -p /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/sander.rst -o /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/sander.log -x /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/sander.x
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>2023-09-06 11:18:08,899 [MainThread  ] [INFO ]  Executing biobb_amber.sander.sander_mdrun Version: 4.1.0
+2023-09-06 11:18:08,901 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772
+2023-09-06 11:18:08,902 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772
+2023-09-06 11:18:08,902 [MainThread  ] [INFO ]  Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/min.mdin to /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772
+2023-09-06 11:18:08,903 [MainThread  ] [INFO ]  Creating ddc7c0c9-c138-420d-a57d-13da4195821b temporary folder
+2023-09-06 11:18:08,903 [MainThread  ] [INFO ]  sander -O -i ddc7c0c9-c138-420d-a57d-13da4195821b/sander.mdin -p /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/sander.rst -o /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/sander.log -x /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/sander.x
 
-2023-09-06 11:14:24,153 [MainThread  ] [INFO ]  Exit code 0
+2023-09-06 11:18:09,322 [MainThread  ] [INFO ]  Exit code 0
 
 Checking if empty file: /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander.log
 Checking if empty file: /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander.rst
 Checking if empty file: /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander.x
 <br/> -------------------------------Captured log call-------------------------------- <br/>INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Executing biobb_amber.sander.sander_mdrun Version: 4.1.0
-INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b
-INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b
-INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/min.mdin to /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b
-INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Creating 0e6780a3-25dd-4ea7-a30c-bc6ffa0811ce temporary folder
-INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:cmd_wrapper.py:33 sander -O -i 0e6780a3-25dd-4ea7-a30c-bc6ffa0811ce/sander.mdin -p /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/sander.rst -o /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/sander.log -x /tmp/biobb/unitests/sander_mdrun_direct_mdin/506e6851-db64-44dc-a159-c75502144d4b/sander.x
+INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.prmtop to /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772
+INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/cln025.inpcrd to /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772
+INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Copy: /home/user/actions-runner/_work/biobb_amber/biobb_amber/biobb_amber/test/data/sander/min.mdin to /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772
+INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:file_utils.py:390 Creating ddc7c0c9-c138-420d-a57d-13da4195821b temporary folder
+INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:cmd_wrapper.py:33 sander -O -i ddc7c0c9-c138-420d-a57d-13da4195821b/sander.mdin -p /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/cln025.prmtop -c /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/cln025.inpcrd -r /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/sander.rst -o /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/sander.log -x /tmp/biobb/unitests/sander_mdrun_direct_mdin/09d89420-f8dd-42fb-9f3b-84bd0235d772/sander.x
 
 INFO     /tmp/biobb/unitests/sander_mdrun_direct_mdin/sander_mdrun_direct_mdin_log.out:cmd_wrapper.py:50 Exit code 0<br/> ----------------------------Captured stdout teardown---------------------------- <br/>
 Removing: /tmp/biobb/unitests
