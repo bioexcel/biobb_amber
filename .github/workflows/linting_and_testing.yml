@@ -36,10 +36,11 @@ jobs:
           ls ${{ github.workspace }}
 
       - name: provision-with-micromamba
-        uses: mamba-org/provision-with-micromamba@main
+        uses: mamba-org/setup-micromamba@v1
         with:
+          post-cleanup: all
           environment-file: .github/env.yaml
-          extra-specs: |
+          create-args: >-
             python=${{ matrix.python-version }}
             pytest
             pytest-cov
@@ -114,7 +115,7 @@ jobs:
         with:
           folder: ./reports
       
-      - name: Restore .bash_profile
-        run: cp ~/.bash_profile_orig ~/.bash_profile
+      # - name: Restore .bash_profile
+      #   run: cp ~/.bash_profile_orig ~/.bash_profile
 
 
