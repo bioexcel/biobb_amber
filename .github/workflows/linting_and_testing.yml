@@ -38,7 +38,8 @@ jobs:
       - name: provision-with-micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
-          post-cleanup: none
+          generate-run-shell: true
+          post-cleanup: all
           environment-file: .github/env.yaml
           create-args: >-
             python=${{ matrix.python-version }}
@@ -49,15 +50,15 @@ jobs:
             pip
       
       - name: Install genbadge from pip
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: pip install genbadge[all]
 
       - name: List installed package versions
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: micromamba list
 
       - name: Lint with flake8
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: |
           # F Codes: https://flake8.pycqa.org/en/latest/user/error-codes.html
           # E Code: https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
@@ -72,7 +73,7 @@ jobs:
           flake8 . --exclude=docs --ignore=C901,E226 --count --exit-zero --max-complexity=10 --max-line-length=999 --statistics --format=html --htmldir=./reports/flake8/ --tee --output-file=./reports/flake8/flake8stats.txt
 
       - name: Generate Flake8 badge
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell:micromamba-shell {0}  # necessary for conda env to be active
         run: |
           genbadge flake8 --name "Flake8" --input-file ./reports/flake8/flake8stats.txt  --output-file ./reports/flake8/flake8badge.svg
 
@@ -83,7 +84,7 @@ jobs:
           path: './biobb_common'
 
       - name: Run tests
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: |
           # Ignoring docker and singularity tests
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
@@ -95,12 +96,12 @@ jobs:
           pytest biobb_amber/test/unitests/ --cov=biobb_amber/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --ignore-glob=*nab_build* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
 
       - name: Generate Tests badge
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: |
           genbadge tests --name "Tests" --input-file ./reports/junit/junit.xml  --output-file ./reports/junit/testsbadge.svg
 
       - name: Generate Coverage badge
-        shell: bash -l {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: |
           # Create directory for flake8 reports
           mkdir -p ./reports/coverage
