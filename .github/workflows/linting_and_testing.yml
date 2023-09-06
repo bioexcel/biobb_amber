@@ -91,7 +91,7 @@ jobs:
           mkdir -p ./reports/junit
 
           # Production one
-          pytest biobb_amber/test/unitests/ --cov=biobb_amber/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
+          pytest biobb_amber/test/unitests/ --cov=biobb_amber/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --ignore-glob=*nab_build* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
 
       - name: Generate Tests badge
         shell: bash -l {0}  # necessary for conda env to be active
