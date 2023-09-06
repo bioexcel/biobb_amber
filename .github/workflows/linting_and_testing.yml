@@ -73,7 +73,7 @@ jobs:
           flake8 . --exclude=docs --ignore=C901,E226 --count --exit-zero --max-complexity=10 --max-line-length=999 --statistics --format=html --htmldir=./reports/flake8/ --tee --output-file=./reports/flake8/flake8stats.txt
 
       - name: Generate Flake8 badge
-        shell:micromamba-shell {0}  # necessary for conda env to be active
+        shell: micromamba-shell {0}  # necessary for conda env to be active
         run: |
           genbadge flake8 --name "Flake8" --input-file ./reports/flake8/flake8stats.txt  --output-file ./reports/flake8/flake8badge.svg
 
