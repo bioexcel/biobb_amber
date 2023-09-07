@@ -35,6 +35,11 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
+      - name: Remove all micromamba installations
+        run: |
+          rm -rf /home/user/.bash_profile /home/user/.conda /home/user/micromamba /home/user/micromamba-bin 2>/dev/null
+          touch /home/user/.bash_profile
+
       - name: provision-with-micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
