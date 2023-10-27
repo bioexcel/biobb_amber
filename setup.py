@@ -14,7 +14,7 @@ setuptools.setup(
     keywords="Bioinformatics Workflows BioExcel Compatibility MD Amber",
     url="https://github.com/bioexcel/biobb_amber",
     project_urls={
-        "Documentation": "http://biobb_amber.readthedocs.io/en/latest/",
+        "Documentation": "http://biobb-amber.readthedocs.io/en/latest/",
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
