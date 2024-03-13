@@ -10,7 +10,7 @@ on:
       - 'LICENSE'
       - 'setup.py'
       - 'README.md'
-      - 'references.json'
+      - 'references.jsonld'
       - '**/docs/**'
       - '**/json_schemas/**'
 
