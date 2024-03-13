@@ -1,4 +1,3 @@
-<script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "SoftwareApplication",
@@ -10,4 +9,3 @@
   "license": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html",
   "softwareVersion": "22"
 }
-</script>
