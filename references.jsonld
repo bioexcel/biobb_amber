@@ -1,8 +1,8 @@
 {
   "@context": "http://schema.org",
-  "@id": "https://github.com/bioexcel/biobb_chemistry",
+  "@id": "https://github.com/bioexcel/biobb_amber",
   "@type": "ItemList",
-  "name": "biobb_chemistry",
+  "name": "biobb_amber",
   "itemListElement":[  
     {
       "@type": "SoftwareApplication",
