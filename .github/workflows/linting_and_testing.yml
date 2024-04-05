@@ -24,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - run: echo "Repository -> ${{ github.repository }}"
       - run: echo "Branch -> ${{ github.ref }}"
@@ -84,7 +84,7 @@ jobs:
           genbadge flake8 --name "Flake8" --input-file ./reports/flake8/flake8stats.txt  --output-file ./reports/flake8/flake8badge.svg
 
       - name: Checkout biobb_common
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: bioexcel/biobb_common
           path: './biobb_common'
