@@ -1,0 +1,30 @@
+name: Sync Citation.cff
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Runs every Monday
+  push:
+    branches:
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          repository: bioexcel/biobb_amber
+          path: ./
+
+      - name: Download file using wget
+        run: wget -O ./CITATION.cff https://raw.githubusercontent.com/bioexcel/biobb/master/CITATION.cff
+
+      - name: Check if file has changed
+        run: ls -la ./
+
+      - name: Commit and push changes if file has changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git diff --exit-code CITATION.cff || (git add CITATION.cff && git commit -m "Updated CITATION.cff" && git push)
