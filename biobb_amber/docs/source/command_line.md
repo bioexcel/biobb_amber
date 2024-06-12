@@ -200,6 +200,7 @@ Config parameters for this building block:
 * **mdin** (*object*): ({}) Sander MD run options specification. (Used if *input_mdin_path* is None).
 * **simulation_type** (*string*): (minimization) Default options for the mdin file. Each creates a different mdin file. .
 * **binary_path** (*string*): (sander) sander binary path to be used..
+* **direct_mdin** (*boolean*): (False) Use input_mdin_path as it is, skip file parsing..
 * **mpi_bin** (*string*): (None) Path to the MPI runner. Usually "mpirun" or "srun"..
 * **mpi_np** (*integer*): (0) Number of MPI processes. Usually an integer bigger than 1..
 * **mpi_flags** (*string*): (None) Path to the MPI hostlist file..

@@ -424,6 +424,12 @@
                     "wf_prop": false,
                     "description": "sander binary path to be used."
                 },
+                "direct_mdin": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Use input_mdin_path as it is, skip file parsing."
+                },
                 "mpi_bin": {
                     "type": "string",
                     "default": null,
