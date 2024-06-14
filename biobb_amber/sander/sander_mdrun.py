@@ -40,6 +40,7 @@ class SanderMDRun(BiobbObject):
             * **mpi_flags** (*str*) - (None) Path to the MPI hostlist file.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
@@ -75,6 +76,7 @@ class SanderMDRun(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
 
     """
+
     def __init__(self, input_top_path: str, input_crd_path: str, output_log_path: str, output_traj_path: str, output_rst_path: str,
                  input_ref_path: str = None, input_mdin_path: str = None, input_cpin_path: str = None, output_cpout_path: str = None, output_cprst_path: str = None, output_mdinfo_path: str = None,
                  properties: dict = None, **kwargs) -> None:

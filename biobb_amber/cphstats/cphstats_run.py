@@ -38,6 +38,7 @@ class CphstatsRun(BiobbObject):
             * **binary_path** (*str*) - ("cphstats") Path to the cphstats executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
+            * **sandbox_path** (*str*) - ("./") [WF property] Parent path to the sandbox directory.
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
@@ -67,6 +68,7 @@ class CphstatsRun(BiobbObject):
             * schema: http://edamontology.org/EDAM.owl
 
     """
+
     def __init__(self, input_cpin_path: str, input_cpout_path: str, output_dat_path: str, output_population_path: str = None,
                  output_chunk_path: str = None, output_cumulative_path: str = None, output_conditional_path: str = None, output_chunk_conditional_path: str = None,
                  properties: dict = None, **kwargs) -> None:
