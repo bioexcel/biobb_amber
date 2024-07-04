@@ -69,6 +69,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (tleap) Path to the tleap executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -206,6 +207,7 @@ Config parameters for this building block:
 * **mpi_flags** (*string*): (None) Path to the MPI hostlist file..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -339,6 +341,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (cestats) Path to the cestats executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -453,6 +456,7 @@ Config parameters for this building block:
 * **mpi_flags** (*string*): (None) Path to the MPI hostlist file..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_pmemd_mdrun.yml)
 ```python
@@ -525,6 +529,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (pdb4amber) Path to the pdb4amber executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -608,6 +613,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (process_mdout.perl) Path to the process_mdout.perl executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -738,6 +744,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (tleap) Path to the tleap executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -877,6 +884,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (cphstats) Path to the cphstats executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -960,6 +968,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (process_minout.perl) Path to the process_minout.perl executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1044,6 +1053,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (tleap) Path to the tleap executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1145,6 +1155,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (nab) Path to the nab executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1211,6 +1222,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (parmed) Path to the parmed executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1303,6 +1315,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (cpptraj) Path to the cpptraj executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1388,6 +1401,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (ambpdb) Path to the ambpdb executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1489,6 +1503,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (tleap) Path to the tleap executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..
@@ -1587,6 +1602,7 @@ Config parameters for this building block:
 * **binary_path** (*string*): (cpinutil.py) Path to the cpinutil.py executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
 * **container_path** (*string*): (None) Container path definition..
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
 * **container_volume_path** (*string*): (/tmp) Container volume path definition..

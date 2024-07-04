@@ -98,6 +98,12 @@
                     "wf_prop": true,
                     "description": "Do not execute if output files exist."
                 },
+                "sandbox_path": {
+                    "type": "string",
+                    "default": "./",
+                    "wf_prop": true,
+                    "description": "Parent path to the sandbox directory."
+                },
                 "container_path": {
                     "type": "string",
                     "default": null,
