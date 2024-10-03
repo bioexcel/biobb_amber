@@ -1,4 +1,5 @@
-working_dir_path: /tmp/biobb/unitests
+global_properties:
+  working_dir_path: /tmp/biobb/unitests
 
 # ambpdb
 
