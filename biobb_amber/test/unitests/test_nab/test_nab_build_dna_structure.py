@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.nab.nab_build_dna_structure import nab_build_dna_structure
 

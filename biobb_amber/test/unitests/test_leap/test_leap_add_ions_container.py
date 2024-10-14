@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_add_ions import leap_add_ions
 import pytest

@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.cphstats.cphstats_run import cphstats_run
 import pytest

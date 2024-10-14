@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.ambpdb.amber_to_pdb import amber_to_pdb
 import pytest

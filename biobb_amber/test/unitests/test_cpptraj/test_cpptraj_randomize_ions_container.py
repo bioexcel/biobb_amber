@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.cpptraj.cpptraj_randomize_ions import cpptraj_randomize_ions
 import pytest

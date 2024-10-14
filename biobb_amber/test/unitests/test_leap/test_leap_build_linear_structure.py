@@ -1,3 +1,4 @@
+# type: ignore
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_build_linear_structure import leap_build_linear_structure
 
