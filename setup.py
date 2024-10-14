@@ -41,13 +41,12 @@ setuptools.setup(
             "sander_mdrun = biobb_amber.sander.sander_mdrun:main"
         ]
     },
-    classifiers=(
-        "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3.8",
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
-    ),
+        "Operating System :: Unix"
+    ],
 )
