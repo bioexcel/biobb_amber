@@ -8,7 +8,7 @@ class TestNabBuildDNAStructure():
         fx.test_setup(self, 'nab_build_dna_structure')
 
     def teardown_class(self):
-        fx.test_teardown(self)
+        # fx.test_teardown(self)
         pass
 
     def test_nab_build_dna_structure(self):

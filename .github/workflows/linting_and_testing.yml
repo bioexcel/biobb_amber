@@ -1,6 +1,6 @@
 name: tests
 
-on: 
+on:
   # workflow_dispatch
   push:
     branches: [ master ]
@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os: [self-hosted]
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository code
@@ -55,7 +55,7 @@ jobs:
             pytest-html
             flake8
             pip
-      
+
       - name: Install genbadge from pip
         shell: micromamba-shell {0}  # necessary for conda env to be active
         run: pip install genbadge[all]
@@ -72,7 +72,7 @@ jobs:
 
           # Workflow fails: Stop the build if there are Python syntax errors or undefined names
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          
+
           # Create directory for flake8 reports
           mkdir -p ./reports/flake8
 
@@ -122,7 +122,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./reports
-      
+
       # - name: Restore .bash_profile
       #   run: cp ~/.bash_profile_orig ~/.bash_profile
 
