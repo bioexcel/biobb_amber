@@ -1,5 +1,14 @@
 # Biobb Amber changelog
 
+## What's new in version [5.0.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.0)?
+
+### Changes
+
+* [FEATURE](__init__): Importing submodules when a module is loaded
+* [UPDATE] Adding sandbox_path property to the json schemas
+* [FEATURE] New sandbox_path property
+* [FEATURE] Adding direct_mdin option
+
 ## What's new in version [4.2.0](https://github.com/bioexcel/biobb_amber/releases/tag/v4.2.0)?
 In version 4.2.0 the dependency biobb_common has been updated to 4.2.0 version.
 
