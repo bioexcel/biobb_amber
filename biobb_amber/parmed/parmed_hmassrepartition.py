@@ -2,6 +2,7 @@
 
 """Module containing the ParmedHMassRepartition class and the command line interface."""
 import argparse
+from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
@@ -121,8 +122,8 @@ class ParmedHMassRepartition(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            self.tmp_folder
+            self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder)
         ])
         self.remove_tmp_files()
 
@@ -132,8 +133,8 @@ class ParmedHMassRepartition(BiobbObject):
 
 
 def parmed_hmassrepartition(input_top_path: str,
-                            output_top_path: str = None,
-                            properties: dict = None, **kwargs) -> int:
+                            output_top_path: Optional[str] = None,
+                            properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ParmedHMassRepartition <parmed.parmed_hmassrepartition.ParmedHMassRepartition>`parmed.parmed_hmassrepartition.ParmedHMassRepartition class and
     execute :meth:`launch() <parmed.parmed_hmassrepartition.ParmedHMassRepartition.launch>` method"""
 

@@ -2,6 +2,7 @@
 
 """Module containing the ProcessMDOut class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
@@ -122,7 +123,7 @@ class ProcessMDOut(BiobbObject):
             if self.container_path:
                 shutil.copy(PurePath(self.stage_io_dict['unique_dir']).joinpath('summary.'+self.terms[0]), self.io_dict['out']['output_dat_path'])
             else:
-                shutil.copy(PurePath(self.tmp_folder).joinpath('summary.'+self.terms[0]), self.io_dict['out']['output_dat_path'])
+                shutil.copy(PurePath(str(self.tmp_folder)).joinpath('summary.'+self.terms[0]), self.io_dict['out']['output_dat_path'])
         else:
 
             if self.container_path:
@@ -132,7 +133,7 @@ class ProcessMDOut(BiobbObject):
 
             ene_dict = {}
             for term in self.terms:
-                with open(tmp + "/summary."+term) as fp:
+                with open(str(tmp) + "/summary."+term) as fp:
                     for line in fp:
                         x = line.split()
                         if x:
@@ -153,11 +154,7 @@ class ProcessMDOut(BiobbObject):
                     fp_out.write("\n")
 
         # remove temporary folder(s)
-        self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            list(Path().glob('summary*')),
-            self.tmp_folder
-        ])
+        self.tmp_files.extend([self.stage_io_dict.get("unique_dir", ""), str(self.tmp_folder)] + list(Path().glob('summary*')))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -165,8 +162,7 @@ class ProcessMDOut(BiobbObject):
         return self.return_code
 
 
-def process_mdout(input_log_path: str, output_dat_path: str,
-                  properties: dict = None, **kwargs) -> int:
+def process_mdout(input_log_path: str, output_dat_path: str, properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ProcessMDOut <process.process_mdout.ProcessMDOut>`process.process_mdout.ProcessMDOut class and
     execute :meth:`launch() <process.process_mdout.ProcessMDOut.launch>` method"""
 

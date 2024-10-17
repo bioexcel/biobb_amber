@@ -2,6 +2,7 @@
 
 """Module containing the Cphstats class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
@@ -69,9 +70,9 @@ class CphstatsRun(BiobbObject):
 
     """
 
-    def __init__(self, input_cpin_path: str, input_cpout_path: str, output_dat_path: str, output_population_path: str = None,
-                 output_chunk_path: str = None, output_cumulative_path: str = None, output_conditional_path: str = None, output_chunk_conditional_path: str = None,
-                 properties: dict = None, **kwargs) -> None:
+    def __init__(self, input_cpin_path: str, input_cpout_path: str, output_dat_path: str, output_population_path: Optional[str] = None,
+                 output_chunk_path: Optional[str] = None, output_cumulative_path: Optional[str] = None, output_conditional_path: Optional[str] = None, output_chunk_conditional_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -212,7 +213,7 @@ class CphstatsRun(BiobbObject):
 
         # Remove temporary file(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            self.stage_io_dict.get("unique_dir", "")
         ])
         self.remove_tmp_files()
 
@@ -223,10 +224,10 @@ class CphstatsRun(BiobbObject):
 
 def cphstats_run(input_cpin_path: str, input_cpout_path: str,
                  output_dat_path: str,
-                 output_population_path: str = None, output_chunk_path: str = None,
-                 output_conditional_path: str = None, output_chunk_conditional_path: str = None,
-                 output_cumulative_path: str = None,
-                 properties: dict = None, **kwargs) -> int:
+                 output_population_path: Optional[str] = None, output_chunk_path: Optional[str] = None,
+                 output_conditional_path: Optional[str] = None, output_chunk_conditional_path: Optional[str] = None,
+                 output_cumulative_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`CphstatsRun <cphstats.chpstats_run.CphstatsRun>`cphstats.chpstats_run.CphstatsRun class and
     execute :meth:`launch() <cphstats.chpstats_run.CphstatsRun.launch>` method"""
 

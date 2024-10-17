@@ -2,6 +2,7 @@
 
 """Module containing the NabBuildDNAStructure class and the command line interface."""
 import argparse
+from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
@@ -139,7 +140,7 @@ class NabBuildDNAStructure(BiobbObject):
                         ' ; ' + nuc_path + '/nuc'
                         ]
         else:
-            nuc_path = './' + self.tmp_folder
+            nuc_path = './' + str(self.tmp_folder)
             self.cmd = [self.binary_path,
                         '--compiler', self.compiler,
                         '--linker', self.linker,
@@ -155,8 +156,8 @@ class NabBuildDNAStructure(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            self.tmp_folder,
+            self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder),
             "nab.log",
             "tleap.out"
         ])
@@ -168,7 +169,7 @@ class NabBuildDNAStructure(BiobbObject):
 
 
 def nab_build_dna_structure(output_pdb_path: str,
-                            properties: dict = None, **kwargs) -> int:
+                            properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`NabBuildDNAStructure <nab.nab_build_dna_structure.NabBuildDNAStructure>`nab.nab_build_dna_structure.NabBuildDNAStructure class and
     execute :meth:`launch() <nab.nab_build_dna_structure.NabBuildDNAStructure.launch>` method"""
 

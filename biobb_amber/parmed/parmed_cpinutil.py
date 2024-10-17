@@ -2,6 +2,7 @@
 
 """Module containing the ParmedCpinUtil class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -146,7 +147,7 @@ class ParmedCpinUtil(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
+            self.stage_io_dict.get("unique_dir", ""),
             self.tmp_folder
         ])
         self.remove_tmp_files()
@@ -157,8 +158,8 @@ class ParmedCpinUtil(BiobbObject):
 
 
 def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
-                    output_top_path: str = None,
-                    properties: dict = None, **kwargs) -> int:
+                    output_top_path: Optional[str] = None,
+                    properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`ParmedCpinUtil <parmed.parmed_cpinutil.ParmedCpinUtil>`parmed.parmed_cpinutil.ParmedCpinUtil class and
     execute :meth:`launch() <parmed.parmed_cpinutil.ParmedCpinUtil.launch>` method"""
 

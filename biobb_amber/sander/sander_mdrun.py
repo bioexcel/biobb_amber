@@ -2,6 +2,7 @@
 
 """Module containing the SanderMDRun class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 import re
 from pathlib import Path, PurePath
@@ -78,8 +79,8 @@ class SanderMDRun(BiobbObject):
     """
 
     def __init__(self, input_top_path: str, input_crd_path: str, output_log_path: str, output_traj_path: str, output_rst_path: str,
-                 input_ref_path: str = None, input_mdin_path: str = None, input_cpin_path: str = None, output_cpout_path: str = None, output_cprst_path: str = None, output_mdinfo_path: str = None,
-                 properties: dict = None, **kwargs) -> None:
+                 input_ref_path: Optional[str] = None, input_mdin_path: Optional[str] = None, input_cpin_path: Optional[str] = None, output_cpout_path: Optional[str] = None, output_cprst_path: Optional[str] = None, output_mdinfo_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs) -> None:
 
         properties = properties or {}
 
@@ -140,7 +141,7 @@ class SanderMDRun(BiobbObject):
         self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"], "output_cprst_path", True, out_log, self.__class__.__name__)
         self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"], "output_mdinfo_path", True, out_log, self.__class__.__name__)
 
-    def create_mdin(self, path: str = None) -> str:
+    def create_mdin(self, path: Optional[str] = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""
         mdin_list = []
         mdin_firstPart = []
@@ -182,7 +183,7 @@ class SanderMDRun(BiobbObject):
                         # Parsing masks, e.g. :
                         # restraintmask = ":1-40@P,O5',C5',C4',C3',O3'", restraint_wt = 0.5
                         mylist = re.findall(r'(?:[^,"]|"(?:\\.|[^"])*")+', line)
-                        [mdin_list.append("  " + i.lstrip()) for i in mylist]
+                        [mdin_list.append("  " + i.lstrip()) for i in mylist]  # type: ignore
                     else:
                         for param in line.split(','):
                             if param.strip():
@@ -272,7 +273,7 @@ class SanderMDRun(BiobbObject):
                     mdin_list.append('  ' + config_parameter_key + ' = '+str(v) + ' ! BioBB property')
 
             # Writing MD configuration file (mdin)
-            with open(self.output_mdin_path, 'w') as mdin:
+            with open(str(self.output_mdin_path), 'w') as mdin:
                 # Start of file keyword(s)
                 if mdin_firstPart:
                     for line in mdin_firstPart:
@@ -290,9 +291,9 @@ class SanderMDRun(BiobbObject):
                     mdin.write("&end\n")
         else:
             # Copying generated output file to the final (user-given) file name
-            shutil.copy2(self.io_dict['in']['input_mdin_path'], self.output_mdin_path)
+            shutil.copy2(self.io_dict['in']['input_mdin_path'], str(self.output_mdin_path))
 
-        return self.output_mdin_path
+        return str(self.output_mdin_path)
 
     @launchlogger
     def launch(self):
@@ -385,9 +386,9 @@ class SanderMDRun(BiobbObject):
             self.remove_tmp_files()'''
 
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
+            self.stage_io_dict.get("unique_dir", ""),
             "mdinfo",
-            self.tmp_folder
+            str(self.tmp_folder)
         ])
         self.remove_tmp_files()
 
@@ -398,10 +399,10 @@ class SanderMDRun(BiobbObject):
 
 def sander_mdrun(input_top_path: str, input_crd_path: str,
                  output_log_path: str, output_traj_path: str, output_rst_path: str,
-                 input_mdin_path: str = None, input_cpin_path: str = None,
-                 output_cpout_path: str = None, output_cprst_path: str = None,
-                 output_mdinfo_path: str = None, input_ref_path: str = None,
-                 properties: dict = None, **kwargs) -> int:
+                 input_mdin_path: Optional[str] = None, input_cpin_path: Optional[str] = None,
+                 output_cpout_path: Optional[str] = None, output_cprst_path: Optional[str] = None,
+                 output_mdinfo_path: Optional[str] = None, input_ref_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`SanderMDRun <sander.sander_mdrun.SanderMDRun>`sander.sander_mdrun.SanderMDRun class and
     execute :meth:`launch() <sander.sander_mdrun.SanderMDRun.launch>` method"""
 

@@ -2,6 +2,7 @@
 
 """Module containing the AmberToPDB class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
@@ -53,7 +54,7 @@ class AmberToPDB(BiobbObject):
 
     """
 
-    def __init__(self, input_top_path, input_crd_path, output_pdb_path, properties: dict = None, **kwargs):
+    def __init__(self, input_top_path, input_crd_path, output_pdb_path, properties: Optional[dict] = None, **kwargs):
         properties = properties or {}
 
         # Call parent class constructor
@@ -111,7 +112,7 @@ class AmberToPDB(BiobbObject):
 
         # Remove temporary file(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir")
+            self.stage_io_dict.get("unique_dir", "")
         ])
         self.remove_tmp_files()
 
@@ -121,7 +122,7 @@ class AmberToPDB(BiobbObject):
 
 
 def amber_to_pdb(input_top_path: str, input_crd_path: str, output_pdb_path: str,
-                 properties: dict = None, **kwargs) -> int:
+                 properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>`amber.amber_to_pdb.AmberToPDB class and
     execute :meth:`launch() <amber.amber_to_pdb.AmberToPDB.launch>` method"""
 

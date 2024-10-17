@@ -2,6 +2,7 @@
 
 """Module containing the LeapBuildLinearStructure class and the command line interface."""
 import argparse
+from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
@@ -139,8 +140,8 @@ class LeapBuildLinearStructure(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            self.tmp_folder,
+            self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder),
             "leap.log"
         ])
         self.remove_tmp_files()
@@ -151,7 +152,7 @@ class LeapBuildLinearStructure(BiobbObject):
 
 
 def leap_build_linear_structure(output_pdb_path: str,
-                                properties: dict = None, **kwargs) -> int:
+                                properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>`leap.leap_build_linear_structure.LeapBuildLinearStructure class and
     execute :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method"""
 

@@ -2,6 +2,7 @@
 
 """Module containing the CpptrajRandomizeIons class and the command line interface."""
 import argparse
+from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
@@ -153,7 +154,7 @@ class CpptrajRandomizeIons(BiobbObject):
 
         # Remove temporary file(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
+            self.stage_io_dict.get("unique_dir", ""),
             self.tmp_folder,
             "cpptraj.log"
         ])
@@ -166,7 +167,7 @@ class CpptrajRandomizeIons(BiobbObject):
 
 def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
                            output_pdb_path: str, output_crd_path: str,
-                           properties: dict = None, **kwargs) -> int:
+                           properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`CpptrajRandomizeIons <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons>`cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons class and
 execute :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.launch>` method"""
 

@@ -2,6 +2,7 @@
 
 """Module containing the LeapSolvate class and the command line interface."""
 import argparse
+from typing import Optional
 import re
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
@@ -78,9 +79,9 @@ class LeapSolvate(BiobbObject):
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
                  output_top_path: str, output_crd_path: str,
-                 input_lib_path: str = None, input_frcmod_path: str = None,
-                 input_params_path: str = None, input_source_path: str = None,
-                 properties: dict = None, **kwargs):
+                 input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
+                 input_params_path: Optional[str] = None, input_source_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs):
 
         properties = properties or {}
 
@@ -302,8 +303,8 @@ class LeapSolvate(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            self.tmp_folder,
+            self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder),
             "leap.log"
         ])
         self.remove_tmp_files()
@@ -315,9 +316,9 @@ class LeapSolvate(BiobbObject):
 
 def leap_solvate(input_pdb_path: str, output_pdb_path: str,
                  output_top_path: str, output_crd_path: str,
-                 input_lib_path: str = None, input_frcmod_path: str = None,
-                 input_params_path: str = None, input_source_path: str = None,
-                 properties: dict = None, **kwargs) -> int:
+                 input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
+                 input_params_path: Optional[str] = None, input_source_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`LeapSolvate <leap.leap_solvate.LeapSolvate>`leap.leap_solvate.LeapSolvate class and
     execute :meth:`launch() <leap.leap_solvate.LeapSolvate.launch>` method"""
 

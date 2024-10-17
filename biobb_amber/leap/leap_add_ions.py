@@ -2,6 +2,7 @@
 
 """Module containing the LeapAddIons class and the command line interface."""
 import argparse
+from typing import Optional
 import shutil
 import re
 from decimal import Decimal
@@ -78,9 +79,9 @@ class LeapAddIons(BiobbObject):
 
     def __init__(self, input_pdb_path: str,
                  output_pdb_path: str, output_top_path: str, output_crd_path: str,
-                 input_lib_path: str = None, input_frcmod_path: str = None,
-                 input_params_path: str = None, input_source_path: str = None,
-                 properties: dict = None, **kwargs):
+                 input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
+                 input_params_path: Optional[str] = None, input_source_path: Optional[str] = None,
+                 properties: Optional[dict] = None, **kwargs):
 
         properties = properties or {}
 
@@ -360,7 +361,7 @@ class LeapAddIons(BiobbObject):
                 # %FORMAT(5E16.8)
                 # 1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
 
-                tmp_parmtop = str(PurePath(self.tmp_folder).joinpath("top_temp.parmtop"))
+                tmp_parmtop = str(PurePath(str(self.tmp_folder)).joinpath("top_temp.parmtop"))
                 shutil.copyfile(self.io_dict['out']['output_top_path'], tmp_parmtop)
 
                 with open(self.io_dict['out']['output_top_path'], 'w') as new_top:
@@ -384,8 +385,8 @@ class LeapAddIons(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            self.tmp_folder,
+            self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder),
             "leap.log"
         ])
         self.remove_tmp_files()
@@ -397,9 +398,9 @@ class LeapAddIons(BiobbObject):
 
 def leap_add_ions(input_pdb_path: str, output_pdb_path: str,
                   output_top_path: str, output_crd_path: str,
-                  input_lib_path: str = None, input_frcmod_path: str = None,
-                  input_params_path: str = None, input_source_path: str = None,
-                  properties: dict = None, **kwargs) -> int:
+                  input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
+                  input_params_path: Optional[str] = None, input_source_path: Optional[str] = None,
+                  properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`LeapAddIons <leap.leap_add_ions.LeapAddIons>`leap.leap_add_ions.LeapAddIons class and
     execute :meth:`launch() <leap.leap_add_ions.LeapAddIons.launch>` method"""
 

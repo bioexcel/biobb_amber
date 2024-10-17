@@ -2,6 +2,7 @@
 
 """Module containing the Pdb4amber class and the command line interface."""
 import argparse
+from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
@@ -55,8 +56,7 @@ class Pdb4amberRun(BiobbObject):
 
     """
 
-    def __init__(self, input_pdb_path: str, output_pdb_path: str,
-                 properties: dict, **kwargs):
+    def __init__(self, input_pdb_path: str, output_pdb_path: str, properties: Optional[dict], **kwargs):
 
         properties = properties or {}
 
@@ -128,8 +128,8 @@ class Pdb4amberRun(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir"),
-            self.tmp_folder
+            self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder)
         ])
         self.remove_tmp_files()
 
@@ -139,7 +139,7 @@ class Pdb4amberRun(BiobbObject):
 
 
 def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
-                  properties: dict = None, **kwargs) -> int:
+                  properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`Pdb4amberRun <pdb4amber.pdb4amber_run.Pdb4amberRun>`pdb4amber.pdb4amber_run.Pdb4amberRun class and
     execute :meth:`launch() <pdb4amber.pdb4amber_run.Pdb4amberRun.launch>` method"""
 
