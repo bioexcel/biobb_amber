@@ -20,7 +20,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     package_data={'biobb_amber': ['py.typed']},
     install_requires=['biobb_common==5.0.0'],
-    python_requires='>=3.8, <3.11',
+    python_requires='>=3.9, <3.11',
     entry_points={
         "console_scripts": [
             "amber_to_pdb = biobb_amber.ambpdb.amber_to_pdb:main",

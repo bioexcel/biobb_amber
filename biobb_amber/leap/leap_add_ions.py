@@ -11,7 +11,6 @@ from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.leap.common import check_input_path, check_output_path
 
 
 class LeapAddIons(BiobbObject):
@@ -81,7 +80,7 @@ class LeapAddIons(BiobbObject):
     def __init__(self, input_pdb_path: str,
                  output_pdb_path: str, output_top_path: str, output_crd_path: str,
                  input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
-                 input_params_path: Optional[str] = None, input_prep_path: Optional[str] = None, 
+                 input_params_path: Optional[str] = None, input_prep_path: Optional[str] = None,
                  input_source_path: Optional[str] = None,
                  properties: Optional[dict] = None, **kwargs):
 
@@ -413,7 +412,7 @@ class LeapAddIons(BiobbObject):
 def leap_add_ions(input_pdb_path: str, output_pdb_path: str,
                   output_top_path: str, output_crd_path: str,
                   input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
-                  input_params_path: Optional[str] = None, input_prep_path: Optional[str] = None, 
+                  input_params_path: Optional[str] = None, input_prep_path: Optional[str] = None,
                   input_source_path: Optional[str] = None,
                   properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`LeapAddIons <leap.leap_add_ions.LeapAddIons>`leap.leap_add_ions.LeapAddIons class and
