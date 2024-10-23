@@ -140,10 +140,10 @@
     ],
     "dep_pypi": [
         "install_requires=['biobb_common==5.0.0']",
-        "python_requires='>=3.8, <3.11'"
+        "python_requires='>=3.9, <3.11'"
     ],
     "dep_conda": [
-        "python >=3.8,<3.11",
+        "python >=3.9,<3.11",
         "biobb_common ==5.0.0",
         "ambertools ==22.5.0",
         "gfortran ==8.5.0"

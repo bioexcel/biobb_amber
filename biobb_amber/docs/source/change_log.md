@@ -1,5 +1,12 @@
 # Biobb Amber changelog
 
+## What's new in version [5.0.1](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.1)?
+
+### Changes
+
+* [FEATURE](leap): Adding new input
+* [FIX](leap): Ions in 4p wat bug fixed; loadAmberPrep added in leap bbs
+
 ## What's new in version [5.0.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.0)?
 
 ### Changes
