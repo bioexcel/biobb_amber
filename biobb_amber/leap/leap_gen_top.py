@@ -20,6 +20,7 @@ class LeapGenTop(BiobbObject):
         input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.leapin.pdb>`_. Accepted formats: pdb (edam:format_1476).
         input_lib_path (str) (Optional): Input ligand library parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib>`_. Accepted formats: lib (edam:format_3889), zip (edam:format_3987).
         input_frcmod_path (str) (Optional): Input ligand frcmod parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod>`_. Accepted formats: frcmod (edam:format_3888), zip (edam:format_3987).
+        input_prep_path (str) (Optional): Input ligand prep parameters file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.prep>`_. Accepted formats: prep (edam:format_3987), zip (edam:format_3987). # NOTE: edam ontology for prep format?
         input_params_path (str) (Optional): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce.txt>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
         input_source_path (str) (Optional): Additional leap command files to load with source Leap command. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/leaprc.water.spce.txt>`_. Accepted formats: in (edam:format_2330), leapin (edam:format_2330), txt (edam:format_2330), zip (edam:format_3987).
         output_pdb_path (str): Output 3D structure PDB file matching the topology file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.leap.pdb>`_. Accepted formats: pdb (edam:format_1476).
@@ -64,8 +65,8 @@ class LeapGenTop(BiobbObject):
     def __init__(self, input_pdb_path: str, output_pdb_path: str,
                  output_top_path: str, output_crd_path: str,
                  input_lib_path: str = None, input_frcmod_path: str = None,
-                 input_params_path: str = None, input_source_path: str = None,
-                 properties: dict = None, **kwargs):
+                 input_prep_path: str = None, input_params_path: str = None, 
+                 input_source_path: str = None, properties: dict = None, **kwargs):
 
         properties = properties or {}
 
@@ -78,6 +79,7 @@ class LeapGenTop(BiobbObject):
             'in': {'input_pdb_path': input_pdb_path,
                    'input_lib_path': input_lib_path,
                    'input_frcmod_path': input_frcmod_path,
+                   'input_prep_path': input_prep_path,
                    'input_params_path': input_params_path,
                    'input_source_path': input_source_path},
             'out': {'output_pdb_path': output_pdb_path,
@@ -110,6 +112,7 @@ class LeapGenTop(BiobbObject):
         self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", False, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_lib_path"] = check_input_path(self.io_dict["in"]["input_lib_path"], "input_lib_path", True, out_log, self.__class__.__name__)
         self.io_dict["in"]["input_frcmod_path"] = check_input_path(self.io_dict["in"]["input_frcmod_path"], "input_frcmod_path", True, out_log, self.__class__.__name__)
+        self.io_dict["in"]["input_prep_path"] = check_input_path(self.io_dict["in"]["input_prep_path"], "input_prep_path", True, out_log, self.__class__.__name__)
         # self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
         # self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
 
@@ -155,6 +158,13 @@ class LeapGenTop(BiobbObject):
             else:
                 ligands_frcmod_list.append(self.stage_io_dict['in']['input_frcmod_path'])
 
+        ligands_prep_list = []
+        if self.io_dict['in']['input_prep_path'] is not None:
+            if self.io_dict['in']['input_prep_path'].endswith('.zip'):
+                ligands_prep_list = fu.unzip_list(self.stage_io_dict['in']['input_prep_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+            else:
+                ligands_prep_list.append(self.stage_io_dict['in']['input_prep_path'])
+               
         amber_params_list = []
         if self.io_dict['in']['input_params_path'] is not None:
             if self.io_dict['in']['input_params_path'].endswith('.zip'):
@@ -198,6 +208,8 @@ class LeapGenTop(BiobbObject):
                 leapin.write("loadOff " + amber_lib + "\n")
             for amber_frcmod in ligands_frcmod_list:
                 leapin.write("loadamberparams " + amber_frcmod + "\n")
+            for amber_prep in ligands_prep_list:
+                leapin.write("loadamberprep " + amber_prep + "\n")
 
             # Loading PDB file
             leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
@@ -234,14 +246,15 @@ class LeapGenTop(BiobbObject):
 def leap_gen_top(input_pdb_path: str, output_pdb_path: str,
                  output_top_path: str, output_crd_path: str,
                  input_lib_path: str = None, input_frcmod_path: str = None,
-                 input_params_path: str = None, input_source_path: str = None,
-                 properties: dict = None, **kwargs) -> int:
+                 input_prep_path: str = None, input_params_path: str = None, 
+                 input_source_path: str = None, properties: dict = None, **kwargs) -> int:
     """Create :class:`LeapGenTop <leap.leap_gen_top.LeapGenTop>`leap.leap_gen_top.LeapGenTop class and
     execute :meth:`launch() <leap.leap_gen_top.LeapGenTop.launch>` method"""
 
     return LeapGenTop(input_pdb_path=input_pdb_path,
                       input_lib_path=input_lib_path,
                       input_frcmod_path=input_frcmod_path,
+                      input_prep_path=input_prep_path,
                       input_params_path=input_params_path,
                       input_source_path=input_source_path,
                       output_pdb_path=output_pdb_path,
@@ -259,6 +272,7 @@ def main():
     required_args.add_argument('--input_pdb_path', required=True, help='Input 3D structure PDB file. Accepted formats: pdb.')
     required_args.add_argument('--input_lib_path', required=False, help='Input ligand library parameters file. Accepted formats: lib, zip.')
     required_args.add_argument('--input_frcmod_path', required=False, help='Input ligand frcmod parameters file. Accepted formats: frcmod, zip.')
+    required_args.add_argument('--input_prep_path', required=False, help='Input ligand prep parameters file. Accepted formats: prep, zip.')
     required_args.add_argument('--input_params_path', required=False, help='Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.')
     required_args.add_argument('--input_source_path', required=False, help='Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.')
     required_args.add_argument('--output_pdb_path', required=True, help='Output 3D structure PDB file matching the topology file. Accepted formats: pdb.')
@@ -273,6 +287,7 @@ def main():
     leap_gen_top(input_pdb_path=args.input_pdb_path,
                  input_lib_path=args.input_lib_path,
                  input_frcmod_path=args.input_frcmod_path,
+                 input_prep_path=args.input_prep_path,
                  input_params_path=args.input_params_path,
                  input_source_path=args.input_source_path,
                  output_pdb_path=args.output_pdb_path,

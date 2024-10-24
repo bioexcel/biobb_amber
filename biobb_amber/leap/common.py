@@ -39,6 +39,7 @@ def is_valid_file(ext, argument):
         'input_pdb_path': ['pdb'],
         'input_lib_path': ['lib', 'zip'],
         'input_frcmod_path': ['frcmod', 'zip'],
+        'input_prep_path': ['prep', 'zip'],
         'input_params_path': ['in', 'leapin', 'txt', 'zip'],
         'input_source_path': ['in', 'leapin', 'txt', 'zip'],
         'output_pdb_path': ['pdb'],
