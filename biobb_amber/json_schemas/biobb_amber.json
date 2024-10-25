@@ -6,7 +6,7 @@
     "conda": "https://anaconda.org/bioconda/biobb_amber",
     "docker": "https://quay.io/biocontainers/biobb_amber:5.0.0--pyhdfd78af_0",
     "singularity": "https://depot.galaxyproject.org/singularity/biobb_amber:5.0.0--pyhdfd78af_0",
-    "version": "5.0.0",
+    "version": "5.0.2",
     "rest": true,
     "tools": [
         {

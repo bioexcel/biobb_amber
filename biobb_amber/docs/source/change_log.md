@@ -1,6 +1,6 @@
 # Biobb Amber changelog
 
-## What's new in version [5.0.1](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.1)?
+## What's new in version [5.0.2](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.2)?
 
 ### Changes
 
