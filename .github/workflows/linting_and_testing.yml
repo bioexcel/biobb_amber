@@ -56,6 +56,10 @@ jobs:
             flake8
             pip
 
+      - name: Show pip version
+        shell: micromamba-shell {0}  # necessary for conda env to be active
+        run:  pip --version
+
       - name: Install genbadge from pip
         shell: micromamba-shell {0}  # necessary for conda env to be active
         run: pip install genbadge[all]
