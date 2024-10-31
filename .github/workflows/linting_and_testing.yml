@@ -60,7 +60,7 @@ jobs:
 
       - name: List files
         shell: micromamba-shell {0}  # necessary for conda env to be active
-        run:  "ls -lthr"
+        run:  ls -lthr
 
       - name: Show pip version
         shell: micromamba-shell {0}  # necessary for conda env to be active
