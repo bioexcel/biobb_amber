@@ -42,12 +42,13 @@ jobs:
           rm -rf /home/user/.bash_profile /home/user/.conda /home/user/micromamba /home/user/micromamba-bin 2>/dev/null
           touch /home/user/.bash_profile
 
-      - name: provision-with-micromamba
+      - name: setup-micromamba
         uses: mamba-org/setup-micromamba@v1
         with:
           generate-run-shell: true
-          post-cleanup: all
+          post-cleanup: 'all'
           environment-file: .github/env.yaml
+          init-shell: bash
           create-args: >-
             python=${{ matrix.python-version }}
             pytest
@@ -55,6 +56,10 @@ jobs:
             pytest-html
             flake8
             pip
+
+      - name: List files
+        shell: micromamba-shell {0}  # necessary for conda env to be active
+        run:  ls -lthr
 
       - name: Show pip version
         shell: micromamba-shell {0}  # necessary for conda env to be active
