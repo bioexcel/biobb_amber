@@ -58,6 +58,10 @@ jobs:
             flake8
             pip
 
+      - name: Verify micromamba environment
+        shell: micromamba-shell {0}  # necessary for conda env to be active
+        run: micromamba info
+
       - name: List files
         shell: micromamba-shell {0}  # necessary for conda env to be active
         run:  ls -lthr
