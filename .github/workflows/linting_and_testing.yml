@@ -58,6 +58,9 @@ jobs:
             flake8
             pip
 
+      - name: Check environment variables
+        run: printenv
+
       - name: Verify micromamba environment
         shell: micromamba-shell {0}  # necessary for conda env to be active
         run: micromamba info
