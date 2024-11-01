@@ -62,12 +62,12 @@ jobs:
         run: printenv
 
       - name: Verify micromamba environment
-        shell: micromamba-shell {0}  # necessary for conda env to be active
+        shell: bash -l {0}  # necessary for conda env to be active
         run: micromamba info
 
       - name: List files
-        shell: micromamba-shell {0}  # necessary for conda env to be active
-        run:  ls -lthr
+        shell: bash -l {0}  # necessary for conda env to be active
+        run:  micromamba list
 
       - name: Show pip version
         shell: micromamba-shell {0}  # necessary for conda env to be active
