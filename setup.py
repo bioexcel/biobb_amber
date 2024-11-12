@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_amber",
-    version="5.0.2",
+    version="5.0.3",
     author="Biobb developers",
     author_email="adam.hospital@irbbarcelona.org",
     description="Biobb_amber is a BioBB category for AMBER MD package.",
@@ -15,12 +15,12 @@ setuptools.setup(
     url="https://github.com/bioexcel/biobb_amber",
     project_urls={
         "Documentation": "http://biobb-amber.readthedocs.io/en/latest/",
-        "Bioexcel": "https://bioexcel.eu/"
+        "Bioexcel": "https://bioexcel.eu/",
     },
-    packages=setuptools.find_packages(exclude=['docs', 'test']),
-    package_data={'biobb_amber': ['py.typed']},
-    install_requires=['biobb_common==5.0.0'],
-    python_requires='>=3.9, <3.11',
+    packages=setuptools.find_packages(exclude=["docs", "test"]),
+    package_data={"biobb_amber": ["py.typed"]},
+    install_requires=["biobb_common==5.0.0"],
+    python_requires=">=3.9, <3.11",
     entry_points={
         "console_scripts": [
             "amber_to_pdb = biobb_amber.ambpdb.amber_to_pdb:main",
@@ -38,7 +38,7 @@ setuptools.setup(
             "pmemd_mdrun = biobb_amber.pmemd.pmemd_mdrun:main",
             "process_mdout = biobb_amber.process.process_mdout:main",
             "process_minout = biobb_amber.process.process_minout:main",
-            "sander_mdrun = biobb_amber.sander.sander_mdrun:main"
+            "sander_mdrun = biobb_amber.sander.sander_mdrun:main",
         ]
     },
     classifiers=[
@@ -47,6 +47,6 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
-        "Operating System :: Unix"
+        "Operating System :: Unix",
     ],
 )
