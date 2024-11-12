@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 
 """Module containing the LeapAddIons class and the command line interface."""
+
 import argparse
-from typing import Optional
-import shutil
 import re
+import shutil
 from decimal import Decimal
 from pathlib import PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from typing import Optional
+
 from biobb_common.configuration import settings
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
+
+from biobb_amber.leap.common import _from_string_to_list
 
 
 class LeapAddIons(BiobbObject):
@@ -77,13 +81,20 @@ class LeapAddIons(BiobbObject):
 
     """
 
-    def __init__(self, input_pdb_path: str,
-                 output_pdb_path: str, output_top_path: str, output_crd_path: str,
-                 input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
-                 input_params_path: Optional[str] = None, input_prep_path: Optional[str] = None,
-                 input_source_path: Optional[str] = None,
-                 properties: Optional[dict] = None, **kwargs):
-
+    def __init__(
+        self,
+        input_pdb_path: str,
+        output_pdb_path: str,
+        output_top_path: str,
+        output_crd_path: str,
+        input_lib_path: Optional[str] = None,
+        input_frcmod_path: Optional[str] = None,
+        input_params_path: Optional[str] = None,
+        input_prep_path: Optional[str] = None,
+        input_source_path: Optional[str] = None,
+        properties: Optional[dict] = None,
+        **kwargs,
+    ):
         properties = properties or {}
 
         # Call parent class constructor
@@ -92,15 +103,19 @@ class LeapAddIons(BiobbObject):
 
         # Input/Output files
         self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path,
-                   'input_lib_path': input_lib_path,
-                   'input_frcmod_path': input_frcmod_path,
-                   'input_params_path': input_params_path,
-                   'input_prep_path': input_prep_path,
-                   'input_source_path': input_source_path},
-            'out': {'output_pdb_path': output_pdb_path,
-                    'output_top_path': output_top_path,
-                    'output_crd_path': output_crd_path}
+            "in": {
+                "input_pdb_path": input_pdb_path,
+                "input_lib_path": input_lib_path,
+                "input_frcmod_path": input_frcmod_path,
+                "input_params_path": input_params_path,
+                "input_prep_path": input_prep_path,
+                "input_source_path": input_source_path,
+            },
+            "out": {
+                "output_pdb_path": output_pdb_path,
+                "output_top_path": output_top_path,
+                "output_crd_path": output_crd_path,
+            },
         }
 
         # Ligand Parameter lists
@@ -114,17 +129,19 @@ class LeapAddIons(BiobbObject):
 
         # Properties specific for BB
         self.properties = properties
-        self.forcefield = properties.get('forcefield', ["protein.ff14SB", "DNA.bsc1", "gaff"])
-        self.water_type = properties.get('water_type', "TIP3PBOX")
-        self.box_type = properties.get('box_type', "truncated_octahedron")
-        self.ions_type = properties.get('ions_type', "ionsjc_tip3p")
-        self.neutralise = properties.get('neutralise', True)
-        self.ionic_concentration = properties.get('ionic_concentration', 50)
-        self.positive_ions_number = properties.get('positive_ions_number', 0)
-        self.positive_ions_type = properties.get('positive_ions_type', "Na+")
-        self.negative_ions_number = properties.get('negative_ions_number', 0)
-        self.negative_ions_type = properties.get('negative_ions_type', "Cl-")
-        self.binary_path = properties.get('binary_path', 'tleap')
+        self.forcefield = _from_string_to_list(
+            properties.get("forcefield", ["protein.ff14SB", "DNA.bsc1", "gaff"])
+        )
+        self.water_type = properties.get("water_type", "TIP3PBOX")
+        self.box_type = properties.get("box_type", "truncated_octahedron")
+        self.ions_type = properties.get("ions_type", "ionsjc_tip3p")
+        self.neutralise = properties.get("neutralise", True)
+        self.ionic_concentration = properties.get("ionic_concentration", 50)
+        self.positive_ions_number = properties.get("positive_ions_number", 0)
+        self.positive_ions_type = properties.get("positive_ions_type", "Na+")
+        self.negative_ions_number = properties.get("negative_ions_number", 0)
+        self.negative_ions_type = properties.get("negative_ions_type", "Cl-")
+        self.binary_path = properties.get("binary_path", "tleap")
 
         # Check the properties
         self.check_properties(properties)
@@ -146,16 +163,16 @@ class LeapAddIons(BiobbObject):
     #     self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"], "output_crd_path", False, out_log, self.__class__.__name__)
 
     def find_out_number_of_ions(self):
-        """ Computes the number of positive and negative ions from the input ionic
+        """Computes the number of positive and negative ions from the input ionic
         concentration and the number of water molecules in the system box."""
 
         # Finding number of water molecules in the box
         cnt = 0
-        with open(self.io_dict['in']['input_pdb_path']) as fp:
+        with open(self.io_dict["in"]["input_pdb_path"]) as fp:
             for line in fp:
                 # Water molecules are identified with different resids
                 # by different forcefields / MD packages
-                pq = re.compile((r'WAT|HOH|TP3|TIP3|SOL'), re.M)
+                pq = re.compile((r"WAT|HOH|TP3|TIP3|SOL"), re.M)
                 if pq.search(line):
                     # Incrementing number of water molecules just in the water
                     # oxygen atom, ignoring hydrogen or dummy atoms
@@ -198,73 +215,135 @@ class LeapAddIons(BiobbObject):
         if self.neutralise:
             # ions_command = ions_command + "addions mol " + self.negative_ions_type + " 0 \n"
             # ions_command = ions_command + "addions mol " + self.positive_ions_type + " 0 \n"
-            ions_command = ions_command + "addionsRand mol " + self.negative_ions_type + " 0 \n"
-            ions_command = ions_command + "addionsRand mol " + self.positive_ions_type + " 0 \n"
+            ions_command = (
+                ions_command + "addionsRand mol " + self.negative_ions_type + " 0 \n"
+            )
+            ions_command = (
+                ions_command + "addionsRand mol " + self.positive_ions_type + " 0 \n"
+            )
 
-        if self.ionic_concentration and self.negative_ions_number == 0 and self.positive_ions_number == 0:
+        if (
+            self.ionic_concentration
+            and self.negative_ions_number == 0
+            and self.positive_ions_number == 0
+        ):
             self.find_out_number_of_ions()
             nneg = self.nio  # Update with function
             npos = self.nio  # Update with function
             # ions_command = ions_command + "addions mol " + self.negative_ions_type + " " + str(nneg) + " \n"
             # ions_command = ions_command + "addions mol " + self.positive_ions_type + " " + str(npos) + " \n"
-            ions_command = ions_command + "addionsRand mol " + self.negative_ions_type + " " + str(nneg) + " \n"
-            ions_command = ions_command + "addionsRand mol " + self.positive_ions_type + " " + str(npos) + " \n"
+            ions_command = (
+                ions_command
+                + "addionsRand mol "
+                + self.negative_ions_type
+                + " "
+                + str(nneg)
+                + " \n"
+            )
+            ions_command = (
+                ions_command
+                + "addionsRand mol "
+                + self.positive_ions_type
+                + " "
+                + str(npos)
+                + " \n"
+            )
         else:
             if self.negative_ions_number != 0:
                 # ions_command = ions_command + "addions mol " + self.negative_ions_type + " " + str(self.negative_ions_number) + " \n"
-                ions_command = ions_command + "addionsRand mol " + self.negative_ions_type + " " + str(self.negative_ions_number) + " \n"
+                ions_command = (
+                    ions_command
+                    + "addionsRand mol "
+                    + self.negative_ions_type
+                    + " "
+                    + str(self.negative_ions_number)
+                    + " \n"
+                )
             if self.positive_ions_number != 0:
                 # ions_command = ions_command + "addions mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
-                ions_command = ions_command + "addionsRand mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
+                ions_command = (
+                    ions_command
+                    + "addionsRand mol "
+                    + self.positive_ions_type
+                    + " "
+                    + str(self.positive_ions_number)
+                    + " \n"
+                )
 
         # Creating temporary folder & Leap configuration (instructions) file
         if self.container_path:
-            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
-            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+            instructions_file = str(
+                PurePath(self.stage_io_dict["unique_dir"]).joinpath("leap.in")
+            )
+            instructions_file_path = str(
+                PurePath(self.container_volume_path).joinpath("leap.in")
+            )
             self.tmp_folder = None
         else:
             self.tmp_folder = fu.create_unique_dir()
             instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         ligands_lib_list = []
-        if self.io_dict['in']['input_lib_path'] is not None:
-            if self.io_dict['in']['input_lib_path'].endswith('.zip'):
-                ligands_lib_list = fu.unzip_list(self.stage_io_dict['in']['input_lib_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+        if self.io_dict["in"]["input_lib_path"] is not None:
+            if self.io_dict["in"]["input_lib_path"].endswith(".zip"):
+                ligands_lib_list = fu.unzip_list(
+                    self.stage_io_dict["in"]["input_lib_path"],
+                    dest_dir=self.tmp_folder,
+                    out_log=self.out_log,
+                )
             else:
-                ligands_lib_list.append(self.stage_io_dict['in']['input_lib_path'])
+                ligands_lib_list.append(self.stage_io_dict["in"]["input_lib_path"])
 
         ligands_frcmod_list = []
-        if self.io_dict['in']['input_frcmod_path'] is not None:
-            if self.io_dict['in']['input_frcmod_path'].endswith('.zip'):
-                ligands_frcmod_list = fu.unzip_list(self.stage_io_dict['in']['input_frcmod_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+        if self.io_dict["in"]["input_frcmod_path"] is not None:
+            if self.io_dict["in"]["input_frcmod_path"].endswith(".zip"):
+                ligands_frcmod_list = fu.unzip_list(
+                    self.stage_io_dict["in"]["input_frcmod_path"],
+                    dest_dir=self.tmp_folder,
+                    out_log=self.out_log,
+                )
             else:
-                ligands_frcmod_list.append(self.stage_io_dict['in']['input_frcmod_path'])
+                ligands_frcmod_list.append(
+                    self.stage_io_dict["in"]["input_frcmod_path"]
+                )
 
         amber_params_list = []
-        if self.io_dict['in']['input_params_path'] is not None:
-            if self.io_dict['in']['input_params_path'].endswith('.zip'):
-                amber_params_list = fu.unzip_list(self.stage_io_dict['in']['input_params_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+        if self.io_dict["in"]["input_params_path"] is not None:
+            if self.io_dict["in"]["input_params_path"].endswith(".zip"):
+                amber_params_list = fu.unzip_list(
+                    self.stage_io_dict["in"]["input_params_path"],
+                    dest_dir=self.tmp_folder,
+                    out_log=self.out_log,
+                )
             else:
-                amber_params_list.append(self.stage_io_dict['in']['input_params_path'])
+                amber_params_list.append(self.stage_io_dict["in"]["input_params_path"])
 
         amber_prep_list = []
-        if self.io_dict['in']['input_prep_path'] is not None:
-            if self.io_dict['in']['input_prep_path'].endswith('.zip'):
-                amber_prep_list = fu.unzip_list(self.stage_io_dict['in']['input_prep_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+        if self.io_dict["in"]["input_prep_path"] is not None:
+            if self.io_dict["in"]["input_prep_path"].endswith(".zip"):
+                amber_prep_list = fu.unzip_list(
+                    self.stage_io_dict["in"]["input_prep_path"],
+                    dest_dir=self.tmp_folder,
+                    out_log=self.out_log,
+                )
             else:
-                amber_prep_list.append(self.stage_io_dict['in']['input_prep_path'])
+                amber_prep_list.append(self.stage_io_dict["in"]["input_prep_path"])
 
         leap_source_list = []
-        if self.io_dict['in']['input_source_path'] is not None:
-            if self.io_dict['in']['input_source_path'].endswith('.zip'):
-                leap_source_list = fu.unzip_list(self.stage_io_dict['in']['input_source_path'], dest_dir=self.tmp_folder, out_log=self.out_log)
+        if self.io_dict["in"]["input_source_path"] is not None:
+            if self.io_dict["in"]["input_source_path"].endswith(".zip"):
+                leap_source_list = fu.unzip_list(
+                    self.stage_io_dict["in"]["input_source_path"],
+                    dest_dir=self.tmp_folder,
+                    out_log=self.out_log,
+                )
             else:
-                leap_source_list.append(self.stage_io_dict['in']['input_source_path'])
+                leap_source_list.append(self.stage_io_dict["in"]["input_source_path"])
 
         # instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-        with open(instructions_file, 'w') as leapin:
+        with open(instructions_file, "w") as leapin:
             # Forcefields loaded by default:
             # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
             # leapin.write("source leaprc.protein.ff14SB \n")
@@ -303,7 +382,9 @@ class LeapAddIons(BiobbObject):
                 leapin.write("loadamberparams " + amber_frcmod + "\n")
 
             # Loading PDB file
-            leapin.write("mol = loadpdb " + self.stage_io_dict['in']['input_pdb_path'] + " \n")
+            leapin.write(
+                "mol = loadpdb " + self.stage_io_dict["in"]["input_pdb_path"] + " \n"
+            )
 
             # Adding ions
             leapin.write(ions_command)
@@ -312,14 +393,20 @@ class LeapAddIons(BiobbObject):
             leapin.write("setBox mol vdw \n")
 
             # Saving output PDB file, coordinates and topology
-            leapin.write("savepdb mol " + self.stage_io_dict['out']['output_pdb_path'] + " \n")
-            leapin.write("saveAmberParm mol " + self.stage_io_dict['out']['output_top_path'] + " " + self.stage_io_dict['out']['output_crd_path'] + "\n")
+            leapin.write(
+                "savepdb mol " + self.stage_io_dict["out"]["output_pdb_path"] + " \n"
+            )
+            leapin.write(
+                "saveAmberParm mol "
+                + self.stage_io_dict["out"]["output_top_path"]
+                + " "
+                + self.stage_io_dict["out"]["output_crd_path"]
+                + "\n"
+            )
             leapin.write("quit \n")
 
         # Command line
-        self.cmd = [self.binary_path,
-                    '-f', instructions_file_path
-                    ]
+        self.cmd = [self.binary_path, "-f", instructions_file_path]
 
         # Run Biobb block
         self.run_biobb()
@@ -328,20 +415,28 @@ class LeapAddIons(BiobbObject):
         self.copy_to_host()
 
         if self.box_type != "cubic":
-            fu.log('Fixing truncated octahedron Box in the topology and coordinates files', self.out_log, self.global_log)
+            fu.log(
+                "Fixing truncated octahedron Box in the topology and coordinates files",
+                self.out_log,
+                self.global_log,
+            )
 
             # Taking box info from input PDB file, CRYST1 tag (first line)
-            with open(self.io_dict['in']['input_pdb_path']) as file:
+            with open(self.io_dict["in"]["input_pdb_path"]) as file:
                 lines = file.readlines()
                 pdb_line = lines[0]
 
-            if 'OCTBOX' not in pdb_line:
-                fu.log('WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.', self.out_log, self.global_log)
+            if "OCTBOX" not in pdb_line:
+                fu.log(
+                    "WARNING: box info not found in input PDB file (OCTBOX). Needed to correctly assign the octahedron box. Assuming cubic box.",
+                    self.out_log,
+                    self.global_log,
+                )
             else:
                 # PDB info: CRYST1   86.316   86.316   86.316 109.47 109.47 109.47 P 1
                 # PDB info: OCTBOX   86.1942924  86.1942924  86.1942924 109.4712190 109.4712190 109.4712190
                 # regex_box = 'CRYST1\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*P 1'
-                regex_box = r'OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)'
+                regex_box = r"OCTBOX\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)\s*(\d+\.\d+)"
                 box = re.findall(regex_box, pdb_line)[0]
                 box_line = ""
                 for coord in box:
@@ -349,20 +444,20 @@ class LeapAddIons(BiobbObject):
 
                 # PRMTOP info: 1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
                 top_box_line = ""
-                top_box_line += '  %.8E' % Decimal(float(box[3]))
-                top_box_line += '  %.8E' % Decimal(float(box[0]))
-                top_box_line += '  %.8E' % Decimal(float(box[1]))
-                top_box_line += '  %.8E' % Decimal(float(box[2]))
+                top_box_line += "  %.8E" % Decimal(float(box[3]))
+                top_box_line += "  %.8E" % Decimal(float(box[0]))
+                top_box_line += "  %.8E" % Decimal(float(box[1]))
+                top_box_line += "  %.8E" % Decimal(float(box[2]))
 
                 # Removing box generated by tleap from the crd file (last line)
-                with open(self.io_dict['out']['output_crd_path']) as file:
+                with open(self.io_dict["out"]["output_crd_path"]) as file:
                     lines = file.readlines()
                     crd_lines = lines[:-1]
 
                 # Adding old box coordinates (taken from the input pdb)
                 crd_lines.append(box_line)
 
-                with open(self.io_dict['out']['output_crd_path'], 'w') as file:
+                with open(self.io_dict["out"]["output_crd_path"], "w") as file:
                     for line in crd_lines:
                         file.write(str(line))
                     file.write("\n")
@@ -374,34 +469,39 @@ class LeapAddIons(BiobbObject):
                 # %FORMAT(5E16.8)
                 # 1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
 
-                tmp_parmtop = str(PurePath(str(self.tmp_folder)).joinpath("top_temp.parmtop"))
-                shutil.copyfile(self.io_dict['out']['output_top_path'], tmp_parmtop)
+                tmp_parmtop = str(
+                    PurePath(str(self.tmp_folder)).joinpath("top_temp.parmtop")
+                )
+                shutil.copyfile(self.io_dict["out"]["output_top_path"], tmp_parmtop)
 
-                with open(self.io_dict['out']['output_top_path'], 'w') as new_top:
-                    with open(tmp_parmtop, 'r') as old_top:
+                with open(self.io_dict["out"]["output_top_path"], "w") as new_top:
+                    with open(tmp_parmtop, "r") as old_top:
                         for line in old_top:
-                            if 'BOX_DIMENSIONS' in line:
+                            if "BOX_DIMENSIONS" in line:
                                 box_flag = True
                                 new_top.write(line)
-                            elif box_flag and 'FORMAT' not in line:
+                            elif box_flag and "FORMAT" not in line:
                                 new_top.write(top_box_line + "\n")
                                 box_flag = False
-                            elif 'FLAG POINTERS' in line or ifbox_flag == 1 or ifbox_flag == 2 or ifbox_flag == 3:
+                            elif (
+                                "FLAG POINTERS" in line
+                                or ifbox_flag == 1
+                                or ifbox_flag == 2
+                                or ifbox_flag == 3
+                            ):
                                 ifbox_flag += 1
                                 new_top.write(line)
                             elif ifbox_flag == 4:
                                 # new_top.write(top_box_line + "\n")
-                                new_top.write(line[:56] + '       2' + line[64:])
+                                new_top.write(line[:56] + "       2" + line[64:])
                                 ifbox_flag += 1
                             else:
                                 new_top.write(line)
 
         # remove temporary folder(s)
-        self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
-            str(self.tmp_folder),
-            "leap.log"
-        ])
+        self.tmp_files.extend(
+            [self.stage_io_dict.get("unique_dir", ""), str(self.tmp_folder), "leap.log"]
+        )
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -409,59 +509,109 @@ class LeapAddIons(BiobbObject):
         return self.return_code
 
 
-def leap_add_ions(input_pdb_path: str, output_pdb_path: str,
-                  output_top_path: str, output_crd_path: str,
-                  input_lib_path: Optional[str] = None, input_frcmod_path: Optional[str] = None,
-                  input_params_path: Optional[str] = None, input_prep_path: Optional[str] = None,
-                  input_source_path: Optional[str] = None,
-                  properties: Optional[dict] = None, **kwargs) -> int:
+def leap_add_ions(
+    input_pdb_path: str,
+    output_pdb_path: str,
+    output_top_path: str,
+    output_crd_path: str,
+    input_lib_path: Optional[str] = None,
+    input_frcmod_path: Optional[str] = None,
+    input_params_path: Optional[str] = None,
+    input_prep_path: Optional[str] = None,
+    input_source_path: Optional[str] = None,
+    properties: Optional[dict] = None,
+    **kwargs,
+) -> int:
     """Create :class:`LeapAddIons <leap.leap_add_ions.LeapAddIons>`leap.leap_add_ions.LeapAddIons class and
     execute :meth:`launch() <leap.leap_add_ions.LeapAddIons.launch>` method"""
 
-    return LeapAddIons(input_pdb_path=input_pdb_path,
-                       input_lib_path=input_lib_path,
-                       input_frcmod_path=input_frcmod_path,
-                       input_params_path=input_params_path,
-                       input_prep_path=input_prep_path,
-                       input_source_path=input_source_path,
-                       output_pdb_path=output_pdb_path,
-                       output_top_path=output_top_path,
-                       output_crd_path=output_crd_path,
-                       properties=properties).launch()
+    return LeapAddIons(
+        input_pdb_path=input_pdb_path,
+        input_lib_path=input_lib_path,
+        input_frcmod_path=input_frcmod_path,
+        input_params_path=input_params_path,
+        input_prep_path=input_prep_path,
+        input_source_path=input_source_path,
+        output_pdb_path=output_pdb_path,
+        output_top_path=output_top_path,
+        output_crd_path=output_crd_path,
+        properties=properties,
+    ).launch()
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Adds counterions to a system box for an AMBER MD system using tLeap.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
+    parser = argparse.ArgumentParser(
+        description="Adds counterions to a system box for an AMBER MD system using tLeap.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument("--config", required=False, help="Configuration file")
 
     # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input 3D structure PDB file. Accepted formats: pdb.')
-    required_args.add_argument('--input_lib_path', required=False, help='Input ligand library parameters file. Accepted formats: lib, zip.')
-    required_args.add_argument('--input_frcmod_path', required=False, help='Input ligand frcmod parameters file. Accepted formats: frcmod, zip.')
-    required_args.add_argument('--input_params_path', required=False, help='Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.')
-    required_args.add_argument('--input_prep_path', required=False, help='Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: leapin, in, txt, zip.')
-    required_args.add_argument('--input_source_path', required=False, help='Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.')
-    required_args.add_argument('--output_pdb_path', required=True, help='Output 3D structure PDB file matching the topology file. Accepted formats: pdb.')
-    required_args.add_argument('--output_top_path', required=True, help='Output topology file (AMBER ParmTop). Accepted formats: top.')
-    required_args.add_argument('--output_crd_path', required=True, help='Output coordinates file (AMBER crd). Accepted formats: crd.')
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "--input_pdb_path",
+        required=True,
+        help="Input 3D structure PDB file. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "--input_lib_path",
+        required=False,
+        help="Input ligand library parameters file. Accepted formats: lib, zip.",
+    )
+    required_args.add_argument(
+        "--input_frcmod_path",
+        required=False,
+        help="Input ligand frcmod parameters file. Accepted formats: frcmod, zip.",
+    )
+    required_args.add_argument(
+        "--input_params_path",
+        required=False,
+        help="Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.",
+    )
+    required_args.add_argument(
+        "--input_prep_path",
+        required=False,
+        help="Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: leapin, in, txt, zip.",
+    )
+    required_args.add_argument(
+        "--input_source_path",
+        required=False,
+        help="Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.",
+    )
+    required_args.add_argument(
+        "--output_pdb_path",
+        required=True,
+        help="Output 3D structure PDB file matching the topology file. Accepted formats: pdb.",
+    )
+    required_args.add_argument(
+        "--output_top_path",
+        required=True,
+        help="Output topology file (AMBER ParmTop). Accepted formats: top.",
+    )
+    required_args.add_argument(
+        "--output_crd_path",
+        required=True,
+        help="Output coordinates file (AMBER crd). Accepted formats: crd.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    leap_add_ions(input_pdb_path=args.input_pdb_path,
-                  input_lib_path=args.input_lib_path,
-                  input_frcmod_path=args.input_frcmod_path,
-                  input_params_path=args.input_params_path,
-                  input_prep_path=args.input_prep_path,
-                  input_source_path=args.input_source_path,
-                  output_pdb_path=args.output_pdb_path,
-                  output_top_path=args.output_top_path,
-                  output_crd_path=args.output_crd_path,
-                  properties=properties)
+    leap_add_ions(
+        input_pdb_path=args.input_pdb_path,
+        input_lib_path=args.input_lib_path,
+        input_frcmod_path=args.input_frcmod_path,
+        input_params_path=args.input_params_path,
+        input_prep_path=args.input_prep_path,
+        input_source_path=args.input_source_path,
+        output_pdb_path=args.output_pdb_path,
+        output_top_path=args.output_top_path,
+        output_crd_path=args.output_crd_path,
+        properties=properties,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

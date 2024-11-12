@@ -117,6 +117,40 @@
                 }
             ]
         },
+        "input_prep_path": {
+            "type": "string",
+            "description": "Additional leap parameter files to load with loadAmberPrep Leap command",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/heme_all.in",
+            "enum": [
+                ".*\\.in$",
+                ".*\\.leapin$",
+                ".*\\.txt$",
+                ".*\\.zip$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Additional leap parameter files to load with loadAmberPrep Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.leapin$",
+                    "description": "Additional leap parameter files to load with loadAmberPrep Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
+                    "description": "Additional leap parameter files to load with loadAmberPrep Leap command",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Additional leap parameter files to load with loadAmberPrep Leap command",
+                    "edam": "format_3987"
+                }
+            ]
+        },
         "input_source_path": {
             "type": "string",
             "description": "Additional leap command files to load with source Leap command",

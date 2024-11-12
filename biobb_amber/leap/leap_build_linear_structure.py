@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
 """Module containing the LeapBuildLinearStructure class and the command line interface."""
+
 import argparse
-from typing import Optional
 from pathlib import PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from typing import Optional
+
 from biobb_common.configuration import settings
+from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.leap.common import check_output_path
+
+from biobb_amber.leap.common import _from_string_to_list, check_output_path
 
 
 class LeapBuildLinearStructure(BiobbObject):
@@ -66,27 +69,32 @@ class LeapBuildLinearStructure(BiobbObject):
         self.locals_var_dict = locals().copy()
 
         # Input/Output files
-        self.io_dict = {
-            'in': {},
-            'out': {'output_pdb_path': output_pdb_path}
-        }
+        self.io_dict = {"in": {}, "out": {"output_pdb_path": output_pdb_path}}
 
         # Properties specific for BB
         self.properties = properties
-        self.sequence = properties.get('sequence', "ALA GLY SER PRO ARG ALA PRO GLY")
-        self.forcefield = properties.get('forcefield', ["protein.ff14SB", "DNA.bsc1", "gaff"])
-        self.build_library = properties.get('build_library', False)
-        self.binary_path = properties.get('binary_path', 'tleap')
+        self.sequence = properties.get("sequence", "ALA GLY SER PRO ARG ALA PRO GLY")
+        self.forcefield = _from_string_to_list(
+            properties.get("forcefield", ["protein.ff14SB", "DNA.bsc1", "gaff"])
+        )
+        self.build_library = properties.get("build_library", False)
+        self.binary_path = properties.get("binary_path", "tleap")
 
         # Check the properties
         self.check_properties(properties)
         self.check_arguments()
 
     def check_data_params(self, out_log, err_log):
-        """ Checks input/output paths correctness """
+        """Checks input/output paths correctness"""
 
         # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
+        self.io_dict["out"]["output_pdb_path"] = check_output_path(
+            self.io_dict["out"]["output_pdb_path"],
+            "output_pdb_path",
+            False,
+            out_log,
+            self.__class__.__name__,
+        )
 
     @launchlogger
     def launch(self):
@@ -107,30 +115,33 @@ class LeapBuildLinearStructure(BiobbObject):
 
         # Creating temporary folder & Leap configuration (instructions) file
         if self.container_path:
-            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
-            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
+            instructions_file = str(
+                PurePath(self.stage_io_dict["unique_dir"]).joinpath("leap.in")
+            )
+            instructions_file_path = str(
+                PurePath(self.container_volume_path).joinpath("leap.in")
+            )
             self.tmp_folder = None
         else:
             self.tmp_folder = fu.create_unique_dir()
             instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         # instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-        with open(instructions_file, 'w') as leapin:
-
+        with open(instructions_file, "w") as leapin:
             # Forcefields loaded from input forcefield property
             for t in self.forcefield:
                 leapin.write("source leaprc.{}\n".format(t))
 
             leapin.write("struct = sequence {" + self.sequence + " } \n")
-            leapin.write("savepdb struct " + self.stage_io_dict['out']['output_pdb_path'] + "\n")
+            leapin.write(
+                "savepdb struct " + self.stage_io_dict["out"]["output_pdb_path"] + "\n"
+            )
             leapin.write("quit \n")
 
         # Command line
-        self.cmd = [self.binary_path,
-                    '-f', instructions_file_path
-                    ]
+        self.cmd = [self.binary_path, "-f", instructions_file_path]
 
         # Run Biobb block
         self.run_biobb()
@@ -139,11 +150,9 @@ class LeapBuildLinearStructure(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
-            str(self.tmp_folder),
-            "leap.log"
-        ])
+        self.tmp_files.extend(
+            [self.stage_io_dict.get("unique_dir", ""), str(self.tmp_folder), "leap.log"]
+        )
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -151,31 +160,41 @@ class LeapBuildLinearStructure(BiobbObject):
         return self.return_code
 
 
-def leap_build_linear_structure(output_pdb_path: str,
-                                properties: Optional[dict] = None, **kwargs) -> int:
+def leap_build_linear_structure(
+    output_pdb_path: str, properties: Optional[dict] = None, **kwargs
+) -> int:
     """Create :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>`leap.leap_build_linear_structure.LeapBuildLinearStructure class and
     execute :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method"""
 
-    return LeapBuildLinearStructure(output_pdb_path=output_pdb_path,
-                                    properties=properties).launch()
+    return LeapBuildLinearStructure(
+        output_pdb_path=output_pdb_path, properties=properties
+    ).launch()
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Building a linear (unfolded) 3D structure from an AA sequence.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
+    parser = argparse.ArgumentParser(
+        description="Building a linear (unfolded) 3D structure from an AA sequence.",
+        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
+    )
+    parser.add_argument("--config", required=False, help="Configuration file")
 
     # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--output_pdb_path', required=True, help='Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.')
+    required_args = parser.add_argument_group("required arguments")
+    required_args.add_argument(
+        "--output_pdb_path",
+        required=True,
+        help="Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.",
+    )
 
     args = parser.parse_args()
     config = args.config if args.config else None
     properties = settings.ConfReader(config=config).get_prop_dic()
 
     # Specific call
-    leap_build_linear_structure(output_pdb_path=args.output_pdb_path,
-                                properties=properties)
+    leap_build_linear_structure(
+        output_pdb_path=args.output_pdb_path, properties=properties
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
