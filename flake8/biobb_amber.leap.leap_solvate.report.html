@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: biobb_amber/leap/leap_solvate.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="biobb_amber.leap.leap_solvate.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/leap/leap_solvate.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="W503">
+               <span class="count sev-2">
+                  18
+               </span>
+               <strong>W503:</strong> line break before binary operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l212">
+                  <tt><i>212</i>                 <span class="o">+</span> <span class="s2">&quot;addions mol &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l213">
+                  <tt><i>213</i>                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">negative_ions_type</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l214">
+                  <tt><i>214</i>                 <span class="o">+</span> <span class="s2">&quot; &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l215">
+                  <tt><i>215</i>                 <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">negative_ions_number</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l216">
+                  <tt><i>216</i>                 <span class="o">+</span> <span class="s2">&quot; </span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l221">
+                  <tt><i>221</i>                 <span class="o">+</span> <span class="s2">&quot;addions mol &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l222">
+                  <tt><i>222</i>                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">positive_ions_type</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l223">
+                  <tt><i>223</i>                 <span class="o">+</span> <span class="s2">&quot; &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l224">
+                  <tt><i>224</i>                 <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">positive_ions_number</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l225">
+                  <tt><i>225</i>                 <span class="o">+</span> <span class="s2">&quot; </span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l346">
+                  <tt><i>346</i>                 <span class="o">+</span> <span class="s2">&quot; mol &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l347">
+                  <tt><i>347</i>                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">water_type</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l348">
+                  <tt><i>348</i>                 <span class="o">+</span> <span class="s2">&quot; &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l349">
+                  <tt><i>349</i>                 <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distance_to_molecule</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l364">
+                  <tt><i>364</i>                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_top_path&quot;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l365">
+                  <tt><i>365</i>                 <span class="o">+</span> <span class="s2">&quot; &quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l366">
+                  <tt><i>366</i>                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_crd_path&quot;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_solvate.source.html#l367">
+                  <tt><i>367</i>                 <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>
