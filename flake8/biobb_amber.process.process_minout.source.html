@@ -29,37 +29,37 @@
                class="code sev- "><tt><i>4</i> &nbsp;</tt>
             </div>
             <div id="l5"
-               class="code sev- "><tt><i>5</i> <span class="kn">import</span> <span class="nn">argparse</span></tt>
+               class="code sev- "><tt><i>5</i> <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span></tt>
             </div>
             <div id="l6"
-               class="code sev- "><tt><i>6</i> <span class="kn">import</span> <span class="nn">shutil</span></tt>
+               class="code sev- "><tt><i>6</i> <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span></tt>
             </div>
             <div id="l7"
-               class="code sev- "><tt><i>7</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               class="code sev- "><tt><i>7</i> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
             </div>
             <div id="l8"
-               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span></tt>
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span></tt>
             </div>
             <div id="l9"
                class="code sev- "><tt><i>9</i> &nbsp;</tt>
             </div>
             <div id="l10"
-               class="code sev- "><tt><i>10</i> <span class="kn">from</span> <span class="nn">biobb_common.configuration</span> <span class="kn">import</span> <span class="n">settings</span></tt>
+               class="code sev- "><tt><i>10</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span></tt>
             </div>
             <div id="l11"
-               class="code sev- "><tt><i>11</i> <span class="kn">from</span> <span class="nn">biobb_common.generic.biobb_object</span> <span class="kn">import</span> <span class="n">BiobbObject</span></tt>
+               class="code sev- "><tt><i>11</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.generic.biobb_object</span><span class="w"> </span><span class="kn">import</span> <span class="n">BiobbObject</span></tt>
             </div>
             <div id="l12"
-               class="code sev- "><tt><i>12</i> <span class="kn">from</span> <span class="nn">biobb_common.tools</span> <span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
+               class="code sev- "><tt><i>12</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
             </div>
             <div id="l13"
-               class="code sev- "><tt><i>13</i> <span class="kn">from</span> <span class="nn">biobb_common.tools.file_utils</span> <span class="kn">import</span> <span class="n">launchlogger</span></tt>
+               class="code sev- "><tt><i>13</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.tools.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">launchlogger</span></tt>
             </div>
             <div id="l14"
                class="code sev- "><tt><i>14</i> &nbsp;</tt>
             </div>
             <div id="l15"
-               class="code sev- "><tt><i>15</i> <span class="kn">from</span> <span class="nn">biobb_amber.process.common</span> <span class="kn">import</span> <span class="p">(</span></tt>
+               class="code sev- "><tt><i>15</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_amber.process.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span></tt>
             </div>
             <div id="l16"
                class="code sev- "><tt><i>16</i>     <span class="n">_from_string_to_list</span><span class="p">,</span></tt>
@@ -80,7 +80,7 @@
                class="code sev- "><tt><i>21</i> &nbsp;</tt>
             </div>
             <div id="l22"
-               class="code sev- "><tt><i>22</i> <span class="k">class</span> <span class="nc">ProcessMinOut</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>22</i> <span class="k">class</span><span class="w"> </span><span class="nc">ProcessMinOut</span><span class="p">(</span><span class="n">BiobbObject</span><span class="p">):</span></tt>
             </div>
             <div id="l23"
                class="code sev- "><tt><i>23</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
@@ -212,7 +212,7 @@
                class="code sev- "><tt><i>65</i> &nbsp;</tt>
             </div>
             <div id="l66"
-               class="code sev- "><tt><i>66</i>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_log_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_dat_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>66</i>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_log_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_dat_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></tt>
             </div>
             <div id="l67"
                class="code sev- "><tt><i>67</i>         <span class="n">properties</span> <span class="o">=</span> <span class="n">properties</span> <span class="ow">or</span> <span class="p">{}</span></tt>
@@ -278,7 +278,7 @@
                class="code sev- "><tt><i>87</i> &nbsp;</tt>
             </div>
             <div id="l88"
-               class="code sev- "><tt><i>88</i>     <span class="k">def</span> <span class="nf">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">out_err</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>88</i>     <span class="k">def</span><span class="w"> </span><span class="nf">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">out_err</span><span class="p">):</span></tt>
             </div>
             <div id="l89"
                class="code sev- "><tt><i>89</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks input/output paths correctness&quot;&quot;&quot;</span></tt>
@@ -344,7 +344,7 @@
                class="code sev- "><tt><i>109</i>     <span class="nd">@launchlogger</span></tt>
             </div>
             <div id="l110"
-               class="code sev- "><tt><i>110</i>     <span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>110</i>     <span class="k">def</span><span class="w"> </span><span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l111"
                class="code sev- "><tt><i>111</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Launches the execution of the ProcessMinOut module.&quot;&quot;&quot;</span></tt>
@@ -605,7 +605,7 @@
                class="code sev- "><tt><i>193</i> &nbsp;</tt>
             </div>
             <div id="l194"
-               class="code sev- "><tt><i>194</i> <span class="k">def</span> <span class="nf">process_minout</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>194</i> <span class="k">def</span><span class="w"> </span><span class="nf">process_minout</span><span class="p">(</span></tt>
             </div>
             <div id="l195"
                class="code sev- "><tt><i>195</i>     <span class="n">input_log_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span></tt>
@@ -653,7 +653,7 @@
                class="code sev- "><tt><i>209</i> &nbsp;</tt>
             </div>
             <div id="l210"
-               class="code sev- "><tt><i>210</i> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span></tt>
+               class="code sev- "><tt><i>210</i> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span></tt>
             </div>
             <div id="l211"
                class="code sev- "><tt><i>211</i>     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span></tt>

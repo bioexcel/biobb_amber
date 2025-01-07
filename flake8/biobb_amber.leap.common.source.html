@@ -23,16 +23,16 @@
                class="code sev- "><tt><i>2</i> &nbsp;</tt>
             </div>
             <div id="l3"
-               class="code sev- "><tt><i>3</i> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
+               class="code sev- "><tt><i>3</i> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span></tt>
             </div>
             <div id="l4"
-               class="code sev- "><tt><i>4</i> <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span></tt>
+               class="code sev- "><tt><i>4</i> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span></tt>
             </div>
             <div id="l5"
                class="code sev- "><tt><i>5</i> &nbsp;</tt>
             </div>
             <div id="l6"
-               class="code sev- "><tt><i>6</i> <span class="kn">from</span> <span class="nn">biobb_common.tools</span> <span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
+               class="code sev- "><tt><i>6</i> <span class="kn">from</span><span class="w"> </span><span class="nn">biobb_common.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">file_utils</span> <span class="k">as</span> <span class="n">fu</span></tt>
             </div>
             <div id="l7"
                class="code sev- "><tt><i>7</i> &nbsp;</tt>
@@ -44,7 +44,7 @@
                class="code sev- "><tt><i>9</i> <span class="c1"># CHECK INPUT PARAMETERS</span></tt>
             </div>
             <div id="l10"
-               class="code sev- "><tt><i>10</i> <span class="k">def</span> <span class="nf">check_input_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">argument</span><span class="p">,</span> <span class="n">optional</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">classname</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>10</i> <span class="k">def</span><span class="w"> </span><span class="nf">check_input_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">argument</span><span class="p">,</span> <span class="n">optional</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">classname</span><span class="p">):</span></tt>
             </div>
             <div id="l11"
                class="code sev- "><tt><i>11</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks input file&quot;&quot;&quot;</span></tt>
@@ -134,7 +134,7 @@
                class="code sev- "><tt><i>33</i> <span class="c1"># CHECK OUTPUT PARAMETERS</span></tt>
             </div>
             <div id="l34"
-               class="code sev- "><tt><i>34</i> <span class="k">def</span> <span class="nf">check_output_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">argument</span><span class="p">,</span> <span class="n">optional</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">classname</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>34</i> <span class="k">def</span><span class="w"> </span><span class="nf">check_output_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">argument</span><span class="p">,</span> <span class="n">optional</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">classname</span><span class="p">):</span></tt>
             </div>
             <div id="l35"
                class="code sev- "><tt><i>35</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks output file&quot;&quot;&quot;</span></tt>
@@ -221,7 +221,7 @@
                class="code sev- "><tt><i>56</i> &nbsp;</tt>
             </div>
             <div id="l57"
-               class="code sev- "><tt><i>57</i> <span class="k">def</span> <span class="nf">is_valid_file</span><span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>57</i> <span class="k">def</span><span class="w"> </span><span class="nf">is_valid_file</span><span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span></tt>
             </div>
             <div id="l58"
                class="code sev- "><tt><i>58</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks if file format is compatible&quot;&quot;&quot;</span></tt>
@@ -266,7 +266,7 @@
                class="code sev- "><tt><i>71</i> &nbsp;</tt>
             </div>
             <div id="l72"
-               class="code sev- "><tt><i>72</i> <span class="k">def</span> <span class="nf">_from_string_to_list</span><span class="p">(</span><span class="n">input_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span></tt>
+               class="code sev- "><tt><i>72</i> <span class="k">def</span><span class="w"> </span><span class="nf">_from_string_to_list</span><span class="p">(</span><span class="n">input_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span></tt>
             </div>
             <div id="l73"
                class="code sev- "><tt><i>73</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span></tt>
