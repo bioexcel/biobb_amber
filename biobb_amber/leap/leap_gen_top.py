@@ -268,11 +268,7 @@ class LeapGenTop(BiobbObject):
                 "savepdb mol " + self.stage_io_dict["out"]["output_pdb_path"] + " \n"
             )
             leapin.write(
-                "saveAmberParm mol "
-                + self.stage_io_dict["out"]["output_top_path"]
-                + " "
-                + self.stage_io_dict["out"]["output_crd_path"]
-                + "\n"
+                "saveAmberParm mol " + self.stage_io_dict["out"]["output_top_path"] + " " + self.stage_io_dict["out"]["output_crd_path"] + "\n"
             )
             leapin.write("quit \n")
 
