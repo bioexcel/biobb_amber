@@ -17,14 +17,12 @@ def check_input_path(path, argument, optional, out_log, classname):
     file_extension = PurePath(path).suffix
     if not is_valid_file(file_extension[1:], argument):
         fu.log(
-            classname
-            + ": Format %s in %s file is not compatible"
+            classname + ": Format %s in %s file is not compatible"
             % (file_extension[1:], argument),
             out_log,
         )
         raise SystemExit(
-            classname
-            + ": Format %s in %s file is not compatible"
+            classname + ": Format %s in %s file is not compatible"
             % (file_extension[1:], argument)
         )
     return path
@@ -41,14 +39,12 @@ def check_output_path(path, argument, optional, out_log, classname):
     file_extension = PurePath(path).suffix
     if not is_valid_file(file_extension[1:], argument):
         fu.log(
-            classname
-            + ": Format %s in  %s file is not compatible"
+            classname + ": Format %s in  %s file is not compatible"
             % (file_extension[1:], argument),
             out_log,
         )
         raise SystemExit(
-            classname
-            + ": Format %s in  %s file is not compatible"
+            classname + ": Format %s in  %s file is not compatible"
             % (file_extension[1:], argument)
         )
     return path

@@ -223,9 +223,7 @@ class LeapAddIons(BiobbObject):
             )
 
         if (
-            self.ionic_concentration
-            and self.negative_ions_number == 0
-            and self.positive_ions_number == 0
+            self.ionic_concentration and self.negative_ions_number == 0 and self.positive_ions_number == 0
         ):
             self.find_out_number_of_ions()
             nneg = self.nio  # Update with function
@@ -233,41 +231,21 @@ class LeapAddIons(BiobbObject):
             # ions_command = ions_command + "addions mol " + self.negative_ions_type + " " + str(nneg) + " \n"
             # ions_command = ions_command + "addions mol " + self.positive_ions_type + " " + str(npos) + " \n"
             ions_command = (
-                ions_command
-                + "addionsRand mol "
-                + self.negative_ions_type
-                + " "
-                + str(nneg)
-                + " \n"
+                ions_command + "addionsRand mol " + self.negative_ions_type + " " + str(nneg) + " \n"
             )
             ions_command = (
-                ions_command
-                + "addionsRand mol "
-                + self.positive_ions_type
-                + " "
-                + str(npos)
-                + " \n"
+                ions_command + "addionsRand mol " + self.positive_ions_type + " " + str(npos) + " \n"
             )
         else:
             if self.negative_ions_number != 0:
                 # ions_command = ions_command + "addions mol " + self.negative_ions_type + " " + str(self.negative_ions_number) + " \n"
                 ions_command = (
-                    ions_command
-                    + "addionsRand mol "
-                    + self.negative_ions_type
-                    + " "
-                    + str(self.negative_ions_number)
-                    + " \n"
+                    ions_command + "addionsRand mol " + self.negative_ions_type + " " + str(self.negative_ions_number) + " \n"
                 )
             if self.positive_ions_number != 0:
                 # ions_command = ions_command + "addions mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
                 ions_command = (
-                    ions_command
-                    + "addionsRand mol "
-                    + self.positive_ions_type
-                    + " "
-                    + str(self.positive_ions_number)
-                    + " \n"
+                    ions_command + "addionsRand mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
                 )
 
         # Creating temporary folder & Leap configuration (instructions) file
@@ -397,11 +375,7 @@ class LeapAddIons(BiobbObject):
                 "savepdb mol " + self.stage_io_dict["out"]["output_pdb_path"] + " \n"
             )
             leapin.write(
-                "saveAmberParm mol "
-                + self.stage_io_dict["out"]["output_top_path"]
-                + " "
-                + self.stage_io_dict["out"]["output_crd_path"]
-                + "\n"
+                "saveAmberParm mol " + self.stage_io_dict["out"]["output_top_path"] + " " + self.stage_io_dict["out"]["output_crd_path"] + "\n"
             )
             leapin.write("quit \n")
 
@@ -484,10 +458,7 @@ class LeapAddIons(BiobbObject):
                                 new_top.write(top_box_line + "\n")
                                 box_flag = False
                             elif (
-                                "FLAG POINTERS" in line
-                                or ifbox_flag == 1
-                                or ifbox_flag == 2
-                                or ifbox_flag == 3
+                                "FLAG POINTERS" in line or ifbox_flag == 1 or ifbox_flag == 2 or ifbox_flag == 3
                             ):
                                 ifbox_flag += 1
                                 new_top.write(line)

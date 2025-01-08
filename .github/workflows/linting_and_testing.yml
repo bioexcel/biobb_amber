@@ -39,8 +39,8 @@ jobs:
 
       - name: Remove all micromamba installations
         run: |
-          rm -rf /home/user/.bash_profile /home/user/.conda /home/user/micromamba /home/user/micromamba-bin 2>/dev/null
-          touch /home/user/.bash_profile
+          rm -rf $HOME/.bash_profile $HOME/.conda $HOME/micromamba $HOME/micromamba-bin 2>/dev/null
+          touch $HOME/.bash_profile
 
       - name: setup-micromamba
         uses: mamba-org/setup-micromamba@v2.0.0

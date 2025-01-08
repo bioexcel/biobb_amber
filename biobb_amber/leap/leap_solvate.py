@@ -208,21 +208,11 @@ class LeapSolvate(BiobbObject):
 
         if self.negative_ions_number != 0:
             ions_command = (
-                ions_command
-                + "addions mol "
-                + self.negative_ions_type
-                + " "
-                + str(self.negative_ions_number)
-                + " \n"
+                ions_command + "addions mol " + self.negative_ions_type + " " + str(self.negative_ions_number) + " \n"
             )
         if self.positive_ions_number != 0:
             ions_command = (
-                ions_command
-                + "addions mol "
-                + self.positive_ions_type
-                + " "
-                + str(self.positive_ions_number)
-                + " \n"
+                ions_command + "addions mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
             )
 
         # Creating temporary folder & Leap configuration (instructions) file
@@ -342,11 +332,7 @@ class LeapSolvate(BiobbObject):
 
             # Generating box + adding water molecules
             leapin.write(
-                box_command
-                + " mol "
-                + self.water_type
-                + " "
-                + str(self.distance_to_molecule)
+                box_command + " mol " + self.water_type + " " + str(self.distance_to_molecule)
             )
             leapin.write(
                 " iso " + str(self.closeness) + "\n"
@@ -360,11 +346,7 @@ class LeapSolvate(BiobbObject):
                 "savepdb mol " + self.stage_io_dict["out"]["output_pdb_path"] + " \n"
             )
             leapin.write(
-                "saveAmberParm mol "
-                + self.stage_io_dict["out"]["output_top_path"]
-                + " "
-                + self.stage_io_dict["out"]["output_crd_path"]
-                + "\n"
+                "saveAmberParm mol " + self.stage_io_dict["out"]["output_top_path"] + " " + self.stage_io_dict["out"]["output_crd_path"] + "\n"
             )
             leapin.write("quit \n")
 

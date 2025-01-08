@@ -1,0 +1,87 @@
+name: PR Tests
+
+# Trigger the workflow on pull request events
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr_test:
+    strategy:
+      matrix:
+        os: [self-hosted]
+        python-version: ["3.10"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - run: echo "Repository -> ${{ github.repository }}"
+      - run: echo "Branch -> ${{ github.ref }}"
+      - run: echo "Trigger event -> ${{ github.event_name }}"
+      - run: echo "Runner OS -> ${{ runner.os }}"
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: Remove all micromamba installations
+        run: |
+          rm -rf $HOME/.bash_profile $HOME/.conda $HOME/micromamba $HOME/micromamba-bin 2>/dev/null
+          touch $HOME/.bash_profile
+
+      - name: setup-micromamba
+        uses: mamba-org/setup-micromamba@v2.0.0
+        with:
+          generate-run-shell: true
+          micromamba-version: '2.0.2-2'
+          post-cleanup: 'all'
+          init-shell: bash
+          environment-file: .github/env.yaml
+          create-args: >-
+            python=${{ matrix.python-version }}
+            pytest
+            pytest-cov
+            pytest-html
+            flake8
+            pip
+
+      - name: List installed package versions
+        shell: bash -l {0}
+        run: micromamba list
+
+      - name: Checkout biobb_common
+        uses: actions/checkout@v4
+        with:
+          repository: bioexcel/biobb_common
+          path: './biobb_common'
+
+      - name: Run tests
+        shell: bash -l {0}
+        run: |
+          # Ignoring docker and singularity tests
+          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
+
+          # Create directory for tests reports
+          mkdir -p ./reports/junit
+
+          # Production one
+          pytest biobb_amber/test/unitests/ --ignore-glob=*container.py --ignore-glob=*docker.py --ignore-glob=*singularity.py
+
+      # Notify user about test results
+      - name: Comment on PR
+        if: always() # This ensures the step runs even if tests fail
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { payload, repo } = context; // Access GitHub context
+            const prNumber = payload.pull_request.number;
+            const jobStatus = '${{ job.status }}'; // Get job status (success/failure)
+            const testStatus = jobStatus === 'success' ? '✅ Tests Passed!' : '❌ Tests Failed.';
+            
+            await github.rest.issues.createComment({
+              owner: repo.owner,
+              repo: repo.repo,
+              issue_number: prNumber,
+              body: `**Test Results for PR #${prNumber}**\n\n${testStatus}`
+            });
