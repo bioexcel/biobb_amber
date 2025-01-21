@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/checkout@v3
         with:
-          token: ${{ steps.generate_token.outputs.token }
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Download file using wget
         run: wget -O ./CITATION.cff https://raw.githubusercontent.com/bioexcel/biobb/master/CITATION.cff
