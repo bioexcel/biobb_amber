@@ -15,13 +15,12 @@ jobs:
         id: generate_token
         with:
           app-id: ${{ vars.GHAPUSH }}
-          installation-id: ${{ secrets.GHAPUSH_IID }}
           private-key: ${{ secrets.GHAPUSH }}
 
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          repository: bioexcel/biobb_analysis
+          repository: bioexcel/biobb_amber
           path: ./
 
       - name: Download file using wget
