@@ -28,7 +28,7 @@ jobs:
       #   run: ls -la ./
 
       - name: Commit and push changes if file has changed
-        if: github.event.pull_request.merged == true
+        # if: github.event.pull_request.merged == true
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
