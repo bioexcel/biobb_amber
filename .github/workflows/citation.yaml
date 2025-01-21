@@ -24,6 +24,8 @@ jobs:
         run: ls -la ./
 
       - name: Commit and push changes if file has changed
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
