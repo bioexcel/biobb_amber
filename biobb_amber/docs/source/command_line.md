@@ -17,7 +17,7 @@ leap_solvate -h
     
     Generating and solvating a system box for an AMBER MD system. using tLeap program from AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -57,7 +57,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefield to be used for the structure generation. .
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
 * **water_type** (*string*): (TIP3PBOX) Water molecule parameters to be used for the topology. .
 * **box_type** (*string*): (truncated_octahedron) Type for the MD system box. .
 * **ions_type** (*string*): (ionsjc_tip3p) Ions type. .
@@ -155,7 +155,7 @@ sander_mdrun -h
     
     Running energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
       --input_mdin_path INPUT_MDIN_PATH
@@ -293,7 +293,7 @@ cestats_run -h
     
     Analyzing the results of constant Redox potential MD simulations using cestats tool from the AMBER MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -405,7 +405,7 @@ pmemd_mdrun -h
     
     Running molecular dynamics using pmemd tool from the AMBER MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -507,7 +507,7 @@ pdb4amber_run -h
     
     Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -529,6 +529,7 @@ Config parameters for this building block:
 * **remove_hydrogens** (*boolean*): (False) Remove hydrogen atoms from the PDB file..
 * **remove_waters** (*boolean*): (False) Remove water molecules from the PDB file..
 * **constant_pH** (*boolean*): (False) Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation..
+* **reduce** (*boolean*): (False) Run Reduce first to add hydrogen atoms..
 * **binary_path** (*string*): (pdb4amber) Path to the pdb4amber executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -593,7 +594,7 @@ process_mdout -h
     
     Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -697,7 +698,7 @@ leap_add_ions -h
     
     Adds counterions to a system box for an AMBER MD system using tLeap.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -737,7 +738,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefield to be used for the structure generation. .
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
 * **water_type** (*string*): (TIP3PBOX) Water molecule parameters to be used for the topology. .
 * **box_type** (*string*): (truncated_octahedron) Type for the MD system box. .
 * **ions_type** (*string*): (ionsjc_tip3p) Ions type. .
@@ -839,7 +840,7 @@ cphstats_run -h
     
     Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -951,7 +952,7 @@ process_minout -h
     
     Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1037,7 +1038,7 @@ leap_build_linear_structure -h
     
     Building a linear (unfolded) 3D structure from an AA sequence.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1054,7 +1055,7 @@ Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
 * **sequence** (*string*): (ALA GLY SER PRO ARG ALA PRO GLY) Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them..
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefield to be used for the structure generation. .
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
 * **build_library** (*boolean*): (False) Generate AMBER lib file for the structure..
 * **binary_path** (*string*): (tleap) Path to the tleap executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
@@ -1138,7 +1139,7 @@ nab_build_dna_structure -h
     
     Building a 3D structure from a DNA sequence using nab.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1206,7 +1207,7 @@ parmed_hmassrepartition -h
     
     Performs a Hydrogen Mass Repartition from an AMBER topology file using parmed tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1289,7 +1290,7 @@ cpptraj_randomize_ions -h
     
     Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1382,7 +1383,7 @@ amber_to_pdb -h
     
     Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1468,7 +1469,7 @@ leap_gen_top -h
     
     Generating a MD topology from a molecule structure using tLeap program from AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     
@@ -1508,7 +1509,7 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefield to be used for the structure generation. .
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
 * **binary_path** (*string*): (tleap) Path to the tleap executable binary..
 * **remove_tmp** (*boolean*): (True) Remove temporal files..
 * **restart** (*boolean*): (False) Do not execute if output files exist..
@@ -1583,7 +1584,7 @@ parmed_cpinutil -h
     
     create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.
     
-    optional arguments:
+    options:
       -h, --help            show this help message and exit
       --config CONFIG       Configuration file
     

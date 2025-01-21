@@ -2,9 +2,10 @@
 
 """Module containing the LeapBuildLinearStructure class and the command line interface."""
 
+import os
 import argparse
 from pathlib import PurePath
-from typing import Optional
+from typing import List, Optional
 
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
@@ -24,7 +25,7 @@ class LeapBuildLinearStructure(BiobbObject):
         output_pdb_path (str): Linear (unfolded) 3D structure PDB file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.pdb>`_. Accepted formats: pdb (edam:format_1476).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
             * **sequence** (*str*) - ("ALA GLY SER PRO ARG ALA PRO GLY") Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them.
-            * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
+            * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"].
             * **build_library** (*bool*) - (False) Generate AMBER lib file for the structure.
             * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
@@ -71,12 +72,20 @@ class LeapBuildLinearStructure(BiobbObject):
         # Input/Output files
         self.io_dict = {"in": {}, "out": {"output_pdb_path": output_pdb_path}}
 
+        # Set default forcefields
+        amber_home_path = os.getenv("AMBERHOME")
+        protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
+        dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
+        gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
+
         # Properties specific for BB
         self.properties = properties
         self.sequence = properties.get("sequence", "ALA GLY SER PRO ARG ALA PRO GLY")
         self.forcefield = _from_string_to_list(
-            properties.get("forcefield", ["protein.ff14SB", "DNA.bsc1", "gaff"])
+            properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
         )
+        # Find the paths of the leaprc files if only the force field names are provided
+        self.forcefield = self.find_leaprc_paths(self.forcefield)
         self.build_library = properties.get("build_library", False)
         self.binary_path = properties.get("binary_path", "tleap")
 
@@ -95,6 +104,63 @@ class LeapBuildLinearStructure(BiobbObject):
             out_log,
             self.__class__.__name__,
         )
+
+    def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
+        """
+        Find the leaprc paths for the force fields provided.
+
+        For each item in the forcefields list, the function checks if the str is a path to an existing file.
+        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/
+        directory with and without the leaprc prefix.
+
+        Args:
+            forcefields (List[str]): List of force fields to find the leaprc files for.
+
+        Returns:
+            List[str]: List of leaprc file paths.
+        """
+
+        leaprc_paths = []
+
+        for forcefield in forcefields:
+
+            num_paths = len(leaprc_paths)
+
+            # Check if the forcefield is a path to an existing file
+            if os.path.exists(forcefield):
+                leaprc_paths.append(forcefield)
+                continue
+
+            # Check if the forcefield is in the leaprc directory
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"leaprc.{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            # Check if the forcefield is in the oldff directory
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"leaprc.{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            # Check if the forcefield is in the leaprc directory without the leaprc prefix
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            # Check if the forcefield is in the oldff directory without the leaprc prefix
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            new_num_paths = len(leaprc_paths)
+
+            if new_num_paths == num_paths:
+                raise ValueError(f"Force field {forcefield} not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.")
+
+        return leaprc_paths
 
     @launchlogger
     def launch(self):
@@ -132,7 +198,7 @@ class LeapBuildLinearStructure(BiobbObject):
         with open(instructions_file, "w") as leapin:
             # Forcefields loaded from input forcefield property
             for t in self.forcefield:
-                leapin.write("source leaprc.{}\n".format(t))
+                leapin.write("source {}\n".format(t))
 
             leapin.write("struct = sequence {" + self.sequence + " } \n")
             leapin.write(

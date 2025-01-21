@@ -49,41 +49,7 @@
                     "type": "array",
                     "default": "[protein.ff14SB,DNA.bsc1,gaff]",
                     "wf_prop": false,
-                    "description": "Forcefield to be used for the structure generation. ",
-                    "enum": [
-                        "protein.ff14SB",
-                        "protein.ff19SB",
-                        "DNA.bsc1",
-                        "DNA.OL15",
-                        "RNA.OL3",
-                        "gaff"
-                    ],
-                    "property_formats": [
-                        {
-                            "name": "protein.ff14SB",
-                            "description": null
-                        },
-                        {
-                            "name": "protein.ff19SB",
-                            "description": null
-                        },
-                        {
-                            "name": "DNA.bsc1",
-                            "description": null
-                        },
-                        {
-                            "name": "DNA.OL15",
-                            "description": null
-                        },
-                        {
-                            "name": "RNA.OL3",
-                            "description": null
-                        },
-                        {
-                            "name": "gaff",
-                            "description": null
-                        }
-                    ]
+                    "description": "Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. \"/path/to/leaprc.protein.ff14SB\" or \"protein.ff14SB\"). Default values: [\"protein.ff14SB\",\"DNA.bsc1\",\"gaff\"]."
                 },
                 "build_library": {
                     "type": "boolean",

@@ -74,6 +74,12 @@
                     "wf_prop": false,
                     "description": "Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation."
                 },
+                "reduce": {
+                    "type": "boolean",
+                    "default": false,
+                    "wf_prop": false,
+                    "description": "Run Reduce first to add hydrogen atoms."
+                },
                 "binary_path": {
                     "type": "string",
                     "default": "pdb4amber",

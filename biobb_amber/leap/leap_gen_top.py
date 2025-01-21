@@ -113,12 +113,12 @@ class LeapGenTop(BiobbObject):
         # self.ligands_frcmod_list = []
         # if input_frcmod_path:
         #     self.ligands_frcmod_list.append(input_frcmod_path)
-        
+
         # Set default forcefields
-        amber_home_path=os.getenv("AMBERHOME")
-        protein_ff14SB_path = os.path.join(amber_home_path,'dat','leap','cmd','leaprc.protein.ff14SB')
-        dna_bsc1_path = os.path.join(amber_home_path, 'dat','leap','cmd','leaprc.DNA.bsc1')
-        gaff_path = os.path.join(amber_home_path, 'dat','leap','cmd','leaprc.gaff')
+        amber_home_path = os.getenv("AMBERHOME")
+        protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
+        dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
+        gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
 
         # Properties specific for BB
         self.properties = properties
@@ -127,68 +127,68 @@ class LeapGenTop(BiobbObject):
         )
         # Find the paths of the leaprc files if only the force field names are provided
         self.forcefield = self.find_leaprc_paths(self.forcefield)
-        
+
         self.binary_path = properties.get("binary_path", "tleap")
 
         # Check the properties
         self.check_properties(properties)
         self.check_arguments()
-    
+
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """
-        Find the leaprc paths for the force fields provided. 
-        
-        For each item in the forcefields list, the function checks if the str is a path to an existing file. 
-        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/ 
+        Find the leaprc paths for the force fields provided.
+
+        For each item in the forcefields list, the function checks if the str is a path to an existing file.
+        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/
         directory with and without the leaprc prefix.
-        
+
         Args:
             forcefields (List[str]): List of force fields to find the leaprc files for.
-        
+
         Returns:
             List[str]: List of leaprc file paths.
-        """      
-        
+        """
+
         leaprc_paths = []
-        
+
         for forcefield in forcefields:
-            
+
             num_paths = len(leaprc_paths)
-            
+
             # Check if the forcefield is a path to an existing file
             if os.path.exists(forcefield):
                 leaprc_paths.append(forcefield)
                 continue
-            
+
             # Check if the forcefield is in the leaprc directory
             leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"leaprc.{forcefield}")
             if os.path.exists(leaprc_path):
                 leaprc_paths.append(leaprc_path)
                 continue
-            
+
             # Check if the forcefield is in the oldff directory
             leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"leaprc.{forcefield}")
             if os.path.exists(leaprc_path):
                 leaprc_paths.append(leaprc_path)
                 continue
-            
+
             # Check if the forcefield is in the leaprc directory without the leaprc prefix
             leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"{forcefield}")
             if os.path.exists(leaprc_path):
                 leaprc_paths.append(leaprc_path)
                 continue
-            
+
             # Check if the forcefield is in the oldff directory without the leaprc prefix
             leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"{forcefield}")
             if os.path.exists(leaprc_path):
                 leaprc_paths.append(leaprc_path)
                 continue
-            
+
             new_num_paths = len(leaprc_paths)
-            
+
             if new_num_paths == num_paths:
                 raise ValueError(f"Force field {forcefield} not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.")
-        
+
         return leaprc_paths
 
     # def check_data_params(self, out_log, err_log):

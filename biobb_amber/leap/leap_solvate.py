@@ -2,10 +2,11 @@
 
 """Module containing the LeapSolvate class and the command line interface."""
 
+import os
 import argparse
 import re
 from pathlib import PurePath
-from typing import Optional
+from typing import List, Optional
 
 from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
@@ -32,7 +33,7 @@ class LeapSolvate(BiobbObject):
         output_top_path (str): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.top>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
         output_crd_path (str): Output coordinates file (AMBER crd). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/leap/structure.solv.crd>`_. Accepted formats: crd (edam:format_3878), mdcrd (edam:format_3878), inpcrd (edam:format_3878).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefield to be used for the structure generation. Values: protein.ff14SB, protein.ff19SB, DNA.bsc1, DNA.OL15, RNA.OL3, gaff.
+            * **forcefield** (*list*) - (["protein.ff14SB","DNA.bsc1","gaff"]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"].
             * **water_type** (*str*) - ("TIP3PBOX") Water molecule parameters to be used for the topology. Values: POL3BOX, QSPCFWBOX, SPCBOX, SPCFWBOX, TIP3PBOX, TIP3PFBOX, TIP4PBOX, TIP4PEWBOX, OPCBOX, OPC3BOX, TIP5PBOX.
             * **box_type** (*str*) - ("truncated_octahedron") Type for the MD system box. Values: cubic, truncated_octahedron.
             * **ions_type** (*str*) - ("ionsjc_tip3p") Ions type. Values: ionsjc_tip3p, ionsjc_spce, ionsff99_tip3p, ions_charmm22, ionsjc_tip4pew, None.
@@ -127,11 +128,19 @@ class LeapSolvate(BiobbObject):
         # if input_frcmod_path:
         #     self.ligands_frcmod_list.append(input_frcmod_path)
 
+        # Set default forcefields
+        amber_home_path = os.getenv("AMBERHOME")
+        protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
+        dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
+        gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
+
         # Properties specific for BB
         self.properties = properties
         self.forcefield = _from_string_to_list(
-            properties.get("forcefield", ["protein.ff14SB", "DNA.bsc1", "gaff"])
+            properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
         )
+        # Find the paths of the leaprc files if only the force field names are provided
+        self.forcefield = self.find_leaprc_paths(self.forcefield)
         self.water_type = properties.get("water_type", "TIP3PBOX")
         self.box_type = properties.get("box_type", "truncated_octahedron")
         self.ions_type = properties.get("ions_type", "ionsjc_tip3p")
@@ -148,6 +157,63 @@ class LeapSolvate(BiobbObject):
         # Check the properties
         self.check_properties(properties)
         self.check_arguments()
+
+    def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
+        """
+        Find the leaprc paths for the force fields provided.
+
+        For each item in the forcefields list, the function checks if the str is a path to an existing file.
+        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/
+        directory with and without the leaprc prefix.
+
+        Args:
+            forcefields (List[str]): List of force fields to find the leaprc files for.
+
+        Returns:
+            List[str]: List of leaprc file paths.
+        """
+
+        leaprc_paths = []
+
+        for forcefield in forcefields:
+
+            num_paths = len(leaprc_paths)
+
+            # Check if the forcefield is a path to an existing file
+            if os.path.exists(forcefield):
+                leaprc_paths.append(forcefield)
+                continue
+
+            # Check if the forcefield is in the leaprc directory
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"leaprc.{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            # Check if the forcefield is in the oldff directory
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"leaprc.{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            # Check if the forcefield is in the leaprc directory without the leaprc prefix
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            # Check if the forcefield is in the oldff directory without the leaprc prefix
+            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"{forcefield}")
+            if os.path.exists(leaprc_path):
+                leaprc_paths.append(leaprc_path)
+                continue
+
+            new_num_paths = len(leaprc_paths)
+
+            if new_num_paths == num_paths:
+                raise ValueError(f"Force field {forcefield} not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.")
+
+        return leaprc_paths
 
     # def check_data_params(self, out_log, err_log):
     #     """ Checks input/output paths correctness """
@@ -298,7 +364,7 @@ class LeapSolvate(BiobbObject):
 
             # Forcefields loaded from input forcefield property
             for t in self.forcefield:
-                leapin.write("source leaprc.{}\n".format(t))
+                leapin.write("source {}\n".format(t))
 
             # Additional Leap commands
             for leap_commands in leap_source_list:
