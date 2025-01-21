@@ -11,16 +11,15 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@v1
-        id: app-token
+      - uses: peter-evans/github-app-token@v1
+        id: generate_token
         with:
-          app-id: ${{ vars.GHAPUSH }}
-          private-key: ${{ secrets.GHAPUSH }}
+          app_id: ${{ vars.GHAPUSH }}
+          # installation_id: ${{ secrets.GHAPUSH_IID }}
+          private_key: ${{ secrets.GHAPUSH }}
 
       - name: Checkout repo
         uses: actions/checkout@v2
-        with:
-          token: ${{ steps.app-token.outputs.token }}
 
       - name: Download file using wget
         run: wget -O ./CITATION.cff https://raw.githubusercontent.com/bioexcel/biobb/master/CITATION.cff
@@ -29,6 +28,8 @@ jobs:
         run: ls -la ./
 
       - name: Commit and push changes if file has changed
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
