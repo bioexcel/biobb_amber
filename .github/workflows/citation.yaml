@@ -11,25 +11,24 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/create-github-app-token@v1
+      - uses: peter-murray/workflow-application-token-action@v3
         id: generate_token
         with:
-          app-id: ${{ vars.GHAPUSH }}
-          private-key: ${{ secrets.GHAPUSH }}
+          application_id: ${{ vars.GHAPUSH }}
+          application_private_key: ${{ secrets.GHAPUSH }}
 
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          repository: bioexcel/biobb_amber
-          path: ./
+          token: ${{ steps.generate_token.outputs.token }
 
       - name: Download file using wget
         run: wget -O ./CITATION.cff https://raw.githubusercontent.com/bioexcel/biobb/master/CITATION.cff
 
-      - name: Check if file has changed
-        run: ls -la ./
+      # - name: Check if file has changed
+      #   run: ls -la ./
 
       - name: Commit and push changes if file has changed
+        if: github.event.pull_request.merged == true
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
