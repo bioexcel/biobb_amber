@@ -14,12 +14,15 @@ jobs:
       - uses: actions/create-github-app-token@v1
         id: generate_token
         with:
-          app_id: ${{ vars.GHAPUSH }}
-          # installation_id: ${{ secrets.GHAPUSH_IID }}
-          private_key: ${{ secrets.GHAPUSH }}
+          app-id: ${{ vars.GHAPUSH }}
+          installation-id: ${{ secrets.GHAPUSH_IID }}
+          private-key: ${{ secrets.GHAPUSH }}
 
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          repository: bioexcel/biobb_analysis
+          path: ./
 
       - name: Download file using wget
         run: wget -O ./CITATION.cff https://raw.githubusercontent.com/bioexcel/biobb/master/CITATION.cff
