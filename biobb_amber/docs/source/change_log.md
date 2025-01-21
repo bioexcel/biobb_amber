@@ -1,5 +1,11 @@
 # Biobb Amber changelog
 
+## What's new in version [5.0.4](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.4)?
+
+### Changes
+
+* [FEATURE](leap): Added support for downloaded or old force fields
+
 ## What's new in version [5.0.3](https://github.com/bioexcel/biobb_amber/releases/tag/v5.0.3)?
 
 ### Changes
