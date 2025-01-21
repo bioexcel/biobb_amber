@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: biobb_amber/leap/leap_gen_top.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="biobb_amber.leap.leap_gen_top.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               biobb_amber/leap/leap_gen_top.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="W293">
+               <span class="count sev-2">
+                  17
+               </span>
+               <strong>W293:</strong> blank line contains whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l116">
+                  <tt><i>116</i>         </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l130">
+                  <tt><i>130</i>         </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l136">
+                  <tt><i>136</i>     </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l140">
+                  <tt><i>140</i> <span class="sd">        </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l144">
+                  <tt><i>144</i> <span class="sd">        </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l147">
+                  <tt><i>147</i> <span class="sd">        </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l151">
+                  <tt><i>151</i>         </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l153">
+                  <tt><i>153</i>         </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l155">
+                  <tt><i>155</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l157">
+                  <tt><i>157</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l162">
+                  <tt><i>162</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l168">
+                  <tt><i>168</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l174">
+                  <tt><i>174</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l180">
+                  <tt><i>180</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l186">
+                  <tt><i>186</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l188">
+                  <tt><i>188</i>             </tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l191">
+                  <tt><i>191</i>         </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E231">
+               <span class="count sev-2">
+                  10
+               </span>
+               <strong>E231:</strong> missing whitespace after ','
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Missing whitespace after ',' (in 4 places):</p>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l119">
+                  <tt><i>119</i>         <span class="n">protein_ff14SB_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span><span class="s1">&#39;dat&#39;</span><span class="p">,</span><span class="s1">&#39;leap&#39;</span><span class="p">,</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span><span class="s1">&#39;leaprc.protein.ff14SB&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',' (in 3 places):</p>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l120">
+                  <tt><i>120</i>         <span class="n">dna_bsc1_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span><span class="s1">&#39;leap&#39;</span><span class="p">,</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span><span class="s1">&#39;leaprc.DNA.bsc1&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Missing whitespace after ',' (in 3 places):</p>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l121">
+                  <tt><i>121</i>         <span class="n">gaff_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span><span class="s1">&#39;leap&#39;</span><span class="p">,</span><span class="s1">&#39;cmd&#39;</span><span class="p">,</span><span class="s1">&#39;leaprc.gaff&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W291">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>W291:</strong> trailing whitespace
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l139">
+                  <tt><i>139</i> <span class="sd">        Find the leaprc paths for the force fields provided. </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l141">
+                  <tt><i>141</i> <span class="sd">        For each item in the forcefields list, the function checks if the str is a path to an existing file. </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l142">
+                  <tt><i>142</i> <span class="sd">        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/ </span></tt>
+               </a>
+            </li><li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l150">
+                  <tt><i>150</i> <span class="sd">        &quot;&quot;&quot;</span>      </tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="biobb_amber.leap.leap_gen_top.source.html#l118">
+                  <tt><i>118</i>         <span class="n">amber_home_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;AMBERHOME&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

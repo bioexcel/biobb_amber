@@ -1,0 +1,4 @@
+1     E225 missing whitespace around operator
+10    E231 missing whitespace after ','
+4     W291 trailing whitespace
+17    W293 blank line contains whitespace
