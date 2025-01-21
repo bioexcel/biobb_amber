@@ -11,7 +11,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: peter-evans/github-app-token@v1
+      - uses: actions/create-github-app-token@v1
         id: generate_token
         with:
           app_id: ${{ vars.GHAPUSH }}
