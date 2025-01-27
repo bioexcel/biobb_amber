@@ -187,7 +187,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_top_path** (*string*): Input topology file (AMBER ParmTop). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.prmtop). Accepted formats: TOP, PARMTOP, PRMTOP
-* **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.inpcrd). Accepted formats: CRD, MDCRD, INPCRD, NETCDF, NC, NCRST
+* **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.inpcrd). Accepted formats: CRD, MDCRD, INPCRD, NETCDF, NC, NCRST, RST
 * **input_mdin_path** (*string*): Input configuration file (MD run options) (AMBER mdin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/npt.mdin). Accepted formats: MDIN, IN, TXT
 * **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.cpin). Accepted formats: CPIN
 * **input_ref_path** (*string*): Input reference coordinates for position restraints. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.rst). Accepted formats: RST, RST7, NETCDF, NC, NCRST, CRD

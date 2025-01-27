@@ -64,7 +64,8 @@
                 ".*\\.inpcrd$",
                 ".*\\.netcdf$",
                 ".*\\.nc$",
-                ".*\\.ncrst$"
+                ".*\\.ncrst$",
+                ".*\\.rst$"
             ],
             "file_formats": [
                 {
@@ -94,6 +95,11 @@
                 },
                 {
                     "extension": ".*\\.ncrst$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.rst$",
                     "description": "Input coordinates file (AMBER crd)",
                     "edam": "format_3886"
                 }
