@@ -386,7 +386,7 @@ class SanderMDRun(BiobbObject):
             self.remove_tmp_files()'''
 
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             "mdinfo",
             str(self.tmp_folder)
         ])
@@ -418,6 +418,8 @@ def sander_mdrun(input_top_path: str, input_crd_path: str,
                        output_cprst_path=output_cprst_path,
                        output_mdinfo_path=output_mdinfo_path,
                        properties=properties).launch()
+
+    sander_mdrun.__doc__ = SanderMDRun.__doc__
 
 
 def main():

@@ -349,9 +349,10 @@ class LeapGenTop(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend(
-            [self.stage_io_dict.get("unique_dir", ""), str(self.tmp_folder), "leap.log"]
-        )
+        self.tmp_files.extend([
+            # self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder), "leap.log"
+        ])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -387,6 +388,8 @@ def leap_gen_top(
         output_crd_path=output_crd_path,
         properties=properties,
     ).launch()
+
+    leap_gen_top.__doc__ = LeapGenTop.__doc__
 
 
 def main():

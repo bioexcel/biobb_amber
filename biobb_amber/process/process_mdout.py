@@ -180,8 +180,10 @@ class ProcessMDOut(BiobbObject):
                     fp_out.write("\n")
 
         # remove temporary folder(s)
-        self.tmp_files.extend(
-            [self.stage_io_dict.get("unique_dir", ""), str(self.tmp_folder)] + list(Path().glob("summary*"))
+        self.tmp_files.extend([
+            # self.stage_io_dict.get("unique_dir", ""),
+            str(self.tmp_folder)
+        ] + list(Path().glob("summary*"))
         )
         self.remove_tmp_files()
 
@@ -204,6 +206,8 @@ def process_mdout(
         output_dat_path=output_dat_path,
         properties=properties,
     ).launch()
+
+    process_mdout.__doc__ = ProcessMDOut.__doc__
 
 
 def main():

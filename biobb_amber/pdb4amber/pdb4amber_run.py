@@ -132,7 +132,7 @@ class Pdb4amberRun(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             str(self.tmp_folder)
         ])
         self.remove_tmp_files()
@@ -150,6 +150,8 @@ def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
     return Pdb4amberRun(input_pdb_path=input_pdb_path,
                         output_pdb_path=output_pdb_path,
                         properties=properties).launch()
+
+    pdb4amber_run.__doc__ = Pdb4amberRun.__doc__
 
 
 def main():

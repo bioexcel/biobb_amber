@@ -156,7 +156,7 @@ class NabBuildDNAStructure(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             str(self.tmp_folder),
             "nab.log",
             "tleap.out"
@@ -175,6 +175,8 @@ def nab_build_dna_structure(output_pdb_path: str,
 
     return NabBuildDNAStructure(output_pdb_path=output_pdb_path,
                                 properties=properties).launch()
+
+    nab_build_dna_structure.__doc__ = NabBuildDNAStructure.__doc__
 
 
 def main():

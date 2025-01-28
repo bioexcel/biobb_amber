@@ -122,7 +122,7 @@ class ParmedHMassRepartition(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             str(self.tmp_folder)
         ])
         self.remove_tmp_files()
@@ -141,6 +141,8 @@ def parmed_hmassrepartition(input_top_path: str,
     return ParmedHMassRepartition(input_top_path=input_top_path,
                                   output_top_path=output_top_path,
                                   properties=properties).launch()
+
+    parmed_hmassrepartition.__doc__ = ParmedHMassRepartition.__doc__
 
 
 def main():

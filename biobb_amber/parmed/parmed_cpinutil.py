@@ -147,7 +147,7 @@ class ParmedCpinUtil(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             self.tmp_folder
         ])
         self.remove_tmp_files()
@@ -167,6 +167,8 @@ def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
                           output_cpin_path=output_cpin_path,
                           output_top_path=output_top_path,
                           properties=properties).launch()
+
+    parmed_cpinutil.__doc__ = ParmedCpinUtil.__doc__
 
 
 def main():

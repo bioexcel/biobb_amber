@@ -348,7 +348,7 @@ class PmemdMDRun(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             self.tmp_folder,
             "mdinfo"
         ])
@@ -380,6 +380,8 @@ def pmemd_mdrun(input_top_path: str, input_crd_path: str,
                       output_cprst_path=output_cprst_path,
                       output_mdinfo_path=output_mdinfo_path,
                       properties=properties).launch()
+
+    pmemd_mdrun.__doc__ = PmemdMDRun.__doc__
 
 
 def main():

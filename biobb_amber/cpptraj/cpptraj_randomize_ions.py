@@ -154,7 +154,7 @@ class CpptrajRandomizeIons(BiobbObject):
 
         # Remove temporary file(s)
         self.tmp_files.extend([
-            self.stage_io_dict.get("unique_dir", ""),
+            # self.stage_io_dict.get("unique_dir", ""),
             self.tmp_folder,
             "cpptraj.log"
         ])
@@ -176,6 +176,8 @@ execute :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.lau
                                 output_pdb_path=output_pdb_path,
                                 output_crd_path=output_crd_path,
                                 properties=properties).launch()
+
+    cpptraj_randomize_ions.__doc__ = CpptrajRandomizeIons.__doc__
 
 
 def main():
