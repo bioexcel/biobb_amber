@@ -69,19 +69,19 @@ jobs:
           pytest biobb_amber/test/unitests/ --ignore-glob=*container.py --ignore-glob=*docker.py --ignore-glob=*singularity.py
 
       # Notify user about test results
-      - name: Comment on PR
-        if: always() # This ensures the step runs even if tests fail
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { payload, repo } = context; // Access GitHub context
-            const prNumber = payload.pull_request.number;
-            const jobStatus = '${{ job.status }}'; // Get job status (success/failure)
-            const testStatus = jobStatus === 'success' ? '✅ Tests Passed!' : '❌ Tests Failed.';
+      # - name: Comment on PR
+      #   if: always() # This ensures the step runs even if tests fail
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const { payload, repo } = context; // Access GitHub context
+      #       const prNumber = payload.pull_request.number;
+      #       const jobStatus = '${{ job.status }}'; // Get job status (success/failure)
+      #       const testStatus = jobStatus === 'success' ? '✅ Tests Passed!' : '❌ Tests Failed.';
             
-            await github.rest.issues.createComment({
-              owner: repo.owner,
-              repo: repo.repo,
-              issue_number: prNumber,
-              body: `**Test Results for PR #${prNumber}**\n\n${testStatus}`
-            });
+      #       await github.rest.issues.createComment({
+      #         owner: repo.owner,
+      #         repo: repo.repo,
+      #         issue_number: prNumber,
+      #         body: `**Test Results for PR #${prNumber}**\n\n${testStatus}`
+      #       });
