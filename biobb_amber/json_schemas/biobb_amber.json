@@ -58,14 +58,6 @@
             "rest": true
         },
         {
-            "block": "NabBuildDNAStructure",
-            "tool": "nab",
-            "desc": "Builds a 3D structure from a DNA sequence using nab (Nucleic Acid Builder) tool from the AmberTools MD package",
-            "exec": "nab_build_dna_structure",
-            "docs": "https://biobb-amber.readthedocs.io/en/latest/nab.html#module-nab.nab_build_dna_structure",
-            "rest": true
-        },
-        {
             "block": "ParmedCpinUtil",
             "tool": "parmed",
             "desc": "Creates a cpin file for constant pH simulations from an AMBER topology file using parmed tool from the AmberTools MD package",
@@ -154,7 +146,6 @@
         "cpptraj",
         "parmed",
         "leap",
-        "nab",
         "MD"
     ]
 }

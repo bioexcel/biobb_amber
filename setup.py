@@ -31,7 +31,7 @@ setuptools.setup(
             "leap_build_linear_structure = biobb_amber.leap.leap_build_linear_structure:main",
             "leap_gen_top = biobb_amber.leap.leap_gen_top:main",
             "leap_solvate = biobb_amber.leap.leap_solvate:main",
-            "nab_build_dna_structure = biobb_amber.nab.nab_build_dna_structure:main",
+            # "nab_build_dna_structure = biobb_amber.nab.nab_build_dna_structure:main",
             "parmed_cpinutil = biobb_amber.parmed.parmed_cpinutil:main",
             "parmed_hmassrepartition = biobb_amber.parmed.parmed_hmassrepartition:main",
             "pdb4amber_run = biobb_amber.pdb4amber.pdb4amber_run:main",

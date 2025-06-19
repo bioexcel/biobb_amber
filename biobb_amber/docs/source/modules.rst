@@ -7,7 +7,6 @@ biobb_amber
    ambpdb
    cpptraj
    leap
-   nab
    parmed
    pdb4amber
    process

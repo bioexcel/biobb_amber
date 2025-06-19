@@ -68,3 +68,6 @@ flake8-badge.svg
 .idea
 .vscode
 .mypy_cache/
+nab/
+nab.rst
+nab_build_dna_structure.json
