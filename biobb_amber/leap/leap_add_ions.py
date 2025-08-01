@@ -40,7 +40,7 @@ class LeapAddIons(BiobbObject):
             * **box_type** (*str*) - ("truncated_octahedron") Type for the MD system box. Values: cubic, truncated_octahedron.
             * **ions_type** (*str*) - ("ionsjc_tip3p") Ions type. Values: ionsjc_tip3p, ionsjc_spce, ionsff99_tip3p, ions_charmm22, ionsjc_tip4pew, None.
             * **neutralise** (*bool*) - ("True") Energetically neutralise the system adding the necessary counterions.
-            * **ionic_concentration** (*float*) - (50) Additional ionic concentration to include in the system box. Units in Mol/L.
+            * **ionic_concentration** (*float*) - (50) Additional ionic concentration to include in the system box. Units in mM/L.
             * **positive_ions_number** (*int*) - (0) Number of additional positive ions to include in the system box.
             * **negative_ions_number** (*int*) - (0) Number of additional negative ions to include in the system box.
             * **positive_ions_type** (*str*) - ("Na+") Type of additional positive ions to include in the system box. Values: Na+,K+.
