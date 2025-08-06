@@ -401,7 +401,7 @@
                     "type": "number",
                     "default": 50.0,
                     "wf_prop": false,
-                    "description": "Additional ionic concentration to include in the system box. Units in Mol/L."
+                    "description": "Additional ionic concentration to include in the system box. Units in mM/L."
                 },
                 "positive_ions_number": {
                     "type": "integer",
