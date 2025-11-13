@@ -378,18 +378,7 @@ class SanderMDRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        '''if self.remove_tmp:
-            if self.container_path: self.tmp_files.append(self.stage_io_dict['unique_dir'])
-            else:
-                self.tmp_files.append(self.tmp_folder)
-                self.tmp_files.append("mdinfo")
-            self.remove_tmp_files()'''
-
-        self.tmp_files.extend([
-            # self.stage_io_dict.get("unique_dir", ""),
-            "mdinfo",
-            str(self.tmp_folder)
-        ])
+        self.tmp_files.extend(["mdinfo", str(self.tmp_folder)])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
