@@ -63,7 +63,7 @@
             "desc": "Creates a cpin file for constant pH simulations from an AMBER topology file using parmed tool from the AmberTools MD package",
             "exec": "parmed_cpinutil",
             "docs": "https://biobb-amber.readthedocs.io/en/latest/parmed.html#module-parmed.parmed_cpinutil",
-            "rest": true
+            "rest": false
         },
         {
             "block": "ParmedHMassRepartition",
