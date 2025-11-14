@@ -121,7 +121,7 @@
             "type": "string",
             "description": "Additional leap parameter files to load with loadAmberPrep Leap command",
             "filetype": "input",
-            "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/heme_all.in",
+            "sample": null,
             "enum": [
                 ".*\\.in$",
                 ".*\\.leapin$",
