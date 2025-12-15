@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
 """Module containing the CpptrajRandomizeIons class and the command line interface."""
-import argparse
+
 from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_amber.cpptraj.common import check_input_path, check_output_path
@@ -164,40 +163,13 @@ class CpptrajRandomizeIons(BiobbObject):
 def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
                            output_pdb_path: str, output_crd_path: str,
                            properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`CpptrajRandomizeIons <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons>`cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons class and
-execute :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.launch>` method"""
-
-    return CpptrajRandomizeIons(input_top_path=input_top_path,
-                                input_crd_path=input_crd_path,
-                                output_pdb_path=output_pdb_path,
-                                output_crd_path=output_crd_path,
-                                properties=properties).launch()
-
-    cpptraj_randomize_ions.__doc__ = CpptrajRandomizeIons.__doc__
+    """Create the :class:`CpptrajRandomizeIons <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons>` class and
+    execute the :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.launch>` method."""
+    return CpptrajRandomizeIons(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_top_path', required=True, help='Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.')
-    required_args.add_argument('--input_crd_path', required=True, help='Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.')
-    required_args.add_argument('--output_pdb_path', required=True, help='Structure PDB file with randomized ions. Accepted formats: pdb.')
-    required_args.add_argument('--output_crd_path', required=True, help='Structure CRD file with coordinates including randomized ions. Accepted formats: crd, mdcrd, inpcrd.')
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    cpptraj_randomize_ions(input_top_path=args.input_top_path,
-                           input_crd_path=args.input_crd_path,
-                           output_pdb_path=args.output_pdb_path,
-                           output_crd_path=args.output_crd_path,
-                           properties=properties)
-
+cpptraj_randomize_ions.__doc__ = CpptrajRandomizeIons.__doc__
+main = CpptrajRandomizeIons.get_main(cpptraj_randomize_ions, "Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.")
 
 if __name__ == '__main__':
     main()

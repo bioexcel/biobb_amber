@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """Module containing the Cphstats class and the command line interface."""
-import argparse
+
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 from biobb_amber.cphstats.common import check_input_path, check_output_path
 
@@ -225,52 +224,13 @@ def cphstats_run(input_cpin_path: str, input_cpout_path: str,
                  output_conditional_path: Optional[str] = None, output_chunk_conditional_path: Optional[str] = None,
                  output_cumulative_path: Optional[str] = None,
                  properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`CphstatsRun <cphstats.chpstats_run.CphstatsRun>`cphstats.chpstats_run.CphstatsRun class and
-    execute :meth:`launch() <cphstats.chpstats_run.CphstatsRun.launch>` method"""
-
-    return CphstatsRun(input_cpin_path=input_cpin_path,
-                       input_cpout_path=input_cpout_path,
-                       output_dat_path=output_dat_path,
-                       output_population_path=output_population_path,
-                       output_chunk_path=output_chunk_path,
-                       output_chunk_conditional_path=output_chunk_conditional_path,
-                       output_conditional_path=output_conditional_path,
-                       output_cumulative_path=output_cumulative_path,
-                       properties=properties).launch()
-
-    cphstats_run.__doc__ = CphstatsRun.__doc__
+    """Create the :class:`CphstatsRun <cphstats.cphstats_run.CphstatsRun>` class and
+    execute the :meth:`launch() <cphstats.cphstats_run.CphstatsRun.launch>` method."""
+    return CphstatsRun(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_cpin_path', required=True, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
-    required_args.add_argument('--input_cpout_path', required=True, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
-    required_args.add_argument('--output_dat_path', required=True, help='Output file to which the standard calcpka-type statistics are written. Accepted formats: dat, out, txt, o.')
-    required_args.add_argument('--output_population_path', required=False, help='Output file where protonation state populations are printed for every state of every residue. Accepted formats: dat, out, txt, o.')
-    required_args.add_argument('--output_chunk_path', required=False, help='Output file where the time series data calculated over chunks of the simulation are printed. Accepted formats: dat, out, txt, o.')
-    required_args.add_argument('--output_cumulative_path', required=False, help='Output file where the cumulative time series data is printed. Accepted formats: dat, out, txt, o.')
-    required_args.add_argument('--output_conditional_path', required=False, help='Output file with requested conditional probabilities. Accepted formats: dat, out, txt, o.')
-    required_args.add_argument('--output_chunk_conditional_path', required=False, help='Output file with a time series of the conditional probabilities over a trajectory split up into chunks. Accepted formats: dat, out, txt, o.')
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    cphstats_run(input_cpin_path=args.input_cpin_path,
-                 input_cpout_path=args.input_cpout_path,
-                 output_dat_path=args.output_dat_path,
-                 output_population_path=args.output_population_path,
-                 output_chunk_path=args.output_chunk_path,
-                 output_cumulative_path=args.output_cumulative_path,
-                 output_conditional_path=args.output_conditional_path,
-                 output_chunk_conditional_path=args.output_chunk_conditional_path,
-                 properties=properties)
-
+cphstats_run.__doc__ = CphstatsRun.__doc__
+main = CphstatsRun.get_main(cphstats_run, "Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package.")
 
 if __name__ == '__main__':
     main()

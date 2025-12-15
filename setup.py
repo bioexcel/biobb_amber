@@ -19,7 +19,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=["docs", "test"]),
     package_data={"biobb_amber": ["py.typed"]},
-    install_requires=["biobb_common==5.1.0"],
+    install_requires=["biobb_common==5.1.1"],
     python_requires=">=3.9",
     entry_points={
         "console_scripts": [

@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
 """Module containing the Pdb4amber class and the command line interface."""
-import argparse
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_amber.pdb4amber.common import check_input_path, check_output_path
@@ -143,32 +141,12 @@ def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
                   properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`Pdb4amberRun <pdb4amber.pdb4amber_run.Pdb4amberRun>`pdb4amber.pdb4amber_run.Pdb4amberRun class and
     execute :meth:`launch() <pdb4amber.pdb4amber_run.Pdb4amberRun.launch>` method"""
-
-    return Pdb4amberRun(input_pdb_path=input_pdb_path,
-                        output_pdb_path=output_pdb_path,
-                        properties=properties).launch()
-
-    pdb4amber_run.__doc__ = Pdb4amberRun.__doc__
+    return Pdb4amberRun(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
+pdb4amber_run.__doc__ = Pdb4amberRun.__doc__
 
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_pdb_path', required=True, help='Input 3D structure PDB file. Accepted formats: pdb.')
-    required_args.add_argument('--output_pdb_path', required=True, help='Output 3D structure PDB file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    pdb4amber_run(input_pdb_path=args.input_pdb_path,
-                  output_pdb_path=args.output_pdb_path,
-                  properties=properties)
-
+main = Pdb4amberRun.get_main(pdb4amber_run, "Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.")
 
 if __name__ == '__main__':
     main()

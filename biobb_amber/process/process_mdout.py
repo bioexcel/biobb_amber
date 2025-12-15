@@ -2,12 +2,10 @@
 
 """Module containing the ProcessMDOut class and the command line interface."""
 
-import argparse
 import shutil
 from pathlib import Path, PurePath
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -199,47 +197,12 @@ def process_mdout(
 ) -> int:
     """Create :class:`ProcessMDOut <process.process_mdout.ProcessMDOut>`process.process_mdout.ProcessMDOut class and
     execute :meth:`launch() <process.process_mdout.ProcessMDOut.launch>` method"""
-
-    return ProcessMDOut(
-        input_log_path=input_log_path,
-        output_dat_path=output_dat_path,
-        properties=properties,
-    ).launch()
-
-    process_mdout.__doc__ = ProcessMDOut.__doc__
+    return ProcessMDOut(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument("--config", required=False, help="Configuration file")
+process_mdout.__doc__ = ProcessMDOut.__doc__
 
-    # Specific args
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "--input_log_path",
-        required=True,
-        help="AMBER (sander) MD output (log) file. Accepted formats: log, out, txt, o.",
-    )
-    required_args.add_argument(
-        "--output_dat_path",
-        required=True,
-        help="Dat output file containing data from the specified terms along the MD process. File type: output. Accepted formats: dat, txt, csv.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    process_mdout(
-        input_log_path=args.input_log_path,
-        output_dat_path=args.output_dat_path,
-        properties=properties,
-    )
-
+main = ProcessMDOut.get_main(process_mdout, "Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.")
 
 if __name__ == "__main__":
     main()

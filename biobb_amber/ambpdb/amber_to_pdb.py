@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """Module containing the AmberToPDB class and the command line interface."""
-import argparse
+
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools.file_utils import launchlogger
 from biobb_amber.ambpdb.common import check_input_path, check_output_path
 
@@ -120,38 +119,13 @@ class AmberToPDB(BiobbObject):
 
 def amber_to_pdb(input_top_path: str, input_crd_path: str, output_pdb_path: str,
                  properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>`amber.amber_to_pdb.AmberToPDB class and
-    execute :meth:`launch() <amber.amber_to_pdb.AmberToPDB.launch>` method"""
-
-    return AmberToPDB(input_top_path=input_top_path,
-                      input_crd_path=input_crd_path,
-                      output_pdb_path=output_pdb_path,
-                      properties=properties).launch()
-
-    amber_to_pdb.__doc__ = AmberToPDB.__doc__
+    """Create the :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>` class and
+    execute the :meth:`launch() <amber.amber_to_pdb.AmberToPDB.launch>` method."""
+    return AmberToPDB(**dict(locals())).launch()
 
 
-def main():
-    """Command line execution of this building block. Please check the command line documentation."""
-    parser = argparse.ArgumentParser(description='Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_top_path', required=True, help='AMBER topology file. Accepted formats: top, parmtop, prmtop.')
-    required_args.add_argument('--input_crd_path', required=True, help='AMBER coordinates file. Accepted formats: crd, mdcrd, inpcrd.')
-    required_args.add_argument('--output_pdb_path', required=True, help='Structure PDB file. Accepted formats: pdb.')
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    amber_to_pdb(input_top_path=args.input_top_path,
-                 input_crd_path=args.input_crd_path,
-                 output_pdb_path=args.output_pdb_path,
-                 properties=properties)
-
+amber_to_pdb.__doc__ = AmberToPDB.__doc__
+main = AmberToPDB.get_main(amber_to_pdb, "Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.")
 
 if __name__ == '__main__':
     main()

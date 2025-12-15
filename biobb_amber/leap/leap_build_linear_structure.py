@@ -3,11 +3,9 @@
 """Module containing the LeapBuildLinearStructure class and the command line interface."""
 
 import os
-import argparse
 from pathlib import PurePath
 from typing import List, Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -227,40 +225,13 @@ class LeapBuildLinearStructure(BiobbObject):
 def leap_build_linear_structure(
     output_pdb_path: str, properties: Optional[dict] = None, **kwargs
 ) -> int:
-    """Create :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>`leap.leap_build_linear_structure.LeapBuildLinearStructure class and
-    execute :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method"""
-
-    return LeapBuildLinearStructure(
-        output_pdb_path=output_pdb_path, properties=properties
-    ).launch()
-
-    leap_build_linear_structure.__doc__ = LeapBuildLinearStructure.__doc__
+    """Create the :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>` class and
+    execute the :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method."""
+    return LeapBuildLinearStructure(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Building a linear (unfolded) 3D structure from an AA sequence.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument("--config", required=False, help="Configuration file")
-
-    # Specific args
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "--output_pdb_path",
-        required=True,
-        help="Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    leap_build_linear_structure(
-        output_pdb_path=args.output_pdb_path, properties=properties
-    )
-
+leap_build_linear_structure.__doc__ = LeapBuildLinearStructure.__doc__
+main = LeapBuildLinearStructure.get_main(leap_build_linear_structure, "Building a linear (unfolded) 3D structure from an AA sequence.")
 
 if __name__ == "__main__":
     main()
