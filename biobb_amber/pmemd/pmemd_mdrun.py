@@ -287,14 +287,14 @@ class PmemdMDRun(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
         # if self.io_dict['in']['input_mdin_path']:
         #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
         # else:
-        #    self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("pmemd.mdin")))
-        self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("pmemd.mdin")))
+        #    self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("pmemd.mdin")))
+        self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("pmemd.mdin")))
 
         # Command line
         # pmemd -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
@@ -345,7 +345,7 @@ class PmemdMDRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([self.tmp_folder, "mdinfo"])
+        self.tmp_files.extend([tmp_folder, "mdinfo"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

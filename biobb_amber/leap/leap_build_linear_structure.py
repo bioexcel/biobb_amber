@@ -185,14 +185,14 @@ class LeapBuildLinearStructure(BiobbObject):
             instructions_file_path = str(
                 PurePath(self.container_volume_path).joinpath("leap.in")
             )
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
-        # instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+        # instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
         with open(instructions_file, "w") as leapin:
             # Forcefields loaded from input forcefield property
             for t in self.forcefield:
@@ -214,7 +214,7 @@ class LeapBuildLinearStructure(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(self.tmp_folder), "leap.log"])
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

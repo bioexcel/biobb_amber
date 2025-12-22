@@ -117,17 +117,17 @@ class ProcessMinOut(BiobbObject):
         self.stage_files()
 
         if not self.container_path:
-            self.tmp_folder = fu.create_unique_dir()
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             self.cmd = [
                 "cd",
-                self.tmp_folder,
+                tmp_folder,
                 ";",
                 self.binary_path,
                 str(Path(self.stage_io_dict["in"]["input_log_path"]).resolve()),
             ]
         else:
-            self.tmp_folder = None
+            tmp_folder = None
             self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
 
         # Run Biobb block
@@ -146,14 +146,14 @@ class ProcessMinOut(BiobbObject):
                 )
             else:
                 shutil.copy(
-                    PurePath(str(self.tmp_folder)).joinpath("summary." + self.terms[0]),
+                    PurePath(str(tmp_folder)).joinpath("summary." + self.terms[0]),
                     self.io_dict["out"]["output_dat_path"],
                 )
         else:
             if self.container_path:
                 tmp = self.stage_io_dict["unique_dir"]
             else:
-                tmp = self.tmp_folder
+                tmp = tmp_folder
 
             ene_dict = {}
             for term in self.terms:
@@ -179,7 +179,7 @@ class ProcessMinOut(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            str(self.tmp_folder)
+            str(tmp_folder)
         ] + list(Path().glob("summary*"))
         )
         self.remove_tmp_files()

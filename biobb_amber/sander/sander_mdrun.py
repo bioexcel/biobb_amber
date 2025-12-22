@@ -306,14 +306,14 @@ class SanderMDRun(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        # self.tmp_folder = fu.create_unique_dir()
-        # fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        # tmp_folder = fu.create_unique_dir()
+        # fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
         # if self.io_dict['in']['input_mdin_path']:
         #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
         # else:
-        #    self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
-        # self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+        #    self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
+        # self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
 
         # Creating temporary folder & Sander configuration (instructions) file
         if self.container_path:
@@ -321,11 +321,11 @@ class SanderMDRun(BiobbObject):
             # instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
             instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("sander.mdin")))
             self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
-            self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+            tmp_folder = fu.create_unique_dir()
+            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
+            self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
@@ -376,7 +376,7 @@ class SanderMDRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend(["mdinfo", str(self.tmp_folder)])
+        self.tmp_files.extend(["mdinfo", str(tmp_folder)])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

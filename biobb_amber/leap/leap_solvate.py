@@ -287,11 +287,11 @@ class LeapSolvate(BiobbObject):
             instructions_file_path = str(
                 PurePath(self.container_volume_path).joinpath("leap.in")
             )
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         ligands_lib_list = []
@@ -299,7 +299,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_lib_path"].endswith(".zip"):
                 ligands_lib_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_lib_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -310,7 +310,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_frcmod_path"].endswith(".zip"):
                 ligands_frcmod_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_frcmod_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -323,7 +323,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_params_path"].endswith(".zip"):
                 amber_params_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_params_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -334,7 +334,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_prep_path"].endswith(".zip"):
                 amber_prep_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_prep_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -345,7 +345,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_source_path"].endswith(".zip"):
                 leap_source_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_source_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -438,7 +438,7 @@ class LeapSolvate(BiobbObject):
             f.write(octbox + content)
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(self.tmp_folder), "leap.log"])
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

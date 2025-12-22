@@ -320,11 +320,11 @@ class LeapAddIons(BiobbObject):
             instructions_file_path = str(
                 PurePath(self.container_volume_path).joinpath("leap.in")
             )
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         ligands_lib_list = []
@@ -332,7 +332,7 @@ class LeapAddIons(BiobbObject):
             if self.io_dict["in"]["input_lib_path"].endswith(".zip"):
                 ligands_lib_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_lib_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -343,7 +343,7 @@ class LeapAddIons(BiobbObject):
             if self.io_dict["in"]["input_frcmod_path"].endswith(".zip"):
                 ligands_frcmod_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_frcmod_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -356,7 +356,7 @@ class LeapAddIons(BiobbObject):
             if self.io_dict["in"]["input_params_path"].endswith(".zip"):
                 amber_params_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_params_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -367,7 +367,7 @@ class LeapAddIons(BiobbObject):
             if self.io_dict["in"]["input_prep_path"].endswith(".zip"):
                 amber_prep_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_prep_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -378,13 +378,13 @@ class LeapAddIons(BiobbObject):
             if self.io_dict["in"]["input_source_path"].endswith(".zip"):
                 leap_source_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_source_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
                 leap_source_list.append(self.stage_io_dict["in"]["input_source_path"])
 
-        # instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
+        # instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
         with open(instructions_file, "w") as leapin:
             # Forcefields loaded by default:
             # Protein: ff14SB (PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA)
@@ -508,7 +508,7 @@ class LeapAddIons(BiobbObject):
                 # 1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
 
                 tmp_parmtop = str(
-                    PurePath(str(self.tmp_folder)).joinpath("top_temp.parmtop")
+                    PurePath(str(tmp_folder)).joinpath("top_temp.parmtop")
                 )
                 shutil.copyfile(self.io_dict["out"]["output_top_path"], tmp_parmtop)
 
@@ -534,7 +534,7 @@ class LeapAddIons(BiobbObject):
                                 new_top.write(line)
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(self.tmp_folder), "leap.log"])
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

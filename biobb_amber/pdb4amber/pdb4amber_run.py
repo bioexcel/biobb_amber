@@ -103,8 +103,8 @@ class Pdb4amberRun(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
@@ -129,7 +129,7 @@ class Pdb4amberRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(self.tmp_folder)])
+        self.tmp_files.extend([str(tmp_folder)])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

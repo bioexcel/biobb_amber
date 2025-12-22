@@ -95,11 +95,11 @@ class ParmedHMassRepartition(BiobbObject):
         if self.container_path:
             instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("parmed.in"))
             instructions_file_path = str(PurePath(self.container_volume_path).joinpath("parmed.in"))
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("parmed.in"))
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(tmp_folder).joinpath("parmed.in"))
+            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         with open(instructions_file, 'w') as parmedin:
@@ -119,7 +119,7 @@ class ParmedHMassRepartition(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(self.tmp_folder)])
+        self.tmp_files.extend([str(tmp_folder)])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

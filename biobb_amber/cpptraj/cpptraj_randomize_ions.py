@@ -120,9 +120,9 @@ class CpptrajRandomizeIons(BiobbObject):
             instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("cpptraj.in"))
             instructions_file_path = str(PurePath(self.container_volume_path).joinpath("cpptraj.in"))
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("cpptraj.in"))
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(tmp_folder).joinpath("cpptraj.in"))
+            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         # create cpptraj.in file
@@ -152,7 +152,7 @@ class CpptrajRandomizeIons(BiobbObject):
         self.copy_to_host()
 
         # Remove temporary file(s)
-        self.tmp_files.extend([self.tmp_folder, "cpptraj.log"])
+        self.tmp_files.extend([tmp_folder, "cpptraj.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

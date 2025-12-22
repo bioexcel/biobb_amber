@@ -109,8 +109,8 @@ class ParmedCpinUtil(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
         # cpinutil.py -igb 2 -resname AS4 GL4 -p $1.prmtop -op $1.cpH.prmtop
         # cpinutil.py -p cln025.cpH.prmtop -igb 2 -system "CLN" -o cpin
@@ -145,7 +145,7 @@ class ParmedCpinUtil(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([self.tmp_folder])
+        self.tmp_files.extend([tmp_folder])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
