@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """Module containing the ParmedCpinUtil class and the command line interface."""
-import argparse
+
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_amber.parmed.common import check_input_path, check_output_path
@@ -110,8 +109,8 @@ class ParmedCpinUtil(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        self.tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        tmp_folder = fu.create_unique_dir()
+        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
         # cpinutil.py -igb 2 -resname AS4 GL4 -p $1.prmtop -op $1.cpH.prmtop
         # cpinutil.py -p cln025.cpH.prmtop -igb 2 -system "CLN" -o cpin
@@ -146,7 +145,7 @@ class ParmedCpinUtil(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([self.tmp_folder])
+        self.tmp_files.extend([tmp_folder])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -157,37 +156,13 @@ class ParmedCpinUtil(BiobbObject):
 def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
                     output_top_path: Optional[str] = None,
                     properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ParmedCpinUtil <parmed.parmed_cpinutil.ParmedCpinUtil>`parmed.parmed_cpinutil.ParmedCpinUtil class and
-    execute :meth:`launch() <parmed.parmed_cpinutil.ParmedCpinUtil.launch>` method"""
-
-    return ParmedCpinUtil(input_top_path=input_top_path,
-                          output_cpin_path=output_cpin_path,
-                          output_top_path=output_top_path,
-                          properties=properties).launch()
-
-    parmed_cpinutil.__doc__ = ParmedCpinUtil.__doc__
+    """Create the :class:`ParmedCpinUtil <parmed.parmed_cpinutil.ParmedCpinUtil>` class and
+    execute the :meth:`launch() <parmed.parmed_cpinutil.ParmedCpinUtil.launch>` method."""
+    return ParmedCpinUtil(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_top_path', required=True, help='Input AMBER topology file. Accepted formats: top, parmtop, prmtop.')
-    required_args.add_argument('--output_cpin_path', required=True, help='Output AMBER constant pH input (CPin) file. Accepted formats: cpin.')
-    required_args.add_argument('--output_top_path', required=False, help='Output topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.')
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    parmed_cpinutil(input_top_path=args.input_top_path,
-                    output_cpin_path=args.output_cpin_path,
-                    output_top_path=args.output_top_path,
-                    properties=properties)
-
+parmed_cpinutil.__doc__ = ParmedCpinUtil.__doc__
+main = ParmedCpinUtil.get_main(parmed_cpinutil, "Create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.")
 
 if __name__ == '__main__':
     main()

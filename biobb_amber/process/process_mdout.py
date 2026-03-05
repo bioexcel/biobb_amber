@@ -2,12 +2,10 @@
 
 """Module containing the ProcessMDOut class and the command line interface."""
 
-import argparse
 import shutil
 from pathlib import Path, PurePath
 from typing import Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -119,17 +117,17 @@ class ProcessMDOut(BiobbObject):
         self.stage_files()
 
         if not self.container_path:
-            self.tmp_folder = fu.create_unique_dir()
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             self.cmd = [
                 "cd",
-                self.tmp_folder,
+                tmp_folder,
                 ";",
                 self.binary_path,
                 str(Path(self.stage_io_dict["in"]["input_log_path"]).resolve()),
             ]
         else:
-            self.tmp_folder = None
+            tmp_folder = None
             self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
 
         # Run Biobb block
@@ -148,14 +146,14 @@ class ProcessMDOut(BiobbObject):
                 )
             else:
                 shutil.copy(
-                    PurePath(str(self.tmp_folder)).joinpath("summary." + self.terms[0]),
+                    PurePath(str(tmp_folder)).joinpath("summary." + self.terms[0]),
                     self.io_dict["out"]["output_dat_path"],
                 )
         else:
             if self.container_path:
                 tmp = self.stage_io_dict["unique_dir"]
             else:
-                tmp = self.tmp_folder
+                tmp = tmp_folder
 
             ene_dict = {}
             for term in self.terms:
@@ -181,7 +179,7 @@ class ProcessMDOut(BiobbObject):
 
         # remove temporary folder(s)
         self.tmp_files.extend([
-            str(self.tmp_folder)
+            str(tmp_folder)
         ] + list(Path().glob("summary*"))
         )
         self.remove_tmp_files()
@@ -199,47 +197,12 @@ def process_mdout(
 ) -> int:
     """Create :class:`ProcessMDOut <process.process_mdout.ProcessMDOut>`process.process_mdout.ProcessMDOut class and
     execute :meth:`launch() <process.process_mdout.ProcessMDOut.launch>` method"""
-
-    return ProcessMDOut(
-        input_log_path=input_log_path,
-        output_dat_path=output_dat_path,
-        properties=properties,
-    ).launch()
-
-    process_mdout.__doc__ = ProcessMDOut.__doc__
+    return ProcessMDOut(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument("--config", required=False, help="Configuration file")
+process_mdout.__doc__ = ProcessMDOut.__doc__
 
-    # Specific args
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "--input_log_path",
-        required=True,
-        help="AMBER (sander) MD output (log) file. Accepted formats: log, out, txt, o.",
-    )
-    required_args.add_argument(
-        "--output_dat_path",
-        required=True,
-        help="Dat output file containing data from the specified terms along the MD process. File type: output. Accepted formats: dat, txt, csv.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    process_mdout(
-        input_log_path=args.input_log_path,
-        output_dat_path=args.output_dat_path,
-        properties=properties,
-    )
-
+main = ProcessMDOut.get_main(process_mdout, "Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.")
 
 if __name__ == "__main__":
     main()

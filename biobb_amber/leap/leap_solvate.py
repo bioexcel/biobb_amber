@@ -3,12 +3,10 @@
 """Module containing the LeapSolvate class and the command line interface."""
 
 import os
-import argparse
 import re
 from pathlib import PurePath
 from typing import List, Optional
 
-from biobb_common.configuration import settings
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
@@ -289,11 +287,11 @@ class LeapSolvate(BiobbObject):
             instructions_file_path = str(
                 PurePath(self.container_volume_path).joinpath("leap.in")
             )
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(self.tmp_folder).joinpath("leap.in"))
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
         ligands_lib_list = []
@@ -301,7 +299,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_lib_path"].endswith(".zip"):
                 ligands_lib_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_lib_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -312,7 +310,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_frcmod_path"].endswith(".zip"):
                 ligands_frcmod_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_frcmod_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -325,7 +323,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_params_path"].endswith(".zip"):
                 amber_params_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_params_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -336,7 +334,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_prep_path"].endswith(".zip"):
                 amber_prep_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_prep_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -347,7 +345,7 @@ class LeapSolvate(BiobbObject):
             if self.io_dict["in"]["input_source_path"].endswith(".zip"):
                 leap_source_list = fu.unzip_list(
                     self.stage_io_dict["in"]["input_source_path"],
-                    dest_dir=self.tmp_folder,
+                    dest_dir=tmp_folder,
                     out_log=self.out_log,
                 )
             else:
@@ -440,7 +438,7 @@ class LeapSolvate(BiobbObject):
             f.write(octbox + content)
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(self.tmp_folder), "leap.log"])
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -461,98 +459,13 @@ def leap_solvate(
     properties: Optional[dict] = None,
     **kwargs,
 ) -> int:
-    """Create :class:`LeapSolvate <leap.leap_solvate.LeapSolvate>`leap.leap_solvate.LeapSolvate class and
-    execute :meth:`launch() <leap.leap_solvate.LeapSolvate.launch>` method"""
-
-    return LeapSolvate(
-        input_pdb_path=input_pdb_path,
-        input_lib_path=input_lib_path,
-        input_frcmod_path=input_frcmod_path,
-        input_params_path=input_params_path,
-        input_prep_path=input_prep_path,
-        input_source_path=input_source_path,
-        output_pdb_path=output_pdb_path,
-        output_top_path=output_top_path,
-        output_crd_path=output_crd_path,
-        properties=properties,
-    ).launch()
-
-    leap_solvate.__doc__ = LeapSolvate.__doc__
+    """Create the :class:`LeapSolvate <leap.leap_solvate.LeapSolvate>` class and
+    execute the :meth:`launch() <leap.leap_solvate.LeapSolvate.launch>` method."""
+    return LeapSolvate(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Generating and solvating a system box for an AMBER MD system. using tLeap program from AmberTools MD package.",
-        formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-    )
-    parser.add_argument("--config", required=False, help="Configuration file")
-
-    # Specific args
-    required_args = parser.add_argument_group("required arguments")
-    required_args.add_argument(
-        "--input_pdb_path",
-        required=True,
-        help="Input 3D structure PDB file. Accepted formats: pdb.",
-    )
-    required_args.add_argument(
-        "--input_lib_path",
-        required=False,
-        help="Input ligand library parameters file. Accepted formats: lib, zip.",
-    )
-    required_args.add_argument(
-        "--input_frcmod_path",
-        required=False,
-        help="Input ligand frcmod parameters file. Accepted formats: frcmod, zip.",
-    )
-    required_args.add_argument(
-        "--input_params_path",
-        required=False,
-        help="Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.",
-    )
-    required_args.add_argument(
-        "--input_prep_path",
-        required=False,
-        help="Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: leapin, in, txt, zip.",
-    )
-    required_args.add_argument(
-        "--input_source_path",
-        required=False,
-        help="Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.",
-    )
-    required_args.add_argument(
-        "--output_pdb_path",
-        required=True,
-        help="Output 3D structure PDB file matching the topology file. Accepted formats: pdb.",
-    )
-    required_args.add_argument(
-        "--output_top_path",
-        required=True,
-        help="Output topology file (AMBER ParmTop). Accepted formats: top.",
-    )
-    required_args.add_argument(
-        "--output_crd_path",
-        required=True,
-        help="Output coordinates file (AMBER crd). Accepted formats: crd.",
-    )
-
-    args = parser.parse_args()
-    config = args.config if args.config else None
-    properties = settings.ConfReader(config=config).get_prop_dic()
-
-    # Specific call
-    leap_solvate(
-        input_pdb_path=args.input_pdb_path,
-        input_lib_path=args.input_lib_path,
-        input_frcmod_path=args.input_frcmod_path,
-        input_params_path=args.input_params_path,
-        input_prep_path=args.input_prep_path,
-        input_source_path=args.input_source_path,
-        output_pdb_path=args.output_pdb_path,
-        output_top_path=args.output_top_path,
-        output_crd_path=args.output_crd_path,
-        properties=properties,
-    )
-
+leap_solvate.__doc__ = LeapSolvate.__doc__
+main = LeapSolvate.get_main(leap_solvate, "Generating and solvating a system box for an AMBER MD system. using tLeap program from AmberTools MD package.")
 
 if __name__ == "__main__":
     main()

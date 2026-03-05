@@ -13,20 +13,21 @@ Command:
 ```python
 amber_to_pdb -h
 ```
-    usage: amber_to_pdb [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH --output_pdb_path OUTPUT_PDB_PATH
+    usage: amber_to_pdb [-h] [-c CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH -o OUTPUT_PDB_PATH
     
     Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_top_path INPUT_TOP_PATH
                             AMBER topology file. Accepted formats: top, parmtop, prmtop.
       --input_crd_path INPUT_CRD_PATH
-                            AMBER coordinates file. Accepted formats: crd, mdcrd, inpcrd.
-      --output_pdb_path OUTPUT_PDB_PATH
+                            AMBER coordinates file. Accepted formats: crd, mdcrd, inpcrd, rst.
+      -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
                             Structure PDB file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
@@ -99,21 +100,24 @@ Command:
 ```python
 cestats_run -h
 ```
-    usage: cestats_run [-h] [--config CONFIG] --input_cein_path INPUT_CEIN_PATH --input_ceout_path INPUT_CEOUT_PATH --output_dat_path OUTPUT_DAT_PATH [--output_population_path OUTPUT_POPULATION_PATH] [--output_chunk_path OUTPUT_CHUNK_PATH] [--output_cumulative_path OUTPUT_CUMULATIVE_PATH] [--output_conditional_path OUTPUT_CONDITIONAL_PATH] [--output_chunk_conditional_path OUTPUT_CHUNK_CONDITIONAL_PATH]
+    usage: cestats_run [-h] [-c CONFIG] --input_cein_path INPUT_CEIN_PATH --input_ceout_path INPUT_CEOUT_PATH --output_dat_path OUTPUT_DAT_PATH [--output_population_path OUTPUT_POPULATION_PATH] [--output_chunk_path OUTPUT_CHUNK_PATH] [--output_cumulative_path OUTPUT_CUMULATIVE_PATH] [--output_conditional_path OUTPUT_CONDITIONAL_PATH] [--output_chunk_conditional_path OUTPUT_CHUNK_CONDITIONAL_PATH]
     
     Analyzing the results of constant Redox potential MD simulations using cestats tool from the AMBER MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_cein_path INPUT_CEIN_PATH
                             Input cein or cpein file (from pmemd or sander) with titrating residue information. Accepted formats: cein, cpein.
       --input_ceout_path INPUT_CEOUT_PATH
-                            Output ceout file (AMBER ceout). Accepted formats: ceout.
+                            Output ceout file (AMBER ceout). Accepted formats: ceout, zip, gzip, gz.
       --output_dat_path OUTPUT_DAT_PATH
                             Output file to which the standard calceo-type statistics are written. Accepted formats: dat, out, txt, o.
+    
+    optional arguments:
       --output_population_path OUTPUT_POPULATION_PATH
                             Output file where protonation state populations are printed for every state of every residue. Accepted formats: dat, out, txt, o.
       --output_chunk_path OUTPUT_CHUNK_PATH
@@ -211,21 +215,24 @@ Command:
 ```python
 cphstats_run -h
 ```
-    usage: cphstats_run [-h] [--config CONFIG] --input_cpin_path INPUT_CPIN_PATH --input_cpout_path INPUT_CPOUT_PATH --output_dat_path OUTPUT_DAT_PATH [--output_population_path OUTPUT_POPULATION_PATH] [--output_chunk_path OUTPUT_CHUNK_PATH] [--output_cumulative_path OUTPUT_CUMULATIVE_PATH] [--output_conditional_path OUTPUT_CONDITIONAL_PATH] [--output_chunk_conditional_path OUTPUT_CHUNK_CONDITIONAL_PATH]
+    usage: cphstats_run [-h] [-c CONFIG] --input_cpin_path INPUT_CPIN_PATH --input_cpout_path INPUT_CPOUT_PATH --output_dat_path OUTPUT_DAT_PATH [--output_population_path OUTPUT_POPULATION_PATH] [--output_chunk_path OUTPUT_CHUNK_PATH] [--output_cumulative_path OUTPUT_CUMULATIVE_PATH] [--output_conditional_path OUTPUT_CONDITIONAL_PATH] [--output_chunk_conditional_path OUTPUT_CHUNK_CONDITIONAL_PATH]
     
     Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_cpin_path INPUT_CPIN_PATH
                             Input constant pH file (AMBER cpin). Accepted formats: cpin.
       --input_cpout_path INPUT_CPOUT_PATH
-                            Output constant pH file (AMBER cpout). Accepted formats: cpout.
+                            Output constant pH file (AMBER cpout). Accepted formats: cpout, zip, gzip.
       --output_dat_path OUTPUT_DAT_PATH
                             Output file to which the standard calcpka-type statistics are written. Accepted formats: dat, out, txt, o.
+    
+    optional arguments:
       --output_population_path OUTPUT_POPULATION_PATH
                             Output file where protonation state populations are printed for every state of every residue. Accepted formats: dat, out, txt, o.
       --output_chunk_path OUTPUT_CHUNK_PATH
@@ -323,13 +330,14 @@ Command:
 ```python
 cpptraj_randomize_ions -h
 ```
-    usage: cpptraj_randomize_ions [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH --output_pdb_path OUTPUT_PDB_PATH --output_crd_path OUTPUT_CRD_PATH
+    usage: cpptraj_randomize_ions [-h] [-c CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH --output_pdb_path OUTPUT_PDB_PATH --output_crd_path OUTPUT_CRD_PATH
     
     Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_top_path INPUT_TOP_PATH
@@ -416,33 +424,36 @@ Command:
 ```python
 leap_add_ions -h
 ```
-    usage: leap_add_ions [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH [--input_lib_path INPUT_LIB_PATH] [--input_frcmod_path INPUT_FRCMOD_PATH] [--input_params_path INPUT_PARAMS_PATH] [--input_prep_path INPUT_PREP_PATH] [--input_source_path INPUT_SOURCE_PATH] --output_pdb_path OUTPUT_PDB_PATH --output_top_path OUTPUT_TOP_PATH --output_crd_path OUTPUT_CRD_PATH
+    usage: leap_add_ions [-h] [-c CONFIG] --input_pdb_path INPUT_PDB_PATH [--input_lib_path INPUT_LIB_PATH] [--input_frcmod_path INPUT_FRCMOD_PATH] [--input_params_path INPUT_PARAMS_PATH] [--input_prep_path INPUT_PREP_PATH] [--input_source_path INPUT_SOURCE_PATH] --output_pdb_path OUTPUT_PDB_PATH --output_top_path OUTPUT_TOP_PATH --output_crd_path OUTPUT_CRD_PATH
     
     Adds counterions to a system box for an AMBER MD system using tLeap.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_pdb_path INPUT_PDB_PATH
                             Input 3D structure PDB file. Accepted formats: pdb.
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output 3D structure PDB file matching the topology file. Accepted formats: pdb.
+      --output_top_path OUTPUT_TOP_PATH
+                            Output topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
+      --output_crd_path OUTPUT_CRD_PATH
+                            Output coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.
+    
+    optional arguments:
       --input_lib_path INPUT_LIB_PATH
                             Input ligand library parameters file. Accepted formats: lib, zip.
       --input_frcmod_path INPUT_FRCMOD_PATH
                             Input ligand frcmod parameters file. Accepted formats: frcmod, zip.
       --input_params_path INPUT_PARAMS_PATH
-                            Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.
+                            Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: in, leapin, txt, zip.
       --input_prep_path INPUT_PREP_PATH
-                            Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: leapin, in, txt, zip.
+                            Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: in, leapin, txt, zip.
       --input_source_path INPUT_SOURCE_PATH
-                            Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.
-      --output_pdb_path OUTPUT_PDB_PATH
-                            Output 3D structure PDB file matching the topology file. Accepted formats: pdb.
-      --output_top_path OUTPUT_TOP_PATH
-                            Output topology file (AMBER ParmTop). Accepted formats: top.
-      --output_crd_path OUTPUT_CRD_PATH
-                            Output coordinates file (AMBER crd). Accepted formats: crd.
+                            Additional leap command files to load with source Leap command. Accepted formats: in, leapin, txt, zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -558,16 +569,17 @@ Command:
 ```python
 leap_build_linear_structure -h
 ```
-    usage: leap_build_linear_structure [-h] [--config CONFIG] --output_pdb_path OUTPUT_PDB_PATH
+    usage: leap_build_linear_structure [-h] [-c CONFIG] -o OUTPUT_PDB_PATH
     
     Building a linear (unfolded) 3D structure from an AA sequence.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      --output_pdb_path OUTPUT_PDB_PATH
+      -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
                             Linear (unfolded) 3D structure PDB file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
@@ -659,33 +671,36 @@ Command:
 ```python
 leap_gen_top -h
 ```
-    usage: leap_gen_top [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH [--input_lib_path INPUT_LIB_PATH] [--input_frcmod_path INPUT_FRCMOD_PATH] [--input_params_path INPUT_PARAMS_PATH] [--input_prep_path INPUT_PREP_PATH] [--input_source_path INPUT_SOURCE_PATH] --output_pdb_path OUTPUT_PDB_PATH --output_top_path OUTPUT_TOP_PATH --output_crd_path OUTPUT_CRD_PATH
+    usage: leap_gen_top [-h] [-c CONFIG] --input_pdb_path INPUT_PDB_PATH [--input_lib_path INPUT_LIB_PATH] [--input_frcmod_path INPUT_FRCMOD_PATH] [--input_params_path INPUT_PARAMS_PATH] [--input_prep_path INPUT_PREP_PATH] [--input_source_path INPUT_SOURCE_PATH] --output_pdb_path OUTPUT_PDB_PATH --output_top_path OUTPUT_TOP_PATH --output_crd_path OUTPUT_CRD_PATH
     
     Generating a MD topology from a molecule structure using tLeap program from AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_pdb_path INPUT_PDB_PATH
                             Input 3D structure PDB file. Accepted formats: pdb.
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output 3D structure PDB file matching the topology file. Accepted formats: pdb.
+      --output_top_path OUTPUT_TOP_PATH
+                            Output topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
+      --output_crd_path OUTPUT_CRD_PATH
+                            Output coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.
+    
+    optional arguments:
       --input_lib_path INPUT_LIB_PATH
                             Input ligand library parameters file. Accepted formats: lib, zip.
       --input_frcmod_path INPUT_FRCMOD_PATH
                             Input ligand frcmod parameters file. Accepted formats: frcmod, zip.
       --input_params_path INPUT_PARAMS_PATH
-                            Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.
+                            Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: in, leapin, txt, zip.
       --input_prep_path INPUT_PREP_PATH
-                            Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: leapin, in, txt, zip.
+                            Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: in, leapin, txt, zip.
       --input_source_path INPUT_SOURCE_PATH
-                            Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.
-      --output_pdb_path OUTPUT_PDB_PATH
-                            Output 3D structure PDB file matching the topology file. Accepted formats: pdb.
-      --output_top_path OUTPUT_TOP_PATH
-                            Output topology file (AMBER ParmTop). Accepted formats: top.
-      --output_crd_path OUTPUT_CRD_PATH
-                            Output coordinates file (AMBER crd). Accepted formats: crd.
+                            Additional leap command files to load with source Leap command. Accepted formats: in, leapin, txt, zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -735,7 +750,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path heme_all.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
+leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path input.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top.json)
@@ -764,7 +779,7 @@ leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.
 ```
 #### Command line
 ```python
-leap_gen_top --config config_leap_gen_top.json --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path heme_all.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
+leap_gen_top --config config_leap_gen_top.json --input_pdb_path structure.leapin.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path input.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.leap.pdb --output_top_path structure.leap.top --output_crd_path structure.leap.crd
 ```
 
 ## Leap_solvate
@@ -774,33 +789,36 @@ Command:
 ```python
 leap_solvate -h
 ```
-    usage: leap_solvate [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH [--input_lib_path INPUT_LIB_PATH] [--input_frcmod_path INPUT_FRCMOD_PATH] [--input_params_path INPUT_PARAMS_PATH] [--input_prep_path INPUT_PREP_PATH] [--input_source_path INPUT_SOURCE_PATH] --output_pdb_path OUTPUT_PDB_PATH --output_top_path OUTPUT_TOP_PATH --output_crd_path OUTPUT_CRD_PATH
+    usage: leap_solvate [-h] [-c CONFIG] --input_pdb_path INPUT_PDB_PATH [--input_lib_path INPUT_LIB_PATH] [--input_frcmod_path INPUT_FRCMOD_PATH] [--input_params_path INPUT_PARAMS_PATH] [--input_prep_path INPUT_PREP_PATH] [--input_source_path INPUT_SOURCE_PATH] --output_pdb_path OUTPUT_PDB_PATH --output_top_path OUTPUT_TOP_PATH --output_crd_path OUTPUT_CRD_PATH
     
     Generating and solvating a system box for an AMBER MD system. using tLeap program from AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_pdb_path INPUT_PDB_PATH
                             Input 3D structure PDB file. Accepted formats: pdb.
+      --output_pdb_path OUTPUT_PDB_PATH
+                            Output 3D structure PDB file matching the topology file. Accepted formats: pdb.
+      --output_top_path OUTPUT_TOP_PATH
+                            Output topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
+      --output_crd_path OUTPUT_CRD_PATH
+                            Output coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.
+    
+    optional arguments:
       --input_lib_path INPUT_LIB_PATH
                             Input ligand library parameters file. Accepted formats: lib, zip.
       --input_frcmod_path INPUT_FRCMOD_PATH
                             Input ligand frcmod parameters file. Accepted formats: frcmod, zip.
       --input_params_path INPUT_PARAMS_PATH
-                            Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: leapin, in, txt, zip.
+                            Additional leap parameter files to load with loadAmberParams Leap command. Accepted formats: in, leapin, txt, zip.
       --input_prep_path INPUT_PREP_PATH
-                            Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: leapin, in, txt, zip.
+                            Additional leap parameter files to load with loadAmberPrep Leap command. Accepted formats: in, leapin, txt, zip.
       --input_source_path INPUT_SOURCE_PATH
-                            Additional leap command files to load with source Leap command. Accepted formats: leapin, in, txt, zip.
-      --output_pdb_path OUTPUT_PDB_PATH
-                            Output 3D structure PDB file matching the topology file. Accepted formats: pdb.
-      --output_top_path OUTPUT_TOP_PATH
-                            Output topology file (AMBER ParmTop). Accepted formats: top.
-      --output_crd_path OUTPUT_CRD_PATH
-                            Output coordinates file (AMBER crd). Accepted formats: crd.
+                            Additional leap command files to load with source Leap command. Accepted formats: in, leapin, txt, zip.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -867,7 +885,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path heme_all.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
+leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path input.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_solvate.json)
@@ -902,7 +920,7 @@ leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pd
 ```
 #### Command line
 ```python
-leap_solvate --config config_leap_solvate.json --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path heme_all.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
+leap_solvate --config config_leap_solvate.json --input_pdb_path structure.leap.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path input.in --input_source_path leaprc.water.spce.txt --output_pdb_path structure.solv.pdb --output_top_path structure.solv.top --output_crd_path structure.solv.crd
 ```
 
 ## Parmed_cpinutil
@@ -912,19 +930,22 @@ Command:
 ```python
 parmed_cpinutil -h
 ```
-    usage: parmed_cpinutil [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH --output_cpin_path OUTPUT_CPIN_PATH [--output_top_path OUTPUT_TOP_PATH]
+    usage: parmed_cpinutil [-h] [-c CONFIG] -i INPUT_TOP_PATH --output_cpin_path OUTPUT_CPIN_PATH [--output_top_path OUTPUT_TOP_PATH]
     
-    create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.
+    Create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      --input_top_path INPUT_TOP_PATH
+      -i INPUT_TOP_PATH, --input_top_path INPUT_TOP_PATH
                             Input AMBER topology file. Accepted formats: top, parmtop, prmtop.
       --output_cpin_path OUTPUT_CPIN_PATH
                             Output AMBER constant pH input (CPin) file. Accepted formats: cpin.
+    
+    optional arguments:
       --output_top_path OUTPUT_TOP_PATH
                             Output topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
 ### I / O Arguments
@@ -1013,18 +1034,19 @@ Command:
 ```python
 parmed_hmassrepartition -h
 ```
-    usage: parmed_hmassrepartition [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH [--output_top_path OUTPUT_TOP_PATH]
+    usage: parmed_hmassrepartition [-h] [-c CONFIG] -i INPUT_TOP_PATH -o OUTPUT_TOP_PATH
     
     Performs a Hydrogen Mass Repartition from an AMBER topology file using parmed tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      --input_top_path INPUT_TOP_PATH
+      -i INPUT_TOP_PATH, --input_top_path INPUT_TOP_PATH
                             Input AMBER topology file. Accepted formats: top, parmtop, prmtop.
-      --output_top_path OUTPUT_TOP_PATH
+      -o OUTPUT_TOP_PATH, --output_top_path OUTPUT_TOP_PATH
                             Output topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
@@ -1096,18 +1118,19 @@ Command:
 ```python
 pdb4amber_run -h
 ```
-    usage: pdb4amber_run [-h] [--config CONFIG] --input_pdb_path INPUT_PDB_PATH --output_pdb_path OUTPUT_PDB_PATH
+    usage: pdb4amber_run [-h] [-c CONFIG] -i INPUT_PDB_PATH -o OUTPUT_PDB_PATH
     
     Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      --input_pdb_path INPUT_PDB_PATH
+      -i INPUT_PDB_PATH, --input_pdb_path INPUT_PDB_PATH
                             Input 3D structure PDB file. Accepted formats: pdb.
-      --output_pdb_path OUTPUT_PDB_PATH
+      -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
                             Output 3D structure PDB file. Accepted formats: pdb.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
@@ -1183,35 +1206,38 @@ Command:
 ```python
 pmemd_mdrun -h
 ```
-    usage: pmemd_mdrun [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH [--input_mdin_path INPUT_MDIN_PATH] [--input_cpin_path INPUT_CPIN_PATH] [--input_ref_path INPUT_REF_PATH] --output_log_path OUTPUT_LOG_PATH --output_traj_path OUTPUT_TRAJ_PATH --output_rst_path OUTPUT_RST_PATH [--output_cpout_path OUTPUT_CPOUT_PATH] [--output_cprst_path OUTPUT_CPRST_PATH] [--output_mdinfo_path OUTPUT_MDINFO_PATH]
+    usage: pmemd_mdrun [-h] [-c CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH [--input_mdin_path INPUT_MDIN_PATH] [--input_cpin_path INPUT_CPIN_PATH] [--input_ref_path INPUT_REF_PATH] --output_log_path OUTPUT_LOG_PATH --output_traj_path OUTPUT_TRAJ_PATH --output_rst_path OUTPUT_RST_PATH [--output_cpout_path OUTPUT_CPOUT_PATH] [--output_cprst_path OUTPUT_CPRST_PATH] [--output_mdinfo_path OUTPUT_MDINFO_PATH]
     
     Running molecular dynamics using pmemd tool from the AMBER MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
       --input_top_path INPUT_TOP_PATH
-                            Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.
+                            Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
       --input_crd_path INPUT_CRD_PATH
-                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.
+                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd, rst, rst7, netcdf, nc, ncrst.
+      --output_log_path OUTPUT_LOG_PATH
+                            Output log file. Accepted formats: log, out, txt, o.
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output trajectory file. Accepted formats: trj, crd, mdcrd, x, netcdf, nc.
+      --output_rst_path OUTPUT_RST_PATH
+                            Output restart file. Accepted formats: rst, rst7, netcdf, nc, ncrst.
+    
+    optional arguments:
       --input_mdin_path INPUT_MDIN_PATH
                             Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.
       --input_cpin_path INPUT_CPIN_PATH
                             Input constant pH file (AMBER cpin). Accepted formats: cpin.
       --input_ref_path INPUT_REF_PATH
-                            Input reference coordinates for position restraints. Accepted formats: rst, rst7.
-      --output_log_path OUTPUT_LOG_PATH
-                            Output log file. Accepted formats: log, out, txt.
-      --output_traj_path OUTPUT_TRAJ_PATH
-                            Output trajectory file. Accepted formats: trj, crd, mdcrd, x.
-      --output_rst_path OUTPUT_RST_PATH
-                            Output restart file. Accepted formats: rst, rst7.
+                            Input reference coordinates for position restraints. Accepted formats: crd, mdcrd, inpcrd, rst, rst7, netcdf, nc, ncrst.
       --output_cpout_path OUTPUT_CPOUT_PATH
                             Output constant pH file (AMBER cpout). Accepted formats: cpout.
       --output_cprst_path OUTPUT_CPRST_PATH
-                            Output constant pH restart file (AMBER rstout). Accepted formats: cprst.
+                            Output constant pH restart file (AMBER rstout). Accepted formats: cprst, rst, rst7.
       --output_mdinfo_path OUTPUT_MDINFO_PATH
                             Output MD info. Accepted formats: mdinfo.
 ### I / O Arguments
@@ -1285,19 +1311,20 @@ Command:
 ```python
 process_mdout -h
 ```
-    usage: process_mdout [-h] [--config CONFIG] --input_log_path INPUT_LOG_PATH --output_dat_path OUTPUT_DAT_PATH
+    usage: process_mdout [-h] [-c CONFIG] -i INPUT_LOG_PATH -o OUTPUT_DAT_PATH
     
     Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      --input_log_path INPUT_LOG_PATH
+      -i INPUT_LOG_PATH, --input_log_path INPUT_LOG_PATH
                             AMBER (sander) MD output (log) file. Accepted formats: log, out, txt, o.
-      --output_dat_path OUTPUT_DAT_PATH
-                            Dat output file containing data from the specified terms along the MD process. File type: output. Accepted formats: dat, txt, csv.
+      -o OUTPUT_DAT_PATH, --output_dat_path OUTPUT_DAT_PATH
+                            Dat output file containing data from the specified terms along the minimization process. Accepted formats: dat, txt, csv.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -1389,19 +1416,20 @@ Command:
 ```python
 process_minout -h
 ```
-    usage: process_minout [-h] [--config CONFIG] --input_log_path INPUT_LOG_PATH --output_dat_path OUTPUT_DAT_PATH
+    usage: process_minout [-h] [-c CONFIG] -i INPUT_LOG_PATH -o OUTPUT_DAT_PATH
     
     Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
     
     required arguments:
-      --input_log_path INPUT_LOG_PATH
-                            AMBER (sander) minimization output (log) file. Accepted formats: log, out, txt, o.
-      --output_dat_path OUTPUT_DAT_PATH
-                            Dat output file containing data from the specified terms along the minimization process. File type: output. Accepted formats: dat, txt, csv.
+      -i INPUT_LOG_PATH, --input_log_path INPUT_LOG_PATH
+                            AMBER (sander) Minimization output (log) file. Accepted formats: log, out, txt, o.
+      -o OUTPUT_DAT_PATH, --output_dat_path OUTPUT_DAT_PATH
+                            Dat output file containing data from the specified terms along the minimization process. Accepted formats: dat, txt, csv.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
@@ -1475,37 +1503,40 @@ Command:
 ```python
 sander_mdrun -h
 ```
-    usage: sander_mdrun [-h] [--config CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH [--input_mdin_path INPUT_MDIN_PATH] [--input_cpin_path INPUT_CPIN_PATH] [--input_ref_path INPUT_REF_PATH] --output_log_path OUTPUT_LOG_PATH --output_traj_path OUTPUT_TRAJ_PATH --output_rst_path OUTPUT_RST_PATH [--output_cpout_path OUTPUT_CPOUT_PATH] [--output_cprst_path OUTPUT_CPRST_PATH] [--output_mdinfo_path OUTPUT_MDINFO_PATH]
+    usage: sander_mdrun [-h] [-c CONFIG] --input_top_path INPUT_TOP_PATH --input_crd_path INPUT_CRD_PATH [--input_mdin_path INPUT_MDIN_PATH] [--input_cpin_path INPUT_CPIN_PATH] [--input_ref_path INPUT_REF_PATH] --output_log_path OUTPUT_LOG_PATH --output_traj_path OUTPUT_TRAJ_PATH --output_rst_path OUTPUT_RST_PATH [--output_cpout_path OUTPUT_CPOUT_PATH] [--output_cprst_path OUTPUT_CPRST_PATH] [--output_mdinfo_path OUTPUT_MDINFO_PATH]
     
     Running energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.
     
     options:
       -h, --help            show this help message and exit
-      --config CONFIG       Configuration file
+      -c CONFIG, --config CONFIG
+                            This file can be a YAML file, JSON file or JSON string
+    
+    required arguments:
+      --input_top_path INPUT_TOP_PATH
+                            Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
+      --input_crd_path INPUT_CRD_PATH
+                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd, netcdf, nc, ncrst, rst.
+      --output_log_path OUTPUT_LOG_PATH
+                            Output log file. Accepted formats: log, out, txt, o.
+      --output_traj_path OUTPUT_TRAJ_PATH
+                            Output trajectory file. Accepted formats: trj, crd, mdcrd, x, netcdf, nc.
+      --output_rst_path OUTPUT_RST_PATH
+                            Output restart file. Accepted formats: rst, rst7, netcdf, nc, ncrst.
+    
+    optional arguments:
       --input_mdin_path INPUT_MDIN_PATH
                             Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.
       --input_cpin_path INPUT_CPIN_PATH
                             Input constant pH file (AMBER cpin). Accepted formats: cpin.
       --input_ref_path INPUT_REF_PATH
-                            Input reference coordinates for position restraints. Accepted formats: rst, rst7.
+                            Input reference coordinates for position restraints. Accepted formats: rst, rst7, netcdf, nc, ncrst, crd.
       --output_cpout_path OUTPUT_CPOUT_PATH
                             Output constant pH file (AMBER cpout). Accepted formats: cpout.
       --output_cprst_path OUTPUT_CPRST_PATH
-                            Output constant pH restart file (AMBER rstout). Accepted formats: cprst.
+                            Output constant pH restart file (AMBER rstout). Accepted formats: cprst, rst, rst7.
       --output_mdinfo_path OUTPUT_MDINFO_PATH
                             Output MD info. Accepted formats: mdinfo.
-    
-    required arguments:
-      --input_top_path INPUT_TOP_PATH
-                            Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.
-      --input_crd_path INPUT_CRD_PATH
-                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.
-      --output_log_path OUTPUT_LOG_PATH
-                            Output log file. Accepted formats: log, out, txt.
-      --output_traj_path OUTPUT_TRAJ_PATH
-                            Output trajectory file. Accepted formats: trj, crd, mdcrd, x.
-      --output_rst_path OUTPUT_RST_PATH
-                            Output restart file. Accepted formats: rst, rst7.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 

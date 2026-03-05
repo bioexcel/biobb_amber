@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
 """Module containing the SanderMDRun class and the command line interface."""
-import argparse
 from typing import Optional
 import shutil
 import re
 from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.configuration import settings
 from biobb_common.tools import file_utils as fu
 from biobb_common.tools.file_utils import launchlogger
 from biobb_amber.sander.common import check_input_path, check_output_path
@@ -308,14 +306,14 @@ class SanderMDRun(BiobbObject):
         self.stage_files()
 
         # Creating temporary folder
-        # self.tmp_folder = fu.create_unique_dir()
-        # fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
+        # tmp_folder = fu.create_unique_dir()
+        # fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
 
         # if self.io_dict['in']['input_mdin_path']:
         #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
         # else:
-        #    self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
-        # self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+        #    self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
+        # self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
 
         # Creating temporary folder & Sander configuration (instructions) file
         if self.container_path:
@@ -323,11 +321,11 @@ class SanderMDRun(BiobbObject):
             # instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
             instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("sander.mdin")))
             self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
-            self.tmp_folder = None
+            tmp_folder = None
         else:
-            self.tmp_folder = fu.create_unique_dir()
-            fu.log('Creating %s temporary folder' % self.tmp_folder, self.out_log)
-            self.output_mdin_path = self.create_mdin(path=str(Path(self.tmp_folder).joinpath("sander.mdin")))
+            tmp_folder = fu.create_unique_dir()
+            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
+            self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
@@ -378,7 +376,7 @@ class SanderMDRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend(["mdinfo", str(self.tmp_folder)])
+        self.tmp_files.extend(["mdinfo", str(tmp_folder)])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
@@ -394,67 +392,11 @@ def sander_mdrun(input_top_path: str, input_crd_path: str,
                  properties: Optional[dict] = None, **kwargs) -> int:
     """Create :class:`SanderMDRun <sander.sander_mdrun.SanderMDRun>`sander.sander_mdrun.SanderMDRun class and
     execute :meth:`launch() <sander.sander_mdrun.SanderMDRun.launch>` method"""
-
-    return SanderMDRun(input_top_path=input_top_path,
-                       input_crd_path=input_crd_path,
-                       input_mdin_path=input_mdin_path,
-                       input_cpin_path=input_cpin_path,
-                       input_ref_path=input_ref_path,
-                       output_log_path=output_log_path,
-                       output_traj_path=output_traj_path,
-                       output_rst_path=output_rst_path,
-                       output_cpout_path=output_cpout_path,
-                       output_cprst_path=output_cprst_path,
-                       output_mdinfo_path=output_mdinfo_path,
-                       properties=properties).launch()
-
-    sander_mdrun.__doc__ = SanderMDRun.__doc__
+    return SanderMDRun(**dict(locals())).launch()
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Running energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.', formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999))
-    parser.add_argument('--config', required=False, help='Configuration file')
-
-    # Specific args
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--input_top_path', required=True, help='Input topology file (AMBER ParmTop). Accepted formats: top, prmtop, parmtop.')
-    required_args.add_argument('--input_crd_path', required=True, help='Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd.')
-    # required_args.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
-    parser.add_argument('--input_mdin_path', required=False, help='Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.')
-    # required_args.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
-    parser.add_argument('--input_cpin_path', required=False, help='Input constant pH file (AMBER cpin). Accepted formats: cpin.')
-    # required_args.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
-    parser.add_argument('--input_ref_path', required=False, help='Input reference coordinates for position restraints. Accepted formats: rst, rst7.')
-    required_args.add_argument('--output_log_path', required=True, help='Output log file. Accepted formats: log, out, txt.')
-    required_args.add_argument('--output_traj_path', required=True, help='Output trajectory file. Accepted formats: trj, crd, mdcrd, x.')
-    required_args.add_argument('--output_rst_path', required=True, help='Output restart file. Accepted formats: rst, rst7.')
-    # required_args.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
-    parser.add_argument('--output_cpout_path', required=False, help='Output constant pH file (AMBER cpout). Accepted formats: cpout.')
-    # required_args.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
-    parser.add_argument('--output_cprst_path', required=False, help='Output constant pH restart file (AMBER rstout). Accepted formats: cprst.')
-    # required_args.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
-    parser.add_argument('--output_mdinfo_path', required=False, help='Output MD info. Accepted formats: mdinfo.')
-
-    args = parser.parse_args()
-    # config = args.config if args.config else None
-    args.config = args.config or "{}"
-    # properties = settings.ConfReader(config=config).get_prop_dic()
-    properties = settings.ConfReader(config=args.config).get_prop_dic()
-
-    # Specific call
-    sander_mdrun(input_top_path=args.input_top_path,
-                 input_crd_path=args.input_crd_path,
-                 input_mdin_path=args.input_mdin_path,
-                 input_cpin_path=args.input_cpin_path,
-                 input_ref_path=args.input_ref_path,
-                 output_log_path=args.output_log_path,
-                 output_traj_path=args.output_traj_path,
-                 output_rst_path=args.output_rst_path,
-                 output_cpout_path=args.output_cpout_path,
-                 output_cprst_path=args.output_cprst_path,
-                 output_mdinfo_path=args.output_mdinfo_path,
-                 properties=properties)
-
+sander_mdrun.__doc__ = SanderMDRun.__doc__
+main = SanderMDRun.get_main(sander_mdrun, "Running energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.")
 
 if __name__ == '__main__':
     main()
