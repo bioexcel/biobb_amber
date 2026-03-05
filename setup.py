@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_amber",
-    version="5.2.0",
+    version="5.2.1",
     author="Biobb developers",
     author_email="adam.hospital@irbbarcelona.org",
     description="Biobb_amber is a BioBB category for AMBER MD package.",
@@ -19,7 +19,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=["docs", "test"]),
     package_data={"biobb_amber": ["py.typed"]},
-    install_requires=["biobb_common==5.2.0"],
+    install_requires=["biobb_common==5.2.2"],
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
