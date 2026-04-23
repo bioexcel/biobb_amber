@@ -1,0 +1,2 @@
+4     E261 at least two spaces before inline comment
+4     W291 trailing whitespace
