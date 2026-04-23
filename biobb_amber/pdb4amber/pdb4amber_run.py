@@ -129,7 +129,8 @@ class Pdb4amberRun(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(tmp_folder)])
+        if not self.container_path:
+            self.tmp_files.extend([str(tmp_folder)])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

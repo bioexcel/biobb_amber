@@ -2,6 +2,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.pdb4amber.pdb4amber_run import pdb4amber_run
 import pytest
+import sys
 
 
 class TestPdb4amberRunDocker():
@@ -18,7 +19,7 @@ class TestPdb4amberRunDocker():
         assert fx.equal(self.paths['output_pdb_path'], self.paths['ref_output_pdb_path'])
 
 
-@pytest.mark.skip(reason="singularity currently not available")
+@pytest.mark.skipif(sys.platform == 'darwin', reason="singularity not available on macOS")
 class TestPdb4amberRunSingularity():
     def setup_class(self):
         fx.test_setup(self, 'pdb4amber_run_singularity')

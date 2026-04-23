@@ -2,6 +2,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.process.process_minout import process_minout
 import pytest
+import sys
 
 
 class TestProcessMinOutDocker():
@@ -18,7 +19,7 @@ class TestProcessMinOutDocker():
         assert fx.equal(self.paths['output_dat_path'], self.paths['ref_output_dat_path'])
 
 
-@pytest.mark.skip(reason="singularity currently not available")
+@pytest.mark.skipif(sys.platform == 'darwin', reason="singularity not available on macOS")
 class TestProcessMinOutSingularity():
     def setup_class(self):
         fx.test_setup(self, 'process_minout_singularity')

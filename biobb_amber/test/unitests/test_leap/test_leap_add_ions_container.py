@@ -2,6 +2,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.leap.leap_add_ions import leap_add_ions
 import pytest
+import sys
 
 
 class TestLeapAddIonsDocker():
@@ -22,7 +23,7 @@ class TestLeapAddIonsDocker():
         # assert fx.equal(self.paths['output_crd_path'], self.paths['ref_output_crd_path'])
 
 
-@pytest.mark.skip(reason="singularity currently not available")
+@pytest.mark.skipif(sys.platform == 'darwin', reason="singularity not available on macOS")
 class TestLeapAddIonsSingularity():
     def setup_class(self):
         fx.test_setup(self, 'leap_add_ions_singularity')

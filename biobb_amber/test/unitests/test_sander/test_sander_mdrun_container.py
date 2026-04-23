@@ -2,6 +2,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.sander.sander_mdrun import sander_mdrun
 import pytest
+import sys
 
 
 class TestSanderMDRunDocker():
@@ -21,7 +22,7 @@ class TestSanderMDRunDocker():
         # assert fx.equal(self.paths['output_rst_path'], self.paths['ref_output_rst_path'])
 
 
-@pytest.mark.skip(reason="singularity currently not available")
+@pytest.mark.skipif(sys.platform == 'darwin', reason="singularity not available on macOS")
 class TestSanderMDRunSingularity():
     def setup_class(self):
         fx.test_setup(self, 'sander_mdrun_singularity')

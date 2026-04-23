@@ -113,7 +113,10 @@ class LeapGenTop(BiobbObject):
         #     self.ligands_frcmod_list.append(input_frcmod_path)
 
         # Set default forcefields
-        amber_home_path = os.getenv("AMBERHOME")
+        if self.container_path: 
+            amber_home_path = "/usr/local" # Assuming AMBERHOME is set to /usr/local in the container
+        else:
+            amber_home_path = os.getenv("AMBERHOME")
         protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
         dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
         gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
@@ -125,6 +128,8 @@ class LeapGenTop(BiobbObject):
         )
         # Find the paths of the leaprc files if only the force field names are provided
         self.forcefield = self.find_leaprc_paths(self.forcefield)
+        if self.container_path:
+            self.forcefield = [ff.replace(os.environ.get('AMBERHOME', ''), '/usr/local') for ff in self.forcefield]
 
         self.binary_path = properties.get("binary_path", "tleap")
 
@@ -347,7 +352,10 @@ class LeapGenTop(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(tmp_folder), "leap.log"])
+        if self.container_path:
+            self.tmp_files.extend(["leap.log"])
+        else:
+            self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

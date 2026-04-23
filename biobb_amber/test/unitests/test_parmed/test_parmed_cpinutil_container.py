@@ -2,6 +2,7 @@
 from biobb_common.tools import test_fixtures as fx
 from biobb_amber.parmed.parmed_cpinutil import parmed_cpinutil
 import pytest
+import sys
 
 
 class TestParmedCpinUtilDocker():
@@ -18,7 +19,7 @@ class TestParmedCpinUtilDocker():
         assert fx.equal(self.paths['output_cpin_path'], self.paths['ref_output_cpin_path'])
 
 
-@pytest.mark.skip(reason="singularity currently not available")
+@pytest.mark.skipif(sys.platform == 'darwin', reason="singularity not available on macOS")
 class TestParmedCpinUtilSingularity():
     def setup_class(self):
         fx.test_setup(self, 'parmed_cpinutil_singularity')

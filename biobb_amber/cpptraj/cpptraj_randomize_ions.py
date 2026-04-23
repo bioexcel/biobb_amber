@@ -152,7 +152,10 @@ class CpptrajRandomizeIons(BiobbObject):
         self.copy_to_host()
 
         # Remove temporary file(s)
-        self.tmp_files.extend([tmp_folder, "cpptraj.log"])
+        if self.container_path:
+            self.tmp_files.extend(["cpptraj.log"])
+        else:
+            self.tmp_files.extend([tmp_folder, "cpptraj.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

@@ -20,8 +20,17 @@ amber_to_pdb_docker:
     ref_output_pdb_path: file:test_reference_dir/ambpdb/structure.ambpdb.pdb
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+amber_to_pdb_docker_singularity:
+  paths:
+    input_top_path: file:test_data_dir/ambpdb/structure.leap.top
+    input_crd_path: file:test_data_dir/ambpdb/structure.leap.crd
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/ambpdb/structure.ambpdb.pdb
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # cpptraj
 
@@ -46,8 +55,7 @@ cpptraj_randomize_ions_docker:
     ref_output_crd_path: file:test_reference_dir/cpptraj/structure.randIons.crd
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # leap
 
@@ -70,8 +78,7 @@ leap_build_linear_structure_docker:
     build_library: False
     forcefield : ["protein.ff14SB"]
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 leap_gen_top:
   paths:
@@ -98,8 +105,7 @@ leap_gen_top_docker:
   properties:
     forcefield : ["protein.ff14SB"]
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 leap_solvate:
   paths:
@@ -132,8 +138,7 @@ leap_solvate_docker:
     distance_to_molecule: "9.0"
     box_type: "truncated_octahedron"
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 leap_add_ions:
   paths:
@@ -169,8 +174,7 @@ leap_add_ions_docker:
     ionic_concentration : 100
     positive_ions_type : K+
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # nab
 
@@ -199,14 +203,13 @@ parmed_cpinutil_docker:
   paths:
     input_top_path: file:test_data_dir/parmed/cln025.prmtop
     output_cpin_path: output.pH.cpin
-    ref_output_cpin_path: file:test_reference_dir/parmed/cln025.docker.cpin
+    ref_output_cpin_path: file:test_reference_dir/parmed/cln025.cpin
   properties:
     igb : 2
     resnames: "AS4 GL4"
     system: "cln025"
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 parmed_hmassrepartition:
   paths:
@@ -223,8 +226,7 @@ parmed_hmassrepartition_docker:
     ref_output_top_path: file:test_reference_dir/parmed/output.hmass.prmtop
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # pdb4amber
 
@@ -243,8 +245,7 @@ pdb4amber_run_docker:
     ref_output_pdb_path: file:test_reference_dir/pdb4amber/structure.pdb4amber.pdb
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # process
 
@@ -263,7 +264,7 @@ process_minout_docker:
     ref_output_dat_path: file:test_reference_dir/process/sander.min.energy.dat
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
 
@@ -284,7 +285,7 @@ process_mdout_docker:
   properties:
     terms : [TEMP, VOLUME, EKTOT]
     container_path: docker
-    container_image: afandiadib/ambertools:serial
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
 
@@ -337,8 +338,7 @@ sander_mdrun_docker:
       ntwx: 100
       ioutfm: 0
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # pmemd
 
@@ -378,8 +378,7 @@ cphstats_run_docker:
     ref_output_dat_path: file:test_reference_dir/cphstats/cphstats.pH.dat
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 cestats_run:
   paths:
@@ -398,5 +397,4 @@ cestats_run_docker:
     ref_output_dat_path: file:test_reference_dir/cphstats/cestats.dat
   properties:
     container_path: docker
-    container_image: afandiadib/ambertools:serial
-    container_volume_path: /tmp
+    container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
