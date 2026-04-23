@@ -57,6 +57,18 @@ cpptraj_randomize_ions_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
+cpptraj_randomize_ions_singularity:
+  paths:
+    input_top_path: file:test_data_dir/cpptraj/structure.ions.parmtop
+    input_crd_path: file:test_data_dir/cpptraj/structure.ions.crd
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/cpptraj/structure.randIons.pdb
+    output_crd_path: output.crd
+    ref_output_crd_path: file:test_reference_dir/cpptraj/structure.randIons.crd
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+
 # leap
 
 leap_build_linear_structure:
@@ -79,6 +91,17 @@ leap_build_linear_structure_docker:
     forcefield : ["protein.ff14SB"]
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+leap_build_linear_structure_singularity:
+  paths:
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.pdb
+  properties:
+    sequence : "ALA PRO SER ARG LYS ASP GLU GLY GLY ALA"
+    build_library: False
+    forcefield : ["protein.ff14SB"]
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 leap_gen_top:
   paths:
@@ -106,6 +129,20 @@ leap_gen_top_docker:
     forcefield : ["protein.ff14SB"]
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+leap_gen_top_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.leap.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.leap.pdb
+    output_crd_path: output.leap.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.leap.crd
+    output_top_path: output.leap.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.leap.top
+  properties:
+    forcefield : ["protein.ff14SB"]
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 leap_solvate:
   paths:
@@ -139,6 +176,23 @@ leap_solvate_docker:
     box_type: "truncated_octahedron"
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+leap_solvate_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.leapin.pdb
+    output_pdb_path: output.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.solv.pdb
+    output_crd_path: output.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.solv.crd
+    output_top_path: output.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.solv.top
+  properties:
+    forcefield : ["protein.ff14SB"]
+    water_type: "TIP3PBOX"
+    distance_to_molecule: "9.0"
+    box_type: "truncated_octahedron"
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 leap_add_ions:
   paths:
@@ -176,6 +230,25 @@ leap_add_ions_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
+leap_add_ions_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/leap/structure.ions.input.pdb
+    output_pdb_path: output.solv.pdb
+    ref_output_pdb_path: file:test_reference_dir/leap/structure.ions.pdb
+    output_crd_path: output.solv.crd
+    ref_output_crd_path: file:test_reference_dir/leap/structure.ions.crd
+    output_top_path: output.solv.top
+    ref_output_top_path: file:test_reference_dir/leap/structure.ions.top
+  properties:
+    forcefield: ["DNA.bsc1"]
+    water_type: OPCBOX
+    ions_type : ionsjc_tip4pew
+    box_type: truncated_octahedron
+    ionic_concentration : 100
+    positive_ions_type : K+
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+
 # nab
 
 nab_build_dna_structure:
@@ -211,6 +284,18 @@ parmed_cpinutil_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
+parmed_cpinutil_singularity:
+  paths:
+    input_top_path: file:test_data_dir/parmed/cln025.prmtop
+    output_cpin_path: output.pH.cpin
+    ref_output_cpin_path: file:test_reference_dir/parmed/cln025.cpin
+  properties:
+    igb : 2
+    resnames: "AS4 GL4"
+    system: "cln025"
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+
 parmed_hmassrepartition:
   paths:
     input_top_path: file:test_data_dir/parmed/input.hmass.prmtop
@@ -227,6 +312,15 @@ parmed_hmassrepartition_docker:
   properties:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+parmed_hmassrepartition_singularity:
+  paths:
+    input_top_path: file:test_data_dir/parmed/input.hmass.prmtop
+    output_top_path: output.prmtop
+    ref_output_top_path: file:test_reference_dir/parmed/output.hmass.prmtop
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # pdb4amber
 
@@ -246,6 +340,15 @@ pdb4amber_run_docker:
   properties:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+pdb4amber_run_singularity:
+  paths:
+    input_pdb_path: file:test_data_dir/pdb4amber/1aki_fixed.pdb
+    output_pdb_path: output.pdb
+    ref_output_pdb_path: file:test_reference_dir/pdb4amber/structure.pdb4amber.pdb
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
 
 # process
 
@@ -268,6 +371,17 @@ process_minout_docker:
     container_volume_path: /tmp
     container_working_dir: /tmp
 
+process_minout_singularity:
+  paths:
+    input_log_path: file:test_data_dir/process/sander.min.log
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/process/sander.min.energy.dat
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
 process_mdout:
   paths:
     input_log_path: file:test_data_dir/process/sander.heat.log
@@ -286,6 +400,18 @@ process_mdout_docker:
     terms : [TEMP, VOLUME, EKTOT]
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+    container_volume_path: /tmp
+    container_working_dir: /tmp
+
+process_mdout_singularity:
+  paths:
+    input_log_path: file:test_data_dir/process/sander.heat.log
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/process/sander.md.temp.dat
+  properties:
+    terms : [TEMP, VOLUME, EKTOT]
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
     container_volume_path: /tmp
     container_working_dir: /tmp
 
@@ -340,6 +466,24 @@ sander_mdrun_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
+sander_mdrun_singularity:
+  paths:
+    input_top_path: file:test_data_dir/sander/cln025.prmtop
+    input_crd_path: file:test_data_dir/sander/cln025.inpcrd
+    output_traj_path: sander.x
+    ref_output_traj_path: file:test_reference_dir/sander/sander.x
+    output_rst_path: sander.rst
+    ref_output_rst_path: file:test_reference_dir/sander/sander.rst
+    output_log_path: sander.log
+  properties:
+    simulation_type: "minimization"
+    mdin :
+      maxcyc: 500
+      ntwx: 100
+      ioutfm: 0
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+
 # pmemd
 
 pmemd_mdrun:
@@ -380,6 +524,16 @@ cphstats_run_docker:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
 
+cphstats_run_singularity:
+  paths:
+    input_cpin_path: file:test_data_dir/cphstats/structure.cpin
+    input_cpout_path: file:test_data_dir/cphstats/sander.pH.cpout
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/cphstats/cphstats.pH.dat
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+
 cestats_run:
   paths:
     input_cein_path: file:test_data_dir/cphstats/structure.cein
@@ -398,3 +552,13 @@ cestats_run_docker:
   properties:
     container_path: docker
     container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
+
+cestats_run_singularity:
+  paths:
+    input_cein_path: file:test_data_dir/cphstats/structure.cein
+    input_ceout_path: file:test_data_dir/cphstats/sander.ceout.gz
+    output_dat_path: output.dat
+    ref_output_dat_path: file:test_reference_dir/cphstats/cestats.dat
+  properties:
+    container_path: singularity
+    container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
