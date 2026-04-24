@@ -126,24 +126,27 @@ class LeapAddIons(BiobbObject):
         if input_frcmod_path:
             self.ligands_frcmod_list.append(input_frcmod_path)
 
-        # Set default forcefields
-        if self.container_path: 
-            amber_home_path = "/usr/local" # Assuming AMBERHOME is set to /usr/local in the container
-        else:
-            amber_home_path = os.getenv("AMBERHOME")
-        protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
-        dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
-        gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
-
         # Properties specific for BB
         self.properties = properties
-        self.forcefield = _from_string_to_list(
-            properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
-        )
-        # Find the paths of the leaprc files if only the force field names are provided
-        self.forcefield = self.find_leaprc_paths(self.forcefield)
+
+        # Set default forcefields
         if self.container_path:
-            self.forcefield = [ff.replace(os.environ.get('AMBERHOME', ''), '/usr/local') for ff in self.forcefield]
+            self.forcefield = _from_string_to_list(
+                properties.get("forcefield", ['leaprc.protein.ff14SB', 'leaprc.DNA.bsc1', 'leaprc.gaff'])
+            )
+        else:
+            amber_home_path = os.getenv("AMBERHOME")
+            protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
+            dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
+            gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
+
+            self.forcefield = _from_string_to_list(
+                properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
+            )
+
+            # Find the paths of the leaprc files if only the force field names are provided
+            self.forcefield = self.find_leaprc_paths(self.forcefield)
+
         self.water_type = properties.get("water_type", "TIP3PBOX")
         self.box_type = properties.get("box_type", "truncated_octahedron")
         self.ions_type = properties.get("ions_type", "ionsjc_tip3p")
@@ -401,7 +404,10 @@ class LeapAddIons(BiobbObject):
 
             # Forcefields loaded from input forcefield property
             for t in self.forcefield:
-                leapin.write("source {}\n".format(t))
+                if self.container_path:
+                    leapin.write("source leaprc.{}\n".format(t))
+                else:
+                    leapin.write("source {}\n".format(t))
 
             # Additional Leap commands
             for leap_commands in leap_source_list:
@@ -447,6 +453,12 @@ class LeapAddIons(BiobbObject):
                 "saveAmberParm mol " + self.stage_io_dict["out"]["output_top_path"] + " " + self.stage_io_dict["out"]["output_crd_path"] + "\n"
             )
             leapin.write("quit \n")
+
+        # Container path
+        if self.container_path:
+            if not self.container_working_dir:
+                fu.log('WARNING: container_working_dir property was not set. Defining it with the same value as container_volume_path', self.out_log, self.global_log)
+                self.container_working_dir = self.container_volume_path
 
         # Command line
         self.cmd = [self.binary_path, "-f", instructions_file_path]
@@ -513,7 +525,8 @@ class LeapAddIons(BiobbObject):
                 # 1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
 
                 tmp_parmtop = str(
-                    PurePath(str(tmp_folder)).joinpath("top_temp.parmtop")
+                    #PurePath(str(tmp_folder)).joinpath("top_temp.parmtop")
+                    PurePath(self.stage_io_dict["unique_dir"]).joinpath("top_temp.parmtop")
                 )
                 shutil.copyfile(self.io_dict["out"]["output_top_path"], tmp_parmtop)
 
@@ -539,10 +552,7 @@ class LeapAddIons(BiobbObject):
                                 new_top.write(line)
 
         # remove temporary folder(s)
-        if self.container_path:
-            self.tmp_files.extend(["leap.log"])
-        else:
-            self.tmp_files.extend([str(tmp_folder), "leap.log"])
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)

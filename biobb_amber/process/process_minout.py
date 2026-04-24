@@ -130,6 +130,11 @@ class ProcessMinOut(BiobbObject):
             tmp_folder = None
             self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
 
+        if self.container_path:
+            if not self.container_working_dir:
+                fu.log('WARNING: container_working_dir property was not set. Defining it with the same value as container_volume_path', self.out_log, self.global_log)
+                self.container_working_dir = self.container_volume_path
+
         # Run Biobb block
         self.run_biobb()
 

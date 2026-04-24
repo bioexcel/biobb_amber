@@ -111,25 +111,27 @@ class LeapGenTop(BiobbObject):
         # self.ligands_frcmod_list = []
         # if input_frcmod_path:
         #     self.ligands_frcmod_list.append(input_frcmod_path)
-
-        # Set default forcefields
-        if self.container_path: 
-            amber_home_path = "/usr/local" # Assuming AMBERHOME is set to /usr/local in the container
-        else:
-            amber_home_path = os.getenv("AMBERHOME")
-        protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
-        dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
-        gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
-
+            
         # Properties specific for BB
         self.properties = properties
-        self.forcefield = _from_string_to_list(
-            properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
-        )
-        # Find the paths of the leaprc files if only the force field names are provided
-        self.forcefield = self.find_leaprc_paths(self.forcefield)
+
+        # Set default forcefields
         if self.container_path:
-            self.forcefield = [ff.replace(os.environ.get('AMBERHOME', ''), '/usr/local') for ff in self.forcefield]
+            #self.forcefield = "leaprc.protein.ff14SB"
+            self.forcefield = _from_string_to_list(
+                properties.get("forcefield", ['leaprc.protein.ff14SB', 'leaprc.DNA.bsc1', 'leaprc.gaff'])
+            )
+        else:
+            amber_home_path = os.getenv("AMBERHOME")
+            protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
+            dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
+            gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
+
+            self.forcefield = _from_string_to_list(
+                properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
+            )
+            # Find the paths of the leaprc files if only the force field names are provided
+            self.forcefield = self.find_leaprc_paths(self.forcefield)
 
         self.binary_path = properties.get("binary_path", "tleap")
 
@@ -305,7 +307,10 @@ class LeapGenTop(BiobbObject):
 
             # Forcefields loaded from input forcefield property
             for t in self.forcefield:
-                leapin.write("source {}\n".format(t))
+                if self.container_path:
+                    leapin.write("source leaprc.{}\n".format(t))
+                else:
+                    leapin.write("source {}\n".format(t))
 
             # Additional Leap commands
             for leap_commands in leap_source_list:
@@ -352,10 +357,7 @@ class LeapGenTop(BiobbObject):
         self.copy_to_host()
 
         # remove temporary folder(s)
-        if self.container_path:
-            self.tmp_files.extend(["leap.log"])
-        else:
-            self.tmp_files.extend([str(tmp_folder), "leap.log"])
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
