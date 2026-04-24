@@ -1,2 +1,2 @@
-4     E261 at least two spaces before inline comment
-4     W291 trailing whitespace
+2     E265 block comment should start with '# '
+2     W293 blank line contains whitespace

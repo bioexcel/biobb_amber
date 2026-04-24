@@ -233,541 +233,541 @@
                class="code sev- "><tt><i>72</i> &nbsp;</tt>
             </div>
             <div id="l73"
-               class="code sev- "><tt><i>73</i>         <span class="c1"># Set default forcefields</span></tt>
+               class="code sev- "><tt><i>73</i>         <span class="c1"># Properties specific for BB</span></tt>
             </div>
             <div id="l74"
-               class="code sev-2  le">
-               <ul class="violations">
-               
-                  <li>
-                     <span class="count sev-2">
-                        W291
-                     </span>
-                     Trailing whitespace</li>
-               
-               </ul><tt><i>74</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span> </tt>
+               class="code sev- "><tt><i>74</i>         <span class="bp">self</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="n">properties</span></tt>
             </div>
             <div id="l75"
+               class="code sev- "><tt><i>75</i> &nbsp;</tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>         <span class="c1"># Set default forcefields</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i>             <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">_from_string_to_list</span><span class="p">(</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>                 <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;forcefield&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;leaprc.protein.ff14SB&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.DNA.bsc1&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.gaff&#39;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>             <span class="p">)</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i>             <span class="n">amber_home_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;AMBERHOME&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>             <span class="n">protein_ff14SB_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.protein.ff14SB&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i>             <span class="n">dna_bsc1_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.DNA.bsc1&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>             <span class="n">gaff_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.gaff&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i> &nbsp;</tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i>             <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">_from_string_to_list</span><span class="p">(</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i>                 <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;forcefield&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">protein_ff14SB_path</span><span class="p">,</span> <span class="n">dna_bsc1_path</span><span class="p">,</span> <span class="n">gaff_path</span><span class="p">])</span></tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i>             <span class="p">)</span></tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i> &nbsp;</tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i>             <span class="c1"># Find the paths of the leaprc files if only the force field names are provided</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i>             <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_leaprc_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="p">)</span></tt>
+            </div>
+            <div id="l93"
                class="code sev-2  le">
                <ul class="violations">
                
                   <li>
                      <span class="count sev-2">
-                        E261
+                        W293
                      </span>
-                     At least two spaces before inline comment</li>
+                     Blank line contains whitespace</li>
                
-               </ul><tt><i>75</i>             <span class="n">amber_home_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/local&quot;</span> <span class="c1"># Assuming AMBERHOME is set to /usr/local in the container</span></tt>
-            </div>
-            <div id="l76"
-               class="code sev- "><tt><i>76</i>         <span class="k">else</span><span class="p">:</span></tt>
-            </div>
-            <div id="l77"
-               class="code sev- "><tt><i>77</i>             <span class="n">amber_home_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;AMBERHOME&quot;</span><span class="p">)</span></tt>
-            </div>
-            <div id="l78"
-               class="code sev- "><tt><i>78</i>         <span class="n">protein_ff14SB_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.protein.ff14SB&#39;</span><span class="p">)</span></tt>
-            </div>
-            <div id="l79"
-               class="code sev- "><tt><i>79</i>         <span class="n">dna_bsc1_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.DNA.bsc1&#39;</span><span class="p">)</span></tt>
-            </div>
-            <div id="l80"
-               class="code sev- "><tt><i>80</i>         <span class="n">gaff_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">amber_home_path</span><span class="p">,</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;leaprc.gaff&#39;</span><span class="p">)</span></tt>
-            </div>
-            <div id="l81"
-               class="code sev- "><tt><i>81</i> &nbsp;</tt>
-            </div>
-            <div id="l82"
-               class="code sev- "><tt><i>82</i>         <span class="c1"># Properties specific for BB</span></tt>
-            </div>
-            <div id="l83"
-               class="code sev- "><tt><i>83</i>         <span class="bp">self</span><span class="o">.</span><span class="n">properties</span> <span class="o">=</span> <span class="n">properties</span></tt>
-            </div>
-            <div id="l84"
-               class="code sev- "><tt><i>84</i>         <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;ALA GLY SER PRO ARG ALA PRO GLY&quot;</span><span class="p">)</span></tt>
-            </div>
-            <div id="l85"
-               class="code sev- "><tt><i>85</i>         <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="n">_from_string_to_list</span><span class="p">(</span></tt>
-            </div>
-            <div id="l86"
-               class="code sev- "><tt><i>86</i>             <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;forcefield&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">protein_ff14SB_path</span><span class="p">,</span> <span class="n">dna_bsc1_path</span><span class="p">,</span> <span class="n">gaff_path</span><span class="p">])</span></tt>
-            </div>
-            <div id="l87"
-               class="code sev- "><tt><i>87</i>         <span class="p">)</span></tt>
-            </div>
-            <div id="l88"
-               class="code sev- "><tt><i>88</i>         <span class="c1"># Find the paths of the leaprc files if only the force field names are provided</span></tt>
-            </div>
-            <div id="l89"
-               class="code sev- "><tt><i>89</i>         <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_leaprc_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="p">)</span></tt>
-            </div>
-            <div id="l90"
-               class="code sev- "><tt><i>90</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
-            </div>
-            <div id="l91"
-               class="code sev- "><tt><i>91</i>             <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span> <span class="o">=</span> <span class="p">[</span><span class="n">ff</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;/usr/local&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ff</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="p">]</span></tt>
-            </div>
-            <div id="l92"
-               class="code sev- "><tt><i>92</i>         <span class="bp">self</span><span class="o">.</span><span class="n">build_library</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;build_library&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></tt>
-            </div>
-            <div id="l93"
-               class="code sev- "><tt><i>93</i>         <span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;binary_path&quot;</span><span class="p">,</span> <span class="s2">&quot;tleap&quot;</span><span class="p">)</span></tt>
+               </ul><tt><i>93</i>         </tt>
             </div>
             <div id="l94"
-               class="code sev- "><tt><i>94</i> &nbsp;</tt>
+               class="code sev- "><tt><i>94</i>         <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span> <span class="s2">&quot;ALA GLY SER PRO ARG ALA PRO GLY&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l95"
-               class="code sev- "><tt><i>95</i>         <span class="c1"># Check the properties</span></tt>
+               class="code sev- "><tt><i>95</i>         <span class="bp">self</span><span class="o">.</span><span class="n">build_library</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;build_library&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></tt>
             </div>
             <div id="l96"
-               class="code sev- "><tt><i>96</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_properties</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>96</i>         <span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;binary_path&quot;</span><span class="p">,</span> <span class="s2">&quot;tleap&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l97"
-               class="code sev- "><tt><i>97</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>97</i> &nbsp;</tt>
             </div>
             <div id="l98"
-               class="code sev- "><tt><i>98</i> &nbsp;</tt>
+               class="code sev- "><tt><i>98</i>         <span class="c1"># Check the properties</span></tt>
             </div>
             <div id="l99"
-               class="code sev- "><tt><i>99</i>     <span class="k">def</span><span class="w"> </span><span class="nf">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>99</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_properties</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span></tt>
             </div>
             <div id="l100"
-               class="code sev- "><tt><i>100</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks input/output paths correctness&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>100</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">()</span></tt>
             </div>
             <div id="l101"
                class="code sev- "><tt><i>101</i> &nbsp;</tt>
             </div>
             <div id="l102"
-               class="code sev- "><tt><i>102</i>         <span class="c1"># Check output(s)</span></tt>
+               class="code sev- "><tt><i>102</i>     <span class="k">def</span><span class="w"> </span><span class="nf">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_log</span><span class="p">,</span> <span class="n">err_log</span><span class="p">):</span></tt>
             </div>
             <div id="l103"
-               class="code sev- "><tt><i>103</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>103</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks input/output paths correctness&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l104"
-               class="code sev- "><tt><i>104</i>             <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span></tt>
+               class="code sev- "><tt><i>104</i> &nbsp;</tt>
             </div>
             <div id="l105"
-               class="code sev- "><tt><i>105</i>             <span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>105</i>         <span class="c1"># Check output(s)</span></tt>
             </div>
             <div id="l106"
-               class="code sev- "><tt><i>106</i>             <span class="kc">False</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>106</i>         <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_output_path</span><span class="p">(</span></tt>
             </div>
             <div id="l107"
-               class="code sev- "><tt><i>107</i>             <span class="n">out_log</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>107</i>             <span class="bp">self</span><span class="o">.</span><span class="n">io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">],</span></tt>
             </div>
             <div id="l108"
-               class="code sev- "><tt><i>108</i>             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span></tt>
+               class="code sev- "><tt><i>108</i>             <span class="s2">&quot;output_pdb_path&quot;</span><span class="p">,</span></tt>
             </div>
             <div id="l109"
-               class="code sev- "><tt><i>109</i>         <span class="p">)</span></tt>
+               class="code sev- "><tt><i>109</i>             <span class="kc">False</span><span class="p">,</span></tt>
             </div>
             <div id="l110"
-               class="code sev- "><tt><i>110</i> &nbsp;</tt>
+               class="code sev- "><tt><i>110</i>             <span class="n">out_log</span><span class="p">,</span></tt>
             </div>
             <div id="l111"
-               class="code sev- "><tt><i>111</i>     <span class="k">def</span><span class="w"> </span><span class="nf">find_leaprc_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forcefields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span></tt>
+               class="code sev- "><tt><i>111</i>             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span></tt>
             </div>
             <div id="l112"
-               class="code sev- "><tt><i>112</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>112</i>         <span class="p">)</span></tt>
             </div>
             <div id="l113"
-               class="code sev- "><tt><i>113</i> <span class="sd">        Find the leaprc paths for the force fields provided.</span></tt>
+               class="code sev- "><tt><i>113</i> &nbsp;</tt>
             </div>
             <div id="l114"
-               class="code sev- "><tt><i>114</i> &nbsp;</tt>
+               class="code sev- "><tt><i>114</i>     <span class="k">def</span><span class="w"> </span><span class="nf">find_leaprc_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forcefields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span></tt>
             </div>
             <div id="l115"
-               class="code sev- "><tt><i>115</i> <span class="sd">        For each item in the forcefields list, the function checks if the str is a path to an existing file.</span></tt>
+               class="code sev- "><tt><i>115</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l116"
-               class="code sev- "><tt><i>116</i> <span class="sd">        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/</span></tt>
+               class="code sev- "><tt><i>116</i> <span class="sd">        Find the leaprc paths for the force fields provided.</span></tt>
             </div>
             <div id="l117"
-               class="code sev- "><tt><i>117</i> <span class="sd">        directory with and without the leaprc prefix.</span></tt>
+               class="code sev- "><tt><i>117</i> &nbsp;</tt>
             </div>
             <div id="l118"
-               class="code sev- "><tt><i>118</i> &nbsp;</tt>
+               class="code sev- "><tt><i>118</i> <span class="sd">        For each item in the forcefields list, the function checks if the str is a path to an existing file.</span></tt>
             </div>
             <div id="l119"
-               class="code sev- "><tt><i>119</i> <span class="sd">        Args:</span></tt>
+               class="code sev- "><tt><i>119</i> <span class="sd">        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/</span></tt>
             </div>
             <div id="l120"
-               class="code sev- "><tt><i>120</i> <span class="sd">            forcefields (List[str]): List of force fields to find the leaprc files for.</span></tt>
+               class="code sev- "><tt><i>120</i> <span class="sd">        directory with and without the leaprc prefix.</span></tt>
             </div>
             <div id="l121"
                class="code sev- "><tt><i>121</i> &nbsp;</tt>
             </div>
             <div id="l122"
-               class="code sev- "><tt><i>122</i> <span class="sd">        Returns:</span></tt>
+               class="code sev- "><tt><i>122</i> <span class="sd">        Args:</span></tt>
             </div>
             <div id="l123"
-               class="code sev- "><tt><i>123</i> <span class="sd">            List[str]: List of leaprc file paths.</span></tt>
+               class="code sev- "><tt><i>123</i> <span class="sd">            forcefields (List[str]): List of force fields to find the leaprc files for.</span></tt>
             </div>
             <div id="l124"
-               class="code sev- "><tt><i>124</i> <span class="sd">        &quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>124</i> &nbsp;</tt>
             </div>
             <div id="l125"
-               class="code sev- "><tt><i>125</i> &nbsp;</tt>
+               class="code sev- "><tt><i>125</i> <span class="sd">        Returns:</span></tt>
             </div>
             <div id="l126"
-               class="code sev- "><tt><i>126</i>         <span class="n">leaprc_paths</span> <span class="o">=</span> <span class="p">[]</span></tt>
+               class="code sev- "><tt><i>126</i> <span class="sd">            List[str]: List of leaprc file paths.</span></tt>
             </div>
             <div id="l127"
-               class="code sev- "><tt><i>127</i> &nbsp;</tt>
+               class="code sev- "><tt><i>127</i> <span class="sd">        &quot;&quot;&quot;</span></tt>
             </div>
             <div id="l128"
-               class="code sev- "><tt><i>128</i>         <span class="k">for</span> <span class="n">forcefield</span> <span class="ow">in</span> <span class="n">forcefields</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>128</i> &nbsp;</tt>
             </div>
             <div id="l129"
-               class="code sev- "><tt><i>129</i> &nbsp;</tt>
+               class="code sev- "><tt><i>129</i>         <span class="n">leaprc_paths</span> <span class="o">=</span> <span class="p">[]</span></tt>
             </div>
             <div id="l130"
-               class="code sev- "><tt><i>130</i>             <span class="n">num_paths</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaprc_paths</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>130</i> &nbsp;</tt>
             </div>
             <div id="l131"
-               class="code sev- "><tt><i>131</i> &nbsp;</tt>
+               class="code sev- "><tt><i>131</i>         <span class="k">for</span> <span class="n">forcefield</span> <span class="ow">in</span> <span class="n">forcefields</span><span class="p">:</span></tt>
             </div>
             <div id="l132"
-               class="code sev- "><tt><i>132</i>             <span class="c1"># Check if the forcefield is a path to an existing file</span></tt>
+               class="code sev- "><tt><i>132</i> &nbsp;</tt>
             </div>
             <div id="l133"
-               class="code sev- "><tt><i>133</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">forcefield</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>133</i>             <span class="n">num_paths</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaprc_paths</span><span class="p">)</span></tt>
             </div>
             <div id="l134"
-               class="code sev- "><tt><i>134</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">forcefield</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>134</i> &nbsp;</tt>
             </div>
             <div id="l135"
-               class="code sev- "><tt><i>135</i>                 <span class="k">continue</span></tt>
+               class="code sev- "><tt><i>135</i>             <span class="c1"># Check if the forcefield is a path to an existing file</span></tt>
             </div>
             <div id="l136"
-               class="code sev- "><tt><i>136</i> &nbsp;</tt>
+               class="code sev- "><tt><i>136</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">forcefield</span><span class="p">):</span></tt>
             </div>
             <div id="l137"
-               class="code sev- "><tt><i>137</i>             <span class="c1"># Check if the forcefield is in the leaprc directory</span></tt>
+               class="code sev- "><tt><i>137</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">forcefield</span><span class="p">)</span></tt>
             </div>
             <div id="l138"
-               class="code sev- "><tt><i>138</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;leaprc.</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>138</i>                 <span class="k">continue</span></tt>
             </div>
             <div id="l139"
-               class="code sev- "><tt><i>139</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>139</i> &nbsp;</tt>
             </div>
             <div id="l140"
-               class="code sev- "><tt><i>140</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>140</i>             <span class="c1"># Check if the forcefield is in the leaprc directory</span></tt>
             </div>
             <div id="l141"
-               class="code sev- "><tt><i>141</i>                 <span class="k">continue</span></tt>
+               class="code sev- "><tt><i>141</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;leaprc.</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l142"
-               class="code sev- "><tt><i>142</i> &nbsp;</tt>
+               class="code sev- "><tt><i>142</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
             </div>
             <div id="l143"
-               class="code sev- "><tt><i>143</i>             <span class="c1"># Check if the forcefield is in the oldff directory</span></tt>
+               class="code sev- "><tt><i>143</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
             </div>
             <div id="l144"
-               class="code sev- "><tt><i>144</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;oldff&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;leaprc.</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>144</i>                 <span class="k">continue</span></tt>
             </div>
             <div id="l145"
-               class="code sev- "><tt><i>145</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>145</i> &nbsp;</tt>
             </div>
             <div id="l146"
-               class="code sev- "><tt><i>146</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>146</i>             <span class="c1"># Check if the forcefield is in the oldff directory</span></tt>
             </div>
             <div id="l147"
-               class="code sev- "><tt><i>147</i>                 <span class="k">continue</span></tt>
+               class="code sev- "><tt><i>147</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;oldff&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;leaprc.</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l148"
-               class="code sev- "><tt><i>148</i> &nbsp;</tt>
+               class="code sev- "><tt><i>148</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
             </div>
             <div id="l149"
-               class="code sev- "><tt><i>149</i>             <span class="c1"># Check if the forcefield is in the leaprc directory without the leaprc prefix</span></tt>
+               class="code sev- "><tt><i>149</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
             </div>
             <div id="l150"
-               class="code sev- "><tt><i>150</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>150</i>                 <span class="k">continue</span></tt>
             </div>
             <div id="l151"
-               class="code sev- "><tt><i>151</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>151</i> &nbsp;</tt>
             </div>
             <div id="l152"
-               class="code sev- "><tt><i>152</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>152</i>             <span class="c1"># Check if the forcefield is in the leaprc directory without the leaprc prefix</span></tt>
             </div>
             <div id="l153"
-               class="code sev- "><tt><i>153</i>                 <span class="k">continue</span></tt>
+               class="code sev- "><tt><i>153</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l154"
-               class="code sev- "><tt><i>154</i> &nbsp;</tt>
+               class="code sev- "><tt><i>154</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
             </div>
             <div id="l155"
-               class="code sev- "><tt><i>155</i>             <span class="c1"># Check if the forcefield is in the oldff directory without the leaprc prefix</span></tt>
+               class="code sev- "><tt><i>155</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
             </div>
             <div id="l156"
-               class="code sev- "><tt><i>156</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;oldff&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>156</i>                 <span class="k">continue</span></tt>
             </div>
             <div id="l157"
-               class="code sev- "><tt><i>157</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>157</i> &nbsp;</tt>
             </div>
             <div id="l158"
-               class="code sev- "><tt><i>158</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>158</i>             <span class="c1"># Check if the forcefield is in the oldff directory without the leaprc prefix</span></tt>
             </div>
             <div id="l159"
-               class="code sev- "><tt><i>159</i>                 <span class="k">continue</span></tt>
+               class="code sev- "><tt><i>159</i>             <span class="n">leaprc_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;AMBERHOME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;dat&#39;</span><span class="p">,</span> <span class="s1">&#39;leap&#39;</span><span class="p">,</span> <span class="s1">&#39;cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;oldff&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l160"
-               class="code sev- "><tt><i>160</i> &nbsp;</tt>
+               class="code sev- "><tt><i>160</i>             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">):</span></tt>
             </div>
             <div id="l161"
-               class="code sev- "><tt><i>161</i>             <span class="n">new_num_paths</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaprc_paths</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>161</i>                 <span class="n">leaprc_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaprc_path</span><span class="p">)</span></tt>
             </div>
             <div id="l162"
-               class="code sev- "><tt><i>162</i> &nbsp;</tt>
+               class="code sev- "><tt><i>162</i>                 <span class="k">continue</span></tt>
             </div>
             <div id="l163"
-               class="code sev- "><tt><i>163</i>             <span class="k">if</span> <span class="n">new_num_paths</span> <span class="o">==</span> <span class="n">num_paths</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>163</i> &nbsp;</tt>
             </div>
             <div id="l164"
-               class="code sev- "><tt><i>164</i>                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Force field </span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2"> not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>164</i>             <span class="n">new_num_paths</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">leaprc_paths</span><span class="p">)</span></tt>
             </div>
             <div id="l165"
                class="code sev- "><tt><i>165</i> &nbsp;</tt>
             </div>
             <div id="l166"
-               class="code sev- "><tt><i>166</i>         <span class="k">return</span> <span class="n">leaprc_paths</span></tt>
+               class="code sev- "><tt><i>166</i>             <span class="k">if</span> <span class="n">new_num_paths</span> <span class="o">==</span> <span class="n">num_paths</span><span class="p">:</span></tt>
             </div>
             <div id="l167"
-               class="code sev- "><tt><i>167</i> &nbsp;</tt>
+               class="code sev- "><tt><i>167</i>                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Force field </span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2"> not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l168"
-               class="code sev- "><tt><i>168</i>     <span class="nd">@launchlogger</span></tt>
+               class="code sev- "><tt><i>168</i> &nbsp;</tt>
             </div>
             <div id="l169"
-               class="code sev- "><tt><i>169</i>     <span class="k">def</span><span class="w"> </span><span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
+               class="code sev- "><tt><i>169</i>         <span class="k">return</span> <span class="n">leaprc_paths</span></tt>
             </div>
             <div id="l170"
-               class="code sev- "><tt><i>170</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Launches the execution of the LeapBuildLinearStructure module.&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>170</i> &nbsp;</tt>
             </div>
             <div id="l171"
-               class="code sev- "><tt><i>171</i> &nbsp;</tt>
+               class="code sev- "><tt><i>171</i>     <span class="nd">@launchlogger</span></tt>
             </div>
             <div id="l172"
-               class="code sev- "><tt><i>172</i>         <span class="c1"># check input/output paths and parameters</span></tt>
+               class="code sev- "><tt><i>172</i>     <span class="k">def</span><span class="w"> </span><span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></tt>
             </div>
             <div id="l173"
-               class="code sev- "><tt><i>173</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_log</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>173</i> <span class="w">        </span><span class="sd">&quot;&quot;&quot;Launches the execution of the LeapBuildLinearStructure module.&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l174"
                class="code sev- "><tt><i>174</i> &nbsp;</tt>
             </div>
             <div id="l175"
-               class="code sev- "><tt><i>175</i>         <span class="c1"># Setup Biobb</span></tt>
+               class="code sev- "><tt><i>175</i>         <span class="c1"># check input/output paths and parameters</span></tt>
             </div>
             <div id="l176"
-               class="code sev- "><tt><i>176</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span></tt>
+               class="code sev- "><tt><i>176</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_data_params</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_log</span><span class="p">)</span></tt>
             </div>
             <div id="l177"
-               class="code sev- "><tt><i>177</i>             <span class="k">return</span> <span class="mi">0</span></tt>
+               class="code sev- "><tt><i>177</i> &nbsp;</tt>
             </div>
             <div id="l178"
-               class="code sev- "><tt><i>178</i>         <span class="bp">self</span><span class="o">.</span><span class="n">stage_files</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>178</i>         <span class="c1"># Setup Biobb</span></tt>
             </div>
             <div id="l179"
-               class="code sev- "><tt><i>179</i> &nbsp;</tt>
+               class="code sev- "><tt><i>179</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_restart</span><span class="p">():</span></tt>
             </div>
             <div id="l180"
-               class="code sev- "><tt><i>180</i>         <span class="c1"># create .in file</span></tt>
+               class="code sev- "><tt><i>180</i>             <span class="k">return</span> <span class="mi">0</span></tt>
             </div>
             <div id="l181"
-               class="code sev- "><tt><i>181</i>         <span class="c1"># TC5b = sequence { NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER }</span></tt>
+               class="code sev- "><tt><i>181</i>         <span class="bp">self</span><span class="o">.</span><span class="n">stage_files</span><span class="p">()</span></tt>
             </div>
             <div id="l182"
-               class="code sev- "><tt><i>182</i>         <span class="c1"># savepdb TC5b TC5b_linear.pdb</span></tt>
+               class="code sev- "><tt><i>182</i> &nbsp;</tt>
             </div>
             <div id="l183"
-               class="code sev- "><tt><i>183</i>         <span class="c1"># quit</span></tt>
+               class="code sev- "><tt><i>183</i>         <span class="c1"># create .in file</span></tt>
             </div>
             <div id="l184"
-               class="code sev- "><tt><i>184</i> &nbsp;</tt>
+               class="code sev- "><tt><i>184</i>         <span class="c1"># TC5b = sequence { NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER }</span></tt>
             </div>
             <div id="l185"
-               class="code sev- "><tt><i>185</i>         <span class="c1"># Creating temporary folder &amp; Leap configuration (instructions) file</span></tt>
+               class="code sev- "><tt><i>185</i>         <span class="c1"># savepdb TC5b TC5b_linear.pdb</span></tt>
             </div>
             <div id="l186"
-               class="code sev- "><tt><i>186</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>186</i>         <span class="c1"># quit</span></tt>
             </div>
             <div id="l187"
-               class="code sev- "><tt><i>187</i>             <span class="n">instructions_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>187</i> &nbsp;</tt>
             </div>
             <div id="l188"
-               class="code sev- "><tt><i>188</i>                 <span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s2">&quot;unique_dir&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;leap.in&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>188</i>         <span class="c1"># Creating temporary folder &amp; Leap configuration (instructions) file</span></tt>
             </div>
             <div id="l189"
-               class="code sev- "><tt><i>189</i>             <span class="p">)</span></tt>
+               class="code sev- "><tt><i>189</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
             </div>
             <div id="l190"
-               class="code sev- "><tt><i>190</i>             <span class="n">instructions_file_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>190</i>             <span class="n">instructions_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span></tt>
             </div>
             <div id="l191"
-               class="code sev- "><tt><i>191</i>                 <span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container_volume_path</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;leap.in&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>191</i>                 <span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s2">&quot;unique_dir&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;leap.in&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l192"
                class="code sev- "><tt><i>192</i>             <span class="p">)</span></tt>
             </div>
             <div id="l193"
-               class="code sev- "><tt><i>193</i>             <span class="n">tmp_folder</span> <span class="o">=</span> <span class="kc">None</span></tt>
+               class="code sev- "><tt><i>193</i>             <span class="n">instructions_file_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span></tt>
             </div>
             <div id="l194"
-               class="code sev- "><tt><i>194</i>         <span class="k">else</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>194</i>                 <span class="n">PurePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container_volume_path</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;leap.in&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l195"
-               class="code sev- "><tt><i>195</i>             <span class="n">tmp_folder</span> <span class="o">=</span> <span class="n">fu</span><span class="o">.</span><span class="n">create_unique_dir</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>195</i>             <span class="p">)</span></tt>
             </div>
             <div id="l196"
-               class="code sev- "><tt><i>196</i>             <span class="n">instructions_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PurePath</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;leap.in&quot;</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>196</i>             <span class="n">tmp_folder</span> <span class="o">=</span> <span class="kc">None</span></tt>
             </div>
             <div id="l197"
-               class="code sev- "><tt><i>197</i>             <span class="n">fu</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Creating </span><span class="si">%s</span><span class="s2"> temporary folder&quot;</span> <span class="o">%</span> <span class="n">tmp_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>197</i>         <span class="k">else</span><span class="p">:</span></tt>
             </div>
             <div id="l198"
-               class="code sev- "><tt><i>198</i>             <span class="n">instructions_file_path</span> <span class="o">=</span> <span class="n">instructions_file</span></tt>
+               class="code sev- "><tt><i>198</i>             <span class="n">tmp_folder</span> <span class="o">=</span> <span class="n">fu</span><span class="o">.</span><span class="n">create_unique_dir</span><span class="p">()</span></tt>
             </div>
             <div id="l199"
-               class="code sev- "><tt><i>199</i> &nbsp;</tt>
+               class="code sev- "><tt><i>199</i>             <span class="n">instructions_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">PurePath</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;leap.in&quot;</span><span class="p">))</span></tt>
             </div>
             <div id="l200"
-               class="code sev- "><tt><i>200</i>         <span class="c1"># instructions_file = str(PurePath(tmp_folder).joinpath(&quot;leap.in&quot;))</span></tt>
+               class="code sev- "><tt><i>200</i>             <span class="n">fu</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Creating </span><span class="si">%s</span><span class="s2"> temporary folder&quot;</span> <span class="o">%</span> <span class="n">tmp_folder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_log</span><span class="p">)</span></tt>
             </div>
             <div id="l201"
-               class="code sev- "><tt><i>201</i>         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">instructions_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">leapin</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>201</i>             <span class="n">instructions_file_path</span> <span class="o">=</span> <span class="n">instructions_file</span></tt>
             </div>
             <div id="l202"
-               class="code sev- "><tt><i>202</i>             <span class="c1"># Forcefields loaded from input forcefield property</span></tt>
+               class="code sev- "><tt><i>202</i> &nbsp;</tt>
             </div>
             <div id="l203"
-               class="code sev- "><tt><i>203</i>             <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>203</i>         <span class="c1"># instructions_file = str(PurePath(tmp_folder).joinpath(&quot;leap.in&quot;))</span></tt>
             </div>
             <div id="l204"
-               class="code sev- "><tt><i>204</i>                 <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;source </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">))</span></tt>
+               class="code sev- "><tt><i>204</i>         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">instructions_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">leapin</span><span class="p">:</span></tt>
             </div>
             <div id="l205"
-               class="code sev- "><tt><i>205</i> &nbsp;</tt>
+               class="code sev- "><tt><i>205</i>             <span class="c1"># Forcefields loaded from input forcefield property</span></tt>
             </div>
             <div id="l206"
-               class="code sev- "><tt><i>206</i>             <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;struct = sequence {&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">+</span> <span class="s2">&quot; } </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>206</i>             <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forcefield</span><span class="p">:</span></tt>
             </div>
             <div id="l207"
-               class="code sev- "><tt><i>207</i>             <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>207</i>                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
             </div>
             <div id="l208"
-               class="code sev- "><tt><i>208</i>                 <span class="s2">&quot;savepdb struct &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
+               class="code sev- "><tt><i>208</i>                     <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;source leaprc.</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">))</span></tt>
             </div>
             <div id="l209"
-               class="code sev- "><tt><i>209</i>             <span class="p">)</span></tt>
+               class="code sev- "><tt><i>209</i>                 <span class="k">else</span><span class="p">:</span></tt>
             </div>
             <div id="l210"
-               class="code sev- "><tt><i>210</i>             <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;quit </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>210</i>                     <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;source </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">))</span></tt>
             </div>
             <div id="l211"
                class="code sev- "><tt><i>211</i> &nbsp;</tt>
             </div>
             <div id="l212"
-               class="code sev- "><tt><i>212</i>         <span class="c1"># Command line</span></tt>
+               class="code sev- "><tt><i>212</i>             <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;struct = sequence {&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">+</span> <span class="s2">&quot; } </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l213"
-               class="code sev- "><tt><i>213</i>         <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="n">instructions_file_path</span><span class="p">]</span></tt>
+               class="code sev- "><tt><i>213</i>             <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span></tt>
             </div>
             <div id="l214"
-               class="code sev- "><tt><i>214</i> &nbsp;</tt>
+               class="code sev- "><tt><i>214</i>                 <span class="s2">&quot;savepdb struct &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stage_io_dict</span><span class="p">[</span><span class="s2">&quot;out&quot;</span><span class="p">][</span><span class="s2">&quot;output_pdb_path&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></tt>
             </div>
             <div id="l215"
-               class="code sev- "><tt><i>215</i>         <span class="c1"># Run Biobb block</span></tt>
+               class="code sev- "><tt><i>215</i>             <span class="p">)</span></tt>
             </div>
             <div id="l216"
-               class="code sev- "><tt><i>216</i>         <span class="bp">self</span><span class="o">.</span><span class="n">run_biobb</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>216</i>             <span class="n">leapin</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;quit </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
             </div>
             <div id="l217"
                class="code sev- "><tt><i>217</i> &nbsp;</tt>
             </div>
             <div id="l218"
-               class="code sev- "><tt><i>218</i>         <span class="c1"># Copy files to host</span></tt>
+               class="code sev- "><tt><i>218</i>         <span class="c1"># Command line</span></tt>
             </div>
             <div id="l219"
-               class="code sev- "><tt><i>219</i>         <span class="bp">self</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>219</i>         <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">binary_path</span><span class="p">,</span> <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="n">instructions_file_path</span><span class="p">]</span></tt>
             </div>
             <div id="l220"
                class="code sev- "><tt><i>220</i> &nbsp;</tt>
             </div>
             <div id="l221"
-               class="code sev- "><tt><i>221</i>         <span class="c1"># remove temporary folder(s)</span></tt>
+               class="code sev- "><tt><i>221</i>         <span class="c1"># Run Biobb block</span></tt>
             </div>
             <div id="l222"
-               class="code sev- "><tt><i>222</i>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_path</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>222</i>         <span class="bp">self</span><span class="o">.</span><span class="n">run_biobb</span><span class="p">()</span></tt>
             </div>
             <div id="l223"
-               class="code sev- "><tt><i>223</i>             <span class="bp">self</span><span class="o">.</span><span class="n">tmp_files</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;leap.log&quot;</span><span class="p">])</span></tt>
+               class="code sev- "><tt><i>223</i> &nbsp;</tt>
             </div>
             <div id="l224"
-               class="code sev- "><tt><i>224</i>         <span class="k">else</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>224</i>         <span class="c1"># Copy files to host</span></tt>
             </div>
             <div id="l225"
-               class="code sev- "><tt><i>225</i>             <span class="bp">self</span><span class="o">.</span><span class="n">tmp_files</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">),</span> <span class="s2">&quot;leap.log&quot;</span><span class="p">])</span></tt>
+               class="code sev- "><tt><i>225</i>         <span class="bp">self</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span></tt>
             </div>
             <div id="l226"
-               class="code sev- "><tt><i>226</i>         <span class="bp">self</span><span class="o">.</span><span class="n">remove_tmp_files</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>226</i> &nbsp;</tt>
             </div>
             <div id="l227"
-               class="code sev- "><tt><i>227</i> &nbsp;</tt>
+               class="code sev- "><tt><i>227</i>         <span class="c1"># remove temporary folder(s)</span></tt>
             </div>
             <div id="l228"
-               class="code sev- "><tt><i>228</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">(</span><span class="n">output_files_created</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>228</i>         <span class="bp">self</span><span class="o">.</span><span class="n">tmp_files</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">tmp_folder</span><span class="p">),</span> <span class="s2">&quot;leap.log&quot;</span><span class="p">])</span></tt>
             </div>
             <div id="l229"
-               class="code sev- "><tt><i>229</i> &nbsp;</tt>
+               class="code sev- "><tt><i>229</i>         <span class="bp">self</span><span class="o">.</span><span class="n">remove_tmp_files</span><span class="p">()</span></tt>
             </div>
             <div id="l230"
-               class="code sev- "><tt><i>230</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_code</span></tt>
+               class="code sev- "><tt><i>230</i> &nbsp;</tt>
             </div>
             <div id="l231"
-               class="code sev- "><tt><i>231</i> &nbsp;</tt>
+               class="code sev- "><tt><i>231</i>         <span class="bp">self</span><span class="o">.</span><span class="n">check_arguments</span><span class="p">(</span><span class="n">output_files_created</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_exception</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></tt>
             </div>
             <div id="l232"
                class="code sev- "><tt><i>232</i> &nbsp;</tt>
             </div>
             <div id="l233"
-               class="code sev- "><tt><i>233</i> <span class="k">def</span><span class="w"> </span><span class="nf">leap_build_linear_structure</span><span class="p">(</span></tt>
+               class="code sev- "><tt><i>233</i>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_code</span></tt>
             </div>
             <div id="l234"
-               class="code sev- "><tt><i>234</i>     <span class="n">output_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span></tt>
+               class="code sev- "><tt><i>234</i> &nbsp;</tt>
             </div>
             <div id="l235"
-               class="code sev- "><tt><i>235</i> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>235</i> &nbsp;</tt>
             </div>
             <div id="l236"
-               class="code sev- "><tt><i>236</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the :class:`LeapBuildLinearStructure &lt;leap.leap_build_linear_structure.LeapBuildLinearStructure&gt;` class and</span></tt>
+               class="code sev- "><tt><i>236</i> <span class="k">def</span><span class="w"> </span><span class="nf">leap_build_linear_structure</span><span class="p">(</span></tt>
             </div>
             <div id="l237"
-               class="code sev- "><tt><i>237</i> <span class="sd">    execute the :meth:`launch() &lt;leap.leap_build_linear_structure.LeapBuildLinearStructure.launch&gt;` method.&quot;&quot;&quot;</span></tt>
+               class="code sev- "><tt><i>237</i>     <span class="n">output_pdb_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span></tt>
             </div>
             <div id="l238"
-               class="code sev- "><tt><i>238</i>     <span class="k">return</span> <span class="n">LeapBuildLinearStructure</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">locals</span><span class="p">()))</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>238</i> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></tt>
             </div>
             <div id="l239"
-               class="code sev- "><tt><i>239</i> &nbsp;</tt>
+               class="code sev- "><tt><i>239</i> <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the :class:`LeapBuildLinearStructure &lt;leap.leap_build_linear_structure.LeapBuildLinearStructure&gt;` class and</span></tt>
             </div>
             <div id="l240"
-               class="code sev- "><tt><i>240</i> &nbsp;</tt>
+               class="code sev- "><tt><i>240</i> <span class="sd">    execute the :meth:`launch() &lt;leap.leap_build_linear_structure.LeapBuildLinearStructure.launch&gt;` method.&quot;&quot;&quot;</span></tt>
             </div>
             <div id="l241"
-               class="code sev- "><tt><i>241</i> <span class="n">leap_build_linear_structure</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">LeapBuildLinearStructure</span><span class="o">.</span><span class="vm">__doc__</span></tt>
+               class="code sev- "><tt><i>241</i>     <span class="k">return</span> <span class="n">LeapBuildLinearStructure</span><span class="p">(</span><span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">locals</span><span class="p">()))</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span></tt>
             </div>
             <div id="l242"
-               class="code sev- "><tt><i>242</i> <span class="n">main</span> <span class="o">=</span> <span class="n">LeapBuildLinearStructure</span><span class="o">.</span><span class="n">get_main</span><span class="p">(</span><span class="n">leap_build_linear_structure</span><span class="p">,</span> <span class="s2">&quot;Building a linear (unfolded) 3D structure from an AA sequence.&quot;</span><span class="p">)</span></tt>
+               class="code sev- "><tt><i>242</i> &nbsp;</tt>
             </div>
             <div id="l243"
                class="code sev- "><tt><i>243</i> &nbsp;</tt>
             </div>
             <div id="l244"
-               class="code sev- "><tt><i>244</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span></tt>
+               class="code sev- "><tt><i>244</i> <span class="n">leap_build_linear_structure</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">LeapBuildLinearStructure</span><span class="o">.</span><span class="vm">__doc__</span></tt>
             </div>
             <div id="l245"
-               class="code sev- "><tt><i>245</i>     <span class="n">main</span><span class="p">()</span></tt>
+               class="code sev- "><tt><i>245</i> <span class="n">main</span> <span class="o">=</span> <span class="n">LeapBuildLinearStructure</span><span class="o">.</span><span class="n">get_main</span><span class="p">(</span><span class="n">leap_build_linear_structure</span><span class="p">,</span> <span class="s2">&quot;Building a linear (unfolded) 3D structure from an AA sequence.&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l246"
+               class="code sev- "><tt><i>246</i> &nbsp;</tt>
+            </div>
+            <div id="l247"
+               class="code sev- "><tt><i>247</i> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l248"
+               class="code sev- "><tt><i>248</i>     <span class="n">main</span><span class="p">()</span></tt>
             </div>
             
          </div>
