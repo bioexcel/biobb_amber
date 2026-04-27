@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}

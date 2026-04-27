@@ -40,16 +40,16 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **binary_path** (*string*): (ambpdb) Path to the ambpdb executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **binary_path** (*string*): (ambpdb) Path to the ambpdb executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_amber_to_pdb.yml)
 ```python
@@ -60,9 +60,8 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_amber_to_pdb_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
 
 ```
 #### Command line
@@ -83,8 +82,7 @@ amber_to_pdb --config config_amber_to_pdb.yml --input_top_path structure.leap.to
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -144,27 +142,27 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **timestep** (*number*): (0.002) Simulation time step -in ps-, used to print data as a function of time..
-* **verbose** (*boolean*): (False) Controls how much information is printed to the calceo-style output file. Options are: False - Just print fraction protonated. True - Print everything calceo prints..
-* **interval** (*integer*): (1000) Interval between which to print out time series data like chunks, cumulative data, and running averages. It is also used as the window of the conditional probability time series..
-* **reduced** (*boolean*): (True) Print out reduction fraction instead of oxidation fraction in time series data..
-* **eos** (*boolean*): (False) Print predicted Eos -via Nernst equation- in place of fraction reduced or oxidized..
-* **calceo** (*boolean*): (True) Triggers the calceo-style output..
-* **running_avg_window** (*integer*): (100) Defines a window size -in MD steps- for a moving, running average time series..
-* **chunk_window** (*integer*): (100) Computes the time series data over a chunk of the simulation of this specified size -window- time steps..
-* **cumulative** (*boolean*): (False) Computes the cumulative average time series data over the course of the trajectory..
-* **fix_remd** (*string*): () This option will trigger cestats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done..
-* **conditional** (*string*): () Evaluates conditional probabilities. CONDITIONAL should be a string of the format: <resid>:<state>,<resid>:<state>,... or <resid>:PROT,<resid>:DEPROT,... or <resid>:<state1>;<state2>,<resid>:PROT,... where <resid> is the residue number in the prmtop and <state> is either the state number or -p-rotonated or -d-eprotonated, case-insensitive..
-* **binary_path** (*string*): (cestats) Path to the cestats executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **timestep** (*number*): (0.002) Simulation time step -in ps-, used to print data as a function of time.
+* **verbose** (*boolean*): (False) Controls how much information is printed to the calceo-style output file. Options are: False - Just print fraction protonated. True - Print everything calceo prints.
+* **interval** (*integer*): (1000) Interval between which to print out time series data like chunks, cumulative data, and running averages. It is also used as the window of the conditional probability time series.
+* **reduced** (*boolean*): (True) Print out reduction fraction instead of oxidation fraction in time series data.
+* **eos** (*boolean*): (False) Print predicted Eos -via Nernst equation- in place of fraction reduced or oxidized.
+* **calceo** (*boolean*): (True) Triggers the calceo-style output.
+* **running_avg_window** (*integer*): (100) Defines a window size -in MD steps- for a moving, running average time series.
+* **chunk_window** (*integer*): (100) Computes the time series data over a chunk of the simulation of this specified size -window- time steps.
+* **cumulative** (*boolean*): (False) Computes the cumulative average time series data over the course of the trajectory.
+* **fix_remd** (*string*): () This option will trigger cestats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done.
+* **conditional** (*string*): () Evaluates conditional probabilities. CONDITIONAL should be a string of the format: <resid>:<state>,<resid>:<state>,... or <resid>:PROT,<resid>:DEPROT,... or <resid>:<state1>;<state2>,<resid>:PROT,... where <resid> is the residue number in the prmtop and <state> is either the state number or -p-rotonated or -d-eprotonated, case-insensitive.
+* **binary_path** (*string*): (cestats) Path to the cestats executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cestats_run.yml)
 ```python
@@ -175,9 +173,15 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cestats_run_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cestats_run_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
 
 ```
 #### Command line
@@ -198,8 +202,16 @@ cestats_run --config config_cestats_run.yml --input_cein_path structure.cein --i
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cestats_run_singularity.json)
+```python
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -259,27 +271,27 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **timestep** (*number*): (0.002) Simulation time step -in ps-, used to print data as a function of time..
-* **verbose** (*boolean*): (False) Controls how much information is printed to the calcpka-style output file. Options are: False - Just print fraction protonated. True - Print everything calcpka prints..
-* **interval** (*integer*): (1000) Interval between which to print out time series data like chunks, cumulative data, and running averages. It is also used as the window of the conditional probability time series..
-* **protonated** (*boolean*): (True) Print out protonation fraction instead of deprotonation fraction in time series data..
-* **pka** (*boolean*): (False) Print predicted pKas -via Henderson-Hasselbalch equation- in place of fraction -de-protonated..
-* **calcpka** (*boolean*): (True) Triggers the calcpka-style output..
-* **running_avg_window** (*integer*): (100) Defines a window size -in MD steps- for a moving, running average time series..
-* **chunk_window** (*integer*): (100) Computes the time series data over a chunk of the simulation of this specified size -window- time steps..
-* **cumulative** (*boolean*): (False) Computes the cumulative average time series data over the course of the trajectory..
-* **fix_remd** (*string*): () This option will trigger cphstats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done..
-* **conditional** (*string*): () Evaluates conditional probabilities. CONDITIONAL should be a string of the format: <resid>:<state>,<resid>:<state>,... or <resid>:PROT,<resid>:DEPROT,... or <resid>:<state1>;<state2>,<resid>:PROT,... where <resid> is the residue number in the prmtop and <state> is either the state number or -p-rotonated or -d-eprotonated, case-insensitive..
-* **binary_path** (*string*): (cphstats) Path to the cphstats executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **timestep** (*number*): (0.002) Simulation time step -in ps-, used to print data as a function of time.
+* **verbose** (*boolean*): (False) Controls how much information is printed to the calcpka-style output file. Options are: False - Just print fraction protonated. True - Print everything calcpka prints.
+* **interval** (*integer*): (1000) Interval between which to print out time series data like chunks, cumulative data, and running averages. It is also used as the window of the conditional probability time series.
+* **protonated** (*boolean*): (True) Print out protonation fraction instead of deprotonation fraction in time series data.
+* **pka** (*boolean*): (False) Print predicted pKas -via Henderson-Hasselbalch equation- in place of fraction -de-protonated.
+* **calcpka** (*boolean*): (True) Triggers the calcpka-style output.
+* **running_avg_window** (*integer*): (100) Defines a window size -in MD steps- for a moving, running average time series.
+* **chunk_window** (*integer*): (100) Computes the time series data over a chunk of the simulation of this specified size -window- time steps.
+* **cumulative** (*boolean*): (False) Computes the cumulative average time series data over the course of the trajectory.
+* **fix_remd** (*string*): () This option will trigger cphstats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done.
+* **conditional** (*string*): () Evaluates conditional probabilities. CONDITIONAL should be a string of the format: <resid>:<state>,<resid>:<state>,... or <resid>:PROT,<resid>:DEPROT,... or <resid>:<state1>;<state2>,<resid>:PROT,... where <resid> is the residue number in the prmtop and <state> is either the state number or -p-rotonated or -d-eprotonated, case-insensitive.
+* **binary_path** (*string*): (cphstats) Path to the cphstats executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cphstats_run.yml)
 ```python
@@ -290,9 +302,15 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cphstats_run_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cphstats_run_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
 
 ```
 #### Command line
@@ -313,8 +331,16 @@ cphstats_run --config config_cphstats_run.yml --input_cpin_path structure.cpin -
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cphstats_run_singularity.json)
+```python
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -360,20 +386,20 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **ion_mask** (*string*): (:K+,Cl-,Na+) Ions to be randomized. Cpptraj mask syntax can be found at the official Cpptraj manual..
-* **solute_mask** (*string*): (:DA,DC,DG,DT,D?3,D?5) Solute (or set of atoms) around which the ions can get no closer than the distance specified. Cpptraj mask syntax can be found at the official Cpptraj manual..
-* **distance** (*number*): (5.0) Minimum distance cutoff for the ions around the defined solute..
-* **overlap** (*number*): (3.5) Minimum distance between ions..
-* **binary_path** (*string*): (cpptraj) Path to the cpptraj executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **ion_mask** (*string*): (:K+,Cl-,Na+) Ions to be randomized. Cpptraj mask syntax can be found at the official Cpptraj manual.
+* **solute_mask** (*string*): (:DA,DC,DG,DT,D?3,D?5) Solute (or set of atoms) around which the ions can get no closer than the distance specified. Cpptraj mask syntax can be found at the official Cpptraj manual.
+* **distance** (*number*): (5.0) Minimum distance cutoff for the ions around the defined solute.
+* **overlap** (*number*): (3.5) Minimum distance between ions.
+* **binary_path** (*string*): (cpptraj) Path to the cpptraj executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cpptraj_randomize_ions.yml)
 ```python
@@ -384,9 +410,15 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cpptraj_randomize_ions_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cpptraj_randomize_ions_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
 
 ```
 #### Command line
@@ -407,8 +439,16 @@ cpptraj_randomize_ions --config config_cpptraj_randomize_ions.yml --input_top_pa
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_cpptraj_randomize_ions_singularity.json)
+```python
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -471,26 +511,26 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
-* **water_type** (*string*): (TIP3PBOX) Water molecule parameters to be used for the topology. .
-* **box_type** (*string*): (truncated_octahedron) Type for the MD system box. .
-* **ions_type** (*string*): (ionsjc_tip3p) Ions type. .
-* **neutralise** (*boolean*): (True) Energetically neutralise the system adding the necessary counterions..
-* **ionic_concentration** (*number*): (50.0) Additional ionic concentration to include in the system box. Units in mM/L..
-* **positive_ions_number** (*integer*): (0) Number of additional positive ions to include in the system box..
-* **negative_ions_number** (*integer*): (0) Number of additional negative ions to include in the system box..
-* **positive_ions_type** (*string*): (Na+) Type of additional positive ions to include in the system box. .
-* **negative_ions_type** (*string*): (Cl-) Type of additional negative ions to include in the system box. .
-* **binary_path** (*string*): (tleap) Path to the tleap executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"].
+* **water_type** (*string*): (TIP3PBOX) Water molecule parameters to be used for the topology. 
+* **box_type** (*string*): (truncated_octahedron) Type for the MD system box. 
+* **ions_type** (*string*): (ionsjc_tip3p) Ions type. 
+* **neutralise** (*boolean*): (True) Energetically neutralise the system adding the necessary counterions.
+* **ionic_concentration** (*number*): (50.0) Additional ionic concentration to include in the system box. Units in mM/L.
+* **positive_ions_number** (*integer*): (0) Number of additional positive ions to include in the system box.
+* **negative_ions_number** (*integer*): (0) Number of additional negative ions to include in the system box.
+* **positive_ions_type** (*string*): (Na+) Type of additional positive ions to include in the system box. 
+* **negative_ions_type** (*string*): (Cl-) Type of additional negative ions to include in the system box. 
+* **binary_path** (*string*): (tleap) Path to the tleap executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_add_ions.yml)
 ```python
@@ -508,9 +548,22 @@ properties:
 ```python
 properties:
   box_type: truncated_octahedron
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+  forcefield:
+  - DNA.bsc1
+  ionic_concentration: 100
+  ions_type: ionsjc_tip4pew
+  positive_ions_type: K+
+  water_type: OPCBOX
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_add_ions_singularity.yml)
+```python
+properties:
+  box_type: truncated_octahedron
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   forcefield:
   - DNA.bsc1
   ionic_concentration: 100
@@ -552,8 +605,24 @@ leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.solv.
     "ionic_concentration": 100,
     "positive_ions_type": "K+",
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_add_ions_singularity.json)
+```python
+{
+  "properties": {
+    "forcefield": [
+      "DNA.bsc1"
+    ],
+    "water_type": "OPCBOX",
+    "ions_type": "ionsjc_tip4pew",
+    "box_type": "truncated_octahedron",
+    "ionic_concentration": 100,
+    "positive_ions_type": "K+",
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -590,19 +659,19 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **sequence** (*string*): (ALA GLY SER PRO ARG ALA PRO GLY) Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them..
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
-* **build_library** (*boolean*): (False) Generate AMBER lib file for the structure..
-* **binary_path** (*string*): (tleap) Path to the tleap executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **sequence** (*string*): (ALA GLY SER PRO ARG ALA PRO GLY) Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them.
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"].
+* **build_library** (*boolean*): (False) Generate AMBER lib file for the structure.
+* **binary_path** (*string*): (tleap) Path to the tleap executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_build_linear_structure.yml)
 ```python
@@ -618,9 +687,19 @@ properties:
 ```python
 properties:
   build_library: false
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+  forcefield:
+  - protein.ff14SB
+  sequence: ALA PRO SER ARG LYS ASP GLU GLY GLY ALA
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_build_linear_structure_singularity.yml)
+```python
+properties:
+  build_library: false
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   forcefield:
   - protein.ff14SB
   sequence: ALA PRO SER ARG LYS ASP GLU GLY GLY ALA
@@ -654,8 +733,21 @@ leap_build_linear_structure --config config_leap_build_linear_structure.yml --ou
       "protein.ff14SB"
     ],
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_build_linear_structure_singularity.json)
+```python
+{
+  "properties": {
+    "sequence": "ALA PRO SER ARG LYS ASP GLU GLY GLY ALA",
+    "build_library": false,
+    "forcefield": [
+      "protein.ff14SB"
+    ],
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -718,17 +810,17 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
-* **binary_path** (*string*): (tleap) Path to the tleap executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"].
+* **binary_path** (*string*): (tleap) Path to the tleap executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top.yml)
 ```python
@@ -741,9 +833,17 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+  forcefield:
+  - protein.ff14SB
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   forcefield:
   - protein.ff14SB
 
@@ -772,8 +872,19 @@ leap_gen_top --config config_leap_gen_top.yml --input_pdb_path structure.leapin.
       "protein.ff14SB"
     ],
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_gen_top_singularity.json)
+```python
+{
+  "properties": {
+    "forcefield": [
+      "protein.ff14SB"
+    ],
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -836,28 +947,28 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"]..
-* **water_type** (*string*): (TIP3PBOX) Water molecule parameters to be used for the topology. .
-* **box_type** (*string*): (truncated_octahedron) Type for the MD system box. .
-* **ions_type** (*string*): (ionsjc_tip3p) Ions type. .
-* **neutralise** (*boolean*): (False) Energetically neutralise the system adding the necessary counterions..
-* **iso** (*boolean*): (False) Make the box isometric..
-* **positive_ions_number** (*integer*): (0) Number of additional positive ions to include in the system box..
-* **negative_ions_number** (*integer*): (0) Number of additional negative ions to include in the system box..
-* **positive_ions_type** (*string*): (Na+) Type of additional positive ions to include in the system box. .
-* **negative_ions_type** (*string*): (Cl-) Type of additional negative ions to include in the system box. .
-* **distance_to_molecule** (*number*): (8.0) Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter..
-* **closeness** (*number*): (1.0) How close, in Å, solvent ATOMs may come to solute ATOMs..
-* **binary_path** (*string*): (tleap) Path to the tleap executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **forcefield** (*array*): ([protein.ff14SB,DNA.bsc1,gaff]) Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. "/path/to/leaprc.protein.ff14SB" or "protein.ff14SB"). Default values: ["protein.ff14SB","DNA.bsc1","gaff"].
+* **water_type** (*string*): (TIP3PBOX) Water molecule parameters to be used for the topology. 
+* **box_type** (*string*): (truncated_octahedron) Type for the MD system box. 
+* **ions_type** (*string*): (ionsjc_tip3p) Ions type. 
+* **neutralise** (*boolean*): (False) Energetically neutralise the system adding the necessary counterions.
+* **iso** (*boolean*): (False) Make the box isometric.
+* **positive_ions_number** (*integer*): (0) Number of additional positive ions to include in the system box.
+* **negative_ions_number** (*integer*): (0) Number of additional negative ions to include in the system box.
+* **positive_ions_type** (*string*): (Na+) Type of additional positive ions to include in the system box. 
+* **negative_ions_type** (*string*): (Cl-) Type of additional negative ions to include in the system box. 
+* **distance_to_molecule** (*number*): (8.0) Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter.
+* **closeness** (*number*): (1.0) How close, in Å, solvent ATOMs may come to solute ATOMs.
+* **binary_path** (*string*): (tleap) Path to the tleap executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_solvate.yml)
 ```python
@@ -874,9 +985,20 @@ properties:
 ```python
 properties:
   box_type: truncated_octahedron
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+  distance_to_molecule: '9.0'
+  forcefield:
+  - protein.ff14SB
+  water_type: TIP3PBOX
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_solvate_singularity.yml)
+```python
+properties:
+  box_type: truncated_octahedron
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   distance_to_molecule: '9.0'
   forcefield:
   - protein.ff14SB
@@ -913,8 +1035,22 @@ leap_solvate --config config_leap_solvate.yml --input_pdb_path structure.leap.pd
     "distance_to_molecule": "9.0",
     "box_type": "truncated_octahedron",
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_solvate_singularity.json)
+```python
+{
+  "properties": {
+    "forcefield": [
+      "protein.ff14SB"
+    ],
+    "water_type": "TIP3PBOX",
+    "distance_to_molecule": "9.0",
+    "box_type": "truncated_octahedron",
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -959,19 +1095,19 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **resnames** (*string*): (None) Residue names to include in CPIN file. .
-* **igb** (*integer*): (2) Generalized Born model which you intend to use to evaluate dynamics or protonation state swaps. .
-* **system** (*string*): (Unknown) Name of system to titrate..
-* **binary_path** (*string*): (cpinutil.py) Path to the cpinutil.py executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **resnames** (*string*): (None) Residue names to include in CPIN file. 
+* **igb** (*integer*): (2) Generalized Born model which you intend to use to evaluate dynamics or protonation state swaps. 
+* **system** (*string*): (Unknown) Name of system to titrate.
+* **binary_path** (*string*): (cpinutil.py) Path to the cpinutil.py executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_cpinutil.yml)
 ```python
@@ -985,9 +1121,18 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_cpinutil_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+  igb: 2
+  resnames: AS4 GL4
+  system: cln025
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_cpinutil_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   igb: 2
   resnames: AS4 GL4
   system: cln025
@@ -1017,8 +1162,19 @@ parmed_cpinutil --config config_parmed_cpinutil.yml --input_top_path structure.s
     "resnames": "AS4 GL4",
     "system": "cln025",
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_cpinutil_singularity.json)
+```python
+{
+  "properties": {
+    "igb": 2,
+    "resnames": "AS4 GL4",
+    "system": "cln025",
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -1058,16 +1214,16 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **binary_path** (*string*): (parmed) Path to the parmed executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **binary_path** (*string*): (parmed) Path to the parmed executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_hmassrepartition.yml)
 ```python
@@ -1078,9 +1234,15 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_hmassrepartition_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_hmassrepartition_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
 
 ```
 #### Command line
@@ -1101,8 +1263,16 @@ parmed_hmassrepartition --config config_parmed_hmassrepartition.yml --input_top_
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_parmed_hmassrepartition_singularity.json)
+```python
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -1142,20 +1312,20 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **remove_hydrogens** (*boolean*): (False) Remove hydrogen atoms from the PDB file..
-* **remove_waters** (*boolean*): (False) Remove water molecules from the PDB file..
-* **constant_pH** (*boolean*): (False) Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation..
-* **reduce** (*boolean*): (False) Run Reduce first to add hydrogen atoms..
-* **binary_path** (*string*): (pdb4amber) Path to the pdb4amber executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **remove_hydrogens** (*boolean*): (False) Remove hydrogen atoms from the PDB file.
+* **remove_waters** (*boolean*): (False) Remove water molecules from the PDB file.
+* **constant_pH** (*boolean*): (False) Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation.
+* **reduce** (*boolean*): (False) Run Reduce first to add hydrogen atoms.
+* **binary_path** (*string*): (pdb4amber) Path to the pdb4amber executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_pdb4amber_run.yml)
 ```python
@@ -1166,9 +1336,15 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_pdb4amber_run_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_pdb4amber_run_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
 
 ```
 #### Command line
@@ -1189,8 +1365,16 @@ pdb4amber_run --config config_pdb4amber_run.yml --input_pdb_path 1aki_fixed.pdb 
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_pdb4amber_run_singularity.json)
+```python
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```
@@ -1259,15 +1443,15 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **mdin** (*object*): ({}) pmemd MD run options specification. (Used if *input_mdin_path* is None).
-* **binary_path** (*string*): (pmemd) pmemd binary path to be used..
-* **simulation_type** (*string*): (minimization) Default options for the mdin file. Each creates a different mdin file. .
-* **mpi_bin** (*string*): (None) Path to the MPI runner. Usually "mpirun" or "srun"..
-* **mpi_np** (*integer*): (0) Number of MPI processes. Usually an integer bigger than 1..
-* **mpi_flags** (*string*): (None) Path to the MPI hostlist file..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
+* **mdin** (*object*): ({}) pmemd MD run options specification. (Used if *input_mdin_path* is None)
+* **binary_path** (*string*): (pmemd) pmemd binary path to be used.
+* **simulation_type** (*string*): (minimization) Default options for the mdin file. Each creates a different mdin file. 
+* **mpi_bin** (*string*): (None) Path to the MPI runner. Usually "mpirun" or "srun".
+* **mpi_np** (*integer*): (0) Number of MPI processes. Usually an integer bigger than 1.
+* **mpi_flags** (*string*): (None) Path to the MPI hostlist file.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_pmemd_mdrun.yml)
 ```python
@@ -1335,17 +1519,17 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **terms** (*array*): ([ETOT]) Statistics descriptors. .
-* **binary_path** (*string*): (process_mdout.perl) Path to the process_mdout.perl executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **terms** (*array*): ([ETOT]) Statistics descriptors. 
+* **binary_path** (*string*): (process_mdout.perl) Path to the process_mdout.perl executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_mdout.yml)
 ```python
@@ -1360,8 +1544,21 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_mdout_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+  terms:
+  - TEMP
+  - VOLUME
+  - EKTOT
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_mdout_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   container_volume_path: /tmp
   container_working_dir: /tmp
   terms:
@@ -1398,7 +1595,23 @@ process_mdout --config config_process_mdout.yml --input_log_path sander.heat.log
       "EKTOT"
     ],
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_mdout_singularity.json)
+```python
+{
+  "properties": {
+    "terms": [
+      "TEMP",
+      "VOLUME",
+      "EKTOT"
+    ],
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0",
     "container_volume_path": "/tmp",
     "container_working_dir": "/tmp"
   }
@@ -1440,17 +1653,17 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **terms** (*array*): ([ENERGY]) Statistics descriptors. .
-* **binary_path** (*string*): (process_minout.perl) Path to the process_minout.perl executable binary..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **terms** (*array*): ([ENERGY]) Statistics descriptors. 
+* **binary_path** (*string*): (process_minout.perl) Path to the process_minout.perl executable binary.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_minout.yml)
 ```python
@@ -1461,8 +1674,17 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_minout_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
+  container_volume_path: /tmp
+  container_working_dir: /tmp
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_minout_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   container_volume_path: /tmp
   container_working_dir: /tmp
 
@@ -1485,7 +1707,18 @@ process_minout --config config_process_minout.yml --input_log_path sander.min.lo
 {
   "properties": {
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0",
+    "container_volume_path": "/tmp",
+    "container_working_dir": "/tmp"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_minout_singularity.json)
+```python
+{
+  "properties": {
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0",
     "container_volume_path": "/tmp",
     "container_working_dir": "/tmp"
   }
@@ -1556,22 +1789,22 @@ Config input / output arguments for this building block:
 Syntax: input_parameter (datatype) - (default_value) Definition
 
 Config parameters for this building block:
-* **mdin** (*object*): ({}) Sander MD run options specification. (Used if *input_mdin_path* is None).
-* **simulation_type** (*string*): (minimization) Default options for the mdin file. Each creates a different mdin file. .
-* **binary_path** (*string*): (sander) sander binary path to be used..
-* **direct_mdin** (*boolean*): (False) Use input_mdin_path as it is, skip file parsing..
-* **mpi_bin** (*string*): (None) Path to the MPI runner. Usually "mpirun" or "srun"..
-* **mpi_np** (*integer*): (0) Number of MPI processes. Usually an integer bigger than 1..
-* **mpi_flags** (*string*): (None) Path to the MPI hostlist file..
-* **remove_tmp** (*boolean*): (True) Remove temporal files..
-* **restart** (*boolean*): (False) Do not execute if output files exist..
-* **sandbox_path** (*string*): (./) Parent path to the sandbox directory..
-* **container_path** (*string*): (None) Container path definition..
-* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition..
-* **container_volume_path** (*string*): (/tmp) Container volume path definition..
-* **container_working_dir** (*string*): (None) Container working directory definition..
-* **container_user_id** (*string*): (None) Container user_id definition..
-* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container..
+* **mdin** (*object*): ({}) Sander MD run options specification. (Used if *input_mdin_path* is None)
+* **simulation_type** (*string*): (minimization) Default options for the mdin file. Each creates a different mdin file. 
+* **binary_path** (*string*): (sander) sander binary path to be used.
+* **direct_mdin** (*boolean*): (False) Use input_mdin_path as it is, skip file parsing.
+* **mpi_bin** (*string*): (None) Path to the MPI runner. Usually "mpirun" or "srun".
+* **mpi_np** (*integer*): (0) Number of MPI processes. Usually an integer bigger than 1.
+* **mpi_flags** (*string*): (None) Path to the MPI hostlist file.
+* **remove_tmp** (*boolean*): (True) Remove temporal files.
+* **restart** (*boolean*): (False) Do not execute if output files exist.
+* **sandbox_path** (*string*): (./) Parent path to the sandbox directory.
+* **container_path** (*string*): (None) Container path definition.
+* **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
+* **container_volume_path** (*string*): (/tmp) Container volume path definition.
+* **container_working_dir** (*string*): (None) Container working directory definition.
+* **container_user_id** (*string*): (None) Container user_id definition.
+* **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_sander_mdrun.yml)
 ```python
@@ -1587,9 +1820,20 @@ properties:
 #### [Docker config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_sander_mdrun_docker.yml)
 ```python
 properties:
-  container_image: afandiadib/ambertools:serial
+  container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
-  container_volume_path: /tmp
+  mdin:
+    ioutfm: 0
+    maxcyc: 500
+    ntwx: 100
+  simulation_type: minimization
+
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_sander_mdrun_singularity.yml)
+```python
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
   mdin:
     ioutfm: 0
     maxcyc: 500
@@ -1627,8 +1871,22 @@ sander_mdrun --config config_sander_mdrun.yml --input_top_path cln025.prmtop --i
       "ioutfm": 0
     },
     "container_path": "docker",
-    "container_image": "afandiadib/ambertools:serial",
-    "container_volume_path": "/tmp"
+    "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}
+```
+#### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_sander_mdrun_singularity.json)
+```python
+{
+  "properties": {
+    "simulation_type": "minimization",
+    "mdin": {
+      "maxcyc": 500,
+      "ntwx": 100,
+      "ioutfm": 0
+    },
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
   }
 }
 ```

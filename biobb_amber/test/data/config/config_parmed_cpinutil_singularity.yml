@@ -1,0 +1,6 @@
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
+  igb: 2
+  resnames: AS4 GL4
+  system: cln025
