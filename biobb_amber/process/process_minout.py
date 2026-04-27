@@ -3,6 +3,7 @@
 """Module containing the ProcessMinOut class and the command line interface."""
 
 import shutil
+import os
 from pathlib import Path, PurePath
 from typing import Optional
 
@@ -116,7 +117,10 @@ class ProcessMinOut(BiobbObject):
             return 0
         self.stage_files()
 
-        if not self.container_path:
+        is_docker = self.container_path and os.path.basename(str(self.container_path)).lower() == 'docker'
+
+        if not self.container_path or not is_docker:
+            # No container or Singularity: cd to tmp_folder so summary.* files land there
             tmp_folder = fu.create_unique_dir()
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             self.cmd = [
@@ -127,6 +131,7 @@ class ProcessMinOut(BiobbObject):
                 str(Path(self.stage_io_dict["in"]["input_log_path"]).resolve()),
             ]
         else:
+            # Docker: working dir is handled via container_working_dir
             tmp_folder = None
             self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
 
@@ -142,7 +147,7 @@ class ProcessMinOut(BiobbObject):
         self.copy_to_host()
 
         if len(self.terms) == 1:
-            if self.container_path:
+            if self.container_path and is_docker:
                 shutil.copy(
                     PurePath(self.stage_io_dict["unique_dir"]).joinpath(
                         "summary." + self.terms[0]
@@ -155,7 +160,7 @@ class ProcessMinOut(BiobbObject):
                     self.io_dict["out"]["output_dat_path"],
                 )
         else:
-            if self.container_path:
+            if self.container_path and is_docker:
                 tmp = self.stage_io_dict["unique_dir"]
             else:
                 tmp = tmp_folder

@@ -117,20 +117,6 @@ class ProcessMDOut(BiobbObject):
             return 0
         self.stage_files()
 
-        # if not self.container_path:
-        #     tmp_folder = fu.create_unique_dir()
-        #     fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
-        #     self.cmd = [
-        #         "cd",
-        #         tmp_folder,
-        #         ";",
-        #         self.binary_path,
-        #         str(Path(self.stage_io_dict["in"]["input_log_path"]).resolve()),
-        #     ]
-        # else:
-        #     tmp_folder = None
-        #     self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
-
         is_docker = self.container_path and os.path.basename(str(self.container_path)).lower() == 'docker'
 
         if not self.container_path or not is_docker:
