@@ -3,6 +3,7 @@
 """Module containing the ProcessMDOut class and the command line interface."""
 
 import shutil
+import os
 from pathlib import Path, PurePath
 from typing import Optional
 
