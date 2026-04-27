@@ -80,23 +80,23 @@ jobs:
           repository: bioexcel/biobb_common
           path: './biobb_common'
 
-      - name: Install biobb_amber
+      - name: Install ${{ github.event.repository.name }}
         shell: bash -l {0}
         run: |
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
           pip install -e .
 
-      - name: Pre-pull biobb_amber Singularity image
+      - name: Pre-pull ${{ github.event.repository.name }} Singularity image
         run: |
           mkdir -p $HOME/.singularity_cache
           cd $HOME/.singularity_cache
-          singularity pull --name biobb_amber:5.2.sif https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
-          ls -lh biobb_amber:5.2.sif
+          singularity pull --name ${{ github.event.repository.name }}:5.2.sif https://depot.galaxyproject.org/singularity/${{ github.event.repository.name }}:5.2.1--py312hc5e4ab4_0
+          ls -lh ${{ github.event.repository.name }}:5.2.sif
 
       - name: Run container tests
         shell: bash -l {0}
         run: |
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
-          pytest biobb_amber/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
+          pytest ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
 
 
