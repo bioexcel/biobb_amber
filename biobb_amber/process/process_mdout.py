@@ -161,7 +161,7 @@ class ProcessMDOut(BiobbObject):
         self.copy_to_host()
 
         if len(self.terms) == 1:
-            if self.container_path and not is_docker:
+            if self.container_path and is_docker:
                 shutil.copy(
                     PurePath(self.stage_io_dict["unique_dir"]).joinpath(
                         "summary." + self.terms[0]
@@ -174,7 +174,7 @@ class ProcessMDOut(BiobbObject):
                     self.io_dict["out"]["output_dat_path"],
                 )
         else:
-            if self.container_path and not is_docker:
+            if self.container_path and is_docker:
                 tmp = self.stage_io_dict["unique_dir"]
             else:
                 tmp = tmp_folder
