@@ -1,0 +1,86 @@
+name: tests
+
+on:
+  # workflow_dispatch
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '.gitignore'
+      - '.readthedocs.yaml'
+      - 'LICENSE'
+      - 'setup.py'
+      - 'README.md'
+      - 'CITATION.cff'
+      - 'references.jsonld'
+      - '**/docs/**'
+      - '**/json_schemas/**'
+
+jobs:
+  # Name of the Job
+  lint_and_test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.11"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - run: echo "Repository -> ${{ github.repository }}"
+      - run: echo "Branch -> ${{ github.ref }}"
+      - run: echo "Trigger event -> ${{ github.event_name }}"
+      - run: echo "Runner OS -> ${{ runner.os }}"
+
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
+      - name: Remove all micromamba installations
+        run: |
+          rm -rf $HOME/.bash_profile $HOME/.conda $HOME/micromamba $HOME/micromamba-bin 2>/dev/null
+          touch $HOME/.bash_profile
+
+      - name: setup-micromamba
+        uses: mamba-org/setup-micromamba@v2.0.0
+        with:
+          generate-run-shell: true
+          micromamba-version: '2.0.2-2'
+          post-cleanup: 'all'
+          init-shell: bash
+          environment-file: .github/env.yaml
+          create-args: >-
+            python=${{ matrix.python-version }}
+            pytest
+            pytest-cov
+            pytest-html
+            singularity>=3.8.6
+
+      - name: Verify Singularity installation
+        shell: bash -l {0}
+        run: singularity --version
+
+      - name: List installed package versions
+        shell: bash -l {0}
+        run: micromamba list
+
+      - name: Checkout biobb_common
+        uses: actions/checkout@v4
+        with:
+          repository: bioexcel/biobb_common
+          path: './biobb_common'
+
+      - name: Install biobb_amber
+        shell: bash -l {0}
+        run: |
+          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
+          pip install -e .
+
+      - name: Run container tests
+        shell: bash -l {0}
+        run: |
+          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
+          pytest biobb_amber/test/unitests/ -k "container"
+
+
