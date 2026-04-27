@@ -14,6 +14,7 @@ on:
       - 'references.jsonld'
       - '**/docs/**'
       - '**/json_schemas/**'
+      - '.github/workflows/test_containers.yml'
 
 jobs:
   # Name of the Job

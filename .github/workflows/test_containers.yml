@@ -1,4 +1,4 @@
-name: tests
+name: tests containers
 
 on:
   # workflow_dispatch
@@ -14,6 +14,7 @@ on:
       - 'references.jsonld'
       - '**/docs/**'
       - '**/json_schemas/**'
+      - '.github/workflows/linting_and_testing.yml'
 
 jobs:
   # Name of the Job
@@ -81,6 +82,6 @@ jobs:
         shell: bash -l {0}
         run: |
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
-          pytest biobb_amber/test/unitests/ -k "container" --ignore-glob=*nab_build*
+          pytest biobb_amber/test/unitests/ -k "container" --ignore-glob=*nab_build* 
 
 
