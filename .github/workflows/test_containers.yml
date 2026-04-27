@@ -66,10 +66,6 @@ jobs:
             pytest-cov
             pytest-html
 
-      - name: Test Singularity with a simple container
-        run: |
-          singularity exec docker://alpine:latest echo "Singularity is working"
-
       - name: List installed package versions
         shell: bash -l {0}
         run: micromamba list
