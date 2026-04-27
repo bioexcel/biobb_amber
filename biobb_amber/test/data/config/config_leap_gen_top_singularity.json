@@ -1,0 +1,9 @@
+{
+  "properties": {
+    "forcefield": [
+      "protein.ff14SB"
+    ],
+    "container_path": "singularity",
+    "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0"
+  }
+}

@@ -1,0 +1,5 @@
+properties:
+  container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
+  container_path: singularity
+  forcefield:
+  - protein.ff14SB
