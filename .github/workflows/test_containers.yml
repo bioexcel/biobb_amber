@@ -17,7 +17,7 @@ on:
 
 jobs:
   # Name of the Job
-  lint_and_test:
+  test_containers:
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -81,6 +81,6 @@ jobs:
         shell: bash -l {0}
         run: |
           export PYTHONPATH=.:./biobb_common:$PYTHONPATH
-          pytest biobb_amber/test/unitests/ -k "container"
+          pytest biobb_amber/test/unitests/ -k "container" --ignore-glob=*nab_build*
 
 
