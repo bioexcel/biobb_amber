@@ -43,6 +43,14 @@ jobs:
           rm -rf $HOME/.bash_profile $HOME/.conda $HOME/micromamba $HOME/micromamba-bin 2>/dev/null
           touch $HOME/.bash_profile
 
+      - name: Install Singularity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/sylabs/singularity/releases/download/v3.8.6/singularity-ce_3.8.6-focal_amd64.deb
+          sudo apt-get install -y ./singularity-ce_3.8.6-focal_amd64.deb
+          singularity --version
+
       - name: setup-micromamba
         uses: mamba-org/setup-micromamba@v2.0.0
         with:
@@ -50,17 +58,16 @@ jobs:
           micromamba-version: '2.0.2-2'
           post-cleanup: 'all'
           init-shell: bash
-          environment-file: .github/env.yaml
+          environment-name: test-env
           create-args: >-
             python=${{ matrix.python-version }}
             pytest
             pytest-cov
             pytest-html
-            singularity>=3.8.6
 
-      - name: Verify Singularity installation
-        shell: bash -l {0}
-        run: singularity --version
+      - name: Test Singularity with a simple container
+        run: |
+          singularity exec docker://alpine:latest echo "Singularity is working"
 
       - name: List installed package versions
         shell: bash -l {0}
