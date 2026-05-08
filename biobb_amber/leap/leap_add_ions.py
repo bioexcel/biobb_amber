@@ -20,7 +20,7 @@ class LeapAddIons(BiobbObject):
     """
     | biobb_amber LeapAddIons
     | Wrapper of the `AmberTools (AMBER MD Package) leap tool <https://ambermd.org/AmberTools.php>`_ module.
-    | Adds counterions to a system box for an AMBER MD system using tLeap tool from the AmberTools MD package.
+    | Adds counterions to a system box for an AMBER MD system using tLeap tool from the AmberTools MD package
 
     Args:
         input_pdb_path (str): Input 3D structure PDB file. File type: input. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.pdb>`_. Accepted formats: pdb (edam:format_1476).
