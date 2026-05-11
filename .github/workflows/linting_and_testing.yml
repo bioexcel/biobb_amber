@@ -21,7 +21,7 @@ jobs:
   lint_and_test:
     strategy:
       matrix:
-        os: [mmbswarm-python]
+        os: [mmbswarm]
         python-version: ["3.10", "3.11", "3.12"]
     runs-on: ${{ matrix.os }}
     steps:
