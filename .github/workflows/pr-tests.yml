@@ -9,7 +9,7 @@ jobs:
   pr_test:
     strategy:
       matrix:
-        os: [self-hosted]
+        os: [mmbswarm-python]
         python-version: ["3.10"]
     runs-on: ${{ matrix.os }}
     steps:
