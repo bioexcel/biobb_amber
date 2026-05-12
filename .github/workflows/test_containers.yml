@@ -84,10 +84,12 @@ jobs:
 
       - name: Pre-pull ${{ github.event.repository.name }} Singularity image
         run: |
+          SINGULARITY_URL=$(jq -r '.singularity' ${{ github.workspace }}/${{ github.event.repository.name }}/json_schemas/${{ github.event.repository.name }}.json)
+          VERSION=$(jq -r '.version' ${{ github.workspace }}/${{ github.event.repository.name }}/json_schemas/${{ github.event.repository.name }}.json)
           mkdir -p $HOME/.singularity_cache
           cd $HOME/.singularity_cache
-          singularity pull --name ${{ github.event.repository.name }}:5.2.sif https://depot.galaxyproject.org/singularity/${{ github.event.repository.name }}:5.2.1--py312hc5e4ab4_0
-          ls -lh ${{ github.event.repository.name }}:5.2.sif
+          singularity pull --name ${{ github.event.repository.name }}:${VERSION}.sif ${SINGULARITY_URL}
+          ls -lh ${{ github.event.repository.name }}:${VERSION}.sif
 
       - name: Run container tests
         shell: bash -l {0}
