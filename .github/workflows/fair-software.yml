@@ -5,7 +5,7 @@ on: push
 jobs:
   verify:
     name: "fair-software"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: fair-software/howfairis-github-action@0.2.1
         name: Measure compliance with fair-software.eu recommendations

@@ -9,7 +9,7 @@ on:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: peter-murray/workflow-application-token-action@v3
         id: generate_token
