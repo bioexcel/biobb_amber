@@ -81,11 +81,6 @@ jobs:
         shell: bash -l {0}
         run: micromamba list
 
-      # - name: Install ${{ github.event.repository.name }}
-      #   shell: bash -l {0}
-      #   run: |
-      #     pip install -e .
-
       - name: Pre-pull ${{ github.event.repository.name }} Singularity image
         run: |
           SINGULARITY_URL=$(jq -r '.singularity' ${{ github.workspace }}/${{ github.event.repository.name }}/json_schemas/${{ github.event.repository.name }}.json)
