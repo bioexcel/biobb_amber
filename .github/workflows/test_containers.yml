@@ -98,7 +98,7 @@ jobs:
       - name: Run container tests
         shell: bash -l {0}
         run: |
-          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
-          pytest ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
+          export PYTHONPATH=.:$PYTHONPATH
+          pytest -s ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
 
 
