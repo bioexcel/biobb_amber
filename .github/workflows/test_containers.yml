@@ -81,16 +81,10 @@ jobs:
         shell: bash -l {0}
         run: micromamba list
 
-      # - name: Checkout biobb_common
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: bioexcel/biobb_common
-      #     path: './biobb_common'
-
-      - name: Install ${{ github.event.repository.name }}
-        shell: bash -l {0}
-        run: |
-          pip install -e .
+      # - name: Install ${{ github.event.repository.name }}
+      #   shell: bash -l {0}
+      #   run: |
+      #     pip install -e .
 
       - name: Pre-pull ${{ github.event.repository.name }} Singularity image
         run: |
@@ -104,6 +98,7 @@ jobs:
       - name: Run container tests
         shell: bash -l {0}
         run: |
+          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
           pytest ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
 
 
