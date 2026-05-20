@@ -525,7 +525,7 @@ class LeapAddIons(BiobbObject):
                 # 1.09471219E+02  8.63157502E+01  8.63157502E+01  8.63157502E+01
 
                 tmp_parmtop = str(
-                    #PurePath(str(tmp_folder)).joinpath("top_temp.parmtop")
+                    # PurePath(str(tmp_folder)).joinpath("top_temp.parmtop")
                     PurePath(self.stage_io_dict["unique_dir"]).joinpath("top_temp.parmtop")
                 )
                 shutil.copyfile(self.io_dict["out"]["output_top_path"], tmp_parmtop)
