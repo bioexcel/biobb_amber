@@ -94,6 +94,6 @@ jobs:
         shell: bash -l {0}
         run: |
           export PYTHONPATH=.:$PYTHONPATH
-          pytest -s ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
+          pytest ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
 
 
