@@ -3,7 +3,7 @@
 """Module containing the ProcessMDOut class and the command line interface."""
 
 import shutil
-import os
+# import os
 from pathlib import Path, PurePath
 from typing import Optional
 
@@ -117,9 +117,9 @@ class ProcessMDOut(BiobbObject):
             return 0
         self.stage_files()
 
-        is_docker = self.container_path and os.path.basename(str(self.container_path)).lower() == 'docker'
+        # is_docker = self.container_path and os.path.basename(str(self.container_path)).lower() == 'docker'
 
-        if not self.container_path or not is_docker:
+        if not self.container_path:
             # No container or Singularity: cd to tmp_folder so summary.* files land there
             tmp_folder = fu.create_unique_dir()
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
@@ -147,7 +147,7 @@ class ProcessMDOut(BiobbObject):
         self.copy_to_host()
 
         if len(self.terms) == 1:
-            if self.container_path and is_docker:
+            if self.container_path:
                 shutil.copy(
                     PurePath(self.stage_io_dict["unique_dir"]).joinpath(
                         "summary." + self.terms[0]
@@ -160,7 +160,7 @@ class ProcessMDOut(BiobbObject):
                     self.io_dict["out"]["output_dat_path"],
                 )
         else:
-            if self.container_path and is_docker:
+            if self.container_path:
                 tmp = self.stage_io_dict["unique_dir"]
             else:
                 tmp = tmp_folder

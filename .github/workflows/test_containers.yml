@@ -52,6 +52,12 @@ jobs:
           sudo apt-get install -y apptainer
           singularity --version
 
+      - name: Get biobb_common version from env.yaml
+        id: biobb_common_version
+        run: |
+          VERSION=$(grep 'biobb_common' .github/env.yaml | sed 's/.*biobb_common *//')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: setup-micromamba
         uses: mamba-org/setup-micromamba@v2.0.0
         with:
@@ -65,21 +71,21 @@ jobs:
             pytest
             pytest-cov
             pytest-html
+            biobb_common${{ steps.biobb_common_version.outputs.version }}
 
       - name: List installed package versions
         shell: bash -l {0}
         run: micromamba list
 
-      - name: Checkout biobb_common
-        uses: actions/checkout@v4
-        with:
-          repository: bioexcel/biobb_common
-          path: './biobb_common'
+      # - name: Checkout biobb_common
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: bioexcel/biobb_common
+      #     path: './biobb_common'
 
       - name: Install ${{ github.event.repository.name }}
         shell: bash -l {0}
         run: |
-          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
           pip install -e .
 
       - name: Pre-pull ${{ github.event.repository.name }} Singularity image
@@ -94,7 +100,6 @@ jobs:
       - name: Run container tests
         shell: bash -l {0}
         run: |
-          export PYTHONPATH=.:./biobb_common:$PYTHONPATH
           pytest ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
 
 
