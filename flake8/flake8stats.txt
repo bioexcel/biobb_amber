@@ -1,2 +1,2 @@
-2     E265 block comment should start with '# '
+1     E265 block comment should start with '# '
 2     W293 blank line contains whitespace
