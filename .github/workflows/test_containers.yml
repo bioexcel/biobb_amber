@@ -66,6 +66,7 @@ jobs:
           post-cleanup: 'all'
           init-shell: bash
           environment-name: test-env
+          conda-channels: bioconda,conda-forge
           create-args: >-
             python=${{ matrix.python-version }}
             pytest
