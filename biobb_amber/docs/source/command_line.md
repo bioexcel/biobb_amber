@@ -498,7 +498,7 @@ leap_add_ions -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.solv.pdb). Accepted formats: PDB
+* **input_pdb_path** (*string*): Input 3D structure PDB file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/structure.ions.input.pdb). Accepted formats: PDB
 * **input_lib_path** (*string*): Input ligand library parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.lib). Accepted formats: LIB, ZIP
 * **input_frcmod_path** (*string*): Input ligand frcmod parameters file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/ligand.frcmod). Accepted formats: FRCMOD, ZIP
 * **input_params_path** (*string*): Additional leap parameter files to load with loadAmberParams Leap command. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/leap/frcmod.ionsdang_spce.txt). Accepted formats: IN, LEAPIN, TXT, ZIP
