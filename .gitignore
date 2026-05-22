@@ -69,5 +69,6 @@ flake8-badge.svg
 .vscode
 .mypy_cache/
 nab/
+test_nab/
 nab.rst
 nab_build_dna_structure.json
