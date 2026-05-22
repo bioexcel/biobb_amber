@@ -60,25 +60,25 @@ jobs:
           TESTS=""
           while IFS= read -r FILE; do
             [ -z "$FILE" ] && continue
-            if [[ "$FILE" =~ ^biobb_amber/test/unitests/test_[^/]+/test_[^/]+\.py$ ]]; then
+            if [[ "$FILE" =~ ^${{ github.event.repository.name }}/test/unitests/test_[^/]+/test_[^/]+\.py$ ]]; then
               # Direct test file change – run only this file (skip container tests)
               if [[ "$FILE" != *_container.py ]]; then
                 [ -f "$FILE" ] && TESTS+=$'\n'"$FILE"
               fi
-            elif [[ "$FILE" =~ ^biobb_amber/([a-z][^/]+)/([^/]+)\.py$ ]]; then
+            elif [[ "$FILE" =~ ^${{ github.event.repository.name }}/([a-z][^/]+)/([^/]+)\.py$ ]]; then
               TOOL="${BASH_REMATCH[1]}"
               BASE="${BASH_REMATCH[2]}"
               if [[ "$BASE" == "__init__" || "$BASE" == "common" ]]; then
                 # Run all tests for this tool
-                TEST_DIR="biobb_amber/test/unitests/test_${TOOL}"
+                TEST_DIR="${{ github.event.repository.name }}/test/unitests/test_${TOOL}"
                 [ -d "$TEST_DIR" ] && TESTS+=$'\n'"$TEST_DIR"
               else
                 # Run the matching test file for this source file
-                TEST_FILE="biobb_amber/test/unitests/test_${TOOL}/test_${BASE}.py"
+                TEST_FILE="${{ github.event.repository.name }}/test/unitests/test_${TOOL}/test_${BASE}.py"
                 if [ -f "$TEST_FILE" ]; then
                   TESTS+=$'\n'"$TEST_FILE"
                 else
-                  TEST_DIR="biobb_amber/test/unitests/test_${TOOL}"
+                  TEST_DIR="${{ github.event.repository.name }}/test/unitests/test_${TOOL}"
                   [ -d "$TEST_DIR" ] && TESTS+=$'\n'"$TEST_DIR"
                 fi
               fi
@@ -150,10 +150,10 @@ jobs:
           # Run only tests for modified tools, fall back to full suite when nothing specific detected
           TEST_PATHS="${{ steps.changes.outputs.test_paths }}"
           if [ -z "$TEST_PATHS" ]; then
-            TEST_PATHS="biobb_amber/test/unitests/"
+            TEST_PATHS="${{ github.event.repository.name }}/test/unitests/"
           fi
 
-          pytest $TEST_PATHS --cov=biobb_amber/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
+          pytest $TEST_PATHS --cov=${{ github.event.repository.name }}/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
 
       - name: Generate Tests badge
         shell: bash -l {0}
