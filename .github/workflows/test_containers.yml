@@ -14,6 +14,9 @@ on:
       - 'references.jsonld'
       - '**/docs/**'
       - '**/json_schemas/**'
+      - '.github/workflows/pr-tests.yml'
+      - '**/test/data/**'
+      - '**/test/references/**'
       - '.github/workflows/linting_and_testing.yml'
 
 jobs:
