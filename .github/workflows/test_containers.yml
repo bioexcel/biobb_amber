@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - run: echo "Repository -> ${{ github.repository }}"
       - run: echo "Branch -> ${{ github.ref }}"
@@ -37,6 +39,56 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+
+      - name: Detect changed files and set test paths
+        id: changes
+        shell: bash
+        run: |
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "New branch detected – running full container test suite"
+            echo "test_paths=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          CHANGED_FILES=$(git diff --name-only "$BEFORE" "$AFTER" 2>/dev/null || echo "")
+          echo "Changed files:"
+          echo "${CHANGED_FILES:-(none)}"
+
+          TESTS=""
+          while IFS= read -r FILE; do
+            [ -z "$FILE" ] && continue
+            if [[ "$FILE" =~ ^biobb_amber/test/unitests/test_[^/]+/test_[^/]+_container\.py$ ]]; then
+              # Direct container test file change – run only this file
+              [ -f "$FILE" ] && TESTS+=$'\n'"$FILE"
+            elif [[ "$FILE" =~ ^biobb_amber/test/unitests/test_[^/]+/test_[^/]+\.py$ ]]; then
+              # Non-container test file change – not relevant for this workflow
+              :
+            elif [[ "$FILE" =~ ^biobb_amber/([a-z][^/]+)/([^/]+)\.py$ ]]; then
+              TOOL="${BASH_REMATCH[1]}"
+              BASE="${BASH_REMATCH[2]}"
+              if [[ "$BASE" == "__init__" || "$BASE" == "common" ]]; then
+                # Run all container tests for this tool
+                TEST_DIR="biobb_amber/test/unitests/test_${TOOL}"
+                [ -d "$TEST_DIR" ] && TESTS+=$'\n'"$TEST_DIR"
+              else
+                # Run the matching container test file for this source file
+                TEST_FILE="biobb_amber/test/unitests/test_${TOOL}/test_${BASE}_container.py"
+                if [ -f "$TEST_FILE" ]; then
+                  TESTS+=$'\n'"$TEST_FILE"
+                else
+                  TEST_DIR="biobb_amber/test/unitests/test_${TOOL}"
+                  [ -d "$TEST_DIR" ] && TESTS+=$'\n'"$TEST_DIR"
+                fi
+              fi
+            fi
+          done <<< "$CHANGED_FILES"
+
+          TESTS=$(echo "$TESTS" | grep -v '^$' | sort -u | tr '\n' ' ' | xargs || echo "")
+          echo "Test paths: ${TESTS:-(none detected – will run full container suite)}"
+          echo "test_paths=$TESTS" >> "$GITHUB_OUTPUT"
 
       - name: Remove all micromamba installations
         run: |
@@ -94,6 +146,13 @@ jobs:
         shell: bash -l {0}
         run: |
           export PYTHONPATH=.:$PYTHONPATH
-          pytest ${{ github.event.repository.name }}/test/unitests/ -k "container" --ignore-glob=*nab_build* -v 
+
+          # Run only tests for modified tools, fall back to full container suite when nothing specific detected
+          TEST_PATHS="${{ steps.changes.outputs.test_paths }}"
+          if [ -z "$TEST_PATHS" ]; then
+            TEST_PATHS="${{ github.event.repository.name }}/test/unitests/"
+          fi
+
+          pytest $TEST_PATHS -k "container" --ignore-glob=*nab_build* -v
 
 
