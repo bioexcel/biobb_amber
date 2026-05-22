@@ -153,6 +153,6 @@ jobs:
             TEST_PATHS="${{ github.event.repository.name }}/test/unitests/"
           fi
 
-          pytest $TEST_PATHS -k "container" --ignore-glob=*nab_build* -v
+          pytest $TEST_PATHS -k "container" -v
 
 

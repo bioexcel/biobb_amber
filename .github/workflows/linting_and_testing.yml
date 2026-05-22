@@ -153,7 +153,7 @@ jobs:
             TEST_PATHS="biobb_amber/test/unitests/"
           fi
 
-          pytest $TEST_PATHS --cov=biobb_amber/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --ignore-glob=*nab_build* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
+          pytest $TEST_PATHS --cov=biobb_amber/ --cov-report=xml --ignore-glob=*container.py --ignore-glob=*pmemd* --junit-xml=./reports/junit/junit.xml --html=./reports/junit/report.html
 
       - name: Generate Tests badge
         shell: bash -l {0}
