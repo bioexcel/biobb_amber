@@ -90,7 +90,7 @@ class LeapBuildLinearStructure(BiobbObject):
 
             # Find the paths of the leaprc files if only the force field names are provided
             self.forcefield = self.find_leaprc_paths(self.forcefield)
-        
+
         self.sequence = properties.get("sequence", "ALA GLY SER PRO ARG ALA PRO GLY")
         self.build_library = properties.get("build_library", False)
         self.binary_path = properties.get("binary_path", "tleap")

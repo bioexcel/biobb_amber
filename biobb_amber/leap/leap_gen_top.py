@@ -111,13 +111,13 @@ class LeapGenTop(BiobbObject):
         # self.ligands_frcmod_list = []
         # if input_frcmod_path:
         #     self.ligands_frcmod_list.append(input_frcmod_path)
-            
+
         # Properties specific for BB
         self.properties = properties
 
         # Set default forcefields
         if self.container_path:
-            #self.forcefield = "leaprc.protein.ff14SB"
+            # self.forcefield = "leaprc.protein.ff14SB"
             self.forcefield = _from_string_to_list(
                 properties.get("forcefield", ['leaprc.protein.ff14SB', 'leaprc.DNA.bsc1', 'leaprc.gaff'])
             )
