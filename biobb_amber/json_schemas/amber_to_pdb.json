@@ -3,7 +3,7 @@
     "$id": "http://bioexcel.eu/biobb_amber/json_schemas/1.0/amber_to_pdb",
     "name": "biobb_amber AmberToPDB",
     "title": "Wrapper of the AmberTools (AMBER MD Package) ambpdb tool module.",
-    "description": "Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.",
+    "description": "Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package",
     "type": "object",
     "info": {
         "wrapped_software": {

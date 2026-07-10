@@ -574,7 +574,7 @@ properties:
 ```
 #### Command line
 ```python
-leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.solv.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
+leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.ions.input.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
 ```
 ### JSON
 #### [Common config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_leap_add_ions.json)
@@ -628,7 +628,7 @@ leap_add_ions --config config_leap_add_ions.yml --input_pdb_path structure.solv.
 ```
 #### Command line
 ```python
-leap_add_ions --config config_leap_add_ions.json --input_pdb_path structure.solv.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
+leap_add_ions --config config_leap_add_ions.json --input_pdb_path structure.ions.input.pdb --input_lib_path ligand.lib --input_frcmod_path ligand.frcmod --input_params_path frcmod.ionsdang_spce.txt --input_prep_path frcmod.ionsdang_spce.txt --input_source_path leaprc.water.spce.txt --output_pdb_path structure.ions.pdb --output_top_path structure.ions.top --output_crd_path structure.ions.crd
 ```
 
 ## Leap_build_linear_structure
