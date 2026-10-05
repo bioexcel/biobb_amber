@@ -196,6 +196,32 @@ class LeapGenTop(BiobbObject):
 
         return leaprc_paths
 
+    def _resolve_input_files(self, io_key: str, tmp_folder: Optional[str]) -> List[str]:
+        """Resolve an optional input (zip or single file) to the list of paths the tleap
+        script must load.
+
+        In container mode the zipball is staged into the host sandbox (unique_dir), which is
+        bind-mounted at ``container_volume_path``; it is unpacked on the host and the entries
+        are referenced by their container path. In local mode the zipball is unpacked into a
+        temporary folder and referenced by its host path.
+        """
+        file_path = self.io_dict["in"][io_key]
+        if file_path is None:
+            return []
+        if not file_path.endswith(".zip"):
+            return [self.stage_io_dict["in"][io_key]]
+        if self.container_path:
+            unique_dir = self.stage_io_dict["unique_dir"]
+            host_zip = os.path.join(unique_dir, os.path.basename(file_path))
+            extracted = fu.unzip_list(host_zip, dest_dir=unique_dir, out_log=self.out_log)
+            return [
+                os.path.join(self.container_volume_path, os.path.relpath(p, unique_dir))
+                for p in extracted
+            ]
+        return fu.unzip_list(
+            self.stage_io_dict["in"][io_key], dest_dir=tmp_folder, out_log=self.out_log
+        )
+
     # def check_data_params(self, out_log, err_log):
     #     """ Checks input/output paths correctness """
 
@@ -239,62 +265,11 @@ class LeapGenTop(BiobbObject):
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             instructions_file_path = instructions_file
 
-        ligands_lib_list = []
-        if self.io_dict["in"]["input_lib_path"] is not None:
-            if self.io_dict["in"]["input_lib_path"].endswith(".zip"):
-                ligands_lib_list = fu.unzip_list(
-                    self.stage_io_dict["in"]["input_lib_path"],
-                    dest_dir=tmp_folder,
-                    out_log=self.out_log,
-                )
-            else:
-                ligands_lib_list.append(self.stage_io_dict["in"]["input_lib_path"])
-
-        ligands_frcmod_list = []
-        if self.io_dict["in"]["input_frcmod_path"] is not None:
-            if self.io_dict["in"]["input_frcmod_path"].endswith(".zip"):
-                ligands_frcmod_list = fu.unzip_list(
-                    self.stage_io_dict["in"]["input_frcmod_path"],
-                    dest_dir=tmp_folder,
-                    out_log=self.out_log,
-                )
-            else:
-                ligands_frcmod_list.append(
-                    self.stage_io_dict["in"]["input_frcmod_path"]
-                )
-
-        amber_params_list = []
-        if self.io_dict["in"]["input_params_path"] is not None:
-            if self.io_dict["in"]["input_params_path"].endswith(".zip"):
-                amber_params_list = fu.unzip_list(
-                    self.stage_io_dict["in"]["input_params_path"],
-                    dest_dir=tmp_folder,
-                    out_log=self.out_log,
-                )
-            else:
-                amber_params_list.append(self.stage_io_dict["in"]["input_params_path"])
-
-        amber_prep_list = []
-        if self.io_dict["in"]["input_prep_path"] is not None:
-            if self.io_dict["in"]["input_prep_path"].endswith(".zip"):
-                amber_prep_list = fu.unzip_list(
-                    self.stage_io_dict["in"]["input_prep_path"],
-                    dest_dir=tmp_folder,
-                    out_log=self.out_log,
-                )
-            else:
-                amber_prep_list.append(self.stage_io_dict["in"]["input_prep_path"])
-
-        leap_source_list = []
-        if self.io_dict["in"]["input_source_path"] is not None:
-            if self.io_dict["in"]["input_source_path"].endswith(".zip"):
-                leap_source_list = fu.unzip_list(
-                    self.stage_io_dict["in"]["input_source_path"],
-                    dest_dir=tmp_folder,
-                    out_log=self.out_log,
-                )
-            else:
-                leap_source_list.append(self.stage_io_dict["in"]["input_source_path"])
+        ligands_lib_list = self._resolve_input_files("input_lib_path", tmp_folder)
+        ligands_frcmod_list = self._resolve_input_files("input_frcmod_path", tmp_folder)
+        amber_params_list = self._resolve_input_files("input_params_path", tmp_folder)
+        amber_prep_list = self._resolve_input_files("input_prep_path", tmp_folder)
+        leap_source_list = self._resolve_input_files("input_source_path", tmp_folder)
 
         with open(instructions_file, "w") as leapin:
             # Forcefields loaded by default:
