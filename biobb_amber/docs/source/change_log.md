@@ -1,5 +1,11 @@
 # Biobb Amber changelog
 
+## What's new in version [5.3.2](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.2)?
+
+### Changes
+
+* [FIX] Bug fix related to containers execution in LeapGenTop
+
 ## What's new in version [5.3.1](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.1)?
 
 ### Changes
