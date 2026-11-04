@@ -24,7 +24,9 @@ jobs:
   test_containers:
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        # ubuntu-24.04, not ubuntu-latest: on the Ubuntu 26.04 runners Apptainer can't create
+        # unprivileged user namespaces and every Singularity test fails ("Operation not permitted")
+        os: [ubuntu-24.04]
         python-version: ["3.11"]
     runs-on: ${{ matrix.os }}
     steps:
