@@ -88,7 +88,10 @@ jobs:
             fi
           done <<< "$CHANGED_FILES"
 
-          TESTS=$(echo "$TESTS" | grep -v '^$' | sort -u | tr '\n' ' ' | xargs || echo "")
+          # pytest's --ignore-glob does not apply to paths passed explicitly on the
+          # command line, so drop here the same tests the "Run tests" step ignores
+          # (container tests, and pmemd tests since pmemd is not installed in CI)
+          TESTS=$(echo "$TESTS" | grep -v '^$' | grep -v -e '_container\.py$' -e 'pmemd' | sort -u | tr '\n' ' ' | xargs || echo "")
           echo "Test paths: ${TESTS:-(none detected – will run full suite)}"
           echo "test_paths=$TESTS" >> "$GITHUB_OUTPUT"
 
