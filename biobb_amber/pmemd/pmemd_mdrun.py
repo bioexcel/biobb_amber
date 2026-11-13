@@ -352,6 +352,11 @@ class PmemdMDRun(BiobbObject):
 
         return self.return_code
 
+    def write_parameter_files(self, directory: str) -> list[str]:
+        """Write the mdin file to **directory** without executing pmemd, used by the
+        provenance of the executions skipped by the restart property."""
+        return [self.create_mdin(path=str(Path(directory).joinpath("pmemd.mdin")))]
+
 
 def pmemd_mdrun(input_top_path: str, input_crd_path: str,
                 output_log_path: str, output_traj_path: str, output_rst_path: str,

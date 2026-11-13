@@ -151,9 +151,9 @@ class SanderMDRun(BiobbObject):
         if self.io_dict['in']['input_mdin_path']:
             # MDIN parameters read from an input mdin file
             if (not self.direct_mdin):
-                mdin_firstPart.append("Mdin read from input file: " + self.stage_io_dict['in']['input_mdin_path'])
+                mdin_firstPart.append("Mdin read from input file: " + self.io_dict['in']['input_mdin_path'])
                 mdin_firstPart.append("and modified by the biobb_amber module from the BioBB library ")
-                with open(self.stage_io_dict['in']['input_mdin_path']) as input_params:
+                with open(self.io_dict['in']['input_mdin_path']) as input_params:
                     firstPart = True
                     secondPart = False
                     for line in input_params:
@@ -382,6 +382,11 @@ class SanderMDRun(BiobbObject):
         self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code
+
+    def write_parameter_files(self, directory: str) -> list[str]:
+        """Write the mdin file to **directory** without executing sander, used by the
+        provenance of the executions skipped by the restart property."""
+        return [self.create_mdin(path=str(Path(directory).joinpath("sander.mdin")))]
 
 
 def sander_mdrun(input_top_path: str, input_crd_path: str,
