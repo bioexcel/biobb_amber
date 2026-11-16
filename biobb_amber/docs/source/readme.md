@@ -10,7 +10,7 @@
 [![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![](https://img.shields.io/badge/Open%20Source%3f-Yes!-blue)](https://github.com/bioexcel/biobb_amber)
 
-[![](https://readthedocs.org/projects/biobb-amber/badge/?version=latest&label=Docs)](https://biobb-amber.readthedocs.io/en/latest/?badge=latest)
+[![](https://img.shields.io/readthedocs/biobb-amber/latest?label=docs)](https://biobb-amber.readthedocs.io/en/latest/?badge=latest)
 [![](https://img.shields.io/website?down_message=Offline&label=Biobb%20Website&up_message=Online&url=https%3A%2F%2Fmmb.irbbarcelona.org%2Fbiobb%2F)](https://mmb.irbbarcelona.org/biobb/)
 [![](https://img.shields.io/badge/Youtube-tutorials-blue?logo=youtube&logoColor=red)](https://www.youtube.com/@BioExcelCoE/search?query=biobb)
 [![](https://zenodo.org/badge/DOI/10.1038/s41597-019-0177-4.svg)](https://doi.org/10.1038/s41597-019-0177-4)
