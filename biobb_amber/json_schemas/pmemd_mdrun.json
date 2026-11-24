@@ -145,11 +145,23 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.cpin",
             "enum": [
-                ".*\\.cpin$"
+                ".*\\.cpin$",
+                ".*\\.in$",
+                ".*\\.txt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.cpin$",
+                    "description": "Input constant pH file (AMBER cpin)",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Input constant pH file (AMBER cpin)",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
                     "description": "Input constant pH file (AMBER cpin)",
                     "edam": "format_2330"
                 }

@@ -29,7 +29,9 @@
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cein",
             "enum": [
                 ".*\\.cein$",
-                ".*\\.cpein$"
+                ".*\\.cpein$",
+                ".*\\.in$",
+                ".*\\.txt$"
             ],
             "file_formats": [
                 {
@@ -39,6 +41,16 @@
                 },
                 {
                     "extension": ".*\\.cpein$",
+                    "description": "Input cein or cpein file (from pmemd or sander) with titrating residue information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Input cein or cpein file (from pmemd or sander) with titrating residue information",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
                     "description": "Input cein or cpein file (from pmemd or sander) with titrating residue information",
                     "edam": "format_2330"
                 }

@@ -28,11 +28,23 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cpin",
             "enum": [
-                ".*\\.cpin$"
+                ".*\\.cpin$",
+                ".*\\.in$",
+                ".*\\.txt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.cpin$",
+                    "description": "Input constant pH file (AMBER cpin)",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Input constant pH file (AMBER cpin)",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
                     "description": "Input constant pH file (AMBER cpin)",
                     "edam": "format_2330"
                 }
@@ -46,7 +58,8 @@
             "enum": [
                 ".*\\.cpout$",
                 ".*\\.zip$",
-                ".*\\.gzip$"
+                ".*\\.gzip$",
+                ".*\\.gz$"
             ],
             "file_formats": [
                 {
@@ -63,6 +76,11 @@
                     "extension": ".*\\.gzip$",
                     "description": "Output constant pH file (AMBER cpout)",
                     "edam": "format_3987"
+                },
+                {
+                    "extension": ".*\\.gz$",
+                    "description": "Output constant pH file (AMBER cpout)",
+                    "edam": "format_3989"
                 }
             ]
         },

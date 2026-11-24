@@ -26,7 +26,7 @@ amber_to_pdb -h
       --input_top_path INPUT_TOP_PATH
                             AMBER topology file. Accepted formats: top, parmtop, prmtop.
       --input_crd_path INPUT_CRD_PATH
-                            AMBER coordinates file. Accepted formats: crd, mdcrd, inpcrd, rst.
+                            AMBER coordinates file. Accepted formats: crd, mdcrd, inpcrd, rst, rst7.
       -o OUTPUT_PDB_PATH, --output_pdb_path OUTPUT_PDB_PATH
                             Structure PDB file. Accepted formats: pdb.
 ### I / O Arguments
@@ -34,7 +34,7 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_top_path** (*string*): AMBER topology file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.top). Accepted formats: TOP, PARMTOP, PRMTOP
-* **input_crd_path** (*string*): AMBER coordinates file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd). Accepted formats: CRD, MDCRD, INPCRD, RST
+* **input_crd_path** (*string*): AMBER coordinates file. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/ambpdb/structure.leap.crd). Accepted formats: CRD, MDCRD, INPCRD, RST, RST7
 * **output_pdb_path** (*string*): Structure PDB file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/ambpdb/structure.ambpdb.pdb). Accepted formats: PDB
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
@@ -109,7 +109,7 @@ cestats_run -h
     
     required arguments:
       --input_cein_path INPUT_CEIN_PATH
-                            Input cein or cpein file (from pmemd or sander) with titrating residue information. Accepted formats: cein, cpein.
+                            Input cein or cpein file (from pmemd or sander) with titrating residue information. Accepted formats: cein, cpein, in, txt.
       --input_ceout_path INPUT_CEOUT_PATH
                             Output ceout file (AMBER ceout). Accepted formats: ceout, zip, gzip, gz.
       --output_dat_path OUTPUT_DAT_PATH
@@ -130,7 +130,7 @@ cestats_run -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_cein_path** (*string*): Input cein or cpein file (from pmemd or sander) with titrating residue information. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cein). Accepted formats: CEIN, CPEIN
+* **input_cein_path** (*string*): Input cein or cpein file (from pmemd or sander) with titrating residue information. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cein). Accepted formats: CEIN, CPEIN, IN, TXT
 * **input_ceout_path** (*string*): Output ceout file (AMBER ceout). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/sander.ceout.gz). Accepted formats: CEOUT, ZIP, GZIP, GZ
 * **output_dat_path** (*string*): Output file to which the standard calceo-type statistics are written. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
 * **output_population_path** (*string*): Output file where protonation state populations are printed for every state of every residue. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cestats.dat). Accepted formats: DAT, OUT, TXT, O
@@ -238,9 +238,9 @@ cphstats_run -h
     
     required arguments:
       --input_cpin_path INPUT_CPIN_PATH
-                            Input constant pH file (AMBER cpin). Accepted formats: cpin.
+                            Input constant pH file (AMBER cpin). Accepted formats: cpin, in, txt.
       --input_cpout_path INPUT_CPOUT_PATH
-                            Output constant pH file (AMBER cpout). Accepted formats: cpout, zip, gzip.
+                            Output constant pH file (AMBER cpout). Accepted formats: cpout, zip, gzip, gz.
       --output_dat_path OUTPUT_DAT_PATH
                             Output file to which the standard calcpka-type statistics are written. Accepted formats: dat, out, txt, o.
     
@@ -259,8 +259,8 @@ cphstats_run -h
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
-* **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cpin). Accepted formats: CPIN
-* **input_cpout_path** (*string*): Output constant pH file (AMBER cpout). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/sander.pH.cpout). Accepted formats: CPOUT, ZIP, GZIP
+* **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/structure.cpin). Accepted formats: CPIN, IN, TXT
+* **input_cpout_path** (*string*): Output constant pH file (AMBER cpout). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cphstats/sander.pH.cpout). Accepted formats: CPOUT, ZIP, GZIP, GZ
 * **output_dat_path** (*string*): Output file to which the standard calcpka-type statistics are written. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cphstats.pH.dat). Accepted formats: DAT, OUT, TXT, O
 * **output_population_path** (*string*): Output file where protonation state populations are printed for every state of every residue. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cphstats.pH.pop.dat). Accepted formats: DAT, OUT, TXT, O
 * **output_chunk_path** (*string*): Output file where the time series data calculated over chunks of the simulation are printed. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cphstats/cphstats.pH.dat). Accepted formats: DAT, OUT, TXT, O
@@ -369,19 +369,19 @@ cpptraj_randomize_ions -h
       --input_top_path INPUT_TOP_PATH
                             Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
       --input_crd_path INPUT_CRD_PATH
-                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd.
+                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd, rst, rst7.
       --output_pdb_path OUTPUT_PDB_PATH
                             Structure PDB file with randomized ions. Accepted formats: pdb.
       --output_crd_path OUTPUT_CRD_PATH
-                            Structure CRD file with coordinates including randomized ions. Accepted formats: crd, mdcrd, inpcrd.
+                            Structure CRD file with coordinates including randomized ions. Accepted formats: crd, mdcrd, inpcrd, rst, rst7.
 ### I / O Arguments
 Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_top_path** (*string*): Input topology file (AMBER ParmTop). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.ions.parmtop). Accepted formats: TOP, PARMTOP, PRMTOP
-* **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.ions.crd). Accepted formats: CRD, MDCRD, INPCRD
+* **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/cpptraj/structure.ions.crd). Accepted formats: CRD, MDCRD, INPCRD, RST, RST7
 * **output_pdb_path** (*string*): Structure PDB file with randomized ions. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cpptraj/structure.randIons.pdb). Accepted formats: PDB
-* **output_crd_path** (*string*): Structure CRD file with coordinates including randomized ions. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cpptraj/structure.randIons.crd). Accepted formats: CRD, MDCRD, INPCRD
+* **output_crd_path** (*string*): Structure CRD file with coordinates including randomized ions. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/cpptraj/structure.randIons.crd). Accepted formats: CRD, MDCRD, INPCRD, RST, RST7
 ### Config
 Syntax: input_parameter (datatype) - (default_value) Definition
 
@@ -1415,7 +1415,7 @@ pmemd_mdrun -h
       --input_mdin_path INPUT_MDIN_PATH
                             Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.
       --input_cpin_path INPUT_CPIN_PATH
-                            Input constant pH file (AMBER cpin). Accepted formats: cpin.
+                            Input constant pH file (AMBER cpin). Accepted formats: cpin, in, txt.
       --input_ref_path INPUT_REF_PATH
                             Input reference coordinates for position restraints. Accepted formats: crd, mdcrd, inpcrd, rst, rst7, netcdf, nc, ncrst.
       --output_cpout_path OUTPUT_CPOUT_PATH
@@ -1431,7 +1431,7 @@ Config input / output arguments for this building block:
 * **input_top_path** (*string*): Input topology file (AMBER ParmTop). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.prmtop). Accepted formats: TOP, PARMTOP, PRMTOP
 * **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.inpcrd). Accepted formats: CRD, MDCRD, INPCRD, RST, RST7, NETCDF, NC, NCRST
 * **input_mdin_path** (*string*): Input configuration file (MD run options) (AMBER mdin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/npt.mdin). Accepted formats: MDIN, IN, TXT
-* **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.cpin). Accepted formats: CPIN
+* **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/cln025.cpin). Accepted formats: CPIN, IN, TXT
 * **input_ref_path** (*string*): Input reference coordinates for position restraints. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/pmemd/sander.rst). Accepted formats: CRD, MDCRD, INPCRD, RST, RST7, NETCDF, NC, NCRST
 * **output_log_path** (*string*): Output log file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.log). Accepted formats: LOG, OUT, TXT, O
 * **output_traj_path** (*string*): Output trajectory file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/pmemd/sander.x). Accepted formats: TRJ, CRD, MDCRD, X, NETCDF, NC
@@ -1749,7 +1749,7 @@ sander_mdrun -h
       --input_top_path INPUT_TOP_PATH
                             Input topology file (AMBER ParmTop). Accepted formats: top, parmtop, prmtop.
       --input_crd_path INPUT_CRD_PATH
-                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd, netcdf, nc, ncrst, rst.
+                            Input coordinates file (AMBER crd). Accepted formats: crd, mdcrd, inpcrd, netcdf, nc, ncrst, rst, rst7.
       --output_log_path OUTPUT_LOG_PATH
                             Output log file. Accepted formats: log, out, txt, o.
       --output_traj_path OUTPUT_TRAJ_PATH
@@ -1761,9 +1761,9 @@ sander_mdrun -h
       --input_mdin_path INPUT_MDIN_PATH
                             Input configuration file (MD run options) (AMBER mdin). Accepted formats: mdin, in, txt.
       --input_cpin_path INPUT_CPIN_PATH
-                            Input constant pH file (AMBER cpin). Accepted formats: cpin.
+                            Input constant pH file (AMBER cpin). Accepted formats: cpin, in, txt.
       --input_ref_path INPUT_REF_PATH
-                            Input reference coordinates for position restraints. Accepted formats: rst, rst7, netcdf, nc, ncrst, crd.
+                            Input reference coordinates for position restraints. Accepted formats: rst, rst7, netcdf, nc, ncrst, crd, inpcrd, mdcrd.
       --output_cpout_path OUTPUT_CPOUT_PATH
                             Output constant pH file (AMBER cpout). Accepted formats: cpout.
       --output_cprst_path OUTPUT_CPRST_PATH
@@ -1775,10 +1775,10 @@ Syntax: input_argument (datatype) : Definition
 
 Config input / output arguments for this building block:
 * **input_top_path** (*string*): Input topology file (AMBER ParmTop). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.prmtop). Accepted formats: TOP, PARMTOP, PRMTOP
-* **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.inpcrd). Accepted formats: CRD, MDCRD, INPCRD, NETCDF, NC, NCRST, RST
+* **input_crd_path** (*string*): Input coordinates file (AMBER crd). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.inpcrd). Accepted formats: CRD, MDCRD, INPCRD, NETCDF, NC, NCRST, RST, RST7
 * **input_mdin_path** (*string*): Input configuration file (MD run options) (AMBER mdin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/npt.mdin). Accepted formats: MDIN, IN, TXT
-* **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.cpin). Accepted formats: CPIN
-* **input_ref_path** (*string*): Input reference coordinates for position restraints. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.rst). Accepted formats: RST, RST7, NETCDF, NC, NCRST, CRD
+* **input_cpin_path** (*string*): Input constant pH file (AMBER cpin). File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.cpin). Accepted formats: CPIN, IN, TXT
+* **input_ref_path** (*string*): Input reference coordinates for position restraints. File type: input. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/sander.rst). Accepted formats: RST, RST7, NETCDF, NC, NCRST, CRD, INPCRD, MDCRD
 * **output_log_path** (*string*): Output log file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.log). Accepted formats: LOG, OUT, TXT, O
 * **output_traj_path** (*string*): Output trajectory file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.x). Accepted formats: TRJ, CRD, MDCRD, X, NETCDF, NC
 * **output_rst_path** (*string*): Output restart file. File type: output. [Sample file](https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/sander/sander.rst). Accepted formats: RST, RST7, NETCDF, NC, NCRST

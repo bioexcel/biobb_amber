@@ -65,7 +65,8 @@
                 ".*\\.netcdf$",
                 ".*\\.nc$",
                 ".*\\.ncrst$",
-                ".*\\.rst$"
+                ".*\\.rst$",
+                ".*\\.rst7$"
             ],
             "file_formats": [
                 {
@@ -100,6 +101,11 @@
                 },
                 {
                     "extension": ".*\\.rst$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.rst7$",
                     "description": "Input coordinates file (AMBER crd)",
                     "edam": "format_3886"
                 }
@@ -139,11 +145,23 @@
             "filetype": "input",
             "sample": "https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/data/sander/cln025.cpin",
             "enum": [
-                ".*\\.cpin$"
+                ".*\\.cpin$",
+                ".*\\.in$",
+                ".*\\.txt$"
             ],
             "file_formats": [
                 {
                     "extension": ".*\\.cpin$",
+                    "description": "Input constant pH file (AMBER cpin)",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.in$",
+                    "description": "Input constant pH file (AMBER cpin)",
+                    "edam": "format_2330"
+                },
+                {
+                    "extension": ".*\\.txt$",
                     "description": "Input constant pH file (AMBER cpin)",
                     "edam": "format_2330"
                 }
@@ -160,7 +178,9 @@
                 ".*\\.netcdf$",
                 ".*\\.nc$",
                 ".*\\.ncrst$",
-                ".*\\.crd$"
+                ".*\\.crd$",
+                ".*\\.inpcrd$",
+                ".*\\.mdcrd$"
             ],
             "file_formats": [
                 {
@@ -190,6 +210,16 @@
                 },
                 {
                     "extension": ".*\\.crd$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.inpcrd$",
+                    "description": "Input reference coordinates for position restraints",
+                    "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.mdcrd$",
                     "description": "Input reference coordinates for position restraints",
                     "edam": "format_3878"
                 }

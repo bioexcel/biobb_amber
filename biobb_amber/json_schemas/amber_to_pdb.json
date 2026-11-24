@@ -59,7 +59,8 @@
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
                 ".*\\.inpcrd$",
-                ".*\\.rst$"
+                ".*\\.rst$",
+                ".*\\.rst7$"
             ],
             "file_formats": [
                 {
@@ -79,6 +80,11 @@
                 },
                 {
                     "extension": ".*\\.rst$",
+                    "description": "AMBER coordinates file",
+                    "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.rst7$",
                     "description": "AMBER coordinates file",
                     "edam": "format_3886"
                 }

@@ -59,7 +59,9 @@
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
-                ".*\\.inpcrd$"
+                ".*\\.inpcrd$",
+                ".*\\.rst$",
+                ".*\\.rst7$"
             ],
             "file_formats": [
                 {
@@ -76,6 +78,16 @@
                     "extension": ".*\\.inpcrd$",
                     "description": "Input coordinates file (AMBER crd)",
                     "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.rst$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.rst7$",
+                    "description": "Input coordinates file (AMBER crd)",
+                    "edam": "format_3886"
                 }
             ]
         },
@@ -103,7 +115,9 @@
             "enum": [
                 ".*\\.crd$",
                 ".*\\.mdcrd$",
-                ".*\\.inpcrd$"
+                ".*\\.inpcrd$",
+                ".*\\.rst$",
+                ".*\\.rst7$"
             ],
             "file_formats": [
                 {
@@ -120,6 +134,16 @@
                     "extension": ".*\\.inpcrd$",
                     "description": "Structure CRD file with coordinates including randomized ions",
                     "edam": "format_3878"
+                },
+                {
+                    "extension": ".*\\.rst$",
+                    "description": "Structure CRD file with coordinates including randomized ions",
+                    "edam": "format_3886"
+                },
+                {
+                    "extension": ".*\\.rst7$",
+                    "description": "Structure CRD file with coordinates including randomized ions",
+                    "edam": "format_3886"
                 }
             ]
         },
