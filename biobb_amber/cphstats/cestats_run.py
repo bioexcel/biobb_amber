@@ -4,8 +4,6 @@
 
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.cphstats.common import check_input_path, check_output_path
 
 
 class CestatsRun(BiobbObject):
@@ -106,36 +104,8 @@ class CestatsRun(BiobbObject):
         self.conditional = properties.get('conditional', "")
         self.binary_path = properties.get('binary_path', 'cestats')
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    def check_data_params(self, out_log, err_log):
-        """ Checks input/output paths correctness """
-
-        # Check input(s)
-        self.io_dict["in"]["input_cein_path"] = check_input_path(self.io_dict["in"]["input_cein_path"], "input_cein_path", False, out_log, self.__class__.__name__)
-        self.io_dict["in"]["input_ceout_path"] = check_input_path(self.io_dict["in"]["input_ceout_path"], "input_ceout_path", False, out_log, self.__class__.__name__)
-
-        # Check output(s)
-        self.io_dict["out"]["output_dat_path"] = check_output_path(self.io_dict["out"]["output_dat_path"], "output_dat_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_population_path"] = check_output_path(self.io_dict["out"]["output_population_path"], "output_population_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_chunk_path"] = check_output_path(self.io_dict["out"]["output_chunk_path"], "output_chunk_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cumulative_path"] = check_output_path(self.io_dict["out"]["output_cumulative_path"], "output_cumulative_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_chunk_conditional_path"] = check_output_path(self.io_dict["out"]["output_chunk_conditional_path"], "output_chunk_conditional_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_conditional_path"] = check_output_path(self.io_dict["out"]["output_conditional_path"], "output_conditional_path", True, out_log, self.__class__.__name__)
-
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the CestatsRun module."""
-
-        # check input/output paths and parameters
-        self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Command line
         # cphstats -i 4LYT.equil.cpin 0/4LYT.md1.cpout -o pH0_calcpka.dat --population pH0_populations.dat
@@ -204,15 +174,9 @@ class CestatsRun(BiobbObject):
             self.cmd.append('-c')
             self.cmd.append(str(self.conditional))
 
-        # Run Biobb block
         self.run_biobb()
-
-        # Copy files to host
         self.copy_to_host()
-
-        # Remove temporary file(s)
         self.remove_tmp_files()
-
         self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code

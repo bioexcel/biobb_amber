@@ -6,8 +6,6 @@ import re
 from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.pmemd.common import check_input_path, check_output_path
 
 
 class PmemdMDRun(BiobbObject):
@@ -103,28 +101,6 @@ class PmemdMDRun(BiobbObject):
         self.mpi_bin = properties.get('mpi_bin')
         self.mpi_np = properties.get('mpi_np')
         self.mpi_flags = properties.get('mpi_flags')
-
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    def check_data_params(self, out_log, err_log):
-        """ Checks input/output paths correctness """
-
-        # Check input(s)
-        self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", False, out_log, self.__class__.__name__)
-        self.io_dict["in"]["input_crd_path"] = check_input_path(self.io_dict["in"]["input_crd_path"], "input_crd_path", False, out_log, self.__class__.__name__)
-        self.io_dict["in"]["input_mdin_path"] = check_input_path(self.io_dict["in"]["input_mdin_path"], "input_mdin_path", True, out_log, self.__class__.__name__)
-        self.io_dict["in"]["input_cpin_path"] = check_input_path(self.io_dict["in"]["input_cpin_path"], "input_cpin_path", True, out_log, self.__class__.__name__)
-        self.io_dict["in"]["input_ref_path"] = check_input_path(self.io_dict["in"]["input_ref_path"], "input_ref_path", True, out_log, self.__class__.__name__)
-
-        # Check output(s)
-        self.io_dict["out"]["output_log_path"] = check_output_path(self.io_dict["out"]["output_log_path"], "output_log_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_traj_path"] = check_output_path(self.io_dict["out"]["output_traj_path"], "output_traj_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_rst_path"] = check_output_path(self.io_dict["out"]["output_rst_path"], "output_rst_path", False, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cpout_path"] = check_output_path(self.io_dict["out"]["output_cpout_path"], "output_cpout_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_cprst_path"] = check_output_path(self.io_dict["out"]["output_cprst_path"], "output_cprst_path", True, out_log, self.__class__.__name__)
-        self.io_dict["out"]["output_mdinfo_path"] = check_output_path(self.io_dict["out"]["output_mdinfo_path"], "output_mdinfo_path", True, out_log, self.__class__.__name__)
 
     def create_mdin(self, path: Optional[str] = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""
@@ -274,17 +250,8 @@ class PmemdMDRun(BiobbObject):
 
         return str(self.output_mdin_path)
 
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the PmemdMDRun module."""
-
-        # check input/output paths and parameters
-        self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Creating temporary folder
         tmp_folder = fu.create_unique_dir()

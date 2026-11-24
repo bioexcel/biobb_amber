@@ -4,8 +4,6 @@
 
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.ambpdb.common import check_input_path, check_output_path
 
 
 class AmberToPDB(BiobbObject):
@@ -71,31 +69,7 @@ class AmberToPDB(BiobbObject):
         self.properties = properties
         self.binary_path = properties.get('binary_path', 'ambpdb')
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    def check_data_params(self, out_log, err_log):
-        """ Checks input/output paths correctness """
-
-        # Check input(s)
-        self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", False, out_log, self.__class__.__name__)
-        self.io_dict["in"]["input_crd_path"] = check_input_path(self.io_dict["in"]["input_crd_path"], "input_crd_path", False, out_log, self.__class__.__name__)
-
-        # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
-
-    @launchlogger
-    def launch(self):
-
-        # check input/output paths and parameters
-        self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
-
+    def run(self):
         # Command line
         self.cmd = [self.binary_path,
                     '-p', self.stage_io_dict['in']['input_top_path'],
@@ -103,15 +77,9 @@ class AmberToPDB(BiobbObject):
                     '> ', self.stage_io_dict['out']['output_pdb_path']
                     ]
 
-        # Run Biobb block
         self.run_biobb()
-
-        # Copy files to host
         self.copy_to_host()
-
-        # Remove temporary file(s)
         self.remove_tmp_files()
-
         self.check_arguments(output_files_created=True, raise_exception=False)
 
         return self.return_code

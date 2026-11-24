@@ -11,7 +11,6 @@ from typing import List, Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_amber.leap.common import _from_string_to_list
 
@@ -158,10 +157,6 @@ class LeapAddIons(BiobbObject):
         self.negative_ions_type = properties.get("negative_ions_type", "Cl-")
         self.binary_path = properties.get("binary_path", "tleap")
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """
         Find the leaprc paths for the force fields provided.
@@ -219,21 +214,6 @@ class LeapAddIons(BiobbObject):
 
         return leaprc_paths
 
-    # def check_data_params(self, out_log, err_log):
-    #     """ Checks input/output paths correctness """
-
-    #     # Check input(s)
-    #     self.io_dict["in"]["input_pdb_path"] = check_input_path(self.io_dict["in"]["input_pdb_path"], "input_pdb_path", False, out_log, self.__class__.__name__)
-    #     self.io_dict["in"]["input_lib_path"] = check_input_path(self.io_dict["in"]["input_lib_path"], "input_lib_path", True, out_log, self.__class__.__name__)
-    #     self.io_dict["in"]["input_frcmod_path"] = check_input_path(self.io_dict["in"]["input_frcmod_path"], "input_frcmod_path", True, out_log, self.__class__.__name__)
-    #     # self.io_dict["in"]["input_params_path"] = check_input_path(self.io_dict["in"]["input_params_path"], "input_params_path", True, out_log, self.__class__.__name__)
-    #     # self.io_dict["in"]["input_source_path"] = check_input_path(self.io_dict["in"]["input_source_path"], "input_source_path", True, out_log, self.__class__.__name__)
-
-    #     # Check output(s)
-    #     self.io_dict["out"]["output_pdb_path"] = check_output_path(self.io_dict["out"]["output_pdb_path"], "output_pdb_path", False, out_log, self.__class__.__name__)
-    #     self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"], "output_top_path", False, out_log, self.__class__.__name__)
-    #     self.io_dict["out"]["output_crd_path"] = check_output_path(self.io_dict["out"]["output_crd_path"], "output_crd_path", False, out_log, self.__class__.__name__)
-
     def find_out_number_of_ions(self):
         """Computes the number of positive and negative ions from the input ionic
         concentration and the number of water molecules in the system box."""
@@ -283,17 +263,8 @@ class LeapAddIons(BiobbObject):
             self.stage_io_dict["in"][io_key], dest_dir=tmp_folder, out_log=self.out_log
         )
 
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the LeapAddIons module."""
-
-        # check input/output paths and parameters
-        # self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Water Type
         # leaprc.water.tip4pew, tip4pd, tip3p, spceb, spce, opc, fb4, fb3

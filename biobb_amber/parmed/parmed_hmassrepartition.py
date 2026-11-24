@@ -5,8 +5,6 @@ from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
-from biobb_amber.parmed.common import check_input_path, check_output_path
 
 
 class ParmedHMassRepartition(BiobbObject):
@@ -66,30 +64,8 @@ class ParmedHMassRepartition(BiobbObject):
         self.properties = properties
         self.binary_path = properties.get('binary_path', 'parmed')
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    def check_data_params(self, out_log, err_log):
-        """ Checks input/output paths correctness """
-
-        # Check input(s)
-        self.io_dict["in"]["input_top_path"] = check_input_path(self.io_dict["in"]["input_top_path"], "input_top_path", False, out_log, self.__class__.__name__)
-
-        # Check output(s)
-        self.io_dict["out"]["output_top_path"] = check_output_path(self.io_dict["out"]["output_top_path"], "output_top_path", False, out_log, self.__class__.__name__)
-
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the ParmedHMassRepartition module."""
-
-        # check input/output paths and parameters
-        self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # Creating temporary folder & Parmed configuration (instructions) file
         if self.container_path:

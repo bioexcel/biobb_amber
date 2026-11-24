@@ -8,9 +8,8 @@ from typing import List, Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
-from biobb_amber.leap.common import _from_string_to_list, check_output_path
+from biobb_amber.leap.common import _from_string_to_list
 
 
 class LeapBuildLinearStructure(BiobbObject):
@@ -95,22 +94,6 @@ class LeapBuildLinearStructure(BiobbObject):
         self.build_library = properties.get("build_library", False)
         self.binary_path = properties.get("binary_path", "tleap")
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    def check_data_params(self, out_log, err_log):
-        """Checks input/output paths correctness"""
-
-        # Check output(s)
-        self.io_dict["out"]["output_pdb_path"] = check_output_path(
-            self.io_dict["out"]["output_pdb_path"],
-            "output_pdb_path",
-            False,
-            out_log,
-            self.__class__.__name__,
-        )
-
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """
         Find the leaprc paths for the force fields provided.
@@ -168,17 +151,8 @@ class LeapBuildLinearStructure(BiobbObject):
 
         return leaprc_paths
 
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the LeapBuildLinearStructure module."""
-
-        # check input/output paths and parameters
-        self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # create .in file
         # TC5b = sequence { NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER }

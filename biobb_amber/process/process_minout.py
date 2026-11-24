@@ -9,12 +9,9 @@ from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
-from biobb_common.tools.file_utils import launchlogger
 
 from biobb_amber.process.common import (
     _from_string_to_list,
-    check_input_path,
-    check_output_path,
 )
 
 
@@ -80,42 +77,8 @@ class ProcessMinOut(BiobbObject):
         self.terms = _from_string_to_list(properties.get("terms", ["ENERGY"]))
         self.binary_path = properties.get("binary_path", "process_minout.perl")
 
-        # Check the properties
-        self.check_properties(properties)
-        self.check_arguments()
-
-    def check_data_params(self, out_log, out_err):
-        """Checks input/output paths correctness"""
-
-        # Check input(s)
-        self.io_dict["in"]["input_log_path"] = check_input_path(
-            self.io_dict["in"]["input_log_path"],
-            "input_log_path",
-            False,
-            out_log,
-            self.__class__.__name__,
-        )
-
-        # Check output(s)
-        self.io_dict["out"]["output_dat_path"] = check_output_path(
-            self.io_dict["out"]["output_dat_path"],
-            "output_dat_path",
-            False,
-            out_log,
-            self.__class__.__name__,
-        )
-
-    @launchlogger
-    def launch(self):
+    def run(self):
         """Launches the execution of the ProcessMinOut module."""
-
-        # check input/output paths and parameters
-        self.check_data_params(self.out_log, self.err_log)
-
-        # Setup Biobb
-        if self.check_restart():
-            return 0
-        self.stage_files()
 
         # is_docker = self.container_path and os.path.basename(str(self.container_path)).lower() == 'docker'
 
