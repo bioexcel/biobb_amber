@@ -253,8 +253,7 @@ class LeapAddIons(BiobbObject):
             return [self.stage_io_dict["in"][io_key]]
         if self.container_path:
             unique_dir = self.stage_io_dict["unique_dir"]
-            host_zip = os.path.join(unique_dir, os.path.basename(file_path))
-            extracted = fu.unzip_list(host_zip, dest_dir=unique_dir, out_log=self.out_log)
+            extracted = fu.unzip_list(self.sandbox_file(io_key), dest_dir=unique_dir, out_log=self.out_log)
             return [
                 os.path.join(self.container_volume_path, os.path.relpath(p, unique_dir))
                 for p in extracted
