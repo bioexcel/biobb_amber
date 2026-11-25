@@ -75,7 +75,7 @@ class LeapBuildLinearStructure(BiobbObject):
         # Set default forcefields
         if self.container_path:
             self.forcefield = _from_string_to_list(
-                properties.get("forcefield", ['leaprc.protein.ff14SB', 'leaprc.DNA.bsc1', 'leaprc.gaff'])
+                properties.get("forcefield", ['protein.ff14SB', 'DNA.bsc1', 'gaff'])
             )
         else:
             amber_home_path = os.getenv("AMBERHOME", "")
