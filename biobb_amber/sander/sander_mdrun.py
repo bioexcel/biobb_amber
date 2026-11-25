@@ -4,9 +4,8 @@
 from typing import Optional
 import shutil
 import re
-from pathlib import Path, PurePath
+from pathlib import Path
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
 
 
 class SanderMDRun(BiobbObject):
@@ -272,27 +271,8 @@ class SanderMDRun(BiobbObject):
     def run(self):
         """Launches the execution of the BuildLinearStructure module."""
 
-        # Creating temporary folder
-        # tmp_folder = fu.create_unique_dir()
-        # fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-
-        # if self.io_dict['in']['input_mdin_path']:
-        #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
-        # else:
-        #    self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
-        # self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
-
-        # Creating temporary folder & Sander configuration (instructions) file
-        if self.container_path:
-            # instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("leap.in"))
-            # instructions_file_path = str(PurePath(self.container_volume_path).joinpath("leap.in"))
-            instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("sander.mdin")))
-            self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
-            tmp_folder = None
-        else:
-            tmp_folder = fu.create_unique_dir()
-            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-            self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("sander.mdin")))
+        # Sander configuration (instructions) file, in the sandbox
+        self.output_mdin_path = self.staged_path(self.create_mdin(path=self.create_tmp_file("_sander.mdin")))
 
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
@@ -340,7 +320,7 @@ class SanderMDRun(BiobbObject):
         self.run_biobb()
 
         # remove temporary folder(s)
-        self.tmp_files.extend(["mdinfo", str(tmp_folder)])
+        self.tmp_files.append("mdinfo")
 
     def write_parameter_files(self, directory: str) -> list[str]:
         """Write the mdin file to **directory** without executing sander, used by the

@@ -83,10 +83,6 @@ class ParmedCpinUtil(BiobbObject):
     def run(self):
         """Launches the execution of the ParmedCpinUtil module."""
 
-        # Creating temporary folder
-        tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-
         # cpinutil.py -igb 2 -resname AS4 GL4 -p $1.prmtop -op $1.cpH.prmtop
         # cpinutil.py -p cln025.cpH.prmtop -igb 2 -system "CLN" -o cpin
 
@@ -115,9 +111,6 @@ class ParmedCpinUtil(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # remove temporary folder(s)
-        self.tmp_files.extend([tmp_folder])
 
 
 def parmed_cpinutil(input_top_path: str, output_cpin_path: str,

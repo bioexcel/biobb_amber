@@ -237,30 +237,16 @@ class LeapAddIons(BiobbObject):
         # where X M = X mM / 1000
         self.nio = int((cnt / 55) * (self.ionic_concentration / 1000))
 
-    def _resolve_input_files(self, io_key: str, tmp_folder: Optional[str]) -> List[str]:
+    def _resolve_input_files(self, io_key: str, tmp_folder: str) -> List[str]:
         """Resolve an optional input (zip or single file) to the list of paths the tleap
-        script must load.
-
-        In container mode the zipball is staged into the host sandbox (unique_dir), which is
-        bind-mounted at ``container_volume_path``; it is unpacked on the host and the entries
-        are referenced by their container path. In local mode the zipball is unpacked into a
-        temporary folder and referenced by its host path.
-        """
+        script must load: a zip file is unpacked into **tmp_folder**, a folder of the sandbox."""
         file_path = self.io_dict["in"][io_key]
         if file_path is None:
             return []
         if not file_path.endswith(".zip"):
             return [self.stage_io_dict["in"][io_key]]
-        if self.container_path:
-            unique_dir = self.stage_io_dict["unique_dir"]
-            extracted = fu.unzip_list(self.sandbox_file(io_key), dest_dir=unique_dir, out_log=self.out_log)
-            return [
-                os.path.join(self.container_volume_path, os.path.relpath(p, unique_dir))
-                for p in extracted
-            ]
-        return fu.unzip_list(
-            self.stage_io_dict["in"][io_key], dest_dir=tmp_folder, out_log=self.out_log
-        )
+        extracted = fu.unzip_list(self.sandbox_file(io_key), dest_dir=tmp_folder, out_log=self.out_log)
+        return [self.staged_path(path) for path in extracted]
 
     def run(self):
         """Launches the execution of the LeapAddIons module."""
@@ -316,20 +302,10 @@ class LeapAddIons(BiobbObject):
                     ions_command + "addionsRand mol " + self.positive_ions_type + " " + str(self.positive_ions_number) + " \n"
                 )
 
-        # Creating temporary folder & Leap configuration (instructions) file
-        if self.container_path:
-            instructions_file = str(
-                PurePath(self.stage_io_dict["unique_dir"]).joinpath("leap.in")
-            )
-            instructions_file_path = str(
-                PurePath(self.container_volume_path).joinpath("leap.in")
-            )
-            tmp_folder = None
-        else:
-            tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
-            instructions_file_path = instructions_file
+        # Temporary folder in the sandbox & Leap configuration (instructions) file
+        tmp_folder = self.create_tmp_dir()
+        instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
+        instructions_file_path = self.staged_path(instructions_file)
 
         ligands_lib_list = self._resolve_input_files("input_lib_path", tmp_folder)
         ligands_frcmod_list = self._resolve_input_files("input_frcmod_path", tmp_folder)
@@ -412,7 +388,7 @@ class LeapAddIons(BiobbObject):
         self.run_biobb()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(tmp_folder), "leap.log"])
+        self.tmp_files.append("leap.log")
 
         # Truncated octahedron box: write the box of the input pdb file (OCTBOX line) in the output crd and topology files.
         if self.box_type != "cubic":

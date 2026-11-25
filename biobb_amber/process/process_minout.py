@@ -84,7 +84,7 @@ class ProcessMinOut(BiobbObject):
 
         if not self.container_path:
             # No container or Singularity: cd to tmp_folder so summary.* files land there
-            tmp_folder = fu.create_unique_dir()
+            tmp_folder = self.create_tmp_dir()
             fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             self.cmd = [
                 "cd",
@@ -105,10 +105,6 @@ class ProcessMinOut(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # remove temporary folder(s): the summary.* files are in the temporary folder or in the sandbox
-        if tmp_folder:
-            self.tmp_files.append(str(tmp_folder))
 
         # Write the output dat file from the summary.<term> files written by process_minout.perl.
         if len(self.terms) == 1:

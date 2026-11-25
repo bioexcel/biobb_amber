@@ -4,7 +4,6 @@
 from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
 
 
 class ParmedHMassRepartition(BiobbObject):
@@ -67,16 +66,9 @@ class ParmedHMassRepartition(BiobbObject):
     def run(self):
         """Launches the execution of the ParmedHMassRepartition module."""
 
-        # Creating temporary folder & Parmed configuration (instructions) file
-        if self.container_path:
-            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("parmed.in"))
-            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("parmed.in"))
-            tmp_folder = None
-        else:
-            tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(tmp_folder).joinpath("parmed.in"))
-            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-            instructions_file_path = instructions_file
+        # Temporary folder in the sandbox & Parmed configuration (instructions) file
+        instructions_file = str(PurePath(self.create_tmp_dir()).joinpath("parmed.in"))
+        instructions_file_path = self.staged_path(instructions_file)
 
         with open(instructions_file, 'w') as parmedin:
             parmedin.write("hmassrepartition\n")
@@ -90,9 +82,6 @@ class ParmedHMassRepartition(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # remove temporary folder(s)
-        self.tmp_files.extend([str(tmp_folder)])
 
 
 def parmed_hmassrepartition(input_top_path: str,

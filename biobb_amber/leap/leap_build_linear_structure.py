@@ -7,7 +7,6 @@ from pathlib import PurePath
 from typing import List, Optional
 
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
 
 from biobb_amber.leap.common import _from_string_to_list
 
@@ -159,20 +158,10 @@ class LeapBuildLinearStructure(BiobbObject):
         # savepdb TC5b TC5b_linear.pdb
         # quit
 
-        # Creating temporary folder & Leap configuration (instructions) file
-        if self.container_path:
-            instructions_file = str(
-                PurePath(self.stage_io_dict["unique_dir"]).joinpath("leap.in")
-            )
-            instructions_file_path = str(
-                PurePath(self.container_volume_path).joinpath("leap.in")
-            )
-            tmp_folder = None
-        else:
-            tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
-            instructions_file_path = instructions_file
+        # Temporary folder in the sandbox & Leap configuration (instructions) file
+        tmp_folder = self.create_tmp_dir()
+        instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
+        instructions_file_path = self.staged_path(instructions_file)
 
         # instructions_file = str(PurePath(tmp_folder).joinpath("leap.in"))
         with open(instructions_file, "w") as leapin:
@@ -196,7 +185,7 @@ class LeapBuildLinearStructure(BiobbObject):
         self.run_biobb()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([str(tmp_folder), "leap.log"])
+        self.tmp_files.append("leap.log")
 
 
 def leap_build_linear_structure(

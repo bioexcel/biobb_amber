@@ -3,7 +3,6 @@
 """Module containing the Pdb4amber class and the command line interface."""
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
 
 
 class Pdb4amberRun(BiobbObject):
@@ -78,10 +77,6 @@ class Pdb4amberRun(BiobbObject):
     def run(self):
         """Launches the execution of the Pdb4amberRun module."""
 
-        # Creating temporary folder
-        tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-
         # Command line
         # sander -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
         self.cmd = [self.binary_path,
@@ -100,10 +95,6 @@ class Pdb4amberRun(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # remove temporary folder(s)
-        if not self.container_path:
-            self.tmp_files.extend([str(tmp_folder)])
 
 
 def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,

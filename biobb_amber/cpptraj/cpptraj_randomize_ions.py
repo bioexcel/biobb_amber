@@ -5,7 +5,6 @@
 from typing import Optional
 from pathlib import PurePath
 from biobb_common.generic.biobb_object import BiobbObject
-from biobb_common.tools import file_utils as fu
 
 
 class CpptrajRandomizeIons(BiobbObject):
@@ -90,14 +89,9 @@ class CpptrajRandomizeIons(BiobbObject):
     def run(self):
         """Launches the execution of the CpptrajRandomizeIons module."""
 
-        if self.container_path:
-            instructions_file = str(PurePath(self.stage_io_dict['unique_dir']).joinpath("cpptraj.in"))
-            instructions_file_path = str(PurePath(self.container_volume_path).joinpath("cpptraj.in"))
-        else:
-            tmp_folder = fu.create_unique_dir()
-            instructions_file = str(PurePath(tmp_folder).joinpath("cpptraj.in"))
-            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-            instructions_file_path = instructions_file
+        # Temporary folder in the sandbox & Cpptraj configuration (instructions) file
+        instructions_file = str(PurePath(self.create_tmp_dir()).joinpath("cpptraj.in"))
+        instructions_file_path = self.staged_path(instructions_file)
 
         # create cpptraj.in file
         # trajin randomizeIons.crd
@@ -123,10 +117,7 @@ class CpptrajRandomizeIons(BiobbObject):
         self.run_biobb()
 
         # Remove temporary file(s)
-        if self.container_path:
-            self.tmp_files.extend(["cpptraj.log"])
-        else:
-            self.tmp_files.extend([tmp_folder, "cpptraj.log"])
+        self.tmp_files.append("cpptraj.log")
 
 
 def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
