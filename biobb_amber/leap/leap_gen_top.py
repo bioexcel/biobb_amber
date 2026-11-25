@@ -79,28 +79,7 @@ class LeapGenTop(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ):
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_pdb_path": input_pdb_path,
-                "input_lib_path": input_lib_path,
-                "input_frcmod_path": input_frcmod_path,
-                "input_params_path": input_params_path,
-                "input_prep_path": input_prep_path,
-                "input_source_path": input_source_path,
-            },
-            "out": {
-                "output_pdb_path": output_pdb_path,
-                "output_top_path": output_top_path,
-                "output_crd_path": output_crd_path,
-            },
-        }
+        super().__init__(**locals())
 
         # # Ligand Parameter lists
         # self.ligands_lib_list = []
@@ -111,15 +90,10 @@ class LeapGenTop(BiobbObject):
         # if input_frcmod_path:
         #     self.ligands_frcmod_list.append(input_frcmod_path)
 
-        # Properties specific for BB
-        self.properties = properties
-
         # Set default forcefields
         if self.container_path:
             # self.forcefield = "leaprc.protein.ff14SB"
-            self.forcefield = _from_string_to_list(
-                properties.get("forcefield", ['protein.ff14SB', 'DNA.bsc1', 'gaff'])
-            )
+            self.forcefield = _from_string_to_list(self.forcefield)
         else:
             amber_home_path = os.getenv("AMBERHOME", "")
             protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
@@ -127,12 +101,10 @@ class LeapGenTop(BiobbObject):
             gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
 
             self.forcefield = _from_string_to_list(
-                properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
+                self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
             )
             # Find the paths of the leaprc files if only the force field names are provided
             self.forcefield = self.find_leaprc_paths(self.forcefield)
-
-        self.binary_path = properties.get("binary_path", "tleap")
 
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """

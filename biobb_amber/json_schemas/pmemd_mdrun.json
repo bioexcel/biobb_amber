@@ -463,7 +463,7 @@
                 },
                 "mpi_np": {
                     "type": "integer",
-                    "default": 0,
+                    "default": null,
                     "wf_prop": false,
                     "description": "Number of MPI processes. Usually an integer bigger than 1.",
                     "min": 0,

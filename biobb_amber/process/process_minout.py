@@ -60,22 +60,10 @@ class ProcessMinOut(BiobbObject):
     """
 
     def __init__(self, input_log_path: str, output_dat_path: str, properties, **kwargs):
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {"input_log_path": input_log_path},
-            "out": {"output_dat_path": output_dat_path},
-        }
+        super().__init__(**locals())
 
         # Properties specific for BB
-        self.properties = properties
-        self.terms = _from_string_to_list(properties.get("terms", ["ENERGY"]))
-        self.binary_path = properties.get("binary_path", "process_minout.perl")
+        self.terms = _from_string_to_list(self.terms)
 
     def run(self):
         """Launches the execution of the ProcessMinOut module."""

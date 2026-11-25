@@ -59,32 +59,7 @@ class CpptrajRandomizeIons(BiobbObject):
     """
 
     def __init__(self, input_top_path: str, input_crd_path: str, output_pdb_path: str, output_crd_path: str, properties, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {
-                'input_top_path': input_top_path,
-                'input_crd_path': input_crd_path
-            },
-            'out': {
-                'output_pdb_path': output_pdb_path,
-                'output_crd_path': output_crd_path
-            }
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.ion_mask = properties.get('ion_mask', ":K+,Cl-,Na+")
-        self.solute_mask = properties.get('solute_mask', ":DA,DC,DG,DT,D?3,D?5")
-        self.distance = properties.get('distance', 5.0)
-        self.overlap = properties.get('overlap', 3.5)
-        self.binary_path = properties.get('binary_path', 'cpptraj')
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the CpptrajRandomizeIons module."""

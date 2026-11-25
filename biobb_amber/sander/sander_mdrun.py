@@ -32,7 +32,7 @@ class SanderMDRun(BiobbObject):
             * **binary_path** (*str*) - ("sander") sander binary path to be used.
             * **direct_mdin** (*bool*) - (False) Use input_mdin_path as it is, skip file parsing.
             * **mpi_bin** (*str*) - (None) Path to the MPI runner. Usually "mpirun" or "srun".
-            * **mpi_np** (*int*) - (0) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
+            * **mpi_np** (*int*) - (None) [0~1000|1] Number of MPI processes. Usually an integer bigger than 1.
             * **mpi_flags** (*str*) - (None) Path to the MPI hostlist file.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -76,43 +76,12 @@ class SanderMDRun(BiobbObject):
     def __init__(self, input_top_path: str, input_crd_path: str, output_log_path: str, output_traj_path: str, output_rst_path: str,
                  input_ref_path: Optional[str] = None, input_mdin_path: Optional[str] = None, input_cpin_path: Optional[str] = None, output_cpout_path: Optional[str] = None, output_cprst_path: Optional[str] = None, output_mdinfo_path: Optional[str] = None,
                  properties: Optional[dict] = None, **kwargs) -> None:
+        super().__init__(**locals())
 
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_top_path': input_top_path,
-                   'input_crd_path': input_crd_path,
-                   'input_mdin_path': input_mdin_path,
-                   'input_ref_path': input_ref_path,
-                   'input_cpin_path': input_cpin_path},
-            'out': {'output_log_path': output_log_path,
-                    'output_traj_path': output_traj_path,
-                    'output_rst_path': output_rst_path,
-                    'output_cpout_path': output_cpout_path,
-                    'output_cprst_path': output_cprst_path,
-                    'output_mdinfo_path': output_mdinfo_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.simulation_type = properties.get('simulation_type', "minimization")
-        self.binary_path = properties.get('binary_path', "sander")
-
-        self.direct_mdin = properties.get('direct_mdin', False)
-        self.mdin = {k: str(v) for k, v in properties.get('mdin', dict()).items()}
+        self.mdin = {k: str(v) for k, v in self.mdin.items()}
 
         if 'restraintmask' in self.mdin and self.mdin['restraintmask'][0] != '"' and self.mdin['restraintmask'][-1] != '"':
             self.mdin['restraintmask'] = "\"" + self.mdin['restraintmask'] + "\""
-
-        # Properties for MPI
-        self.mpi_bin = properties.get('mpi_bin')
-        self.mpi_np = properties.get('mpi_np')
-        self.mpi_flags = properties.get('mpi_flags')
 
     def create_mdin(self, path: Optional[str] = None) -> str:
         """Creates an AMBER MD configuration file (mdin) using the properties file settings"""

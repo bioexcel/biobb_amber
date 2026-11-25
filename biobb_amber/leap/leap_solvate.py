@@ -34,14 +34,14 @@ class LeapSolvate(BiobbObject):
             * **water_type** (*str*) - ("TIP3PBOX") Water molecule parameters to be used for the topology. Values: POL3BOX, QSPCFWBOX, SPCBOX, SPCFWBOX, TIP3PBOX, TIP3PFBOX, TIP4PBOX, TIP4PEWBOX, OPCBOX, OPC3BOX, TIP5PBOX.
             * **box_type** (*str*) - ("truncated_octahedron") Type for the MD system box. Values: cubic, truncated_octahedron.
             * **ions_type** (*str*) - ("ionsjc_tip3p") Ions type. Values: ionsjc_tip3p, ionsjc_spce, ionsff99_tip3p, ions_charmm22, ionsjc_tip4pew, None.
-            * **neutralise** (*bool*) - ("False") Energetically neutralise the system adding the necessary counterions.
-            * **iso** (*bool*) - ("False") Make the box isometric.
+            * **neutralise** (*bool*) - (False) Energetically neutralise the system adding the necessary counterions.
+            * **iso** (*bool*) - (False) Make the box isometric.
             * **positive_ions_number** (*int*) - (0) Number of additional positive ions to include in the system box.
             * **negative_ions_number** (*int*) - (0) Number of additional negative ions to include in the system box.
             * **positive_ions_type** (*str*) - ("Na+") Type of additional positive ions to include in the system box. Values: Na+,K+.
             * **negative_ions_type** (*str*) - ("Cl-") Type of additional negative ions to include in the system box. Values: Cl-.
-            * **distance_to_molecule** (*float*) - ("8.0") Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter.
-            * **closeness** (*float*) - ("1.0") How close, in Å, solvent ATOMs may come to solute ATOMs.
+            * **distance_to_molecule** (*float*) - (8.0) Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter.
+            * **closeness** (*float*) - (1.0) How close, in Å, solvent ATOMs may come to solute ATOMs.
             * **binary_path** (*str*) - ("tleap") Path to the tleap executable binary.
             * **remove_tmp** (*bool*) - (True) [WF property] Remove temporal files.
             * **restart** (*bool*) - (False) [WF property] Do not execute if output files exist.
@@ -93,28 +93,7 @@ class LeapSolvate(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ):
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_pdb_path": input_pdb_path,
-                "input_lib_path": input_lib_path,
-                "input_frcmod_path": input_frcmod_path,
-                "input_params_path": input_params_path,
-                "input_prep_path": input_prep_path,
-                "input_source_path": input_source_path,
-            },
-            "out": {
-                "output_pdb_path": output_pdb_path,
-                "output_top_path": output_top_path,
-                "output_crd_path": output_crd_path,
-            },
-        }
+        super().__init__(**locals())
 
         # # Ligand Parameter lists
         # self.ligands_lib_list = []
@@ -125,14 +104,9 @@ class LeapSolvate(BiobbObject):
         # if input_frcmod_path:
         #     self.ligands_frcmod_list.append(input_frcmod_path)
 
-        # Properties specific for BB
-        self.properties = properties
-
         # Set default forcefields
         if self.container_path:
-            self.forcefield = _from_string_to_list(
-                properties.get("forcefield", ['protein.ff14SB', 'DNA.bsc1', 'gaff'])
-            )
+            self.forcefield = _from_string_to_list(self.forcefield)
         else:
             amber_home_path = os.getenv("AMBERHOME", "")
             protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
@@ -140,24 +114,11 @@ class LeapSolvate(BiobbObject):
             gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
 
             self.forcefield = _from_string_to_list(
-                properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
+                self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
             )
 
             # Find the paths of the leaprc files if only the force field names are provided
             self.forcefield = self.find_leaprc_paths(self.forcefield)
-
-        self.water_type = properties.get("water_type", "TIP3PBOX")
-        self.box_type = properties.get("box_type", "truncated_octahedron")
-        self.ions_type = properties.get("ions_type", "ionsjc_tip3p")
-        self.neutralise = properties.get("neutralise", False)
-        self.iso = properties.get("iso", False)
-        self.positive_ions_number = properties.get("positive_ions_number", 0)
-        self.positive_ions_type = properties.get("positive_ions_type", "Na+")
-        self.negative_ions_number = properties.get("negative_ions_number", 0)
-        self.negative_ions_type = properties.get("negative_ions_type", "Cl-")
-        self.distance_to_molecule = properties.get("distance_to_molecule", 8.0)
-        self.closeness = properties.get("closeness", 1.0)
-        self.binary_path = properties.get("binary_path", "tleap")
 
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """

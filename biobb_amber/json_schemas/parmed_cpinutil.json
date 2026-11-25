@@ -98,7 +98,7 @@
             "properties": {
                 "resnames": {
                     "type": "string",
-                    "default": "None",
+                    "default": null,
                     "wf_prop": false,
                     "description": "Residue names to include in CPIN file. ",
                     "enum": [

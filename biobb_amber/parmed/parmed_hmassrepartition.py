@@ -46,22 +46,7 @@ class ParmedHMassRepartition(BiobbObject):
     """
 
     def __init__(self, input_top_path, output_top_path, properties=None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_top_path': input_top_path},
-            'out': {'output_top_path': output_top_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'parmed')
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the ParmedHMassRepartition module."""

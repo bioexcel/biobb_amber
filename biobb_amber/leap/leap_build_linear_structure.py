@@ -59,23 +59,11 @@ class LeapBuildLinearStructure(BiobbObject):
     """
 
     def __init__(self, output_pdb_path, properties, **kwargs):
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {"in": {}, "out": {"output_pdb_path": output_pdb_path}}
-
-        # Properties specific for BB
-        self.properties = properties
+        super().__init__(**locals())
 
         # Set default forcefields
         if self.container_path:
-            self.forcefield = _from_string_to_list(
-                properties.get("forcefield", ['protein.ff14SB', 'DNA.bsc1', 'gaff'])
-            )
+            self.forcefield = _from_string_to_list(self.forcefield)
         else:
             amber_home_path = os.getenv("AMBERHOME", "")
             protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
@@ -83,15 +71,11 @@ class LeapBuildLinearStructure(BiobbObject):
             gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
 
             self.forcefield = _from_string_to_list(
-                properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
+                self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
             )
 
             # Find the paths of the leaprc files if only the force field names are provided
             self.forcefield = self.find_leaprc_paths(self.forcefield)
-
-        self.sequence = properties.get("sequence", "ALA GLY SER PRO ARG ALA PRO GLY")
-        self.build_library = properties.get("build_library", False)
-        self.binary_path = properties.get("binary_path", "tleap")
 
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """

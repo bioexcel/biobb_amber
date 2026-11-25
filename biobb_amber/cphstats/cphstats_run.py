@@ -70,39 +70,7 @@ class CphstatsRun(BiobbObject):
     def __init__(self, input_cpin_path: str, input_cpout_path: str, output_dat_path: str, output_population_path: Optional[str] = None,
                  output_chunk_path: Optional[str] = None, output_cumulative_path: Optional[str] = None, output_conditional_path: Optional[str] = None, output_chunk_conditional_path: Optional[str] = None,
                  properties: Optional[dict] = None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_cpin_path': input_cpin_path,
-                   'input_cpout_path': input_cpout_path},
-            'out': {'output_dat_path': output_dat_path,
-                    'output_population_path': output_population_path,
-                    'output_chunk_path': output_chunk_path,
-                    'output_cumulative_path': output_cumulative_path,
-                    'output_conditional_path': output_conditional_path,
-                    'output_chunk_conditional_path': output_chunk_conditional_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.timestep = properties.get('timestep', 0.002)
-        self.verbose = properties.get('verbose', False)
-        self.interval = properties.get('interval', 1000)
-        self.protonated = properties.get('protonated', True)
-        self.pka = properties.get('pka', False)
-        self.calcpka = properties.get('calcpka', True)
-        self.running_avg_window = properties.get('running_avg_window', 100)
-        self.chunk_window = properties.get('chunk_window', 100)
-        self.cumulative = properties.get('cumulative', False)
-        self.fix_remd = properties.get('fix_remd', "")
-        self.conditional = properties.get('conditional', "")
-        self.binary_path = properties.get('binary_path', 'cphstats')
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the CphstatsRun module."""

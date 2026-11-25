@@ -36,7 +36,7 @@ class LeapAddIons(BiobbObject):
             * **water_type** (*str*) - ("TIP3PBOX") Water molecule parameters to be used for the topology. Values: POL3BOX, QSPCFWBOX, SPCBOX, SPCFWBOX, TIP3PBOX, TIP3PFBOX, TIP4PBOX, TIP4PEWBOX, OPCBOX, OPC3BOX, TIP5PBOX.
             * **box_type** (*str*) - ("truncated_octahedron") Type for the MD system box. Values: cubic, truncated_octahedron.
             * **ions_type** (*str*) - ("ionsjc_tip3p") Ions type. Values: ionsjc_tip3p, ionsjc_spce, ionsff99_tip3p, ions_charmm22, ionsjc_tip4pew, None.
-            * **neutralise** (*bool*) - ("True") Energetically neutralise the system adding the necessary counterions.
+            * **neutralise** (*bool*) - (True) Energetically neutralise the system adding the necessary counterions.
             * **ionic_concentration** (*float*) - (50) Additional ionic concentration to include in the system box. Units in mM/L.
             * **positive_ions_number** (*int*) - (0) Number of additional positive ions to include in the system box.
             * **negative_ions_number** (*int*) - (0) Number of additional negative ions to include in the system box.
@@ -93,28 +93,7 @@ class LeapAddIons(BiobbObject):
         properties: Optional[dict] = None,
         **kwargs,
     ):
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            "in": {
-                "input_pdb_path": input_pdb_path,
-                "input_lib_path": input_lib_path,
-                "input_frcmod_path": input_frcmod_path,
-                "input_params_path": input_params_path,
-                "input_prep_path": input_prep_path,
-                "input_source_path": input_source_path,
-            },
-            "out": {
-                "output_pdb_path": output_pdb_path,
-                "output_top_path": output_top_path,
-                "output_crd_path": output_crd_path,
-            },
-        }
+        super().__init__(**locals())
 
         # Ligand Parameter lists
         self.ligands_lib_list = []
@@ -125,13 +104,10 @@ class LeapAddIons(BiobbObject):
         if input_frcmod_path:
             self.ligands_frcmod_list.append(input_frcmod_path)
 
-        # Properties specific for BB
-        self.properties = properties
-
         # Set default forcefields
         if self.container_path:
             self.forcefield = _from_string_to_list(
-                properties.get("forcefield", ['protein.ff14SB', 'DNA.bsc1', 'gaff'])
+                self.forcefield
             )
         else:
             amber_home_path = os.getenv("AMBERHOME", "")
@@ -140,22 +116,11 @@ class LeapAddIons(BiobbObject):
             gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
 
             self.forcefield = _from_string_to_list(
-                properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
+                self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
             )
 
             # Find the paths of the leaprc files if only the force field names are provided
             self.forcefield = self.find_leaprc_paths(self.forcefield)
-
-        self.water_type = properties.get("water_type", "TIP3PBOX")
-        self.box_type = properties.get("box_type", "truncated_octahedron")
-        self.ions_type = properties.get("ions_type", "ionsjc_tip3p")
-        self.neutralise = properties.get("neutralise", True)
-        self.ionic_concentration = properties.get("ionic_concentration", 50)
-        self.positive_ions_number = properties.get("positive_ions_number", 0)
-        self.positive_ions_type = properties.get("positive_ions_type", "Na+")
-        self.negative_ions_number = properties.get("negative_ions_number", 0)
-        self.negative_ions_type = properties.get("negative_ions_type", "Cl-")
-        self.binary_path = properties.get("binary_path", "tleap")
 
     def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
         """

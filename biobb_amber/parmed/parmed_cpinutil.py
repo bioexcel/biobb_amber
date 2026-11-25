@@ -18,7 +18,7 @@ class ParmedCpinUtil(BiobbObject):
         output_cpin_path (str): Output AMBER constant pH input (CPin) file. File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/parmed/cln025.cpin>`_. Accepted formats: cpin (edam:format_2330).
         output_top_path (str) (Optional): Output topology file (AMBER ParmTop). File type: output. `Sample file <https://github.com/bioexcel/biobb_amber/raw/master/biobb_amber/test/reference/parmed/cln025.cpH.prmtop>`_. Accepted formats: top (edam:format_3881), parmtop (edam:format_3881), prmtop (edam:format_3881).
         properties (dic - Python dictionary object containing the tool parameters, not input/output files):
-            * **resnames** (*str*) - ("None") Residue names to include in CPIN file. Values: AS4, GL4, HIP, CYS, LYS, TYR.
+            * **resnames** (*str*) - (None) Residue names to include in CPIN file. Values: AS4, GL4, HIP, CYS, LYS, TYR.
             * **igb** (*int*) - (2) Generalized Born model which you intend to use to evaluate dynamics or protonation state swaps. Values: 1, 2, 5, 7, 8.
             * **system** (*str*) - ("Unknown") Name of system to titrate.
             * **binary_path** (*str*) - ("cpinutil.py") Path to the cpinutil.py executable binary.
@@ -59,26 +59,7 @@ class ParmedCpinUtil(BiobbObject):
     """
 
     def __init__(self, input_top_path, output_cpin_path, output_top_path=None, properties=None, **kwargs) -> None:
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_top_path': input_top_path},
-            'out': {'output_cpin_path': output_cpin_path,
-                    'output_top_path': output_top_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.resnames = properties.get('resnames')
-        self.igb = properties.get('igb', 2)
-        self.system = properties.get('system', "Unknown")
-        self.binary_path = properties.get('binary_path', 'cpinutil.py')
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the ParmedCpinUtil module."""

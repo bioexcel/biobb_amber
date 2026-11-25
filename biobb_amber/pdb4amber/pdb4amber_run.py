@@ -53,26 +53,7 @@ class Pdb4amberRun(BiobbObject):
     """
 
     def __init__(self, input_pdb_path: str, output_pdb_path: str, properties: Optional[dict], **kwargs):
-
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_pdb_path': input_pdb_path},
-            'out': {'output_pdb_path': output_pdb_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.remove_hydrogens = properties.get('remove_hydrogens', False)
-        self.remove_waters = properties.get('remove_waters', False)
-        self.constant_pH = properties.get('constant_pH', False)
-        self.reduce = properties.get('reduce', False)
-        self.binary_path = properties.get('binary_path', 'pdb4amber')
+        super().__init__(**locals())
 
     def run(self):
         """Launches the execution of the Pdb4amberRun module."""

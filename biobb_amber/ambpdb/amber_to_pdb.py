@@ -52,22 +52,7 @@ class AmberToPDB(BiobbObject):
     """
 
     def __init__(self, input_top_path, input_crd_path, output_pdb_path, properties: Optional[dict] = None, **kwargs):
-        properties = properties or {}
-
-        # Call parent class constructor
-        super().__init__(properties)
-        self.locals_var_dict = locals().copy()
-
-        # Input/Output files
-        self.io_dict = {
-            'in': {'input_top_path': input_top_path,
-                   'input_crd_path': input_crd_path},
-            'out': {'output_pdb_path': output_pdb_path}
-        }
-
-        # Properties specific for BB
-        self.properties = properties
-        self.binary_path = properties.get('binary_path', 'ambpdb')
+        super().__init__(**locals())
 
     def run(self):
         # Command line
