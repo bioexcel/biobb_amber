@@ -150,11 +150,9 @@ class ProcessMinOut(BiobbObject):
                         fp_out.write(ene_dict[key][term] + " ")
                     fp_out.write("\n")
 
-        # remove temporary folder(s)
-        self.tmp_files.extend([
-            str(tmp_folder)
-        ] + list(Path().glob("summary*"))
-        )
+        # remove temporary folder(s): the summary.* files are in the temporary folder or in the sandbox
+        if tmp_folder:
+            self.tmp_files.append(str(tmp_folder))
         self.remove_tmp_files()
 
         self.check_arguments(output_files_created=True, raise_exception=False)
