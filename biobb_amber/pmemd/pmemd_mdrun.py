@@ -3,7 +3,7 @@
 """Module containing the PmemdMDRun class and the command line interface."""
 from typing import Optional
 import re
-from pathlib import Path
+from pathlib import Path, PurePath
 from biobb_common.generic.biobb_object import BiobbObject
 from biobb_common.tools import file_utils as fu
 
@@ -253,47 +253,47 @@ class PmemdMDRun(BiobbObject):
     def run(self):
         """Launches the execution of the PmemdMDRun module."""
 
-        # Creating temporary folder
-        tmp_folder = fu.create_unique_dir()
-        fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
-
-        # if self.io_dict['in']['input_mdin_path']:
-        #    self.output_mdin_path = self.io_dict['in']['input_mdin_path']
-        # else:
-        #    self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("pmemd.mdin")))
-        self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("pmemd.mdin")))
+        # Creating temporary folder & Pmemd configuration (instructions) file
+        if self.container_path:
+            instructions_file = self.create_mdin(path=str(Path(self.stage_io_dict['unique_dir']).joinpath("pmemd.mdin")))
+            self.output_mdin_path = str(PurePath(self.container_volume_path).joinpath(PurePath(instructions_file).name))
+            tmp_folder = None
+        else:
+            tmp_folder = fu.create_unique_dir()
+            fu.log('Creating %s temporary folder' % tmp_folder, self.out_log)
+            self.output_mdin_path = self.create_mdin(path=str(Path(tmp_folder).joinpath("pmemd.mdin")))
 
         # Command line
         # pmemd -O -i mdin/min.mdin -p $1.cpH.prmtop -c ph$i/$1.inpcrd -r ph$i/$1.min.rst7 -o ph$i/$1.min.o
         self.cmd = [self.binary_path,
                     '-O',
                     '-i', self.output_mdin_path,
-                    '-p', self.io_dict['in']['input_top_path'],
-                    '-c', self.io_dict['in']['input_crd_path'],
-                    '-r', self.io_dict['out']['output_rst_path'],
-                    '-o', self.io_dict['out']['output_log_path'],
-                    '-x', self.io_dict['out']['output_traj_path']
+                    '-p', self.stage_io_dict['in']['input_top_path'],
+                    '-c', self.stage_io_dict['in']['input_crd_path'],
+                    '-r', self.stage_io_dict['out']['output_rst_path'],
+                    '-o', self.stage_io_dict['out']['output_log_path'],
+                    '-x', self.stage_io_dict['out']['output_traj_path']
                     ]
 
-        if self.io_dict['in']['input_ref_path']:
+        if self.stage_io_dict['in'].get('input_ref_path'):
             self.cmd.append('-ref')
-            self.cmd.append(self.io_dict['in']['input_ref_path'])
+            self.cmd.append(self.stage_io_dict['in']['input_ref_path'])
 
-        if self.io_dict['in']['input_cpin_path']:
+        if self.stage_io_dict['in'].get('input_cpin_path'):
             self.cmd.append('-cpin')
-            self.cmd.append(self.io_dict['in']['input_cpin_path'])
+            self.cmd.append(self.stage_io_dict['in']['input_cpin_path'])
 
-        if self.io_dict['out']['output_mdinfo_path']:
+        if self.stage_io_dict['out'].get('output_mdinfo_path'):
             self.cmd.append('-inf')
-            self.cmd.append(self.io_dict['out']['output_mdinfo_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_mdinfo_path'])
 
-        if self.io_dict['out']['output_cpout_path']:
+        if self.stage_io_dict['out'].get('output_cpout_path'):
             self.cmd.append('-cpout')
-            self.cmd.append(self.io_dict['out']['output_cpout_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_cpout_path'])
 
-        if self.io_dict['out']['output_cprst_path']:
+        if self.stage_io_dict['out'].get('output_cprst_path'):
             self.cmd.append('-cprestrt')
-            self.cmd.append(self.io_dict['out']['output_cprst_path'])
+            self.cmd.append(self.stage_io_dict['out']['output_cprst_path'])
 
         # general mpi properties
         if self.mpi_bin:
@@ -309,7 +309,7 @@ class PmemdMDRun(BiobbObject):
         self.run_biobb()
 
         # remove temporary folder(s)
-        self.tmp_files.extend([tmp_folder, "mdinfo"])
+        self.tmp_files.extend([str(tmp_folder), "mdinfo"] if tmp_folder else ["mdinfo"])
 
     def write_parameter_files(self, directory: str) -> list[str]:
         """Write the mdin file to **directory** without executing pmemd, used by the
