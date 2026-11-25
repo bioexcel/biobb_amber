@@ -84,18 +84,18 @@ class ProcessMinOut(BiobbObject):
 
         if not self.container_path:
             # No container or Singularity: cd to tmp_folder so summary.* files land there
-            self.tmp_folder = fu.create_unique_dir()
-            fu.log("Creating %s temporary folder" % self.tmp_folder, self.out_log)
+            tmp_folder = fu.create_unique_dir()
+            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
             self.cmd = [
                 "cd",
-                self.tmp_folder,
+                tmp_folder,
                 ";",
                 self.binary_path,
                 str(Path(self.stage_io_dict["in"]["input_log_path"]).resolve()),
             ]
         else:
             # Docker: working dir is handled via container_working_dir
-            self.tmp_folder = None
+            tmp_folder = None
             self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
 
         if self.container_path:
@@ -107,29 +107,28 @@ class ProcessMinOut(BiobbObject):
         self.run_biobb()
 
         # remove temporary folder(s): the summary.* files are in the temporary folder or in the sandbox
-        if self.tmp_folder:
-            self.tmp_files.append(str(self.tmp_folder))
+        if tmp_folder:
+            self.tmp_files.append(str(tmp_folder))
 
-    def process_outputs(self) -> None:
-        """Write the output dat file from the summary.<term> files written by process_minout.perl."""
+        # Write the output dat file from the summary.<term> files written by process_minout.perl.
         if len(self.terms) == 1:
             if self.container_path:
                 shutil.copy(
                     PurePath(self.stage_io_dict["unique_dir"]).joinpath(
                         "summary." + self.terms[0]
                     ),
-                    self.io_dict["out"]["output_dat_path"],
+                    self.sandbox_file("output_dat_path"),
                 )
             else:
                 shutil.copy(
-                    PurePath(str(self.tmp_folder)).joinpath("summary." + self.terms[0]),
-                    self.io_dict["out"]["output_dat_path"],
+                    PurePath(str(tmp_folder)).joinpath("summary." + self.terms[0]),
+                    self.sandbox_file("output_dat_path"),
                 )
         else:
             if self.container_path:
                 tmp = self.stage_io_dict["unique_dir"]
             else:
-                tmp = self.tmp_folder
+                tmp = tmp_folder
 
             ene_dict = {}
             for term in self.terms:
@@ -142,7 +141,7 @@ class ProcessMinOut(BiobbObject):
                             else:
                                 ene_dict.setdefault(float(x[0]), {})[term] = "-"
 
-            with open(self.io_dict["out"]["output_dat_path"], "w") as fp_out:
+            with open(self.sandbox_file("output_dat_path"), "w") as fp_out:
                 fp_out.write("# TIME ")
                 for term in self.terms:
                     fp_out.write(term + " ")

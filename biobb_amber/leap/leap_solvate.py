@@ -380,18 +380,16 @@ class LeapSolvate(BiobbObject):
         # remove temporary folder(s)
         self.tmp_files.extend([str(tmp_folder), "leap.log"])
 
-    def process_outputs(self) -> None:
-        """Add the box of the output crd file as an OCTBOX line at the beginning of the output pdb file, read by leap_add_ions."""
         # Saving octahedron box with all decimals in PDB file. Needed for the add_ions BB.
 
         # Getting octahedron box from generated crd file
-        with open(self.io_dict["out"]["output_crd_path"], "r") as file:
+        with open(self.sandbox_file("output_crd_path"), "r") as file:
             for line in file:
                 pass
 
         # Adding box as a first line in the generated pdb file with OCTBOX tag
         octbox = "OCTBOX " + line
-        with open(self.io_dict["out"]["output_pdb_path"], "r+") as f:
+        with open(self.sandbox_file("output_pdb_path"), "r+") as f:
             content = f.read()
             f.seek(0, 0)
             f.write(octbox + content)
