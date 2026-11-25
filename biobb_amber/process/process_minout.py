@@ -84,8 +84,7 @@ class ProcessMinOut(BiobbObject):
 
         if not self.container_path:
             # No container or Singularity: cd to tmp_folder so summary.* files land there
-            tmp_folder = self.create_tmp_dir()
-            fu.log("Creating %s temporary folder" % tmp_folder, self.out_log)
+            tmp_folder = self.create_tmp_dir(log=True)
             self.cmd = [
                 "cd",
                 tmp_folder,
