@@ -134,7 +134,7 @@ class LeapAddIons(BiobbObject):
                 properties.get("forcefield", ['leaprc.protein.ff14SB', 'leaprc.DNA.bsc1', 'leaprc.gaff'])
             )
         else:
-            amber_home_path = os.getenv("AMBERHOME")
+            amber_home_path = os.getenv("AMBERHOME", "")
             protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
             dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
             gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
