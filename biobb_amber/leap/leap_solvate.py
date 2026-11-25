@@ -257,9 +257,9 @@ class LeapSolvate(BiobbObject):
         # Values: POL3BOX, QSPCFWBOX, SPCBOX, SPCFWBOX, TIP3PBOX, TIP3PFBOX, TIP4PBOX, TIP4PEWBOX, OPCBOX, OPC3BOX, TIP5PBOX.
         source_wat_command = "source leaprc.water.tip3p"
         if self.water_type == "TIP4PEWBOX":
-            source_wat_command = "leaprc.water.tip4pew"
+            source_wat_command = "source leaprc.water.tip4pew"
         if self.water_type == "TIP4PBOX":
-            source_wat_command = "leaprc.water.tip4pd"
+            source_wat_command = "source leaprc.water.tip4pd"
         if re.match(r"SPC", self.water_type):
             source_wat_command = "source leaprc.water.spce"
         if re.match(r"OPC", self.water_type):
