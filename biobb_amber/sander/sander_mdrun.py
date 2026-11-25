@@ -339,16 +339,8 @@ class SanderMDRun(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
-
         # remove temporary folder(s)
         self.tmp_files.extend(["mdinfo", str(tmp_folder)])
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
     def write_parameter_files(self, directory: str) -> list[str]:
         """Write the mdin file to **directory** without executing sander, used by the

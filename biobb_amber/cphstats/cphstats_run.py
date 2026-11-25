@@ -175,11 +175,6 @@ class CphstatsRun(BiobbObject):
             self.cmd.append(str(self.conditional))
 
         self.run_biobb()
-        self.copy_to_host()
-        self.remove_tmp_files()
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def cphstats_run(input_cpin_path: str, input_cpout_path: str,

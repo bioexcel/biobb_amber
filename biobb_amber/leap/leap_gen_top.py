@@ -298,16 +298,8 @@ class LeapGenTop(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
-
         # remove temporary folder(s)
         self.tmp_files.extend([str(tmp_folder), "leap.log"])
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def leap_gen_top(

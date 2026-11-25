@@ -412,9 +412,11 @@ class LeapAddIons(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Copy files to host
-        self.copy_to_host()
+        # remove temporary folder(s)
+        self.tmp_files.extend([str(tmp_folder), "leap.log"])
 
+    def process_outputs(self) -> None:
+        """Truncated octahedron box: write the box of the input pdb file (OCTBOX line) in the output crd and topology files."""
         if self.box_type != "cubic":
             fu.log(
                 "Fixing truncated octahedron Box in the topology and coordinates files",
@@ -496,14 +498,6 @@ class LeapAddIons(BiobbObject):
                                 ifbox_flag += 1
                             else:
                                 new_top.write(line)
-
-        # remove temporary folder(s)
-        self.tmp_files.extend([str(tmp_folder), "leap.log"])
-        self.remove_tmp_files()
-
-        self.check_arguments(output_files_created=True, raise_exception=False)
-
-        return self.return_code
 
 
 def leap_add_ions(
