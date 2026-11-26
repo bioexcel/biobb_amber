@@ -49,7 +49,6 @@ class LeapAddIons(BiobbObject):
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
-            * **container_working_dir** (*str*) - (None) Container working directory definition.
             * **container_user_id** (*str*) - (None) Container user_id definition.
             * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
@@ -340,20 +339,11 @@ class LeapAddIons(BiobbObject):
             )
             leapin.write("quit \n")
 
-        # Container path
-        if self.container_path:
-            if not self.container_working_dir:
-                fu.log('WARNING: container_working_dir property was not set. Defining it with the same value as container_volume_path', self.out_log, self.global_log)
-                self.container_working_dir = self.container_volume_path
-
         # Command line
         self.cmd = [self.binary_path, "-f", instructions_file_path]
 
         # Run Biobb block
         self.run_biobb()
-
-        # remove temporary folder(s)
-        self.tmp_files.append("leap.log")
 
         # Truncated octahedron box: write the box of the input pdb file (OCTBOX line) in the output crd and topology files.
         if self.box_type != "cubic":

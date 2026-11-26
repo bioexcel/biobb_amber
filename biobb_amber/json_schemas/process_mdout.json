@@ -193,12 +193,6 @@
                     "wf_prop": false,
                     "description": "Container volume path definition."
                 },
-                "container_working_dir": {
-                    "type": "string",
-                    "default": null,
-                    "wf_prop": false,
-                    "description": "Container working directory definition."
-                },
                 "container_user_id": {
                     "type": "string",
                     "default": null,

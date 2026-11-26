@@ -30,7 +30,6 @@ class CpptrajRandomizeIons(BiobbObject):
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
-            * **container_working_dir** (*str*) - (None) Container working directory definition.
             * **container_user_id** (*str*) - (None) Container user_id definition.
             * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
@@ -90,9 +89,6 @@ class CpptrajRandomizeIons(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # Remove temporary file(s)
-        self.tmp_files.append("cpptraj.log")
 
 
 cpptraj_randomize_ions = launcher(CpptrajRandomizeIons)

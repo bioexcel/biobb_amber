@@ -49,7 +49,6 @@ class LeapSolvate(BiobbObject):
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
-            * **container_working_dir** (*str*) - (None) Container working directory definition.
             * **container_user_id** (*str*) - (None) Container user_id definition.
             * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
@@ -312,9 +311,6 @@ class LeapSolvate(BiobbObject):
 
         # Run Biobb block
         self.run_biobb()
-
-        # remove temporary folder(s)
-        self.tmp_files.append("leap.log")
 
         # Saving octahedron box with all decimals in PDB file. Needed for the add_ions BB.
 

@@ -272,9 +272,6 @@ class PmemdMDRun(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # remove temporary folder(s)
-        self.tmp_files.append("mdinfo")
-
     def write_parameter_files(self, directory: str) -> list[str]:
         """Write the mdin file to **directory** without executing pmemd, used by the
         provenance of the executions skipped by the restart property."""
