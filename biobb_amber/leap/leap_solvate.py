@@ -4,7 +4,7 @@
 
 import os
 import re
-from pathlib import PurePath
+from pathlib import Path, PurePath
 from typing import List, Optional
 
 from biobb_common.generic.biobb_object import BiobbObject, launcher
@@ -323,12 +323,13 @@ class LeapSolvate(BiobbObject):
             for line in file:
                 pass
 
-        # Adding box as a first line in the generated pdb file with OCTBOX tag
+        # Adding box as a first line in the generated pdb file with OCTBOX tag.
+        # The file is replaced, not rewritten: Docker can have written it as root
         octbox = "OCTBOX " + line
-        with open(self.sandbox_file("output_pdb_path"), "r+") as f:
-            content = f.read()
-            f.seek(0, 0)
-            f.write(octbox + content)
+        output_pdb = Path(self.sandbox_file("output_pdb_path"))
+        content = output_pdb.read_text()
+        output_pdb.unlink()
+        output_pdb.write_text(octbox + content)
 
 
 leap_solvate = launcher(LeapSolvate)
