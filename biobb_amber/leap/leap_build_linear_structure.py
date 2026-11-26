@@ -6,7 +6,7 @@ import os
 from pathlib import PurePath
 from typing import List, Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 from biobb_amber.leap.common import _from_string_to_list
 
@@ -58,7 +58,7 @@ class LeapBuildLinearStructure(BiobbObject):
 
     """
 
-    def __init__(self, output_pdb_path, properties, **kwargs):
+    def __init__(self, output_pdb_path: str, properties: Optional[dict] = None, **kwargs):
         super().__init__(**locals())
 
         # Set default forcefields
@@ -172,16 +172,7 @@ class LeapBuildLinearStructure(BiobbObject):
         self.tmp_files.append("leap.log")
 
 
-def leap_build_linear_structure(
-    output_pdb_path: str, properties: Optional[dict] = None, **kwargs
-) -> int:
-    """Create the :class:`LeapBuildLinearStructure <leap.leap_build_linear_structure.LeapBuildLinearStructure>` class and
-    execute the :meth:`launch() <leap.leap_build_linear_structure.LeapBuildLinearStructure.launch>` method."""
-    return LeapBuildLinearStructure(**dict(locals())).launch()
-
-
-leap_build_linear_structure.__doc__ = LeapBuildLinearStructure.__doc__
-main = LeapBuildLinearStructure.get_main(leap_build_linear_structure, "Building a linear (unfolded) 3D structure from an AA sequence.")
+leap_build_linear_structure = launcher(LeapBuildLinearStructure)
 
 if __name__ == "__main__":
-    main()
+    LeapBuildLinearStructure.main()

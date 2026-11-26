@@ -4,7 +4,7 @@
 
 from typing import Optional
 from pathlib import PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class CpptrajRandomizeIons(BiobbObject):
@@ -58,7 +58,7 @@ class CpptrajRandomizeIons(BiobbObject):
 
     """
 
-    def __init__(self, input_top_path: str, input_crd_path: str, output_pdb_path: str, output_crd_path: str, properties, **kwargs) -> None:
+    def __init__(self, input_top_path: str, input_crd_path: str, output_pdb_path: str, output_crd_path: str, properties: Optional[dict] = None, **kwargs) -> None:
         super().__init__(**locals())
 
     def run(self):
@@ -95,16 +95,7 @@ class CpptrajRandomizeIons(BiobbObject):
         self.tmp_files.append("cpptraj.log")
 
 
-def cpptraj_randomize_ions(input_top_path: str, input_crd_path: str,
-                           output_pdb_path: str, output_crd_path: str,
-                           properties: Optional[dict] = None, **kwargs) -> int:
-    """Create the :class:`CpptrajRandomizeIons <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons>` class and
-    execute the :meth:`launch() <cpptraj.cpptraj_randomize_ions.CpptrajRandomizeIons.launch>` method."""
-    return CpptrajRandomizeIons(**dict(locals())).launch()
-
-
-cpptraj_randomize_ions.__doc__ = CpptrajRandomizeIons.__doc__
-main = CpptrajRandomizeIons.get_main(cpptraj_randomize_ions, "Swap specified ions with randomly selected solvent molecules using cpptraj tool from the AmberTools MD package.")
+cpptraj_randomize_ions = launcher(CpptrajRandomizeIons)
 
 if __name__ == '__main__':
-    main()
+    CpptrajRandomizeIons.main()

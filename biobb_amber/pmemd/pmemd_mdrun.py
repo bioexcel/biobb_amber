@@ -4,7 +4,7 @@
 from typing import Optional
 import re
 from pathlib import Path
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class PmemdMDRun(BiobbObject):
@@ -281,20 +281,7 @@ class PmemdMDRun(BiobbObject):
         return [self.create_mdin(path=str(Path(directory).joinpath("pmemd.mdin")))]
 
 
-def pmemd_mdrun(input_top_path: str, input_crd_path: str,
-                output_log_path: str, output_traj_path: str, output_rst_path: str,
-                input_mdin_path: Optional[str] = None, input_cpin_path: Optional[str] = None,
-                output_cpout_path: Optional[str] = None, output_cprst_path: Optional[str] = None,
-                output_mdinfo_path: Optional[str] = None, input_ref_path: Optional[str] = None,
-                properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`PmemdMDRun <pmemd.pmemd_mdrun.PmemdMDRun>`pmemd.pmemd_mdrun.PmemdMDRun class and
-    execute :meth:`launch() <pmemd.pmemd_mdrun.PmemdMDRun.launch>` method"""
-    return PmemdMDRun(**dict(locals())).launch()
-
-
-pmemd_mdrun.__doc__ = PmemdMDRun.__doc__
-
-main = PmemdMDRun.get_main(pmemd_mdrun, "Running molecular dynamics using pmemd tool from the AMBER MD package.")
+pmemd_mdrun = launcher(PmemdMDRun)
 
 if __name__ == '__main__':
-    main()
+    PmemdMDRun.main()

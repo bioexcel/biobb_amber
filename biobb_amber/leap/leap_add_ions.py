@@ -9,7 +9,7 @@ from decimal import Decimal
 from pathlib import PurePath
 from typing import List, Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_amber.leap.common import _from_string_to_list
@@ -439,26 +439,7 @@ class LeapAddIons(BiobbObject):
                                 new_top.write(line)
 
 
-def leap_add_ions(
-    input_pdb_path: str,
-    output_pdb_path: str,
-    output_top_path: str,
-    output_crd_path: str,
-    input_lib_path: Optional[str] = None,
-    input_frcmod_path: Optional[str] = None,
-    input_params_path: Optional[str] = None,
-    input_prep_path: Optional[str] = None,
-    input_source_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`LeapAddIons <leap.leap_add_ions.LeapAddIons>` class and
-    execute the :meth:`launch() <leap.leap_add_ions.LeapAddIons.launch>` method."""
-    return LeapAddIons(**dict(locals())).launch()
-
-
-leap_add_ions.__doc__ = LeapAddIons.__doc__
-main = LeapAddIons.get_main(leap_add_ions, "Adds counterions to a system box for an AMBER MD system using tLeap.")
+leap_add_ions = launcher(LeapAddIons)
 
 if __name__ == "__main__":
-    main()
+    LeapAddIons.main()

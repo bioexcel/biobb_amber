@@ -3,7 +3,7 @@
 """Module containing the Cphstats class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class CphstatsRun(BiobbObject):
@@ -145,19 +145,7 @@ class CphstatsRun(BiobbObject):
         self.run_biobb()
 
 
-def cphstats_run(input_cpin_path: str, input_cpout_path: str,
-                 output_dat_path: str,
-                 output_population_path: Optional[str] = None, output_chunk_path: Optional[str] = None,
-                 output_conditional_path: Optional[str] = None, output_chunk_conditional_path: Optional[str] = None,
-                 output_cumulative_path: Optional[str] = None,
-                 properties: Optional[dict] = None, **kwargs) -> int:
-    """Create the :class:`CphstatsRun <cphstats.cphstats_run.CphstatsRun>` class and
-    execute the :meth:`launch() <cphstats.cphstats_run.CphstatsRun.launch>` method."""
-    return CphstatsRun(**dict(locals())).launch()
-
-
-cphstats_run.__doc__ = CphstatsRun.__doc__
-main = CphstatsRun.get_main(cphstats_run, "Analyzing the results of constant pH MD simulations using cphstats tool from the AMBER MD package.")
+cphstats_run = launcher(CphstatsRun)
 
 if __name__ == '__main__':
-    main()
+    CphstatsRun.main()

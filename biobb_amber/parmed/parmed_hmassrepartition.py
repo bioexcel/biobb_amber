@@ -3,7 +3,7 @@
 """Module containing the ParmedHMassRepartition class and the command line interface."""
 from typing import Optional
 from pathlib import PurePath
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class ParmedHMassRepartition(BiobbObject):
@@ -45,7 +45,7 @@ class ParmedHMassRepartition(BiobbObject):
 
     """
 
-    def __init__(self, input_top_path, output_top_path, properties=None, **kwargs) -> None:
+    def __init__(self, input_top_path: str, output_top_path: Optional[str], properties: Optional[dict] = None, **kwargs) -> None:
         super().__init__(**locals())
 
     def run(self):
@@ -69,16 +69,7 @@ class ParmedHMassRepartition(BiobbObject):
         self.run_biobb()
 
 
-def parmed_hmassrepartition(input_top_path: str,
-                            output_top_path: Optional[str] = None,
-                            properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`ParmedHMassRepartition <parmed.parmed_hmassrepartition.ParmedHMassRepartition>`parmed.parmed_hmassrepartition.ParmedHMassRepartition class and
-    execute :meth:`launch() <parmed.parmed_hmassrepartition.ParmedHMassRepartition.launch>` method"""
-    return ParmedHMassRepartition(**dict(locals())).launch()
-
-
-parmed_hmassrepartition.__doc__ = ParmedHMassRepartition.__doc__
-main = ParmedHMassRepartition.get_main(parmed_hmassrepartition, 'Performs a Hydrogen Mass Repartition from an AMBER topology file using parmed tool from the AmberTools MD package.')
+parmed_hmassrepartition = launcher(ParmedHMassRepartition)
 
 if __name__ == '__main__':
-    main()
+    ParmedHMassRepartition.main()

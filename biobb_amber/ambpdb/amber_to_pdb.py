@@ -3,7 +3,7 @@
 """Module containing the AmberToPDB class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class AmberToPDB(BiobbObject):
@@ -51,7 +51,7 @@ class AmberToPDB(BiobbObject):
 
     """
 
-    def __init__(self, input_top_path, input_crd_path, output_pdb_path, properties: Optional[dict] = None, **kwargs):
+    def __init__(self, input_top_path: str, input_crd_path: str, output_pdb_path: str, properties: Optional[dict] = None, **kwargs):
         super().__init__(**locals())
 
     def run(self):
@@ -65,15 +65,7 @@ class AmberToPDB(BiobbObject):
         self.run_biobb()
 
 
-def amber_to_pdb(input_top_path: str, input_crd_path: str, output_pdb_path: str,
-                 properties: Optional[dict] = None, **kwargs) -> int:
-    """Create the :class:`AmberToPDB <amber.amber_to_pdb.AmberToPDB>` class and
-    execute the :meth:`launch() <amber.amber_to_pdb.AmberToPDB.launch>` method."""
-    return AmberToPDB(**dict(locals())).launch()
-
-
-amber_to_pdb.__doc__ = AmberToPDB.__doc__
-main = AmberToPDB.get_main(amber_to_pdb, "Generates a PDB structure from AMBER topology (parmtop) and coordinates (crd) files, using the ambpdb tool from the AmberTools MD package.")
+amber_to_pdb = launcher(AmberToPDB)
 
 if __name__ == '__main__':
-    main()
+    AmberToPDB.main()

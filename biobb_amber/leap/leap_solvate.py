@@ -7,7 +7,7 @@ import re
 from pathlib import PurePath
 from typing import List, Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_amber.leap.common import _from_string_to_list
@@ -331,26 +331,7 @@ class LeapSolvate(BiobbObject):
             f.write(octbox + content)
 
 
-def leap_solvate(
-    input_pdb_path: str,
-    output_pdb_path: str,
-    output_top_path: str,
-    output_crd_path: str,
-    input_lib_path: Optional[str] = None,
-    input_frcmod_path: Optional[str] = None,
-    input_params_path: Optional[str] = None,
-    input_prep_path: Optional[str] = None,
-    input_source_path: Optional[str] = None,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create the :class:`LeapSolvate <leap.leap_solvate.LeapSolvate>` class and
-    execute the :meth:`launch() <leap.leap_solvate.LeapSolvate.launch>` method."""
-    return LeapSolvate(**dict(locals())).launch()
-
-
-leap_solvate.__doc__ = LeapSolvate.__doc__
-main = LeapSolvate.get_main(leap_solvate, "Generating and solvating a system box for an AMBER MD system. using tLeap program from AmberTools MD package.")
+leap_solvate = launcher(LeapSolvate)
 
 if __name__ == "__main__":
-    main()
+    LeapSolvate.main()

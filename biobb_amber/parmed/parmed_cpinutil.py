@@ -3,7 +3,7 @@
 """Module containing the ParmedCpinUtil class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 
@@ -58,7 +58,7 @@ class ParmedCpinUtil(BiobbObject):
 
     """
 
-    def __init__(self, input_top_path, output_cpin_path, output_top_path=None, properties=None, **kwargs) -> None:
+    def __init__(self, input_top_path: str, output_cpin_path: str, output_top_path: Optional[str] = None, properties: Optional[dict] = None, **kwargs) -> None:
         super().__init__(**locals())
 
     def run(self):
@@ -94,16 +94,7 @@ class ParmedCpinUtil(BiobbObject):
         self.run_biobb()
 
 
-def parmed_cpinutil(input_top_path: str, output_cpin_path: str,
-                    output_top_path: Optional[str] = None,
-                    properties: Optional[dict] = None, **kwargs) -> int:
-    """Create the :class:`ParmedCpinUtil <parmed.parmed_cpinutil.ParmedCpinUtil>` class and
-    execute the :meth:`launch() <parmed.parmed_cpinutil.ParmedCpinUtil.launch>` method."""
-    return ParmedCpinUtil(**dict(locals())).launch()
-
-
-parmed_cpinutil.__doc__ = ParmedCpinUtil.__doc__
-main = ParmedCpinUtil.get_main(parmed_cpinutil, "Create a cpin file for constant pH simulations from an AMBER topology file using parmed program from AmberTools MD package.")
+parmed_cpinutil = launcher(ParmedCpinUtil)
 
 if __name__ == '__main__':
-    main()
+    ParmedCpinUtil.main()

@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path, PurePath
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_amber.process.common import (
@@ -59,7 +59,7 @@ class ProcessMinOut(BiobbObject):
 
     """
 
-    def __init__(self, input_log_path: str, output_dat_path: str, properties, **kwargs):
+    def __init__(self, input_log_path: str, output_dat_path: str, properties: Optional[dict] = None, **kwargs):
         super().__init__(**locals())
 
         # Properties specific for BB
@@ -136,20 +136,7 @@ class ProcessMinOut(BiobbObject):
                     fp_out.write("\n")
 
 
-def process_minout(
-    input_log_path: str,
-    output_dat_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`ProcessMinOut <process.process_mdout.ProcessMinOut>`process.process_mdout.ProcessMinOut class and
-    execute :meth:`launch() <process.process_mdout.ProcessMinOut.launch>` method"""
-    return ProcessMinOut(**dict(locals())).launch()
-
-
-process_minout.__doc__ = ProcessMinOut.__doc__
-
-main = ProcessMinOut.get_main(process_minout, "Parses the AMBER (sander) minimization output file (log) and dumps statistics that can then be plotted. Using the process_minout.pl tool from the AmberTools MD package.")
+process_minout = launcher(ProcessMinOut)
 
 if __name__ == "__main__":
-    main()
+    ProcessMinOut.main()

@@ -2,7 +2,7 @@
 
 """Module containing the Pdb4amber class and the command line interface."""
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class Pdb4amberRun(BiobbObject):
@@ -52,7 +52,7 @@ class Pdb4amberRun(BiobbObject):
 
     """
 
-    def __init__(self, input_pdb_path: str, output_pdb_path: str, properties: Optional[dict], **kwargs):
+    def __init__(self, input_pdb_path: str, output_pdb_path: str, properties: Optional[dict] = None, **kwargs):
         super().__init__(**locals())
 
     def run(self):
@@ -78,16 +78,7 @@ class Pdb4amberRun(BiobbObject):
         self.run_biobb()
 
 
-def pdb4amber_run(input_pdb_path: str, output_pdb_path: str,
-                  properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`Pdb4amberRun <pdb4amber.pdb4amber_run.Pdb4amberRun>`pdb4amber.pdb4amber_run.Pdb4amberRun class and
-    execute :meth:`launch() <pdb4amber.pdb4amber_run.Pdb4amberRun.launch>` method"""
-    return Pdb4amberRun(**dict(locals())).launch()
-
-
-pdb4amber_run.__doc__ = Pdb4amberRun.__doc__
-
-main = Pdb4amberRun.get_main(pdb4amber_run, "Analyse PDB files and clean them for further usage, especially with the LEaP programs of Amber, using pdb4amber tool from the AmberTools MD package.")
+pdb4amber_run = launcher(Pdb4amberRun)
 
 if __name__ == '__main__':
-    main()
+    Pdb4amberRun.main()

@@ -5,7 +5,7 @@ from typing import Optional
 import shutil
 import re
 from pathlib import Path
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class SanderMDRun(BiobbObject):
@@ -297,19 +297,7 @@ class SanderMDRun(BiobbObject):
         return [self.create_mdin(path=str(Path(directory).joinpath("sander.mdin")))]
 
 
-def sander_mdrun(input_top_path: str, input_crd_path: str,
-                 output_log_path: str, output_traj_path: str, output_rst_path: str,
-                 input_mdin_path: Optional[str] = None, input_cpin_path: Optional[str] = None,
-                 output_cpout_path: Optional[str] = None, output_cprst_path: Optional[str] = None,
-                 output_mdinfo_path: Optional[str] = None, input_ref_path: Optional[str] = None,
-                 properties: Optional[dict] = None, **kwargs) -> int:
-    """Create :class:`SanderMDRun <sander.sander_mdrun.SanderMDRun>`sander.sander_mdrun.SanderMDRun class and
-    execute :meth:`launch() <sander.sander_mdrun.SanderMDRun.launch>` method"""
-    return SanderMDRun(**dict(locals())).launch()
-
-
-sander_mdrun.__doc__ = SanderMDRun.__doc__
-main = SanderMDRun.get_main(sander_mdrun, "Running energy minimization, molecular dynamics, and NMR refinements using sander tool from the AmberTools MD package.")
+sander_mdrun = launcher(SanderMDRun)
 
 if __name__ == '__main__':
-    main()
+    SanderMDRun.main()

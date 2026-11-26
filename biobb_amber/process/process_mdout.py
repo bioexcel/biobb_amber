@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path, PurePath
 from typing import Optional
 
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
 from biobb_amber.process.common import (
@@ -59,7 +59,7 @@ class ProcessMDOut(BiobbObject):
 
     """
 
-    def __init__(self, input_log_path: str, output_dat_path: str, properties, **kwargs):
+    def __init__(self, input_log_path: str, output_dat_path: str, properties: Optional[dict] = None, **kwargs):
         super().__init__(**locals())
 
         # Properties specific for BB
@@ -136,20 +136,7 @@ class ProcessMDOut(BiobbObject):
                     fp_out.write("\n")
 
 
-def process_mdout(
-    input_log_path: str,
-    output_dat_path: str,
-    properties: Optional[dict] = None,
-    **kwargs,
-) -> int:
-    """Create :class:`ProcessMDOut <process.process_mdout.ProcessMDOut>`process.process_mdout.ProcessMDOut class and
-    execute :meth:`launch() <process.process_mdout.ProcessMDOut.launch>` method"""
-    return ProcessMDOut(**dict(locals())).launch()
-
-
-process_mdout.__doc__ = ProcessMDOut.__doc__
-
-main = ProcessMDOut.get_main(process_mdout, "Parses the AMBER (sander) MD output file (log) and dumps statistics that can then be plotted. Using the process_mdout.pl tool from the AmberTools MD package.")
+process_mdout = launcher(ProcessMDOut)
 
 if __name__ == "__main__":
-    main()
+    ProcessMDOut.main()

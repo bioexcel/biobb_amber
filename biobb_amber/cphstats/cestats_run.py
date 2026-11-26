@@ -3,7 +3,7 @@
 """Module containing the Cestats class and the command line interface."""
 
 from typing import Optional
-from biobb_common.generic.biobb_object import BiobbObject
+from biobb_common.generic.biobb_object import BiobbObject, launcher
 
 
 class CestatsRun(BiobbObject):
@@ -145,19 +145,7 @@ class CestatsRun(BiobbObject):
         self.run_biobb()
 
 
-def cestats_run(input_cein_path: str, input_ceout_path: str,
-                output_dat_path: str,
-                output_population_path: Optional[str] = None, output_chunk_path: Optional[str] = None,
-                output_conditional_path: Optional[str] = None, output_chunk_conditional_path: Optional[str] = None,
-                output_cumulative_path: Optional[str] = None,
-                properties: Optional[dict] = None, **kwargs) -> int:
-    """Create the :class:`CestatsRun <cphstats.cestats_run.CestatsRun>` class and
-    execute the :meth:`launch() <cphstats.cestats_run.CestatsRun.launch>` method."""
-    return CestatsRun(**dict(locals())).launch()
-
-
-cestats_run.__doc__ = CestatsRun.__doc__
-main = CestatsRun.get_main(cestats_run, "Analyzing the results of constant Redox potential MD simulations using cestats tool from the AMBER MD package.")
+cestats_run = launcher(CestatsRun)
 
 if __name__ == '__main__':
-    main()
+    CestatsRun.main()
