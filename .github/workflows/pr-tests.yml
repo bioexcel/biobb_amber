@@ -39,6 +39,7 @@ jobs:
           echo "${CHANGED_FILES:-(none)}"
 
           TESTS=""
+          FULL=""
           while IFS= read -r FILE; do
             [ -z "$FILE" ] && continue
             if [[ "$FILE" =~ ^${{ github.event.repository.name }}/test/unitests/test_[^/]+/test_[^/]+\.py$ ]]; then
@@ -46,25 +47,27 @@ jobs:
               if [[ "$FILE" != *_container.py && "$FILE" != *_docker.py && "$FILE" != *_singularity.py ]]; then
                 [ -f "$FILE" ] && TESTS+=$'\n'"$FILE"
               fi
-            elif [[ "$FILE" =~ ^${{ github.event.repository.name }}/([a-z][^/]+)/([^/]+)\.py$ ]]; then
+            elif [[ "$FILE" =~ ^${{ github.event.repository.name }}/([a-z][^/]+)/(([^/]+/)*)([^/]+)\.py$ ]]; then
               TOOL="${BASH_REMATCH[1]}"
-              BASE="${BASH_REMATCH[2]}"
-              if [[ "$BASE" == "__init__" || "$BASE" == "common" ]]; then
-                # Run all tests for this tool
-                TEST_DIR="${{ github.event.repository.name }}/test/unitests/test_${TOOL}"
-                [ -d "$TEST_DIR" ] && TESTS+=$'\n'"$TEST_DIR"
-              else
+              SUBDIR="${BASH_REMATCH[2]}"
+              BASE="${BASH_REMATCH[4]}"
+              TEST_DIR="${{ github.event.repository.name }}/test/unitests/test_${TOOL}"
+              TEST_FILE="$TEST_DIR/test_${BASE}.py"
+              if [[ "$TOOL" == "test" || "$TOOL" == "docs" ]]; then
+                :
+              elif [ ! -d "$TEST_DIR" ]; then
+                # No test folder named after the module folder (its tests are elsewhere): run the full suite
+                FULL=1
+              elif [[ -z "$SUBDIR" && "$BASE" != "__init__" && "$BASE" != "common" && -f "$TEST_FILE" ]]; then
                 # Run the matching test file for this source file
-                TEST_FILE="${{ github.event.repository.name }}/test/unitests/test_${TOOL}/test_${BASE}.py"
-                if [ -f "$TEST_FILE" ]; then
-                  TESTS+=$'\n'"$TEST_FILE"
-                else
-                  TEST_DIR="${{ github.event.repository.name }}/test/unitests/test_${TOOL}"
-                  [ -d "$TEST_DIR" ] && TESTS+=$'\n'"$TEST_DIR"
-                fi
+                TESTS+=$'\n'"$TEST_FILE"
+              else
+                # Run all tests for this tool (common code, modules in subfolders, no matching test file)
+                TESTS+=$'\n'"$TEST_DIR"
               fi
             fi
           done <<< "$CHANGED_FILES"
+          [ -n "$FULL" ] && TESTS=""
 
           # Without the pmemd tests: pmemd is not installed in CI (not in AmberTools)
           TESTS=$(echo "$TESTS" | grep -v '^$' | grep -v 'pmemd' | sort -u | tr '\n' ' ' | xargs || echo "")
