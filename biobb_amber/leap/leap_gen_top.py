@@ -9,8 +9,6 @@ from typing import List, Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
-from biobb_amber.leap.common import _from_string_to_list
-
 
 class LeapGenTop(BiobbObject):
     """
@@ -92,16 +90,14 @@ class LeapGenTop(BiobbObject):
         # Set default forcefields
         if self.container_path:
             # self.forcefield = "leaprc.protein.ff14SB"
-            self.forcefield = _from_string_to_list(self.forcefield)
+            self.forcefield = fu.str_to_list(self.forcefield)
         else:
             amber_home_path = os.getenv("AMBERHOME", "")
             protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
             dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
             gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
 
-            self.forcefield = _from_string_to_list(
-                self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
-            )
+            self.forcefield = fu.str_to_list(self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path]))
             # Find the paths of the leaprc files if only the force field names are provided
             self.forcefield = self.find_leaprc_paths(self.forcefield)
 

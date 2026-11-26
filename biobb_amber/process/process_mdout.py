@@ -7,10 +7,7 @@ from pathlib import PurePath
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject, launcher
-
-from biobb_amber.process.common import (
-    _from_string_to_list,
-)
+from biobb_common.tools import file_utils as fu
 
 
 class ProcessMDOut(BiobbObject):
@@ -60,7 +57,7 @@ class ProcessMDOut(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.terms = _from_string_to_list(self.terms)
+        self.terms = fu.str_to_list(self.terms)
 
     def run(self):
         """Launches the execution of the ProcessMDOut module."""
