@@ -4,7 +4,6 @@
 
 import os
 import re
-import shutil
 from decimal import Decimal
 from pathlib import PurePath
 from typing import List, Optional
@@ -389,6 +388,8 @@ class LeapAddIons(BiobbObject):
                 # Adding old box coordinates (taken from the input pdb)
                 crd_lines.append(box_line)
 
+                # The crd and topology files are replaced, not rewritten: Docker can have written them as root
+                os.remove(self.sandbox_file("output_crd_path"))
                 with open(self.sandbox_file("output_crd_path"), "w") as file:
                     for line in crd_lines:
                         file.write(str(line))
@@ -405,7 +406,7 @@ class LeapAddIons(BiobbObject):
                     # PurePath(str(tmp_folder)).joinpath("top_temp.parmtop")
                     PurePath(self.stage_io_dict["unique_dir"]).joinpath("top_temp.parmtop")
                 )
-                shutil.copyfile(self.sandbox_file("output_top_path"), tmp_parmtop)
+                os.replace(self.sandbox_file("output_top_path"), tmp_parmtop)
 
                 with open(self.sandbox_file("output_top_path"), "w") as new_top:
                     with open(tmp_parmtop, "r") as old_top:
