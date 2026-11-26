@@ -6,6 +6,7 @@
 
 * [FIX] `cphstats_run` and `cestats_run`: the `timestep` property is passed to cphstats/cestats (`-t`): it was documented but never reached them. The Python example of `cestats_run` imports it from its module, `biobb_amber.cphstats.cestats_run`.
 * [FIX] `pmemd_mdrun`: a `restraintmask` given in the `mdin` property is written quoted in the mdin file, as `sander_mdrun` already did. Unquoted, the Amber programs stop reading the mdin file ("Fortran runtime error: End of file"). The `simulation_type` documentation of `pmemd_mdrun` lists `heat`, which it already supported, and links to the existing sample mdin files.
+* [FIX] `sander_mdrun` and `pmemd_mdrun`: the `simulation_type` value is read in any case, so the documented `NVT` gets the NVT equilibration defaults. Before, only `nvt` did: `NVT` silently wrote an mdin file without them.
 
 ## What's new in version [5.3.3](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.3)?
 

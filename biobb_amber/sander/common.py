@@ -62,7 +62,7 @@ def write_mdin(path: str, input_mdin_path: Optional[str], mdin: Dict[str, Any], 
         # MDIN parameters added by the biobb_amber module
         mdin_list.append("This mdin file has been created by the biobb_amber module from the BioBB library ")
 
-        sim_type = simulation_type
+        sim_type = simulation_type.lower()  # the docs list NVT, the workflows pass nvt
         minimization = (sim_type == 'minimization')
         min_vacuo = (sim_type == 'min_vacuo')
         heat = (sim_type == 'heat')
