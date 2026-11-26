@@ -5,6 +5,8 @@
 from typing import Optional
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 
+from biobb_amber.cphstats.common import stats_cmd
+
 
 class CestatsRun(BiobbObject):
     """
@@ -76,70 +78,11 @@ class CestatsRun(BiobbObject):
 
         # Command line
         # cphstats -i 4LYT.equil.cpin 0/4LYT.md1.cpout -o pH0_calcpka.dat --population pH0_populations.dat
-        self.cmd = [self.binary_path,
-                    '-O',
-                    '-i', self.stage_io_dict['in']['input_cein_path'],
-                    '-o', self.stage_io_dict['out']['output_dat_path'],
-                    self.stage_io_dict['in']['input_ceout_path']
-                    ]
-
-        if self.io_dict['out']['output_population_path']:
-            self.cmd.append('--population ')
-            self.cmd.append(self.stage_io_dict['out']['output_population_path'])
-
-        if self.io_dict['out']['output_chunk_path']:
-            self.cmd.append('--chunk-out ')
-            self.cmd.append(self.stage_io_dict['out']['output_chunk_path'])
-            if self.chunk_window:
-                self.cmd.append('--chunk')
-                self.cmd.append(str(self.chunk_window))
-
-        if self.io_dict['out']['output_cumulative_path']:
-            self.cmd.append('--cumulative-out ')
-            self.cmd.append(self.stage_io_dict['out']['output_cumulative_path'])
-
-        if self.io_dict['out']['output_conditional_path']:
-            self.cmd.append('--conditional-output ')
-            self.cmd.append(self.stage_io_dict['out']['output_conditional_path'])
-
-        if self.io_dict['out']['output_chunk_conditional_path']:
-            self.cmd.append('--chunk-conditional ')
-            self.cmd.append(self.stage_io_dict['out']['output_chunk_conditional_path'])
-
-        if self.verbose:
-            self.cmd.append('-v 1')
-
-        if self.interval:
-            self.cmd.append('-n')
-            self.cmd.append(str(self.interval))
-
-        if self.reduced:
-            self.cmd.append('-p')
-        else:
-            self.cmd.append('-d')
-
+        self.cmd = stats_cmd(self, 'input_cein_path', 'input_ceout_path')
+        self.cmd.append('-p' if self.reduced else '-d')
         if self.eos:
             self.cmd.append('-a')
-
-        if self.calceo:
-            self.cmd.append('--calceo')
-        else:
-            self.cmd.append('--no-calceo')
-
-        if self.running_avg_window:
-            self.cmd.append('-r')
-            self.cmd.append(str(self.running_avg_window))
-
-        if self.cumulative:
-            self.cmd.append('--cumulative')
-
-        if self.fix_remd:
-            self.cmd.append('--fix-remd')
-            self.cmd.append(str(self.fix_remd))
-
-        if self.conditional:
-            self.cmd.append('-c')
-            self.cmd.append(str(self.conditional))
+        self.cmd.append('--calceo' if self.calceo else '--no-calceo')
 
         self.run_biobb()
 

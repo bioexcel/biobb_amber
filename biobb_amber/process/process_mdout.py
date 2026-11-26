@@ -2,12 +2,12 @@
 
 """Module containing the ProcessMDOut class and the command line interface."""
 
-import shutil
-from pathlib import PurePath
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
+
+from biobb_amber.process.common import summaries_to_dat
 
 
 class ProcessMDOut(BiobbObject):
@@ -68,35 +68,8 @@ class ProcessMDOut(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # Write the output dat file from the summary.<term> files written by process_mdout.perl.
-        unique_dir = self.stage_io_dict["unique_dir"]
-        if len(self.terms) == 1:
-            shutil.copy(
-                PurePath(unique_dir).joinpath("summary." + self.terms[0]),
-                self.sandbox_file("output_dat_path"),
-            )
-        else:
-            ene_dict = {}
-            for term in self.terms:
-                with open(str(unique_dir) + "/summary." + term) as fp:
-                    for line in fp:
-                        x = line.split()
-                        if x:
-                            if len(x) > 1:
-                                ene_dict.setdefault(float(x[0]), {})[term] = x[1]
-                            else:
-                                ene_dict.setdefault(float(x[0]), {})[term] = "-"
-
-            with open(self.sandbox_file("output_dat_path"), "w") as fp_out:
-                fp_out.write("# TIME ")
-                for term in self.terms:
-                    fp_out.write(term + " ")
-                fp_out.write("\n")
-                for key in sorted(ene_dict.keys()):
-                    fp_out.write(str(key) + " ")
-                    for term in self.terms:
-                        fp_out.write(ene_dict[key][term] + " ")
-                    fp_out.write("\n")
+        # Write the output dat file from the summary.<term> files written by process_mdout.perl
+        summaries_to_dat(self.stage_io_dict["unique_dir"], self.terms, self.sandbox_file("output_dat_path"))
 
 
 process_mdout = launcher(ProcessMDOut)
