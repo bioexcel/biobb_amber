@@ -48,7 +48,7 @@ class CestatsRun(BiobbObject):
     Examples:
         This is a use example of how to use the building block from Python::
 
-            from biobb_amber.cestats.cestats_run import cestats_run
+            from biobb_amber.cphstats.cestats_run import cestats_run
             prop = {
                 'timestep' : 0.002
             }

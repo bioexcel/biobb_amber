@@ -39,6 +39,10 @@ def stats_cmd(block: BiobbObject, in_key: str, out_key: str) -> List[str]:
         cmd.append('--chunk-conditional')
         cmd.append(stage_out['output_chunk_conditional_path'])
 
+    if block.timestep:
+        cmd.append('-t')
+        cmd.append(str(block.timestep))
+
     if block.verbose:
         cmd.append('-v 1')
 

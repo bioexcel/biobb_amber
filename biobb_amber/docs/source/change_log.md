@@ -1,5 +1,11 @@
 # Biobb Amber changelog
 
+## [Unreleased]
+
+### Changes
+
+* [FIX] `cphstats_run` and `cestats_run`: the `timestep` property is passed to cphstats/cestats (`-t`): it was documented but never reached them. The Python example of `cestats_run` imports it from its module, `biobb_amber.cphstats.cestats_run`.
+
 ## What's new in version [5.3.3](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.3)?
 
 ### Changes
