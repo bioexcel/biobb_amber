@@ -2,17 +2,12 @@
 
 """Module containing the ProcessMinOut class and the command line interface."""
 
-import shutil
-# import os
-from pathlib import Path, PurePath
 from typing import Optional
 
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
-from biobb_amber.process.common import (
-    _from_string_to_list,
-)
+from biobb_amber.process.common import summaries_to_dat
 
 
 class ProcessMinOut(BiobbObject):
@@ -33,7 +28,6 @@ class ProcessMinOut(BiobbObject):
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
-            * **container_working_dir** (*str*) - (None) Container working directory definition.
             * **container_user_id** (*str*) - (None) Container user_id definition.
             * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
@@ -63,77 +57,19 @@ class ProcessMinOut(BiobbObject):
         super().__init__(**locals())
 
         # Properties specific for BB
-        self.terms = _from_string_to_list(self.terms)
+        self.terms = fu.str_to_list(self.terms)
 
     def run(self):
         """Launches the execution of the ProcessMinOut module."""
 
-        # is_docker = self.container_path and os.path.basename(str(self.container_path)).lower() == 'docker'
-
-        if not self.container_path:
-            # No container or Singularity: cd to tmp_folder so summary.* files land there
-            tmp_folder = self.create_tmp_dir(log=True)
-            self.cmd = [
-                "cd",
-                tmp_folder,
-                ";",
-                self.binary_path,
-                str(Path(self.stage_io_dict["in"]["input_log_path"]).resolve()),
-            ]
-        else:
-            # Docker: working dir is handled via container_working_dir
-            tmp_folder = None
-            self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
-
-        if self.container_path:
-            if not self.container_working_dir:
-                fu.log('WARNING: container_working_dir property was not set. Defining it with the same value as container_volume_path', self.out_log, self.global_log)
-                self.container_working_dir = self.container_volume_path
+        # process_minout.perl writes the summary.<term> files where it runs: in the sandbox
+        self.cmd = [self.binary_path, self.stage_io_dict["in"]["input_log_path"]]
 
         # Run Biobb block
         self.run_biobb()
 
-        # Write the output dat file from the summary.<term> files written by process_minout.perl.
-        if len(self.terms) == 1:
-            if self.container_path:
-                shutil.copy(
-                    PurePath(self.stage_io_dict["unique_dir"]).joinpath(
-                        "summary." + self.terms[0]
-                    ),
-                    self.sandbox_file("output_dat_path"),
-                )
-            else:
-                shutil.copy(
-                    PurePath(str(tmp_folder)).joinpath("summary." + self.terms[0]),
-                    self.sandbox_file("output_dat_path"),
-                )
-        else:
-            if self.container_path:
-                tmp = self.stage_io_dict["unique_dir"]
-            else:
-                tmp = tmp_folder
-
-            ene_dict = {}
-            for term in self.terms:
-                with open(str(tmp) + "/summary." + term) as fp:
-                    for line in fp:
-                        x = line.split()
-                        if x:
-                            if len(x) > 1:
-                                ene_dict.setdefault(float(x[0]), {})[term] = x[1]
-                            else:
-                                ene_dict.setdefault(float(x[0]), {})[term] = "-"
-
-            with open(self.sandbox_file("output_dat_path"), "w") as fp_out:
-                fp_out.write("# TIME ")
-                for term in self.terms:
-                    fp_out.write(term + " ")
-                fp_out.write("\n")
-                for key in sorted(ene_dict.keys()):
-                    fp_out.write(str(key) + " ")
-                    for term in self.terms:
-                        fp_out.write(ene_dict[key][term] + " ")
-                    fp_out.write("\n")
+        # Write the output dat file from the summary.<term> files written by process_minout.perl
+        summaries_to_dat(self.stage_io_dict["unique_dir"], self.terms, self.sandbox_file("output_dat_path"))
 
 
 process_minout = launcher(ProcessMinOut)

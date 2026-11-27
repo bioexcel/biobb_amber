@@ -1,31 +1,25 @@
-"""Common functions for package biobb_amber.process"""
+"""Common functions for the process blocks"""
 
-from typing import Optional, Union
+import shutil
+from pathlib import Path
+from typing import Dict, List
 
 
-def _from_string_to_list(input_data: Optional[Union[str, list[str]]]) -> list[str]:
-    """
-    Converts a string to a list, splitting by commas or spaces. If the input is already a list, returns it as is.
-    Returns an empty list if input_data is None.
+def summaries_to_dat(summary_dir: str, terms: List[str], output_dat_path: str) -> None:
+    """Go from the ``summary.<term>`` files that process_mdout.perl and process_minout.perl write in
+    **summary_dir** to one dat file: the summary file itself for one term, else a table by time."""
+    if len(terms) == 1:
+        shutil.copy(Path(summary_dir).joinpath("summary." + terms[0]), output_dat_path)
+        return
+    ene_dict: Dict[float, Dict[str, str]] = {}
+    for term in terms:
+        with open(Path(summary_dir).joinpath("summary." + term)) as fp:
+            for line in fp:
+                x = line.split()
+                if x:
+                    ene_dict.setdefault(float(x[0]), {})[term] = x[1] if len(x) > 1 else "-"
 
-    Parameters:
-        input_data (str, list, or None): The string, list, or None value to convert.
-
-    Returns:
-        list: A list of string elements or an empty list if input_data is None.
-    """
-    if input_data is None:
-        return []
-
-    if isinstance(input_data, list):
-        # If input is already a list, return it
-        return input_data
-
-    # If input is a string, determine the delimiter based on presence of commas
-    delimiter = "," if "," in input_data else " "
-    items = input_data.split(delimiter)
-
-    # Remove whitespace from each item and ignore empty strings
-    processed_items = [item.strip() for item in items if item.strip()]
-
-    return processed_items
+    with open(output_dat_path, "w") as fp_out:
+        fp_out.write("# TIME " + "".join(term + " " for term in terms) + "\n")
+        for key in sorted(ene_dict):
+            fp_out.write(str(key) + " " + "".join(ene_dict[key][term] + " " for term in terms) + "\n")

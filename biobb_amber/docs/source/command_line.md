@@ -47,7 +47,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -160,7 +159,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -289,7 +287,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -397,7 +394,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -528,7 +524,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -669,7 +664,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -818,7 +812,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -966,7 +959,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -1105,7 +1097,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -1221,7 +1212,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -1323,7 +1313,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -1527,7 +1516,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -1547,7 +1535,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
   terms:
   - TEMP
   - VOLUME
@@ -1560,7 +1547,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
   terms:
   - TEMP
   - VOLUME
@@ -1596,8 +1582,7 @@ process_mdout --config config_process_mdout.yml --input_log_path sander.heat.log
     ],
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -1612,8 +1597,7 @@ process_mdout --config config_process_mdout.yml --input_log_path sander.heat.log
     ],
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -1661,7 +1645,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML
@@ -1677,7 +1660,6 @@ properties:
   container_image: quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: docker
   container_volume_path: /tmp
-  container_working_dir: /tmp
 
 ```
 #### [Singularity config file](https://github.com/bioexcel/biobb_amber/blob/master/biobb_amber/test/data/config/config_process_minout_singularity.yml)
@@ -1686,7 +1668,6 @@ properties:
   container_image: https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0
   container_path: singularity
   container_volume_path: /tmp
-  container_working_dir: /tmp
 
 ```
 #### Command line
@@ -1708,8 +1689,7 @@ process_minout --config config_process_minout.yml --input_log_path sander.min.lo
   "properties": {
     "container_path": "docker",
     "container_image": "quay.io/biocontainers/biobb_amber:5.2.1--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -1719,8 +1699,7 @@ process_minout --config config_process_minout.yml --input_log_path sander.min.lo
   "properties": {
     "container_path": "singularity",
     "container_image": "https://depot.galaxyproject.org/singularity/biobb_amber:5.2.1--py312hc5e4ab4_0",
-    "container_volume_path": "/tmp",
-    "container_working_dir": "/tmp"
+    "container_volume_path": "/tmp"
   }
 }
 ```
@@ -1802,7 +1781,6 @@ Config parameters for this building block:
 * **container_path** (*string*): (None) Container path definition.
 * **container_image** (*string*): (afandiadib/ambertools:serial) Container image definition.
 * **container_volume_path** (*string*): (/tmp) Container volume path definition.
-* **container_working_dir** (*string*): (None) Container working directory definition.
 * **container_user_id** (*string*): (None) Container user_id definition.
 * **container_shell_path** (*string*): (/bin/bash) Path to default shell inside the container.
 ### YAML

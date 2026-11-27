@@ -1,5 +1,23 @@
 # Biobb Amber changelog
 
+## [Unreleased]
+
+## What's new in version [5.4.0](https://github.com/bioexcel/biobb_amber/releases/tag/v5.4.0)?
+
+### Changes
+
+* [UPDATE] Update to biobb_common 5.4.0.
+* [FIX] `cphstats_run` and `cestats_run`: the `timestep` property is passed to cphstats/cestats (`-t`): it was documented but never reached them. The Python example of `cestats_run` imports it from its module, `biobb_amber.cphstats.cestats_run`.
+* [FIX] `pmemd_mdrun`: a `restraintmask` given in the `mdin` property is written quoted in the mdin file, as `sander_mdrun` already did. Unquoted, the Amber programs stop reading the mdin file ("Fortran runtime error: End of file"). The `simulation_type` documentation of `pmemd_mdrun` lists `heat`, which it already supported, and links to the existing sample mdin files.
+* [FIX] `sander_mdrun` and `pmemd_mdrun`: the `simulation_type` value is read in any case, so the documented `NVT` gets the NVT equilibration defaults. Before, only `nvt` did: `NVT` silently wrote an mdin file without them.
+* [FIX] `leap_gen_top`, `leap_solvate`, `leap_add_ions` and `leap_build_linear_structure`: the default force fields work in containers (they were sourced as `leaprc.leaprc.<name>`), and the blocks no longer fail with a `TypeError` when `AMBERHOME` is not set.
+* [FIX] `leap_solvate` and `leap_add_ions`: the TIP4P-Ew and TIP4P-D water models are sourced in the leap input; the `source` command was missing and tleap failed.
+* [FIX] `process_mdout` and `process_minout` no longer delete the `summary*` files of the folder they run from.
+* [FIX] `sander_mdrun` and `pmemd_mdrun`: the `mpi_flags` property reaches the MPI launcher as given; it was split into single characters.
+* [FEATURE] `sander_mdrun` and `pmemd_mdrun`: the provenance of a step skipped by the `restart` property records the parameters of its mdin file.
+* [DOCS] `amber_to_pdb`, `cestats_run`, `cphstats_run`, `cpptraj_randomize_ions`, `sander_mdrun` and `pmemd_mdrun` document every file format they accept, in the docstrings and the JSON schemas.
+* [UPDATE] Python 3.11 to 3.13.
+
 ## What's new in version [5.3.3](https://github.com/bioexcel/biobb_amber/releases/tag/v5.3.3)?
 
 ### Changes

@@ -1,31 +1,22 @@
-"""Common functions for package biobb_amber.leap"""
+"""Common functions for the leap blocks"""
 
-from typing import Optional, Union
+import os
+from typing import List, Optional
 
 
-def _from_string_to_list(input_data: Optional[Union[str, list[str]]]) -> list[str]:
-    """
-    Converts a string to a list, splitting by commas or spaces. If the input is already a list, returns it as is.
-    Returns an empty list if input_data is None.
-
-    Parameters:
-        input_data (str, list, or None): The string, list, or None value to convert.
-
-    Returns:
-        list: A list of string elements or an empty list if input_data is None.
-    """
-    if input_data is None:
-        return []
-
-    if isinstance(input_data, list):
-        # If input is already a list, return it
-        return input_data
-
-    # If input is a string, determine the delimiter based on presence of commas
-    delimiter = "," if "," in input_data else " "
-    items = input_data.split(delimiter)
-
-    # Remove whitespace from each item and ignore empty strings
-    processed_items = [item.strip() for item in items if item.strip()]
-
-    return processed_items
+def leaprc_files(forcefields: List[str], container_path: Optional[str] = None) -> List[str]:
+    """Go from the forcefield property (force field names or leaprc paths) to the files that tleap
+    sources: ``leaprc.<name>`` in a container, else the paths found in ``$AMBERHOME/dat/leap/cmd``."""
+    if container_path:
+        return [f"leaprc.{forcefield}" for forcefield in forcefields]
+    cmd_dir = os.path.join(os.environ.get("AMBERHOME", ""), "dat", "leap", "cmd")
+    leaprc_paths = []
+    for forcefield in forcefields:
+        # A path, else a file of cmd or cmd/oldff, with or without the leaprc. prefix
+        candidates = [forcefield] + [os.path.join(cmd_dir, folder, name)
+                                     for name in (f"leaprc.{forcefield}", forcefield) for folder in ("", "oldff")]
+        leaprc_path = next((path for path in candidates if os.path.exists(path)), None)
+        if leaprc_path is None:
+            raise ValueError(f"Force field {forcefield} not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.")
+        leaprc_paths.append(leaprc_path)
+    return leaprc_paths

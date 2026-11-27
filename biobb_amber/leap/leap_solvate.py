@@ -2,15 +2,14 @@
 
 """Module containing the LeapSolvate class and the command line interface."""
 
-import os
 import re
-from pathlib import PurePath
+from pathlib import Path, PurePath
 from typing import List, Optional
 
 from biobb_common.generic.biobb_object import BiobbObject, launcher
 from biobb_common.tools import file_utils as fu
 
-from biobb_amber.leap.common import _from_string_to_list
+from biobb_amber.leap.common import leaprc_files
 
 
 class LeapSolvate(BiobbObject):
@@ -49,7 +48,6 @@ class LeapSolvate(BiobbObject):
             * **container_path** (*str*) - (None) Container path definition.
             * **container_image** (*str*) - ('afandiadib/ambertools:serial') Container image definition.
             * **container_volume_path** (*str*) - ('/tmp') Container volume path definition.
-            * **container_working_dir** (*str*) - (None) Container working directory definition.
             * **container_user_id** (*str*) - (None) Container user_id definition.
             * **container_shell_path** (*str*) - ('/bin/bash') Path to default shell inside the container.
 
@@ -95,87 +93,8 @@ class LeapSolvate(BiobbObject):
     ):
         super().__init__(**locals())
 
-        # # Ligand Parameter lists
-        # self.ligands_lib_list = []
-        # if input_lib_path:
-        #     self.ligands_lib_list.append(input_lib_path)
-        #
-        # self.ligands_frcmod_list = []
-        # if input_frcmod_path:
-        #     self.ligands_frcmod_list.append(input_frcmod_path)
-
-        # Set default forcefields
-        if self.container_path:
-            self.forcefield = _from_string_to_list(self.forcefield)
-        else:
-            amber_home_path = os.getenv("AMBERHOME", "")
-            protein_ff14SB_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.protein.ff14SB')
-            dna_bsc1_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.DNA.bsc1')
-            gaff_path = os.path.join(amber_home_path, 'dat', 'leap', 'cmd', 'leaprc.gaff')
-
-            self.forcefield = _from_string_to_list(
-                self.properties.get("forcefield", [protein_ff14SB_path, dna_bsc1_path, gaff_path])
-            )
-
-            # Find the paths of the leaprc files if only the force field names are provided
-            self.forcefield = self.find_leaprc_paths(self.forcefield)
-
-    def find_leaprc_paths(self, forcefields: List[str]) -> List[str]:
-        """
-        Find the leaprc paths for the force fields provided.
-
-        For each item in the forcefields list, the function checks if the str is a path to an existing file.
-        If not, it tries to find the file in the $AMBERHOME/dat/leap/cmd/ directory or the $AMBERHOME/dat/leap/cmd/oldff/
-        directory with and without the leaprc prefix.
-
-        Args:
-            forcefields (List[str]): List of force fields to find the leaprc files for.
-
-        Returns:
-            List[str]: List of leaprc file paths.
-        """
-
-        leaprc_paths = []
-
-        for forcefield in forcefields:
-
-            num_paths = len(leaprc_paths)
-
-            # Check if the forcefield is a path to an existing file
-            if os.path.exists(forcefield):
-                leaprc_paths.append(forcefield)
-                continue
-
-            # Check if the forcefield is in the leaprc directory
-            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"leaprc.{forcefield}")
-            if os.path.exists(leaprc_path):
-                leaprc_paths.append(leaprc_path)
-                continue
-
-            # Check if the forcefield is in the oldff directory
-            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"leaprc.{forcefield}")
-            if os.path.exists(leaprc_path):
-                leaprc_paths.append(leaprc_path)
-                continue
-
-            # Check if the forcefield is in the leaprc directory without the leaprc prefix
-            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', f"{forcefield}")
-            if os.path.exists(leaprc_path):
-                leaprc_paths.append(leaprc_path)
-                continue
-
-            # Check if the forcefield is in the oldff directory without the leaprc prefix
-            leaprc_path = os.path.join(os.environ.get('AMBERHOME', ''), 'dat', 'leap', 'cmd', 'oldff', f"{forcefield}")
-            if os.path.exists(leaprc_path):
-                leaprc_paths.append(leaprc_path)
-                continue
-
-            new_num_paths = len(leaprc_paths)
-
-            if new_num_paths == num_paths:
-                raise ValueError(f"Force field {forcefield} not found. Check the $AMBERHOME/dat/leap/cmd/ directory for available force fields or provide the path to an existing leaprc file.")
-
-        return leaprc_paths
+        # Files sourced by tleap for the forcefield property
+        self.forcefield = leaprc_files(fu.str_to_list(self.forcefield), self.container_path)
 
     def _resolve_input_files(self, io_key: str, tmp_folder: str) -> List[str]:
         """Resolve an optional input (zip or single file) to the list of paths the tleap
@@ -251,11 +170,8 @@ class LeapSolvate(BiobbObject):
             # leapin.write("source leaprc.gaff \n")
 
             # Forcefields loaded from input forcefield property
-            for t in self.forcefield:
-                if self.container_path:
-                    leapin.write("source leaprc.{}\n".format(t))
-                else:
-                    leapin.write("source {}\n".format(t))
+            for leaprc in self.forcefield:
+                leapin.write(f"source {leaprc}\n")
 
             # Additional Leap commands
             for leap_commands in leap_source_list:
@@ -313,9 +229,6 @@ class LeapSolvate(BiobbObject):
         # Run Biobb block
         self.run_biobb()
 
-        # remove temporary folder(s)
-        self.tmp_files.append("leap.log")
-
         # Saving octahedron box with all decimals in PDB file. Needed for the add_ions BB.
 
         # Getting octahedron box from generated crd file
@@ -323,12 +236,13 @@ class LeapSolvate(BiobbObject):
             for line in file:
                 pass
 
-        # Adding box as a first line in the generated pdb file with OCTBOX tag
+        # Adding box as a first line in the generated pdb file with OCTBOX tag.
+        # The file is replaced, not rewritten: Docker can have written it as root
         octbox = "OCTBOX " + line
-        with open(self.sandbox_file("output_pdb_path"), "r+") as f:
-            content = f.read()
-            f.seek(0, 0)
-            f.write(octbox + content)
+        output_pdb = Path(self.sandbox_file("output_pdb_path"))
+        content = output_pdb.read_text()
+        output_pdb.unlink()
+        output_pdb.write_text(octbox + content)
 
 
 leap_solvate = launcher(LeapSolvate)
