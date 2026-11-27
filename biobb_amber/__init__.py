@@ -22,4 +22,4 @@ __all__ = [
     "pmemd",
     "cphstats",
 ]
-__version__ = "5.3.3"
+__version__ = "5.4.0"
